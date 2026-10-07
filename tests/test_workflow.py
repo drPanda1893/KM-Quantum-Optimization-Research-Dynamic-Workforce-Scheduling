@@ -89,14 +89,17 @@ def test_benchmark_rejects_misreported_objective(monkeypatch: pytest.MonkeyPatch
         run_benchmark(instance, experiment_id="wrong-objective")
 
 
-@pytest.mark.parametrize("override", [
-    {"runtime_ms": float("inf")},
-    {"best_bound": float("nan")},
-    {"optimality_gap": -1},
-    {"timestamp": "2026-10-07T00:00:00"},
-    {"proven_optimal": False},
-    {"unassigned_count": -1},
-])
+@pytest.mark.parametrize(
+    "override",
+    [
+        {"runtime_ms": float("inf")},
+        {"best_bound": float("nan")},
+        {"optimality_gap": -1},
+        {"timestamp": "2026-10-07T00:00:00"},
+        {"proven_optimal": False},
+        {"unassigned_count": -1},
+    ],
+)
 def test_benchmark_schema_rejects_unusable_metrics(override: dict[str, object]) -> None:
     record = run_benchmark(hand_cases()["touching_intervals"], experiment_id="schema-check")
     raw = record.model_dump(mode="json")
@@ -111,21 +114,50 @@ def test_cli_generate_solve_validate_benchmark(
     instance_path = tmp_path / "instance.json"
     result_path = tmp_path / "result.json"
     benchmark_path = tmp_path / "results.jsonl"
-    assert main([
-        "generate", "--workers", "2", "--jobs", "3", "--skills", "1",
-        "--compatibility-density", "1", "--overlap-density", "0",
-        "--workload-tightness", "0", "--seed", "17", "--output", str(instance_path),
-    ]) == 0
+    assert (
+        main(
+            [
+                "generate",
+                "--workers",
+                "2",
+                "--jobs",
+                "3",
+                "--skills",
+                "1",
+                "--compatibility-density",
+                "1",
+                "--overlap-density",
+                "0",
+                "--workload-tightness",
+                "0",
+                "--seed",
+                "17",
+                "--output",
+                str(instance_path),
+            ]
+        )
+        == 0
+    )
     instance = read_model(instance_path, SchedulingInstance)
     assert instance.seed == 17 and len(instance.jobs) == 3
     assert main(["solve", "--instance", str(instance_path), "--output", str(result_path)]) == 0
     result = read_model(result_path, SolverResult)
     assert result.status == "OPTIMAL" and result.objective_value == 0
     assert main(["validate", "--instance", str(instance_path), "--schedule", str(result_path)]) == 0
-    assert main([
-        "benchmark", "--instance", str(instance_path), "--experiment-id", "smoke",
-        "--output", str(benchmark_path),
-    ]) == 0
+    assert (
+        main(
+            [
+                "benchmark",
+                "--instance",
+                str(instance_path),
+                "--experiment-id",
+                "smoke",
+                "--output",
+                str(benchmark_path),
+            ]
+        )
+        == 0
+    )
     outputs = [json.loads(line) for line in capsys.readouterr().out.splitlines()]
     assert len(outputs) == 4
     assert outputs[2]["is_valid"] and outputs[2]["violation_count"] == 0
@@ -141,9 +173,9 @@ def test_cli_validates_malformed_candidates_structurally(
     instance_path, schedule_path = tmp_path / "instance.json", tmp_path / "candidate.json"
     write_json(instance_path, hand_cases()["touching_intervals"])
     write_json(schedule_path, {"assignments": [{"job_id": "job-a"}]})
-    assert main([
-        "validate", "--instance", str(instance_path), "--schedule", str(schedule_path)
-    ]) == 1
+    assert (
+        main(["validate", "--instance", str(instance_path), "--schedule", str(schedule_path)]) == 1
+    )
     validation = json.loads(capsys.readouterr().out)
     assert validation["is_valid"] is False
     assert validation["violation_count"] == 1
@@ -170,11 +202,28 @@ def test_cli_config_and_overrides_are_recorded(
     output = tmp_path / "result.jsonl"
     write_json(instance_path, hand_cases()["cost_choice"])
     write_json(config_path, SolverConfig().model_dump(mode="json"))
-    assert main([
-        "benchmark", "--instance", str(instance_path), "--config", str(config_path),
-        "--cost-weight", "1", "--random-seed", "19", "--solver", "exhaustive",
-        "--experiment-id", "cost", "--output", str(output),
-    ]) == 0
+    assert (
+        main(
+            [
+                "benchmark",
+                "--instance",
+                str(instance_path),
+                "--config",
+                str(config_path),
+                "--cost-weight",
+                "1",
+                "--random-seed",
+                "19",
+                "--solver",
+                "exhaustive",
+                "--experiment-id",
+                "cost",
+                "--output",
+                str(output),
+            ]
+        )
+        == 0
+    )
     record = json.loads(capsys.readouterr().out)
     assert record["objective"] == 1500
     assert record["solver_config"]["objective"]["cost_weight"] == 1
@@ -194,12 +243,16 @@ def test_cli_input_error_is_json_and_does_not_write_output(
 def test_cli_module_entrypoint_and_usage_errors() -> None:
     help_result = subprocess.run(
         [sys.executable, "-m", "km_quantum", "--help"],
-        capture_output=True, text=True, check=False,
+        capture_output=True,
+        text=True,
+        check=False,
     )
     assert help_result.returncode == 0 and "benchmark" in help_result.stdout
     invalid_result = subprocess.run(
         [sys.executable, "-m", "km_quantum", "unknown-command"],
-        capture_output=True, text=True, check=False,
+        capture_output=True,
+        text=True,
+        check=False,
     )
     assert invalid_result.returncode == 2
     assert json.loads(invalid_result.stderr)["error"]["code"] == "usage_error"

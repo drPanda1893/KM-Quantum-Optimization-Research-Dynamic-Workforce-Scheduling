@@ -189,9 +189,7 @@ def run_benchmark(
         number_jobs=len(instance.jobs),
         assignment_count=len(schedule.assignments) if schedule is not None else None,
         unassigned_count=len(schedule.unassigned_job_ids) if schedule is not None else None,
-        violations=tuple(
-            violation.model_dump(mode="json") for violation in validation.violations
-        )
+        violations=tuple(violation.model_dump(mode="json") for violation in validation.violations)
         if validation is not None
         else (),
         timestamp=datetime.now(UTC),
