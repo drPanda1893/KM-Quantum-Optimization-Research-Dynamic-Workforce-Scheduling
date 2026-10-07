@@ -116,6 +116,7 @@ def test_duplicate_input_ids_rejected(kind):
         {"time_limit_seconds": 0},
         {"time_limit_seconds": float("inf")},
         {"num_search_workers": 0},
+        {"num_search_workers": 2**31},
         {"random_seed": -1},
         {"random_seed": 2**31},
         {"max_deterministic_time": 0},
@@ -280,5 +281,26 @@ def test_result_cannot_claim_an_unearned_optimum():
             schedule=schedule(objective_value=1),
             objective_value=0,
             proven_optimal=True,
+            runtime_ms=1,
+        )
+
+
+@pytest.mark.parametrize(
+    "status,candidate,objective",
+    [
+        ("OPTIMAL", None, None),
+        ("FEASIBLE", None, None),
+        ("INFEASIBLE", schedule(objective_value=0), 0),
+        ("UNKNOWN", schedule(objective_value=0), 0),
+        ("MADE_UP", None, None),
+    ],
+)
+def test_result_status_must_match_incumbent(status, candidate, objective):
+    with pytest.raises(ValidationError):
+        SolverResult(
+            status=status,
+            schedule=candidate,
+            objective_value=objective,
+            proven_optimal=False,
             runtime_ms=1,
         )

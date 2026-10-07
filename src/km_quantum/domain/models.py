@@ -1,6 +1,6 @@
 """Validated input/output schemas; times and objective coefficients are integers."""
 
-from typing import Annotated, Self
+from typing import Annotated, Literal, Self
 
 from pydantic import (
     BaseModel,
@@ -128,14 +128,14 @@ class ObjectiveWeights(FrozenModel):
 class SolverConfig(FrozenModel):
     objective: ObjectiveWeights = Field(default_factory=ObjectiveWeights)
     time_limit_seconds: float = Field(default=10.0, gt=0, allow_inf_nan=False)
-    num_search_workers: PositiveInt = 1
+    num_search_workers: PositiveInt = Field(default=1, le=2**31 - 1)
     random_seed: NonnegativeInt = Field(default=0, le=2**31 - 1)
     max_deterministic_time: float | None = Field(default=None, gt=0, allow_inf_nan=False)
     exhaustive_max_states: PositiveInt = 1_000_000
 
 
 class SolverResult(FrozenModel):
-    status: Identifier
+    status: Literal["OPTIMAL", "FEASIBLE", "INFEASIBLE", "UNKNOWN", "MODEL_INVALID"]
     schedule: Schedule | None
     objective_value: NonnegativeInt | None
     runtime_ms: float = Field(ge=0, allow_inf_nan=False)
@@ -146,6 +146,10 @@ class SolverResult(FrozenModel):
 
     @model_validator(mode="after")
     def consistent_result(self) -> Self:
+        if (self.status in ("OPTIMAL", "FEASIBLE")) != (self.schedule is not None):
+            raise ValueError("OPTIMAL/FEASIBLE require a schedule; other statuses forbid one")
+        if self.proven_optimal != (self.status == "OPTIMAL"):
+            raise ValueError("proven_optimal must agree with OPTIMAL status")
         if self.schedule is None:
             if self.objective_value is not None or self.proven_optimal:
                 raise ValueError("a result without a schedule cannot claim an objective or optimum")
@@ -153,6 +157,4 @@ class SolverResult(FrozenModel):
             raise ValueError("a schedule requires an objective_value")
         elif self.schedule.objective_value != self.objective_value:
             raise ValueError("schedule and result objective values must agree")
-        if self.proven_optimal and self.status != "OPTIMAL":
-            raise ValueError("proven_optimal requires OPTIMAL status")
         return self
