@@ -1,0 +1,259 @@
+{
+  "additionalProperties": false,
+  "description": "One immutable result; null solution metrics mean no incumbent was returned.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "experiment_id": {
+      "minLength": 1,
+      "title": "Experiment Id",
+      "type": "string"
+    },
+    "instance_id": {
+      "title": "Instance Id",
+      "type": "string"
+    },
+    "instance_hash": {
+      "title": "Instance Hash",
+      "type": "string"
+    },
+    "seed": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Seed"
+    },
+    "solver": {
+      "enum": [
+        "cp-sat",
+        "exhaustive"
+      ],
+      "title": "Solver",
+      "type": "string"
+    },
+    "solver_version": {
+      "title": "Solver Version",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "OPTIMAL",
+        "FEASIBLE",
+        "INFEASIBLE",
+        "UNKNOWN",
+        "MODEL_INVALID"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "feasible": {
+      "title": "Feasible",
+      "type": "boolean"
+    },
+    "objective": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Objective"
+    },
+    "best_bound": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Best Bound"
+    },
+    "optimality_gap": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Optimality Gap"
+    },
+    "runtime_ms": {
+      "minimum": 0,
+      "title": "Runtime Ms",
+      "type": "number"
+    },
+    "proven_optimal": {
+      "title": "Proven Optimal",
+      "type": "boolean"
+    },
+    "number_workers": {
+      "minimum": 0,
+      "title": "Number Workers",
+      "type": "integer"
+    },
+    "number_jobs": {
+      "minimum": 0,
+      "title": "Number Jobs",
+      "type": "integer"
+    },
+    "assignment_count": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Assignment Count"
+    },
+    "unassigned_count": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Unassigned Count"
+    },
+    "violations": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Violations",
+      "type": "array"
+    },
+    "timestamp": {
+      "format": "date-time",
+      "title": "Timestamp",
+      "type": "string"
+    },
+    "git_commit": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Git Commit"
+    },
+    "git_dirty": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Git Dirty"
+    },
+    "dependency_lock_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Dependency Lock Sha256"
+    },
+    "environment": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "title": "Environment",
+      "type": "object"
+    },
+    "instance": {
+      "additionalProperties": true,
+      "title": "Instance",
+      "type": "object"
+    },
+    "solver_config": {
+      "additionalProperties": true,
+      "title": "Solver Config",
+      "type": "object"
+    },
+    "raw_result": {
+      "additionalProperties": true,
+      "title": "Raw Result",
+      "type": "object"
+    },
+    "objective_breakdown": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Objective Breakdown"
+    }
+  },
+  "required": [
+    "experiment_id",
+    "instance_id",
+    "instance_hash",
+    "seed",
+    "solver",
+    "solver_version",
+    "status",
+    "feasible",
+    "objective",
+    "best_bound",
+    "optimality_gap",
+    "runtime_ms",
+    "proven_optimal",
+    "number_workers",
+    "number_jobs",
+    "violations",
+    "timestamp",
+    "git_commit",
+    "git_dirty",
+    "dependency_lock_sha256",
+    "environment",
+    "instance",
+    "solver_config",
+    "raw_result",
+    "objective_breakdown"
+  ],
+  "title": "BenchmarkResult",
+  "type": "object"
+}

@@ -30,22 +30,74 @@ A negative result is a valid research result. A useful KM³ optimization product
 
 ## Status
 
-**M0 — Research contract / planning**
+**M1 — Classical Scheduling Baseline**
 
-See RESEARCH_PLAN.md.
+Implemented: validated fixed-slot scheduling models, deterministic synthetic
+instances, independent feasibility validator and objective evaluator, OR-Tools
+CP-SAT, a tiny exhaustive reference solver, ten hand-verifiable cases, and a
+JSON/JSONL experiment CLI. Every returned incumbent is independently checked.
+Only proven optima serve as objective ground truth.
 
-## Planned stack
+M1 contains no QUBO, QAOA, IBM integration, customer data, or product UI.
+The research roadmap remains in [RESEARCH_PLAN.md](RESEARCH_PLAN.md).
 
-- Python
-- Google OR-Tools / CP-SAT
-- Qiskit 2.x
-- Qiskit Aer
-- Qiskit IBM Runtime
-- Qiskit Optimization Mapper addon
-- NumPy / SciPy / pandas
-- pytest
+## Run locally
 
-Exact versions will be pinned in the reproducible environment once implementation starts.
+Install [uv](https://docs.astral.sh/uv/), then use the locked Python 3.12 environment:
+
+```sh
+uv sync --locked --all-groups
+uv run --locked python -m pytest
+uv run --locked ruff check .
+uv run --locked mypy
+```
+
+Runtime dependencies are OR-Tools and Pydantic; pytest, Ruff, and mypy are
+development tools. Exact resolved versions are committed in `uv.lock`.
+
+## Reproducible workflow
+
+```sh
+uv run --locked python -m km_quantum generate --config configs/generator_easy.json --seed 42 --output data/synthetic/run-42.json
+uv run --locked python -m km_quantum solve --instance data/synthetic/run-42.json --config configs/baseline.json --output results/run-42.json
+uv run --locked python -m km_quantum validate --instance data/synthetic/run-42.json --schedule results/run-42.json
+uv run --locked python -m km_quantum benchmark --instance data/synthetic/run-42.json --config configs/baseline.json --experiment-id m1-example --output results/m1-example.jsonl
+```
+
+Use `--solver exhaustive` on tiny instances for a second reference. The CLI
+also exposes generator/search parameter overrides; inspect each command's
+`--help`. It prints JSON and returns 0 for success/feasibility, 1 for absent or
+invalid schedules, and 2 for usage/input/IO errors. Benchmark files append one
+record per run, including input/configuration, raw output, independent metrics,
+versions, dependency-lock hash, timestamp, and Git state.
+
+The default objective is priority-weighted unassigned penalties. Optional worker
+cost and workload-range weights default to zero. This is a weighted sum, not
+lexicographic coverage. All job intervals are fixed and half-open; travel and
+dynamic repair are outside M1. Time limits can prevent proof of optimality.
+
+See [the mathematical model](docs/model.md) and
+[the experiment protocol](docs/experiment_protocol.md) for exact units,
+constraints, objective arithmetic, generator semantics, reproducibility, and
+fair comparison rules.
+
+## Repository layout
+
+```text
+src/km_quantum/
+  domain/               Pydantic input, schedule and solver schemas
+  instances/            Versioned synthetic generator and hand cases
+  solvers/classical/    CP-SAT and tiny exhaustive reference
+  metrics/              Independent feasibility and objective checks
+  experiments/          JSON helpers and benchmark records
+tests/                  Mathematical, solver, reproducibility and workflow tests
+configs/                Baseline and easy/tight generator configurations
+data/synthetic/         Synthetic families and ten hand-verifiable fixtures
+docs/                   Model, experiment protocol and implementation decision
+```
+
+The next milestone is **M2: QUBO mapping + equivalence verification** against
+the original constrained model. M2 implementation has not begun.
 
 ## Intended outputs
 
