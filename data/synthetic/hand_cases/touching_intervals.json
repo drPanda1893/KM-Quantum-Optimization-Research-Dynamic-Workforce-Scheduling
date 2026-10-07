@@ -1,0 +1,61 @@
+{
+  "instance_id": "hand-touching_intervals",
+  "seed": 0,
+  "workers": [
+    {
+      "id": "worker-a",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 180
+        }
+      ],
+      "max_work_minutes": 60,
+      "cost_per_hour": null
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job-a",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 0,
+      "end_minute": 30,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    },
+    {
+      "id": "job-b",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 30,
+      "end_minute": 60,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    }
+  ],
+  "metadata": {
+    "source": "hand-verifiable",
+    "reference": {
+      "objective_config": {
+        "cost_weight": 0
+      },
+      "expected_status": "OPTIMAL",
+      "expected_objective": 0,
+      "one_optimal_assignment": {
+        "job-a": "worker-a",
+        "job-b": "worker-a"
+      },
+      "optimum_count": 1,
+      "explanation": "Half-open intervals touch at minute 30 without overlap; total workload is exactly 60."
+    }
+  },
+  "generator_parameters": null
+}

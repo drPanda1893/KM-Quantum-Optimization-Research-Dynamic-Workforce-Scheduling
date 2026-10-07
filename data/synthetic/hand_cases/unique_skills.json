@@ -1,0 +1,75 @@
+{
+  "instance_id": "hand-unique_skills",
+  "seed": 0,
+  "workers": [
+    {
+      "id": "worker-a",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 180
+        }
+      ],
+      "max_work_minutes": 180,
+      "cost_per_hour": null
+    },
+    {
+      "id": "worker-b",
+      "skills": [
+        "b"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 180
+        }
+      ],
+      "max_work_minutes": 180,
+      "cost_per_hour": null
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job-a",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 0,
+      "end_minute": 60,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    },
+    {
+      "id": "job-b",
+      "required_skills": [
+        "b"
+      ],
+      "start_minute": 0,
+      "end_minute": 60,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    }
+  ],
+  "metadata": {
+    "source": "hand-verifiable",
+    "reference": {
+      "objective_config": {
+        "cost_weight": 0
+      },
+      "expected_status": "OPTIMAL",
+      "expected_objective": 0,
+      "one_optimal_assignment": {
+        "job-a": "worker-a",
+        "job-b": "worker-b"
+      },
+      "optimum_count": 1,
+      "explanation": "Each job has exactly one skilled worker; both can run concurrently. Unique optimum."
+    }
+  },
+  "generator_parameters": null
+}

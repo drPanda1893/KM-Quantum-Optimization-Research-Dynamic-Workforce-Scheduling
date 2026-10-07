@@ -1,0 +1,123 @@
+{
+  "instance_id": "synthetic-d1c19dabffc46f8f53aa",
+  "seed": 20261008,
+  "workers": [
+    {
+      "id": "worker-000",
+      "skills": [
+        "skill-00",
+        "skill-01"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 150
+        }
+      ],
+      "max_work_minutes": 54,
+      "cost_per_hour": null
+    },
+    {
+      "id": "worker-001",
+      "skills": [
+        "skill-01"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 150
+        }
+      ],
+      "max_work_minutes": 54,
+      "cost_per_hour": null
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job-000",
+      "required_skills": [
+        "skill-00"
+      ],
+      "start_minute": 0,
+      "end_minute": 30,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    },
+    {
+      "id": "job-001",
+      "required_skills": [
+        "skill-00"
+      ],
+      "start_minute": 0,
+      "end_minute": 30,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    },
+    {
+      "id": "job-002",
+      "required_skills": [
+        "skill-00"
+      ],
+      "start_minute": 30,
+      "end_minute": 60,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    },
+    {
+      "id": "job-003",
+      "required_skills": [
+        "skill-01"
+      ],
+      "start_minute": 60,
+      "end_minute": 90,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    },
+    {
+      "id": "job-004",
+      "required_skills": [
+        "skill-00"
+      ],
+      "start_minute": 30,
+      "end_minute": 60,
+      "priority": 2,
+      "unassigned_penalty": null,
+      "must_assign": false
+    }
+  ],
+  "metadata": {
+    "source": "synthetic",
+    "generator_version": "fixed-slot-v1",
+    "effective_horizon_minutes": 150,
+    "total_job_minutes": 150,
+    "worker_capacity_minutes": 54,
+    "shared_start_constructions": 2,
+    "observed_skill_compatibility_density": 0.6,
+    "observed_pairwise_overlap_density": 0.2,
+    "observed_workload_tightness": 1.3888888888888888
+  },
+  "generator_parameters": {
+    "number_of_workers": 2,
+    "number_of_jobs": 5,
+    "number_of_skills": 2,
+    "compatibility_density": 0.75,
+    "overlap_density": 0.6,
+    "workload_tightness": 1.4,
+    "priority_distribution": [
+      0.6,
+      0.3,
+      0.1
+    ],
+    "seed": 20261008,
+    "min_duration_minutes": 30,
+    "max_duration_minutes": 30,
+    "horizon_minutes": 150,
+    "must_assign_fraction": 0.0,
+    "min_cost_per_hour": null,
+    "max_cost_per_hour": null
+  }
+}

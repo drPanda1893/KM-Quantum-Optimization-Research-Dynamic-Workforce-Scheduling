@@ -1,0 +1,65 @@
+{
+  "instance_id": "hand-split_availability",
+  "seed": 0,
+  "workers": [
+    {
+      "id": "worker-a",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 30
+        },
+        {
+          "start_minute": 60,
+          "end_minute": 90
+        }
+      ],
+      "max_work_minutes": 60,
+      "cost_per_hour": null
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job-inside",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 0,
+      "end_minute": 30,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    },
+    {
+      "id": "job-crossing",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 20,
+      "end_minute": 70,
+      "priority": 3,
+      "unassigned_penalty": null,
+      "must_assign": false
+    }
+  ],
+  "metadata": {
+    "source": "hand-verifiable",
+    "reference": {
+      "objective_config": {
+        "cost_weight": 0
+      },
+      "expected_status": "OPTIMAL",
+      "expected_objective": 300000,
+      "one_optimal_assignment": {
+        "job-inside": "worker-a",
+        "job-crossing": null
+      },
+      "optimum_count": 1,
+      "explanation": "The inside job fits one availability interval; the crossing job spans the unavailable break."
+    }
+  },
+  "generator_parameters": null
+}

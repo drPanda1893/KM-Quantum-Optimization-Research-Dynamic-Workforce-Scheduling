@@ -1,0 +1,49 @@
+{
+  "instance_id": "hand-no_compatible_worker",
+  "seed": 0,
+  "workers": [
+    {
+      "id": "worker-a",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 180
+        }
+      ],
+      "max_work_minutes": 180,
+      "cost_per_hour": null
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job-b",
+      "required_skills": [
+        "b"
+      ],
+      "start_minute": 0,
+      "end_minute": 60,
+      "priority": 2,
+      "unassigned_penalty": null,
+      "must_assign": false
+    }
+  ],
+  "metadata": {
+    "source": "hand-verifiable",
+    "reference": {
+      "objective_config": {
+        "cost_weight": 0
+      },
+      "expected_status": "OPTIMAL",
+      "expected_objective": 200000,
+      "one_optimal_assignment": {
+        "job-b": null
+      },
+      "optimum_count": 1,
+      "explanation": "The only worker lacks skill b. The optional priority-2 job incurs 200000."
+    }
+  },
+  "generator_parameters": null
+}

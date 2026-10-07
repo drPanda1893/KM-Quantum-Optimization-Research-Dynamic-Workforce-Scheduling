@@ -1,0 +1,61 @@
+{
+  "instance_id": "hand-workload_limit",
+  "seed": 0,
+  "workers": [
+    {
+      "id": "worker-a",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 180
+        }
+      ],
+      "max_work_minutes": 60,
+      "cost_per_hour": null
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job-low",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 0,
+      "end_minute": 60,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    },
+    {
+      "id": "job-high",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 60,
+      "end_minute": 120,
+      "priority": 2,
+      "unassigned_penalty": null,
+      "must_assign": false
+    }
+  ],
+  "metadata": {
+    "source": "hand-verifiable",
+    "reference": {
+      "objective_config": {
+        "cost_weight": 0
+      },
+      "expected_status": "OPTIMAL",
+      "expected_objective": 100000,
+      "one_optimal_assignment": {
+        "job-low": null,
+        "job-high": "worker-a"
+      },
+      "optimum_count": 1,
+      "explanation": "The jobs do not overlap, but 120 minutes exceed the 60-minute cap. Keep priority 2."
+    }
+  },
+  "generator_parameters": null
+}

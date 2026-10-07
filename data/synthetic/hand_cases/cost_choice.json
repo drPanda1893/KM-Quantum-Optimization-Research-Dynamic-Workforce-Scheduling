@@ -1,0 +1,63 @@
+{
+  "instance_id": "hand-cost_choice",
+  "seed": 0,
+  "workers": [
+    {
+      "id": "worker-expensive",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 180
+        }
+      ],
+      "max_work_minutes": 180,
+      "cost_per_hour": 6000
+    },
+    {
+      "id": "worker-cheap",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 180
+        }
+      ],
+      "max_work_minutes": 180,
+      "cost_per_hour": 3000
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job-a",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 0,
+      "end_minute": 30,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    }
+  ],
+  "metadata": {
+    "source": "hand-verifiable",
+    "reference": {
+      "objective_config": {
+        "cost_weight": 1
+      },
+      "expected_status": "OPTIMAL",
+      "expected_objective": 1500,
+      "one_optimal_assignment": {
+        "job-a": "worker-cheap"
+      },
+      "optimum_count": 1,
+      "explanation": "With cost weight 1, 30 minutes cost 1500 or 3000. Both are below the 100000 omission penalty."
+    }
+  },
+  "generator_parameters": null
+}

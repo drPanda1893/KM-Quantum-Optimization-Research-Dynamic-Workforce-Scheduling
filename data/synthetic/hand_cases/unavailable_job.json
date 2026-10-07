@@ -1,0 +1,49 @@
+{
+  "instance_id": "hand-unavailable_job",
+  "seed": 0,
+  "workers": [
+    {
+      "id": "worker-a",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 30
+        }
+      ],
+      "max_work_minutes": 180,
+      "cost_per_hour": null
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job-a",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 30,
+      "end_minute": 60,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    }
+  ],
+  "metadata": {
+    "source": "hand-verifiable",
+    "reference": {
+      "objective_config": {
+        "cost_weight": 0
+      },
+      "expected_status": "OPTIMAL",
+      "expected_objective": 100000,
+      "one_optimal_assignment": {
+        "job-a": null
+      },
+      "optimum_count": 1,
+      "explanation": "The job begins at the end of the worker's availability and cannot be assigned."
+    }
+  },
+  "generator_parameters": null
+}

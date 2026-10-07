@@ -1,0 +1,47 @@
+{
+  "instance_id": "hand-mandatory_infeasible",
+  "seed": 0,
+  "workers": [
+    {
+      "id": "worker-a",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 180
+        }
+      ],
+      "max_work_minutes": 180,
+      "cost_per_hour": null
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job-b",
+      "required_skills": [
+        "b"
+      ],
+      "start_minute": 0,
+      "end_minute": 60,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": true
+    }
+  ],
+  "metadata": {
+    "source": "hand-verifiable",
+    "reference": {
+      "objective_config": {
+        "cost_weight": 0
+      },
+      "expected_status": "INFEASIBLE",
+      "expected_objective": null,
+      "one_optimal_assignment": null,
+      "optimum_count": 0,
+      "explanation": "A mandatory job has no skilled worker, so no feasible schedule exists."
+    }
+  },
+  "generator_parameters": null
+}

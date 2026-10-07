@@ -1,0 +1,63 @@
+{
+  "instance_id": "hand-multiple_optima",
+  "seed": 0,
+  "workers": [
+    {
+      "id": "worker-a",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 180
+        }
+      ],
+      "max_work_minutes": 180,
+      "cost_per_hour": null
+    },
+    {
+      "id": "worker-b",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 180
+        }
+      ],
+      "max_work_minutes": 180,
+      "cost_per_hour": null
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job-a",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 0,
+      "end_minute": 60,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    }
+  ],
+  "metadata": {
+    "source": "hand-verifiable",
+    "reference": {
+      "objective_config": {
+        "cost_weight": 0
+      },
+      "expected_status": "OPTIMAL",
+      "expected_objective": 0,
+      "one_optimal_assignment": {
+        "job-a": "worker-a"
+      },
+      "optimum_count": 2,
+      "explanation": "Either identical worker can execute the one job at zero objective. Exactly two optima."
+    }
+  },
+  "generator_parameters": null
+}
