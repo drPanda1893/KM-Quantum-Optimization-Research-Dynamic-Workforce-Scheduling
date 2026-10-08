@@ -85,6 +85,9 @@ def _parser() -> argparse.ArgumentParser:
     _solver_arguments(benchmark)
     benchmark.add_argument("--experiment-id", required=True)
     benchmark.add_argument("--output", required=True, help="Destination benchmark JSONL (append)")
+    from km_quantum.qubo.cli import add_qubo_parser
+
+    add_qubo_parser(commands)
     return parser
 
 
@@ -115,6 +118,12 @@ def _solver_config(args: argparse.Namespace) -> SolverConfig:
 
 
 def _execute(args: argparse.Namespace) -> int:
+    if args.command == "qubo":
+        from km_quantum.qubo.cli import execute_qubo
+
+        output, code = execute_qubo(args)
+        _emit(output)
+        return code
     if args.command == "generate":
         instance = generate_instance(_generator_config(args))
         write_json(args.output, instance)

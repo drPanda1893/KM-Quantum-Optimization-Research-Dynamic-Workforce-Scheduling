@@ -1,0 +1,394 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 2,
+      "default": 2,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "artifact_type": {
+      "const": "m2_equivalence",
+      "default": "m2_equivalence",
+      "title": "Artifact Type",
+      "type": "string"
+    },
+    "experiment_id": {
+      "minLength": 1,
+      "title": "Experiment Id",
+      "type": "string"
+    },
+    "instance_id": {
+      "title": "Instance Id",
+      "type": "string"
+    },
+    "seed": {
+      "title": "Seed",
+      "type": "integer"
+    },
+    "instance_hash": {
+      "title": "Instance Hash",
+      "type": "string"
+    },
+    "qubo_hash": {
+      "title": "Qubo Hash",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "PASS",
+        "FAIL",
+        "INFEASIBLE",
+        "INCONCLUSIVE"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "equivalence_passed": {
+      "title": "Equivalence Passed",
+      "type": "boolean"
+    },
+    "ising_equivalence_passed": {
+      "title": "Ising Equivalence Passed",
+      "type": "boolean"
+    },
+    "number_workers": {
+      "minimum": 0,
+      "title": "Number Workers",
+      "type": "integer"
+    },
+    "number_jobs": {
+      "minimum": 0,
+      "title": "Number Jobs",
+      "type": "integer"
+    },
+    "original_worker_job_combinations": {
+      "minimum": 0,
+      "title": "Original Worker Job Combinations",
+      "type": "integer"
+    },
+    "assignment_variable_count": {
+      "minimum": 0,
+      "title": "Assignment Variable Count",
+      "type": "integer"
+    },
+    "unassigned_variable_count": {
+      "minimum": 0,
+      "title": "Unassigned Variable Count",
+      "type": "integer"
+    },
+    "slack_variable_count": {
+      "minimum": 0,
+      "title": "Slack Variable Count",
+      "type": "integer"
+    },
+    "auxiliary_variable_count": {
+      "minimum": 0,
+      "title": "Auxiliary Variable Count",
+      "type": "integer"
+    },
+    "qubo_variable_count": {
+      "minimum": 0,
+      "title": "Qubo Variable Count",
+      "type": "integer"
+    },
+    "linear_term_count": {
+      "minimum": 0,
+      "title": "Linear Term Count",
+      "type": "integer"
+    },
+    "quadratic_term_count": {
+      "minimum": 0,
+      "title": "Quadratic Term Count",
+      "type": "integer"
+    },
+    "qubo_density": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Qubo Density",
+      "type": "number"
+    },
+    "preprocessing_reduction": {
+      "minimum": 0,
+      "title": "Preprocessing Reduction",
+      "type": "integer"
+    },
+    "reduction_ratio": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Reduction Ratio",
+      "type": "number"
+    },
+    "max_coefficient": {
+      "minimum": 0,
+      "title": "Max Coefficient",
+      "type": "integer"
+    },
+    "min_nonzero_coefficient": {
+      "anyOf": [
+        {
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Min Nonzero Coefficient"
+    },
+    "coefficient_dynamic_range": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Coefficient Dynamic Range"
+    },
+    "penalty_configuration": {
+      "additionalProperties": true,
+      "title": "Penalty Configuration",
+      "type": "object"
+    },
+    "ground_energy": {
+      "title": "Ground Energy",
+      "type": "integer"
+    },
+    "ground_state_count": {
+      "minimum": 1,
+      "title": "Ground State Count",
+      "type": "integer"
+    },
+    "valid_ground_state_count": {
+      "minimum": 0,
+      "title": "Valid Ground State Count",
+      "type": "integer"
+    },
+    "invalid_ground_state_count": {
+      "minimum": 0,
+      "title": "Invalid Ground State Count",
+      "type": "integer"
+    },
+    "best_invalid_energy": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Best Invalid Energy"
+    },
+    "best_valid_energy": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Best Valid Energy"
+    },
+    "constraint_energy_margin": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Constraint Energy Margin"
+    },
+    "first_excited_energy": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "First Excited Energy"
+    },
+    "energy_gap": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Energy Gap"
+    },
+    "classical_objective": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Classical Objective"
+    },
+    "decoded_qubo_objective": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Decoded Qubo Objective"
+    },
+    "enumerated_bitstrings": {
+      "minimum": 1,
+      "title": "Enumerated Bitstrings",
+      "type": "integer"
+    },
+    "runtime_ms": {
+      "minimum": 0,
+      "title": "Runtime Ms",
+      "type": "number"
+    },
+    "timestamp": {
+      "format": "date-time",
+      "title": "Timestamp",
+      "type": "string"
+    },
+    "git_commit": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Git Commit"
+    },
+    "git_dirty": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Git Dirty"
+    },
+    "dependency_lock_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Dependency Lock Sha256"
+    },
+    "environment": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "title": "Environment",
+      "type": "object"
+    },
+    "metrics": {
+      "additionalProperties": true,
+      "title": "Metrics",
+      "type": "object"
+    },
+    "instance": {
+      "additionalProperties": true,
+      "title": "Instance",
+      "type": "object"
+    },
+    "qubo_config": {
+      "additionalProperties": true,
+      "title": "Qubo Config",
+      "type": "object"
+    },
+    "qubo_model": {
+      "additionalProperties": true,
+      "title": "Qubo Model",
+      "type": "object"
+    },
+    "raw_result": {
+      "additionalProperties": true,
+      "title": "Raw Result",
+      "type": "object"
+    }
+  },
+  "required": [
+    "experiment_id",
+    "instance_id",
+    "seed",
+    "instance_hash",
+    "qubo_hash",
+    "status",
+    "equivalence_passed",
+    "ising_equivalence_passed",
+    "number_workers",
+    "number_jobs",
+    "original_worker_job_combinations",
+    "assignment_variable_count",
+    "unassigned_variable_count",
+    "slack_variable_count",
+    "auxiliary_variable_count",
+    "qubo_variable_count",
+    "linear_term_count",
+    "quadratic_term_count",
+    "qubo_density",
+    "preprocessing_reduction",
+    "reduction_ratio",
+    "max_coefficient",
+    "min_nonzero_coefficient",
+    "coefficient_dynamic_range",
+    "penalty_configuration",
+    "ground_energy",
+    "ground_state_count",
+    "valid_ground_state_count",
+    "invalid_ground_state_count",
+    "best_invalid_energy",
+    "best_valid_energy",
+    "constraint_energy_margin",
+    "first_excited_energy",
+    "energy_gap",
+    "classical_objective",
+    "decoded_qubo_objective",
+    "enumerated_bitstrings",
+    "runtime_ms",
+    "timestamp",
+    "git_commit",
+    "git_dirty",
+    "dependency_lock_sha256",
+    "environment",
+    "metrics",
+    "instance",
+    "qubo_config",
+    "qubo_model",
+    "raw_result"
+  ],
+  "title": "M2BenchmarkResult",
+  "type": "object"
+}
