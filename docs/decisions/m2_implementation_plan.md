@@ -17,7 +17,7 @@ Omit inequalities that cannot bind for any assignment bit pattern.
 Encode the existing maximum-minus-minimum imbalance through bounded integers
 A, B, D and nonnegative slacks, with A >= each load, B <= each load, D=A-B.
 Its objective is the original weight times the duration unit times D. These
-are epigraph constraints: minimizing over auxiliaries reproduces the exact
+are epigraph constraints: minimizing over their feasible extensions reproduces the exact
 M1 range; arbitrary noncanonical auxiliary states may have higher business
 energy. No M1 objective is replaced.
 

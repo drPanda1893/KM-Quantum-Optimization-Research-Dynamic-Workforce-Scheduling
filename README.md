@@ -122,6 +122,8 @@ See [the QUBO formulation and penalty proof](docs/qubo_formulation.md),
 [the complete 16-state worked example](docs/m2_mini_example.md).
 The [frozen QUBO/Ising and exact ground-state artifacts](data/synthetic/m2/frozen_qubos.jsonl)
 contain all 114 safe reference models for the next milestone.
+Verified counts, tooling results and repository changes are in the
+[M2 completion report](docs/m2_completion_report.md).
 
 The next milestone is **M3 — Ideal QAOA**, using these frozen QUBOs on ideal
 simulators and comparing against exact M2 ground states. M3 is not implemented.

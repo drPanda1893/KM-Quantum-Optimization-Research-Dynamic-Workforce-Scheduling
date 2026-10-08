@@ -155,8 +155,9 @@ Every zero-residual extension has `D>=max l_w-min l_w`.
 
 This is **lower-envelope equivalence**, not pointwise equality for every choice
 of auxiliary bits. Noncanonical zero-penalty choices can inflate the encoded
-business energy for the same valid schedule. Minimizing over auxiliary bits
-recovers its exact M1 objective. Under safe penalties a global minimum cannot
+business energy for the same valid schedule. Minimizing over zero-residual
+auxiliary extensions recovers its exact M1 objective. Safe penalties also make
+this the unrestricted auxiliary minimum. Under safe penalties a global minimum cannot
 use an inflated extension, since its canonical extension is strictly cheaper.
 The verification records noncanonical and auxiliary-invalid states separately.
 It checks canonical extension energy for **every valid primary schedule**, as
