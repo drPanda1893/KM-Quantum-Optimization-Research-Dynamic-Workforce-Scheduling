@@ -333,7 +333,10 @@ class EnergyBreakdown(FrozenModel):
         if isinstance(value, dict) and "constraint_total" in value:
             value = value.copy()
             declared = value.pop("constraint_total")
-            if declared != value.get("total", 0) - value.get("business", 0):
+            total, business = value.get("total"), value.get("business")
+            if any(type(item) is not int for item in (declared, total, business)):
+                raise ValueError("serialized energy totals must be integers")
+            if declared != total - business:
                 raise ValueError("constraint_total must agree with total minus business")
         return value
 

@@ -122,3 +122,12 @@ def test_energy_breakdown_roundtrip_checks_computed_field():
     assert EnergyBreakdown.model_validate_json(energy.model_dump_json()) == energy
     with pytest.raises(ValidationError):
         EnergyBreakdown.model_validate({**energy.model_dump(), "constraint_total": 0})
+
+
+@pytest.mark.parametrize("field", ["total", "business", "constraint_total"])
+def test_malformed_serialized_energy_totals_report_schema_error(field):
+    energy = EnergyBreakdown(
+        total=9, business=4, coverage=5, mandatory=0, overlap=0, workload=0, imbalance_constraints=0
+    )
+    with pytest.raises(ValidationError):
+        EnergyBreakdown.model_validate({**energy.model_dump(), field: "bad"})
