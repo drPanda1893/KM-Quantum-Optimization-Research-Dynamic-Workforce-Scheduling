@@ -30,7 +30,7 @@ A negative result is a valid research result. A useful KM³ optimization product
 
 ## Status
 
-**M1 — Classical Scheduling Baseline**
+**M2 — QUBO Mapping + Equivalence Verification**
 
 Implemented: validated fixed-slot scheduling models, deterministic synthetic
 instances, independent feasibility validator and objective evaluator, OR-Tools
@@ -38,7 +38,11 @@ CP-SAT, a tiny exhaustive reference solver, ten hand-verifiable cases, and a
 JSON/JSONL experiment CLI. Every returned incumbent is independently checked.
 Only proven optima serve as objective ground truth.
 
-M1 contains no QUBO, QAOA, IBM integration, customer data, or product UI.
+M1 remains the frozen classical reference. M2 adds a canonical pruned binary
+mapping, exact integer QUBO/Ising representations, bounded slack and imbalance
+auxiliaries, derived safe penalties, all-minima exhaustive analysis, and an
+automated equivalence gate against both M1 oracles. No QAOA, circuits, IBM
+integration, customer data, or product UI is implemented.
 The research roadmap remains in [RESEARCH_PLAN.md](RESEARCH_PLAN.md).
 
 ## Run locally
@@ -90,14 +94,37 @@ src/km_quantum/
   solvers/classical/    CP-SAT and tiny exhaustive reference
   metrics/              Independent feasibility and objective checks
   experiments/          JSON helpers and benchmark records
+  qubo/                 Exact encoding/decoding, Ising, enumeration and verification
 tests/                  Mathematical, solver, reproducibility and workflow tests
 configs/                Baseline and easy/tight generator configurations
 data/synthetic/         Synthetic families and ten hand-verifiable fixtures
 docs/                   Model, experiment protocol and implementation decision
 ```
 
-The next milestone is **M2: QUBO mapping + equivalence verification** against
-the original constrained model. M2 implementation has not begun.
+## M2 equivalence workflow
+
+```sh
+uv run --locked python -m km_quantum qubo encode --instance data/synthetic/m2/mini_example.json --config configs/m2_mini_example.json --output results/m2-mini-qubo.json
+uv run --locked python -m km_quantum qubo verify --instance data/synthetic/m2/mini_example.json --model results/m2-mini-qubo.json --benchmark-output results/m2-mini-benchmark.jsonl --experiment-id m2-mini
+uv run --locked python -m km_quantum qubo to-ising --model results/m2-mini-qubo.json --output results/m2-mini-ising.json
+uv run --locked python -m km_quantum qubo acceptance --output results/m2-acceptance.json --benchmark-output results/m2-acceptance.jsonl
+```
+
+The gate checks fourteen feasible hand cases and at least one hundred frozen
+random cases, every ground state, canonical objective extensions, and exact
+Ising energies for every bitstring. It separately recognizes original
+infeasibility and demonstrates expected failures from unsafe penalties.
+Complete records use a distinct M2 schema; existing M1 commands/records retain
+their behavior. Exhaustive enumeration is limited by an explicit state cap.
+
+See [the QUBO formulation and penalty proof](docs/qubo_formulation.md),
+[the equivalence protocol](docs/m2_equivalence_protocol.md), and
+[the complete 16-state worked example](docs/m2_mini_example.md).
+The [frozen QUBO/Ising and exact ground-state artifacts](data/synthetic/m2/frozen_qubos.jsonl)
+contain all 114 safe reference models for the next milestone.
+
+The next milestone is **M3 — Ideal QAOA**, using these frozen QUBOs on ideal
+simulators and comparing against exact M2 ground states. M3 is not implemented.
 
 ## Intended outputs
 
