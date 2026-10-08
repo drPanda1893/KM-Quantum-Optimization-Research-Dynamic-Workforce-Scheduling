@@ -1,0 +1,8357 @@
+{
+  "random-000": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 2,
+        "unassigned_penalty": 9
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 0,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-000",
+      "jobs": [
+        {
+          "end_minute": 1,
+          "id": "job-0",
+          "must_assign": true,
+          "priority": 2,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "imbalance-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 0,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-001": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 11
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 1,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-001",
+      "jobs": [
+        {
+          "end_minute": 4,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "shared-skill-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 1,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-002": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 5
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 2,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-002",
+      "jobs": [
+        {
+          "end_minute": 7,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 2,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-003": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 12
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 3,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-003",
+      "jobs": [
+        {
+          "end_minute": 6,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 5,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 3,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-004": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 5
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 4,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-004",
+      "jobs": [
+        {
+          "end_minute": 2,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 6,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 3,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 4,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-005": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 6
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 5,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-005",
+      "jobs": [
+        {
+          "end_minute": 2,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-3"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 5,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 5,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 5,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-2",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-006": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 6
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 6,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-006",
+      "jobs": [
+        {
+          "end_minute": 4,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 6,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-2",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-007": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 5
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 7,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-007",
+      "jobs": [
+        {
+          "end_minute": 5,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 4,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 7,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-1",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-008": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 12
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 8,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-008",
+      "jobs": [
+        {
+          "end_minute": 1,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 4,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 5,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 8,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-009": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 6
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 9,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-009",
+      "jobs": [
+        {
+          "end_minute": 3,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 7,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 2,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 9,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-010": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 3,
+        "unassigned_penalty": 12
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 10,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-010",
+      "jobs": [
+        {
+          "end_minute": 4,
+          "id": "job-0",
+          "must_assign": true,
+          "priority": 3,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "imbalance-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 10,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-011": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 9
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 11,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-011",
+      "jobs": [
+        {
+          "end_minute": 2,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 2,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "shared-skill-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 11,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-012": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 5
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 12,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-012",
+      "jobs": [
+        {
+          "end_minute": 5,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 5,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 5,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 12,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-013": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 9
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 13,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-013",
+      "jobs": [
+        {
+          "end_minute": 7,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 2,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 2,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 13,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-1",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-014": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 8
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 14,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-014",
+      "jobs": [
+        {
+          "end_minute": 6,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 7,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 14,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-015": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 10
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 15,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-015",
+      "jobs": [
+        {
+          "end_minute": 2,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 15,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-016": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 8
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 16,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-016",
+      "jobs": [
+        {
+          "end_minute": 2,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 8,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 1,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 2,
+          "id": "job-3",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 16,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-017": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 6
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 17,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-017",
+      "jobs": [
+        {
+          "end_minute": 5,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 7,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 2,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 3,
+          "id": "job-3",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 17,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-2",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-018": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 9
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 18,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-018",
+      "jobs": [
+        {
+          "end_minute": 3,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 18,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-019": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 6
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 19,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-019",
+      "jobs": [
+        {
+          "end_minute": 2,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-3"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 19,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-2",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-020": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 1,
+        "unassigned_penalty": 11
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 20,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-020",
+      "jobs": [
+        {
+          "end_minute": 1,
+          "id": "job-0",
+          "must_assign": true,
+          "priority": 2,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "imbalance-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 20,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-021": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 7
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 21,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-021",
+      "jobs": [
+        {
+          "end_minute": 4,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "shared-skill-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 21,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-1",
+          "max_work_minutes": 2,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-022": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 11
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 22,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-022",
+      "jobs": [
+        {
+          "end_minute": 2,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 3,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 22,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-023": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 8
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 23,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-023",
+      "jobs": [
+        {
+          "end_minute": 6,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 23,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-024": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 9
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 24,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-024",
+      "jobs": [
+        {
+          "end_minute": 8,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 7,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 5,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 7,
+          "id": "job-3",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 24,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-2",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-025": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 6
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 25,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-025",
+      "jobs": [
+        {
+          "end_minute": 2,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 25,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-1",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-026": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 7
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 26,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-026",
+      "jobs": [
+        {
+          "end_minute": 7,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 6,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 26,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-2",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-027": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 10
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 27,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-027",
+      "jobs": [
+        {
+          "end_minute": 8,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 4,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 8,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 3,
+          "id": "job-3",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-3"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 27,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-2",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-028": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 8
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 28,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-028",
+      "jobs": [
+        {
+          "end_minute": 2,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 2,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 28,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-029": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 12
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 29,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-029",
+      "jobs": [
+        {
+          "end_minute": 2,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 29,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-2",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-030": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 2,
+        "unassigned_penalty": 7
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 30,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-030",
+      "jobs": [
+        {
+          "end_minute": 2,
+          "id": "job-0",
+          "must_assign": true,
+          "priority": 2,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "imbalance-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 30,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-031": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 8
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 31,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-031",
+      "jobs": [
+        {
+          "end_minute": 1,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "shared-skill-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 31,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-032": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 10
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 32,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-032",
+      "jobs": [
+        {
+          "end_minute": 4,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 6,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 32,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-033": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 5
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 33,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-033",
+      "jobs": [
+        {
+          "end_minute": 7,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-3"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 4,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 33,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-2",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-034": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 11
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 34,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-034",
+      "jobs": [
+        {
+          "end_minute": 3,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 3,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 7,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 34,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-2",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-035": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 5
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 35,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-035",
+      "jobs": [
+        {
+          "end_minute": 7,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 5,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 3,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 35,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-2",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-036": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 10
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 36,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-036",
+      "jobs": [
+        {
+          "end_minute": 3,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 36,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-037": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 12
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 37,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-037",
+      "jobs": [
+        {
+          "end_minute": 6,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-3"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 37,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-1",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-2",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-038": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 5
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 38,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-038",
+      "jobs": [
+        {
+          "end_minute": 6,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 6,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-3"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 2,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-3"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 5,
+          "id": "job-3",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 38,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-2",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-039": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 11
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 39,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-039",
+      "jobs": [
+        {
+          "end_minute": 4,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 6,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 3,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 39,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-040": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 3,
+        "unassigned_penalty": 10
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 40,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-040",
+      "jobs": [
+        {
+          "end_minute": 2,
+          "id": "job-0",
+          "must_assign": true,
+          "priority": 2,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "imbalance-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 40,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-041": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 8
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 41,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-041",
+      "jobs": [
+        {
+          "end_minute": 3,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 4,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "shared-skill-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 41,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-042": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 8
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 42,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-042",
+      "jobs": [
+        {
+          "end_minute": 6,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 42,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-2",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-043": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 6
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 43,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-043",
+      "jobs": [
+        {
+          "end_minute": 3,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 5,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 6,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 43,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-044": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 11
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 44,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-044",
+      "jobs": [
+        {
+          "end_minute": 1,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 44,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-045": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 5
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 45,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-045",
+      "jobs": [
+        {
+          "end_minute": 1,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 7,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 3,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 2,
+          "id": "job-3",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 45,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-046": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 12
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 46,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-046",
+      "jobs": [
+        {
+          "end_minute": 6,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 8,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 6,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 5,
+          "id": "job-3",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 46,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-047": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 6
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 47,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-047",
+      "jobs": [
+        {
+          "end_minute": 5,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 47,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-048": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 7
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 48,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-048",
+      "jobs": [
+        {
+          "end_minute": 4,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 4,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 1,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-3"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 48,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-1",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-2",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-049": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 8
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 49,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-049",
+      "jobs": [
+        {
+          "end_minute": 7,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 3,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 8,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 49,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-050": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 3,
+        "unassigned_penalty": 10
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 50,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-050",
+      "jobs": [
+        {
+          "end_minute": 3,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "imbalance-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 50,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-051": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 10
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 51,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-051",
+      "jobs": [
+        {
+          "end_minute": 3,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "shared-skill-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 51,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-052": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 5
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 52,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-052",
+      "jobs": [
+        {
+          "end_minute": 3,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 52,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-053": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 8
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 53,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-053",
+      "jobs": [
+        {
+          "end_minute": 3,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 2,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 53,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-1",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-2",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-054": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 9
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 54,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-054",
+      "jobs": [
+        {
+          "end_minute": 4,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 2,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 5,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 5,
+          "id": "job-3",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 54,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-055": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 10
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 55,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-055",
+      "jobs": [
+        {
+          "end_minute": 7,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 4,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 55,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-056": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 8
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 56,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-056",
+      "jobs": [
+        {
+          "end_minute": 5,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 56,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-1",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-2",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-057": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 12
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 57,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-057",
+      "jobs": [
+        {
+          "end_minute": 6,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 7,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 6,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 57,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-058": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 12
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 58,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-058",
+      "jobs": [
+        {
+          "end_minute": 5,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 2,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 58,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-2",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-059": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 12
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 59,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-059",
+      "jobs": [
+        {
+          "end_minute": 3,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 59,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-060": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 1,
+        "unassigned_penalty": 12
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 60,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-060",
+      "jobs": [
+        {
+          "end_minute": 2,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "imbalance-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 60,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-061": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 6
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 61,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-061",
+      "jobs": [
+        {
+          "end_minute": 3,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 4,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "shared-skill-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 61,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-062": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 8
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 62,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-062",
+      "jobs": [
+        {
+          "end_minute": 2,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 5,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 62,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-2",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-063": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 8
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 63,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-063",
+      "jobs": [
+        {
+          "end_minute": 6,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 3,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 2,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 5,
+          "id": "job-3",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 63,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-064": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 8
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 64,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-064",
+      "jobs": [
+        {
+          "end_minute": 6,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 64,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-065": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 7
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 65,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-065",
+      "jobs": [
+        {
+          "end_minute": 6,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 2,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 5,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 65,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-066": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 5
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 66,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-066",
+      "jobs": [
+        {
+          "end_minute": 4,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 3,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 7,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 66,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-067": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 8
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 67,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-067",
+      "jobs": [
+        {
+          "end_minute": 4,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 67,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-068": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 7
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 68,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-068",
+      "jobs": [
+        {
+          "end_minute": 5,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 2,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 1,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 6,
+          "id": "job-3",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-3"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 68,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-1",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-2",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-069": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 11
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 69,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-069",
+      "jobs": [
+        {
+          "end_minute": 8,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-3"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 69,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-1",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-2",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-070": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 3,
+        "unassigned_penalty": 6
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 70,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-070",
+      "jobs": [
+        {
+          "end_minute": 4,
+          "id": "job-0",
+          "must_assign": true,
+          "priority": 2,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "imbalance-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 70,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-071": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 8
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 71,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-071",
+      "jobs": [
+        {
+          "end_minute": 2,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 2,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "shared-skill-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 71,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-072": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 12
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 72,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-072",
+      "jobs": [
+        {
+          "end_minute": 3,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 2,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 72,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-073": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 12
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 73,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-073",
+      "jobs": [
+        {
+          "end_minute": 5,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 73,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-074": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 9
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 74,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-074",
+      "jobs": [
+        {
+          "end_minute": 6,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-3"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 74,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-2",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-075": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 9
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 75,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-075",
+      "jobs": [
+        {
+          "end_minute": 2,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 5,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 4,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 6,
+          "id": "job-3",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 75,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-1",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-076": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 12
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 76,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-076",
+      "jobs": [
+        {
+          "end_minute": 4,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 2,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 7,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 6,
+          "id": "job-3",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 76,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-077": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 12
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 77,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-077",
+      "jobs": [
+        {
+          "end_minute": 2,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 2,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 4,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 77,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-078": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 11
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 78,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-078",
+      "jobs": [
+        {
+          "end_minute": 7,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 78,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-079": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 9
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 79,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-079",
+      "jobs": [
+        {
+          "end_minute": 3,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 1,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 7,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 8,
+          "id": "job-3",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 79,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-080": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 3,
+        "unassigned_penalty": 10
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 80,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-080",
+      "jobs": [
+        {
+          "end_minute": 4,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "imbalance-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 80,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-081": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 10
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 81,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-081",
+      "jobs": [
+        {
+          "end_minute": 2,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 1,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "shared-skill-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 81,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-082": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 12
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 82,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-082",
+      "jobs": [
+        {
+          "end_minute": 7,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 5,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 5,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 7,
+          "id": "job-3",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 82,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-083": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 11
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 83,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-083",
+      "jobs": [
+        {
+          "end_minute": 2,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 4,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 4,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 7,
+          "id": "job-3",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 83,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-084": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 9
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 84,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-084",
+      "jobs": [
+        {
+          "end_minute": 6,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-3"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 5,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 1,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 84,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-2",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-085": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 11
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 85,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-085",
+      "jobs": [
+        {
+          "end_minute": 3,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 85,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-086": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 9
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 86,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-086",
+      "jobs": [
+        {
+          "end_minute": 7,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 8,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 3,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 86,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-087": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 8
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 87,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-087",
+      "jobs": [
+        {
+          "end_minute": 7,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 4,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 87,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-088": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 12
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 88,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-088",
+      "jobs": [
+        {
+          "end_minute": 8,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 2,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 88,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-1",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-089": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 5
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 89,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-089",
+      "jobs": [
+        {
+          "end_minute": 3,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 7,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 4,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 89,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-090": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 3,
+        "unassigned_penalty": 10
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 90,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-090",
+      "jobs": [
+        {
+          "end_minute": 4,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "imbalance-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 90,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-091": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 12
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 91,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-091",
+      "jobs": [
+        {
+          "end_minute": 4,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "shared"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "shared-skill-micro",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 91,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "shared"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-1",
+          "max_work_minutes": 2,
+          "skills": [
+            "shared"
+          ]
+        }
+      ]
+    }
+  },
+  "random-092": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 11
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 92,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-092",
+      "jobs": [
+        {
+          "end_minute": 7,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 1,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 7,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 92,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-1",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-093": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 7
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 93,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-093",
+      "jobs": [
+        {
+          "end_minute": 5,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 7,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 7,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 93,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-094": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 8
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 94,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-094",
+      "jobs": [
+        {
+          "end_minute": 6,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 7,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 94,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-2",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-095": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 10
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 95,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-095",
+      "jobs": [
+        {
+          "end_minute": 6,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 3,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 95,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 60,
+          "id": "worker-1",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-1"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-2",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-2"
+          ]
+        }
+      ]
+    }
+  },
+  "random-096": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 1,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 12
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 96,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-096",
+      "jobs": [
+        {
+          "end_minute": 6,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 5,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 2,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 0,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 2,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 11
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 96,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 2,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-097": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 7
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 97,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-097",
+      "jobs": [
+        {
+          "end_minute": 5,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 3,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": 11
+        },
+        {
+          "end_minute": 4,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 3,
+          "unassigned_penalty": 3
+        },
+        {
+          "end_minute": 3,
+          "id": "job-3",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 0
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 97,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        }
+      ]
+    }
+  },
+  "random-098": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 0,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 10
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 98,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-098",
+      "jobs": [
+        {
+          "end_minute": 8,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": null
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 98,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": 121,
+          "id": "worker-0",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-1",
+          "max_work_minutes": 1,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  },
+  "random-099": {
+    "config": {
+      "max_variables": 256,
+      "objective": {
+        "cost_weight": 2,
+        "imbalance_weight": 0,
+        "unassigned_penalty": 6
+      },
+      "penalty_margin": 1,
+      "penalty_scale": "1"
+    },
+    "instance": {
+      "generator_parameters": {
+        "seed": 99,
+        "suite_version": "m2-micro-v1"
+      },
+      "instance_id": "m2-random-099",
+      "jobs": [
+        {
+          "end_minute": 4,
+          "id": "job-0",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 2,
+          "unassigned_penalty": null
+        },
+        {
+          "end_minute": 6,
+          "id": "job-1",
+          "must_assign": false,
+          "priority": 2,
+          "required_skills": [
+            "skill-0"
+          ],
+          "start_minute": 4,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 8,
+          "id": "job-2",
+          "must_assign": false,
+          "priority": 3,
+          "required_skills": [
+            "skill-1"
+          ],
+          "start_minute": 6,
+          "unassigned_penalty": 0
+        },
+        {
+          "end_minute": 3,
+          "id": "job-3",
+          "must_assign": false,
+          "priority": 1,
+          "required_skills": [
+            "skill-2"
+          ],
+          "start_minute": 1,
+          "unassigned_penalty": 3
+        }
+      ],
+      "metadata": {
+        "construction": "exclusive-skills",
+        "source": "m2-frozen-development",
+        "suite_version": "m2-micro-v1"
+      },
+      "seed": 99,
+      "workers": [
+        {
+          "availability": [
+            {
+              "end_minute": 3,
+              "start_minute": 0
+            },
+            {
+              "end_minute": 8,
+              "start_minute": 5
+            }
+          ],
+          "cost_per_hour": 1,
+          "id": "worker-0",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-0"
+          ]
+        },
+        {
+          "availability": [
+            {
+              "end_minute": 8,
+              "start_minute": 0
+            }
+          ],
+          "cost_per_hour": null,
+          "id": "worker-1",
+          "max_work_minutes": 0,
+          "skills": [
+            "skill-1"
+          ]
+        }
+      ]
+    }
+  }
+}

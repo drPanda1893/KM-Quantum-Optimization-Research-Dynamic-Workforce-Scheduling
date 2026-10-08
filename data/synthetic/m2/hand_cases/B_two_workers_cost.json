@@ -1,0 +1,66 @@
+{
+  "instance_id": "m2-B_two_workers_cost",
+  "seed": 0,
+  "workers": [
+    {
+      "id": "worker-expensive",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 8
+        }
+      ],
+      "max_work_minutes": 4,
+      "cost_per_hour": 120
+    },
+    {
+      "id": "worker-cheap",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 8
+        }
+      ],
+      "max_work_minutes": 4,
+      "cost_per_hour": 1
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job-a",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 0,
+      "end_minute": 1,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    }
+  ],
+  "metadata": {
+    "source": "m2-hand-verifiable",
+    "reference": {
+      "expected_objective": 1,
+      "expected_status": "OPTIMAL",
+      "explanation": "One minute costs ceil(120/60)=2 or ceil(1/60)=1. Omission costs 7.",
+      "qubo_config": {
+        "objective": {
+          "unassigned_penalty": 7,
+          "cost_weight": 1,
+          "imbalance_weight": 0
+        },
+        "penalty_scale": "1",
+        "penalty_margin": 1,
+        "max_variables": 256
+      }
+    }
+  },
+  "generator_parameters": null
+}

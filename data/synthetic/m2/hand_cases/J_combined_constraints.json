@@ -1,0 +1,88 @@
+{
+  "instance_id": "m2-J_combined_constraints",
+  "seed": 0,
+  "workers": [
+    {
+      "id": "worker-a",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 8
+        }
+      ],
+      "max_work_minutes": 1,
+      "cost_per_hour": null
+    },
+    {
+      "id": "worker-b",
+      "skills": [
+        "b"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 8
+        }
+      ],
+      "max_work_minutes": 2,
+      "cost_per_hour": null
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job-low",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 0,
+      "end_minute": 1,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    },
+    {
+      "id": "job-b",
+      "required_skills": [
+        "b"
+      ],
+      "start_minute": 0,
+      "end_minute": 1,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    },
+    {
+      "id": "job-high",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 0,
+      "end_minute": 1,
+      "priority": 3,
+      "unassigned_penalty": null,
+      "must_assign": false
+    }
+  ],
+  "metadata": {
+    "source": "m2-hand-verifiable",
+    "reference": {
+      "expected_objective": 7,
+      "expected_status": "OPTIMAL",
+      "explanation": "Skills split the workers; worker-a's overlapping jobs also exceed its capacity. Keep job-high and job-b, and omit job-low.",
+      "qubo_config": {
+        "objective": {
+          "unassigned_penalty": 7,
+          "cost_weight": 0,
+          "imbalance_weight": 0
+        },
+        "penalty_scale": "1",
+        "penalty_margin": 1,
+        "max_variables": 256
+      }
+    }
+  },
+  "generator_parameters": null
+}

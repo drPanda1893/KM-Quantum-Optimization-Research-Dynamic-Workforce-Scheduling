@@ -1,0 +1,63 @@
+{
+  "instance_id": "m2-G_priority",
+  "seed": 0,
+  "workers": [
+    {
+      "id": "worker-a",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 8
+        }
+      ],
+      "max_work_minutes": 4,
+      "cost_per_hour": null
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job-low",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 0,
+      "end_minute": 1,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    },
+    {
+      "id": "job-high",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 0,
+      "end_minute": 1,
+      "priority": 3,
+      "unassigned_penalty": null,
+      "must_assign": false
+    }
+  ],
+  "metadata": {
+    "source": "m2-hand-verifiable",
+    "reference": {
+      "expected_objective": 7,
+      "expected_status": "OPTIMAL",
+      "explanation": "The overlapping priority-3 job is assigned; omitting priority 1 costs 7 versus 21.",
+      "qubo_config": {
+        "objective": {
+          "unassigned_penalty": 7,
+          "cost_weight": 0,
+          "imbalance_weight": 0
+        },
+        "penalty_scale": "1",
+        "penalty_margin": 1,
+        "max_variables": 256
+      }
+    }
+  },
+  "generator_parameters": null
+}

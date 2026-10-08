@@ -1,0 +1,76 @@
+{
+  "instance_id": "m2-mini-example",
+  "seed": 0,
+  "workers": [
+    {
+      "id": "worker-a",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 60
+        }
+      ],
+      "max_work_minutes": 60,
+      "cost_per_hour": 2
+    },
+    {
+      "id": "worker-b",
+      "skills": [
+        "b"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 60
+        }
+      ],
+      "max_work_minutes": 60,
+      "cost_per_hour": 3
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job-a",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 0,
+      "end_minute": 60,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    },
+    {
+      "id": "job-b",
+      "required_skills": [
+        "b"
+      ],
+      "start_minute": 0,
+      "end_minute": 60,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    }
+  ],
+  "metadata": {
+    "source": "m2-hand-verifiable",
+    "reference": {
+      "expected_objective": 5,
+      "explanation": "Each job has one skilled worker; hourly costs 2 and 3 for 60 minutes total 5, less than omission 10 per job.",
+      "qubo_config": {
+        "objective": {
+          "unassigned_penalty": 10,
+          "cost_weight": 1,
+          "imbalance_weight": 0
+        },
+        "penalty_scale": "1",
+        "penalty_margin": 1,
+        "max_variables": 256
+      }
+    }
+  },
+  "generator_parameters": null
+}

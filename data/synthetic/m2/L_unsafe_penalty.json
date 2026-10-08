@@ -1,0 +1,52 @@
+{
+  "instance_id": "m2-L_unsafe_penalty",
+  "seed": 0,
+  "workers": [
+    {
+      "id": "worker-a",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 8
+        }
+      ],
+      "max_work_minutes": 4,
+      "cost_per_hour": 6000
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job-a",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 0,
+      "end_minute": 1,
+      "priority": 1,
+      "unassigned_penalty": 10,
+      "must_assign": true
+    }
+  ],
+  "metadata": {
+    "source": "m2-hand-verifiable",
+    "reference": {
+      "expected_objective": 100,
+      "expected_status": "OPTIMAL",
+      "explanation": "The mandatory one-minute assignment costs 100. Safe penalties exceed this bound. At scale 1/4 the all-zero uncovered state costs less than 100 and is invalid.",
+      "qubo_config": {
+        "objective": {
+          "unassigned_penalty": 7,
+          "cost_weight": 1,
+          "imbalance_weight": 0
+        },
+        "penalty_scale": "1/4",
+        "penalty_margin": 1,
+        "max_variables": 256
+      }
+    }
+  },
+  "generator_parameters": null
+}

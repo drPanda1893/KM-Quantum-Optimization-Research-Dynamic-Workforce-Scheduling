@@ -1,0 +1,77 @@
+{
+  "instance_id": "m2-O_capacity_and_imbalance",
+  "seed": 0,
+  "workers": [
+    {
+      "id": "worker-a",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 8
+        }
+      ],
+      "max_work_minutes": 1,
+      "cost_per_hour": null
+    },
+    {
+      "id": "worker-b",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 8
+        }
+      ],
+      "max_work_minutes": 1,
+      "cost_per_hour": null
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job-a",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 0,
+      "end_minute": 1,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    },
+    {
+      "id": "job-b",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 1,
+      "end_minute": 2,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    }
+  ],
+  "metadata": {
+    "source": "m2-hand-verifiable",
+    "reference": {
+      "expected_objective": 0,
+      "expected_status": "OPTIMAL",
+      "explanation": "Two skill-compatible workers each have capacity 1. Both touching jobs can be assigned only by splitting them, giving loads (1,1) and zero range. Either split is optimal; omitting one costs 7 plus range penalty 1.",
+      "qubo_config": {
+        "objective": {
+          "unassigned_penalty": 7,
+          "cost_weight": 0,
+          "imbalance_weight": 1
+        },
+        "penalty_scale": "1",
+        "penalty_margin": 1,
+        "max_variables": 256
+      }
+    }
+  },
+  "generator_parameters": null
+}

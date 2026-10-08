@@ -1,0 +1,32 @@
+{
+  "suite_version": "m2-micro-v1",
+  "successful_hand_cases": [
+    "A_single_job",
+    "B_two_workers_cost",
+    "C_skill_compatibility",
+    "D_availability",
+    "E_overlap",
+    "F_unassigned_override",
+    "G_priority",
+    "H_workload",
+    "I_multiple_optima",
+    "J_combined_constraints",
+    "K_bounded_slack",
+    "M_active_imbalance",
+    "N_zero_override",
+    "O_capacity_and_imbalance"
+  ],
+  "random_seed_range": [
+    0,
+    99
+  ],
+  "random_case_count": 100,
+  "selection": "Frozen construction; no outcome-based filtering or resampling.",
+  "random_general_maximum_workload_slack_bound": 2,
+  "special_micro_seed_classes": {
+    "0 modulo 10": "2 workers / 1 job with active imbalance",
+    "1 modulo 10": "2 workers / 1-2 jobs with shared skills"
+  },
+  "exclusive_skill_maximum_assignment_bits_per_job": 1,
+  "overall_random_maximum_assignment_bits_per_job": 2
+}

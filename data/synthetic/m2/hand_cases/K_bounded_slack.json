@@ -1,0 +1,63 @@
+{
+  "instance_id": "m2-K_bounded_slack",
+  "seed": 0,
+  "workers": [
+    {
+      "id": "worker-a",
+      "skills": [
+        "a"
+      ],
+      "availability": [
+        {
+          "start_minute": 0,
+          "end_minute": 8
+        }
+      ],
+      "max_work_minutes": 4,
+      "cost_per_hour": null
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job-short",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 0,
+      "end_minute": 2,
+      "priority": 1,
+      "unassigned_penalty": null,
+      "must_assign": false
+    },
+    {
+      "id": "job-long",
+      "required_skills": [
+        "a"
+      ],
+      "start_minute": 2,
+      "end_minute": 5,
+      "priority": 2,
+      "unassigned_penalty": null,
+      "must_assign": false
+    }
+  ],
+  "metadata": {
+    "source": "m2-hand-verifiable",
+    "reference": {
+      "expected_objective": 7,
+      "expected_status": "OPTIMAL",
+      "explanation": "Durations 2 and 3 have gcd 1. Capacity 4 requires bounded slack; keep duration 3 and omit duration 2. Residual slack is 1, including bounded-bit degeneracy.",
+      "qubo_config": {
+        "objective": {
+          "unassigned_penalty": 7,
+          "cost_weight": 0,
+          "imbalance_weight": 0
+        },
+        "penalty_scale": "1",
+        "penalty_margin": 1,
+        "max_variables": 256
+      }
+    }
+  },
+  "generator_parameters": null
+}
