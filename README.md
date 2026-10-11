@@ -46,6 +46,12 @@ integration, customer data, or product UI was part of M2.
 M3 adds local ideal standard-QAOA with a uniform initial state, X mixer,
 exact V2 statevector training, COBYLA, seeded final sampling and a frozen
 multi-restart depth study. The M1/M2 mathematical references stay unchanged.
+The completed study contains 660 runs on 22 frozen references and 844 passing
+tests. All 14,246 eligible basis-state energies match Qiskit exactly. QAOA raises
+ground probability above uniform in 577 runs; 83 remain below it. The bounded
+slack case stays below uniform at every tested depth. See the
+[M3 completion report](docs/m3_completion_report.md) for complete restart,
+sampling, depth and structural results.
 The research roadmap remains in [RESEARCH_PLAN.md](RESEARCH_PLAN.md).
 
 ## Run locally

@@ -1,0 +1,1199 @@
+{
+  "analysis": "Supplemental deterministic structural measurement for prespecified RQ-M3.6; no new optimization, no changes to selection/configuration and no outcome filtering.",
+  "manifest_content_sha256": "f640fc3ee7cc843fd04724b45e0cb8c990a04b78c1571f4bcbb076060e620b45",
+  "atomic_count_definition": {
+    "coverage": "One squared coverage equation per job.",
+    "mandatory": "One omission penalty per must_assign job.",
+    "overlap": "One eligible overlapping unordered job-pair penalty per worker, using strict half-open interval intersection.",
+    "workload": "One squared workload equation per stored workload_slack IntegerEncoding group, regardless of bit-group length.",
+    "imbalance": "One equation per upper_slack group, one per lower_slack group, plus A-B-D=0 when a load_range group exists.",
+    "scope": "Counts atomic encoded penalty terms, not original skill/availability predicates already enforced through frozen pruning. A=2 includes its mandatory penalty; H=3 and M=6."
+  },
+  "penalty_ratio_definition": "Applied common hard-constraint penalty P divided by maximum absolute nonzero coefficient of the frozen business polynomial, excluding the constant. Exact Fraction; null for an identically coefficient-free business polynomial. Descriptive scale feature only; no Hamiltonian rescaling.",
+  "records": [
+    {
+      "reference_name": "A_single_job",
+      "instance_id": "m2-A_single_job",
+      "split": "evaluation",
+      "number_qubits": 2,
+      "indexed_hamiltonian_sha256": "eb4a5847b9990debc90b05b099eb3d70ab557e2f2a1f2cb488f54442e69dc69a",
+      "atomic_encoded_constraint_components": {
+        "coverage": 1,
+        "mandatory": 1,
+        "overlap": 0,
+        "workload": 0,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 2,
+      "active_constraint_component_type_count": 2,
+      "applied_penalty": 1,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 7,
+      "penalty_to_business_coefficient_ratio_exact": "1/7",
+      "penalty_to_business_coefficient_ratio": 0.14285714285714285
+    },
+    {
+      "reference_name": "B_two_workers_cost",
+      "instance_id": "m2-B_two_workers_cost",
+      "split": "development",
+      "number_qubits": 3,
+      "indexed_hamiltonian_sha256": "9a0e55329e6a63617231ec4726f76da4480741981d95b2ca01a28421954353e7",
+      "atomic_encoded_constraint_components": {
+        "coverage": 1,
+        "mandatory": 0,
+        "overlap": 0,
+        "workload": 0,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 1,
+      "active_constraint_component_type_count": 1,
+      "applied_penalty": 8,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 7,
+      "penalty_to_business_coefficient_ratio_exact": "8/7",
+      "penalty_to_business_coefficient_ratio": 1.1428571428571428
+    },
+    {
+      "reference_name": "C_skill_compatibility",
+      "instance_id": "m2-C_skill_compatibility",
+      "split": "evaluation",
+      "number_qubits": 2,
+      "indexed_hamiltonian_sha256": "2db361c027e6939c256cb05c0ff672d93330e67b5ee289243f581c0576930eda",
+      "atomic_encoded_constraint_components": {
+        "coverage": 1,
+        "mandatory": 0,
+        "overlap": 0,
+        "workload": 0,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 1,
+      "active_constraint_component_type_count": 1,
+      "applied_penalty": 8,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 7,
+      "penalty_to_business_coefficient_ratio_exact": "8/7",
+      "penalty_to_business_coefficient_ratio": 1.1428571428571428
+    },
+    {
+      "reference_name": "D_availability",
+      "instance_id": "m2-D_availability",
+      "split": "evaluation",
+      "number_qubits": 2,
+      "indexed_hamiltonian_sha256": "2db361c027e6939c256cb05c0ff672d93330e67b5ee289243f581c0576930eda",
+      "atomic_encoded_constraint_components": {
+        "coverage": 1,
+        "mandatory": 0,
+        "overlap": 0,
+        "workload": 0,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 1,
+      "active_constraint_component_type_count": 1,
+      "applied_penalty": 8,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 7,
+      "penalty_to_business_coefficient_ratio_exact": "8/7",
+      "penalty_to_business_coefficient_ratio": 1.1428571428571428
+    },
+    {
+      "reference_name": "E_overlap",
+      "instance_id": "m2-E_overlap",
+      "split": "development",
+      "number_qubits": 4,
+      "indexed_hamiltonian_sha256": "fa383314d7ca2cfb0a30924aca4d7b2f0962eec8994e94cb50fd9d8a32a8d1e0",
+      "atomic_encoded_constraint_components": {
+        "coverage": 2,
+        "mandatory": 0,
+        "overlap": 1,
+        "workload": 0,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 3,
+      "active_constraint_component_type_count": 2,
+      "applied_penalty": 15,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 7,
+      "penalty_to_business_coefficient_ratio_exact": "15/7",
+      "penalty_to_business_coefficient_ratio": 2.142857142857143
+    },
+    {
+      "reference_name": "F_unassigned_override",
+      "instance_id": "m2-F_unassigned_override",
+      "split": "evaluation",
+      "number_qubits": 1,
+      "indexed_hamiltonian_sha256": "c67c7e460dc6d871a6bcaae6a06f36b6a0ea802bb6112f7f5c4c390763c843b1",
+      "atomic_encoded_constraint_components": {
+        "coverage": 1,
+        "mandatory": 0,
+        "overlap": 0,
+        "workload": 0,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 1,
+      "active_constraint_component_type_count": 1,
+      "applied_penalty": 7,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 6,
+      "penalty_to_business_coefficient_ratio_exact": "7/6",
+      "penalty_to_business_coefficient_ratio": 1.1666666666666667
+    },
+    {
+      "reference_name": "G_priority",
+      "instance_id": "m2-G_priority",
+      "split": "evaluation",
+      "number_qubits": 4,
+      "indexed_hamiltonian_sha256": "27a442f5351bd12c02cddc95c9cff5bb64dcf4f2d6a5f650c9b82840d4a9d53d",
+      "atomic_encoded_constraint_components": {
+        "coverage": 2,
+        "mandatory": 0,
+        "overlap": 1,
+        "workload": 0,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 3,
+      "active_constraint_component_type_count": 2,
+      "applied_penalty": 29,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 21,
+      "penalty_to_business_coefficient_ratio_exact": "29/21",
+      "penalty_to_business_coefficient_ratio": 1.380952380952381
+    },
+    {
+      "reference_name": "H_workload",
+      "instance_id": "m2-H_workload",
+      "split": "evaluation",
+      "number_qubits": 5,
+      "indexed_hamiltonian_sha256": "265806a394da1cd85f61b2c2fbb96f6efec452e39a6be46efd09740f0543cc29",
+      "atomic_encoded_constraint_components": {
+        "coverage": 2,
+        "mandatory": 0,
+        "overlap": 0,
+        "workload": 1,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 3,
+      "active_constraint_component_type_count": 2,
+      "applied_penalty": 15,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 7,
+      "penalty_to_business_coefficient_ratio_exact": "15/7",
+      "penalty_to_business_coefficient_ratio": 2.142857142857143
+    },
+    {
+      "reference_name": "I_multiple_optima",
+      "instance_id": "m2-I_multiple_optima",
+      "split": "evaluation",
+      "number_qubits": 3,
+      "indexed_hamiltonian_sha256": "276ed7811108e4661eb8447552d70a8fcecd185f93ab9d69e9ca0b2c33212f0e",
+      "atomic_encoded_constraint_components": {
+        "coverage": 1,
+        "mandatory": 0,
+        "overlap": 0,
+        "workload": 0,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 1,
+      "active_constraint_component_type_count": 1,
+      "applied_penalty": 8,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 7,
+      "penalty_to_business_coefficient_ratio_exact": "8/7",
+      "penalty_to_business_coefficient_ratio": 1.1428571428571428
+    },
+    {
+      "reference_name": "J_combined_constraints",
+      "instance_id": "m2-J_combined_constraints",
+      "split": "evaluation",
+      "number_qubits": 7,
+      "indexed_hamiltonian_sha256": "2056014a7e499b6632707ac41d9ec4edb6f6acbae48bfe65bb2a0f410ba6b0be",
+      "atomic_encoded_constraint_components": {
+        "coverage": 3,
+        "mandatory": 0,
+        "overlap": 1,
+        "workload": 1,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 5,
+      "active_constraint_component_type_count": 3,
+      "applied_penalty": 36,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 21,
+      "penalty_to_business_coefficient_ratio_exact": "12/7",
+      "penalty_to_business_coefficient_ratio": 1.7142857142857142
+    },
+    {
+      "reference_name": "K_bounded_slack",
+      "instance_id": "m2-K_bounded_slack",
+      "split": "evaluation",
+      "number_qubits": 7,
+      "indexed_hamiltonian_sha256": "a54fa9282132d97d3c8da8351474892ebb857d9c00c37d23bbfec0f7b8047e18",
+      "atomic_encoded_constraint_components": {
+        "coverage": 2,
+        "mandatory": 0,
+        "overlap": 0,
+        "workload": 1,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 3,
+      "active_constraint_component_type_count": 2,
+      "applied_penalty": 22,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 14,
+      "penalty_to_business_coefficient_ratio_exact": "11/7",
+      "penalty_to_business_coefficient_ratio": 1.5714285714285714
+    },
+    {
+      "reference_name": "M_active_imbalance",
+      "instance_id": "m2-M_active_imbalance",
+      "split": "evaluation",
+      "number_qubits": 10,
+      "indexed_hamiltonian_sha256": "c125f7366b7edc30550fb8156b6a23d3d6b711e2f02015106cef01165b0e367f",
+      "atomic_encoded_constraint_components": {
+        "coverage": 1,
+        "mandatory": 0,
+        "overlap": 0,
+        "workload": 0,
+        "imbalance": 5
+      },
+      "atomic_encoded_constraint_count": 6,
+      "active_constraint_component_type_count": 2,
+      "applied_penalty": 10,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 7,
+      "penalty_to_business_coefficient_ratio_exact": "10/7",
+      "penalty_to_business_coefficient_ratio": 1.4285714285714286
+    },
+    {
+      "reference_name": "N_zero_override",
+      "instance_id": "m2-N_zero_override",
+      "split": "evaluation",
+      "number_qubits": 2,
+      "indexed_hamiltonian_sha256": "376e31deb20b78ba82b39691a5da80d83332611cf65026615df0207032dfd119",
+      "atomic_encoded_constraint_components": {
+        "coverage": 1,
+        "mandatory": 0,
+        "overlap": 0,
+        "workload": 0,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 1,
+      "active_constraint_component_type_count": 1,
+      "applied_penalty": 1,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": null,
+      "penalty_to_business_coefficient_ratio_exact": null,
+      "penalty_to_business_coefficient_ratio": null
+    },
+    {
+      "reference_name": "random-011",
+      "instance_id": "m2-random-011",
+      "split": "evaluation",
+      "number_qubits": 7,
+      "indexed_hamiltonian_sha256": "6ee215ec73b4c5b82069cd2e124cfdfada4f59902a305ce886ceb95fac322d63",
+      "atomic_encoded_constraint_components": {
+        "coverage": 2,
+        "mandatory": 0,
+        "overlap": 2,
+        "workload": 1,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 5,
+      "active_constraint_component_type_count": 3,
+      "applied_penalty": 45,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 33,
+      "penalty_to_business_coefficient_ratio_exact": "15/11",
+      "penalty_to_business_coefficient_ratio": 1.3636363636363635
+    },
+    {
+      "reference_name": "random-013",
+      "instance_id": "m2-random-013",
+      "split": "evaluation",
+      "number_qubits": 4,
+      "indexed_hamiltonian_sha256": "42ed317708230bd041350a2b28e3b441ac4c6b351047b003ab1a17600f669cd2",
+      "atomic_encoded_constraint_components": {
+        "coverage": 3,
+        "mandatory": 0,
+        "overlap": 0,
+        "workload": 0,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 3,
+      "active_constraint_component_type_count": 1,
+      "applied_penalty": 31,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 27,
+      "penalty_to_business_coefficient_ratio_exact": "31/27",
+      "penalty_to_business_coefficient_ratio": 1.1481481481481481
+    },
+    {
+      "reference_name": "random-019",
+      "instance_id": "m2-random-019",
+      "split": "evaluation",
+      "number_qubits": 1,
+      "indexed_hamiltonian_sha256": "c67c7e460dc6d871a6bcaae6a06f36b6a0ea802bb6112f7f5c4c390763c843b1",
+      "atomic_encoded_constraint_components": {
+        "coverage": 1,
+        "mandatory": 0,
+        "overlap": 0,
+        "workload": 0,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 1,
+      "active_constraint_component_type_count": 1,
+      "applied_penalty": 7,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 6,
+      "penalty_to_business_coefficient_ratio_exact": "7/6",
+      "penalty_to_business_coefficient_ratio": 1.1666666666666667
+    },
+    {
+      "reference_name": "random-027",
+      "instance_id": "m2-random-027",
+      "split": "development",
+      "number_qubits": 8,
+      "indexed_hamiltonian_sha256": "eddc02378e5ddc89122fd144e9034451c34f12b1eab07e82fed4e9f4ed5249f1",
+      "atomic_encoded_constraint_components": {
+        "coverage": 4,
+        "mandatory": 0,
+        "overlap": 0,
+        "workload": 1,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 5,
+      "active_constraint_component_type_count": 2,
+      "applied_penalty": 67,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 33,
+      "penalty_to_business_coefficient_ratio_exact": "67/33",
+      "penalty_to_business_coefficient_ratio": 2.0303030303030303
+    },
+    {
+      "reference_name": "random-041",
+      "instance_id": "m2-random-041",
+      "split": "evaluation",
+      "number_qubits": 5,
+      "indexed_hamiltonian_sha256": "153afedd995342349aa7ca6a01e01497b89d4cc877f7a760230377b5c64c72cf",
+      "atomic_encoded_constraint_components": {
+        "coverage": 2,
+        "mandatory": 0,
+        "overlap": 0,
+        "workload": 1,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 3,
+      "active_constraint_component_type_count": 2,
+      "applied_penalty": 34,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 24,
+      "penalty_to_business_coefficient_ratio_exact": "17/12",
+      "penalty_to_business_coefficient_ratio": 1.4166666666666667
+    },
+    {
+      "reference_name": "random-045",
+      "instance_id": "m2-random-045",
+      "split": "evaluation",
+      "number_qubits": 6,
+      "indexed_hamiltonian_sha256": "81b2791a989a5d07e10872785fa6e8b6e1f1d0ba7dd2269a90ebeecff113e909",
+      "atomic_encoded_constraint_components": {
+        "coverage": 4,
+        "mandatory": 0,
+        "overlap": 0,
+        "workload": 0,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 4,
+      "active_constraint_component_type_count": 1,
+      "applied_penalty": 52,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 33,
+      "penalty_to_business_coefficient_ratio_exact": "52/33",
+      "penalty_to_business_coefficient_ratio": 1.5757575757575757
+    },
+    {
+      "reference_name": "random-064",
+      "instance_id": "m2-random-064",
+      "split": "evaluation",
+      "number_qubits": 2,
+      "indexed_hamiltonian_sha256": "32e6a9a428c8ccb10926836ac071c83edaa81f7730d9fa04f5a023674a273241",
+      "atomic_encoded_constraint_components": {
+        "coverage": 1,
+        "mandatory": 0,
+        "overlap": 0,
+        "workload": 0,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 1,
+      "active_constraint_component_type_count": 1,
+      "applied_penalty": 23,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 22,
+      "penalty_to_business_coefficient_ratio_exact": "23/22",
+      "penalty_to_business_coefficient_ratio": 1.0454545454545454
+    },
+    {
+      "reference_name": "random-084",
+      "instance_id": "m2-random-084",
+      "split": "evaluation",
+      "number_qubits": 3,
+      "indexed_hamiltonian_sha256": "4c4c4fa7ed68a28e4441f2f243eb2b0e7de24521b1a7260c7d091bbc5a13dc36",
+      "atomic_encoded_constraint_components": {
+        "coverage": 3,
+        "mandatory": 0,
+        "overlap": 0,
+        "workload": 0,
+        "imbalance": 0
+      },
+      "atomic_encoded_constraint_count": 3,
+      "active_constraint_component_type_count": 1,
+      "applied_penalty": 54,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 33,
+      "penalty_to_business_coefficient_ratio_exact": "18/11",
+      "penalty_to_business_coefficient_ratio": 1.6363636363636365
+    },
+    {
+      "reference_name": "random-090",
+      "instance_id": "m2-random-090",
+      "split": "evaluation",
+      "number_qubits": 10,
+      "indexed_hamiltonian_sha256": "6bf2526ebce244a8f4eff36f0ac810d2c6f8beef7b2b9e69290558bbf019dcf5",
+      "atomic_encoded_constraint_components": {
+        "coverage": 1,
+        "mandatory": 0,
+        "overlap": 0,
+        "workload": 0,
+        "imbalance": 5
+      },
+      "atomic_encoded_constraint_count": 6,
+      "active_constraint_component_type_count": 2,
+      "applied_penalty": 13,
+      "maximum_absolute_nonzero_business_polynomial_coefficient": 9,
+      "penalty_to_business_coefficient_ratio_exact": "13/9",
+      "penalty_to_business_coefficient_ratio": 1.4444444444444444
+    }
+  ],
+  "hamiltonian_uniqueness": {
+    "definition": "Exact indexed Hamiltonian identity: qubit count, energy denominator, constant, fields and couplings; scheduling mapping and provenance identities excluded. No qubit-permutation equivalence reduction.",
+    "reference_count": 22,
+    "distinct_indexed_hamiltonian_count": 20,
+    "by_split": {
+      "development": {
+        "reference_count": 3,
+        "distinct_indexed_hamiltonian_count": 3
+      },
+      "evaluation": {
+        "reference_count": 19,
+        "distinct_indexed_hamiltonian_count": 17
+      }
+    },
+    "groups": [
+      {
+        "indexed_hamiltonian_sha256": "153afedd995342349aa7ca6a01e01497b89d4cc877f7a760230377b5c64c72cf",
+        "number_qubits": 5,
+        "references": [
+          {
+            "reference_name": "random-041",
+            "split": "evaluation"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "2056014a7e499b6632707ac41d9ec4edb6f6acbae48bfe65bb2a0f410ba6b0be",
+        "number_qubits": 7,
+        "references": [
+          {
+            "reference_name": "J_combined_constraints",
+            "split": "evaluation"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "265806a394da1cd85f61b2c2fbb96f6efec452e39a6be46efd09740f0543cc29",
+        "number_qubits": 5,
+        "references": [
+          {
+            "reference_name": "H_workload",
+            "split": "evaluation"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "276ed7811108e4661eb8447552d70a8fcecd185f93ab9d69e9ca0b2c33212f0e",
+        "number_qubits": 3,
+        "references": [
+          {
+            "reference_name": "I_multiple_optima",
+            "split": "evaluation"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "27a442f5351bd12c02cddc95c9cff5bb64dcf4f2d6a5f650c9b82840d4a9d53d",
+        "number_qubits": 4,
+        "references": [
+          {
+            "reference_name": "G_priority",
+            "split": "evaluation"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "2db361c027e6939c256cb05c0ff672d93330e67b5ee289243f581c0576930eda",
+        "number_qubits": 2,
+        "references": [
+          {
+            "reference_name": "C_skill_compatibility",
+            "split": "evaluation"
+          },
+          {
+            "reference_name": "D_availability",
+            "split": "evaluation"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "32e6a9a428c8ccb10926836ac071c83edaa81f7730d9fa04f5a023674a273241",
+        "number_qubits": 2,
+        "references": [
+          {
+            "reference_name": "random-064",
+            "split": "evaluation"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "376e31deb20b78ba82b39691a5da80d83332611cf65026615df0207032dfd119",
+        "number_qubits": 2,
+        "references": [
+          {
+            "reference_name": "N_zero_override",
+            "split": "evaluation"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "42ed317708230bd041350a2b28e3b441ac4c6b351047b003ab1a17600f669cd2",
+        "number_qubits": 4,
+        "references": [
+          {
+            "reference_name": "random-013",
+            "split": "evaluation"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "4c4c4fa7ed68a28e4441f2f243eb2b0e7de24521b1a7260c7d091bbc5a13dc36",
+        "number_qubits": 3,
+        "references": [
+          {
+            "reference_name": "random-084",
+            "split": "evaluation"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "6bf2526ebce244a8f4eff36f0ac810d2c6f8beef7b2b9e69290558bbf019dcf5",
+        "number_qubits": 10,
+        "references": [
+          {
+            "reference_name": "random-090",
+            "split": "evaluation"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "6ee215ec73b4c5b82069cd2e124cfdfada4f59902a305ce886ceb95fac322d63",
+        "number_qubits": 7,
+        "references": [
+          {
+            "reference_name": "random-011",
+            "split": "evaluation"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "81b2791a989a5d07e10872785fa6e8b6e1f1d0ba7dd2269a90ebeecff113e909",
+        "number_qubits": 6,
+        "references": [
+          {
+            "reference_name": "random-045",
+            "split": "evaluation"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "9a0e55329e6a63617231ec4726f76da4480741981d95b2ca01a28421954353e7",
+        "number_qubits": 3,
+        "references": [
+          {
+            "reference_name": "B_two_workers_cost",
+            "split": "development"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "a54fa9282132d97d3c8da8351474892ebb857d9c00c37d23bbfec0f7b8047e18",
+        "number_qubits": 7,
+        "references": [
+          {
+            "reference_name": "K_bounded_slack",
+            "split": "evaluation"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "c125f7366b7edc30550fb8156b6a23d3d6b711e2f02015106cef01165b0e367f",
+        "number_qubits": 10,
+        "references": [
+          {
+            "reference_name": "M_active_imbalance",
+            "split": "evaluation"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "c67c7e460dc6d871a6bcaae6a06f36b6a0ea802bb6112f7f5c4c390763c843b1",
+        "number_qubits": 1,
+        "references": [
+          {
+            "reference_name": "F_unassigned_override",
+            "split": "evaluation"
+          },
+          {
+            "reference_name": "random-019",
+            "split": "evaluation"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "eb4a5847b9990debc90b05b099eb3d70ab557e2f2a1f2cb488f54442e69dc69a",
+        "number_qubits": 2,
+        "references": [
+          {
+            "reference_name": "A_single_job",
+            "split": "evaluation"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "eddc02378e5ddc89122fd144e9034451c34f12b1eab07e82fed4e9f4ed5249f1",
+        "number_qubits": 8,
+        "references": [
+          {
+            "reference_name": "random-027",
+            "split": "development"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "fa383314d7ca2cfb0a30924aca4d7b2f0962eec8994e94cb50fd9d8a32a8d1e0",
+        "number_qubits": 4,
+        "references": [
+          {
+            "reference_name": "E_overlap",
+            "split": "development"
+          }
+        ]
+      }
+    ],
+    "duplicate_groups": [
+      {
+        "indexed_hamiltonian_sha256": "2db361c027e6939c256cb05c0ff672d93330e67b5ee289243f581c0576930eda",
+        "references": [
+          {
+            "reference_name": "C_skill_compatibility",
+            "split": "evaluation"
+          },
+          {
+            "reference_name": "D_availability",
+            "split": "evaluation"
+          }
+        ]
+      },
+      {
+        "indexed_hamiltonian_sha256": "c67c7e460dc6d871a6bcaae6a06f36b6a0ea802bb6112f7f5c4c390763c843b1",
+        "references": [
+          {
+            "reference_name": "F_unassigned_override",
+            "split": "evaluation"
+          },
+          {
+            "reference_name": "random-019",
+            "split": "evaluation"
+          }
+        ]
+      }
+    ],
+    "interpretation": "Every frozen reference and restart is retained. Evaluation has 19 references but only 17 distinct indexed Hamiltonians; these are not 19 independent quantum optimization problems."
+  },
+  "correlation_unit": "One median across the ten fixed restarts per original reference and depth, stratified by split. All references retained; evaluation has 19 references but 17 distinct indexed Hamiltonians.",
+  "correlations": [
+    {
+      "split": "development",
+      "p": 1,
+      "feature": "atomic_encoded_constraint_count",
+      "outcome": "ground_state_probability",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": -0.6847079221499595
+    },
+    {
+      "split": "development",
+      "p": 1,
+      "feature": "atomic_encoded_constraint_count",
+      "outcome": "valid_probability",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": -0.9311635331807041
+    },
+    {
+      "split": "development",
+      "p": 1,
+      "feature": "atomic_encoded_constraint_count",
+      "outcome": "normalized_energy_error",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": 0.7799531548030173
+    },
+    {
+      "split": "development",
+      "p": 1,
+      "feature": "active_constraint_component_type_count",
+      "outcome": "ground_state_probability",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": -0.22856566597958525
+    },
+    {
+      "split": "development",
+      "p": 1,
+      "feature": "active_constraint_component_type_count",
+      "outcome": "valid_probability",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": -0.6241103735017014
+    },
+    {
+      "split": "development",
+      "p": 1,
+      "feature": "active_constraint_component_type_count",
+      "outcome": "normalized_energy_error",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": 0.3625402961262567
+    },
+    {
+      "split": "development",
+      "p": 1,
+      "feature": "penalty_to_business_coefficient_ratio",
+      "outcome": "ground_state_probability",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": -0.127334984427241
+    },
+    {
+      "split": "development",
+      "p": 1,
+      "feature": "penalty_to_business_coefficient_ratio",
+      "outcome": "valid_probability",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": -0.5405325329659019
+    },
+    {
+      "split": "development",
+      "p": 1,
+      "feature": "penalty_to_business_coefficient_ratio",
+      "outcome": "normalized_energy_error",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": 0.2648705928744728
+    },
+    {
+      "split": "development",
+      "p": 2,
+      "feature": "atomic_encoded_constraint_count",
+      "outcome": "ground_state_probability",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": -0.6181928883181949
+    },
+    {
+      "split": "development",
+      "p": 2,
+      "feature": "atomic_encoded_constraint_count",
+      "outcome": "valid_probability",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": -0.8771389857136401
+    },
+    {
+      "split": "development",
+      "p": 2,
+      "feature": "atomic_encoded_constraint_count",
+      "outcome": "normalized_energy_error",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": 0.8999208496583252
+    },
+    {
+      "split": "development",
+      "p": 2,
+      "feature": "active_constraint_component_type_count",
+      "outcome": "ground_state_probability",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": -0.14235752939478588
+    },
+    {
+      "split": "development",
+      "p": 2,
+      "feature": "active_constraint_component_type_count",
+      "outcome": "valid_probability",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": -0.5195063402371747
+    },
+    {
+      "split": "development",
+      "p": 2,
+      "feature": "active_constraint_component_type_count",
+      "outcome": "normalized_energy_error",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": 0.56132767642455
+    },
+    {
+      "split": "development",
+      "p": 2,
+      "feature": "penalty_to_business_coefficient_ratio",
+      "outcome": "ground_state_probability",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": -0.039909727559524294
+    },
+    {
+      "split": "development",
+      "p": 2,
+      "feature": "penalty_to_business_coefficient_ratio",
+      "outcome": "valid_probability",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": -0.4289685676474856
+    },
+    {
+      "split": "development",
+      "p": 2,
+      "feature": "penalty_to_business_coefficient_ratio",
+      "outcome": "normalized_energy_error",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": 0.47332954180187253
+    },
+    {
+      "split": "development",
+      "p": 3,
+      "feature": "atomic_encoded_constraint_count",
+      "outcome": "ground_state_probability",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": -0.9839024122755493
+    },
+    {
+      "split": "development",
+      "p": 3,
+      "feature": "atomic_encoded_constraint_count",
+      "outcome": "valid_probability",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": -0.9802943024290691
+    },
+    {
+      "split": "development",
+      "p": 3,
+      "feature": "atomic_encoded_constraint_count",
+      "outcome": "normalized_energy_error",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": 0.9925542549810377
+    },
+    {
+      "split": "development",
+      "p": 3,
+      "feature": "active_constraint_component_type_count",
+      "outcome": "ground_state_probability",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": -0.7627311919405981
+    },
+    {
+      "split": "development",
+      "p": 3,
+      "feature": "active_constraint_component_type_count",
+      "outcome": "valid_probability",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": -0.7501884667976376
+    },
+    {
+      "split": "development",
+      "p": 3,
+      "feature": "active_constraint_component_type_count",
+      "outcome": "normalized_energy_error",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": 0.7986755350227186
+    },
+    {
+      "split": "development",
+      "p": 3,
+      "feature": "penalty_to_business_coefficient_ratio",
+      "outcome": "ground_state_probability",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": -0.6922508210635412
+    },
+    {
+      "split": "development",
+      "p": 3,
+      "feature": "penalty_to_business_coefficient_ratio",
+      "outcome": "valid_probability",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": -0.6782838628697453
+    },
+    {
+      "split": "development",
+      "p": 3,
+      "feature": "penalty_to_business_coefficient_ratio",
+      "outcome": "normalized_energy_error",
+      "reference_count": 3,
+      "distinct_indexed_hamiltonian_count": 3,
+      "pearson_r": 0.7326235382059498
+    },
+    {
+      "split": "evaluation",
+      "p": 1,
+      "feature": "atomic_encoded_constraint_count",
+      "outcome": "ground_state_probability",
+      "reference_count": 19,
+      "distinct_indexed_hamiltonian_count": 17,
+      "pearson_r": -0.8023391646707293
+    },
+    {
+      "split": "evaluation",
+      "p": 1,
+      "feature": "atomic_encoded_constraint_count",
+      "outcome": "valid_probability",
+      "reference_count": 19,
+      "distinct_indexed_hamiltonian_count": 17,
+      "pearson_r": -0.693916464247236
+    },
+    {
+      "split": "evaluation",
+      "p": 1,
+      "feature": "atomic_encoded_constraint_count",
+      "outcome": "normalized_energy_error",
+      "reference_count": 19,
+      "distinct_indexed_hamiltonian_count": 17,
+      "pearson_r": 0.3325721528492382
+    },
+    {
+      "split": "evaluation",
+      "p": 1,
+      "feature": "active_constraint_component_type_count",
+      "outcome": "ground_state_probability",
+      "reference_count": 19,
+      "distinct_indexed_hamiltonian_count": 17,
+      "pearson_r": -0.6468299993060598
+    },
+    {
+      "split": "evaluation",
+      "p": 1,
+      "feature": "active_constraint_component_type_count",
+      "outcome": "valid_probability",
+      "reference_count": 19,
+      "distinct_indexed_hamiltonian_count": 17,
+      "pearson_r": -0.5984411484342241
+    },
+    {
+      "split": "evaluation",
+      "p": 1,
+      "feature": "active_constraint_component_type_count",
+      "outcome": "normalized_energy_error",
+      "reference_count": 19,
+      "distinct_indexed_hamiltonian_count": 17,
+      "pearson_r": 0.14159664797741733
+    },
+    {
+      "split": "evaluation",
+      "p": 1,
+      "feature": "penalty_to_business_coefficient_ratio",
+      "outcome": "ground_state_probability",
+      "reference_count": 18,
+      "distinct_indexed_hamiltonian_count": 16,
+      "pearson_r": -0.4521309829549829
+    },
+    {
+      "split": "evaluation",
+      "p": 1,
+      "feature": "penalty_to_business_coefficient_ratio",
+      "outcome": "valid_probability",
+      "reference_count": 18,
+      "distinct_indexed_hamiltonian_count": 16,
+      "pearson_r": -0.37628813933426797
+    },
+    {
+      "split": "evaluation",
+      "p": 1,
+      "feature": "penalty_to_business_coefficient_ratio",
+      "outcome": "normalized_energy_error",
+      "reference_count": 18,
+      "distinct_indexed_hamiltonian_count": 16,
+      "pearson_r": 0.0992130418692106
+    },
+    {
+      "split": "evaluation",
+      "p": 2,
+      "feature": "atomic_encoded_constraint_count",
+      "outcome": "ground_state_probability",
+      "reference_count": 19,
+      "distinct_indexed_hamiltonian_count": 17,
+      "pearson_r": -0.8543421116819602
+    },
+    {
+      "split": "evaluation",
+      "p": 2,
+      "feature": "atomic_encoded_constraint_count",
+      "outcome": "valid_probability",
+      "reference_count": 19,
+      "distinct_indexed_hamiltonian_count": 17,
+      "pearson_r": -0.7495120890215398
+    },
+    {
+      "split": "evaluation",
+      "p": 2,
+      "feature": "atomic_encoded_constraint_count",
+      "outcome": "normalized_energy_error",
+      "reference_count": 19,
+      "distinct_indexed_hamiltonian_count": 17,
+      "pearson_r": 0.5396714409936986
+    },
+    {
+      "split": "evaluation",
+      "p": 2,
+      "feature": "active_constraint_component_type_count",
+      "outcome": "ground_state_probability",
+      "reference_count": 19,
+      "distinct_indexed_hamiltonian_count": 17,
+      "pearson_r": -0.7086958055073326
+    },
+    {
+      "split": "evaluation",
+      "p": 2,
+      "feature": "active_constraint_component_type_count",
+      "outcome": "valid_probability",
+      "reference_count": 19,
+      "distinct_indexed_hamiltonian_count": 17,
+      "pearson_r": -0.7228009894110545
+    },
+    {
+      "split": "evaluation",
+      "p": 2,
+      "feature": "active_constraint_component_type_count",
+      "outcome": "normalized_energy_error",
+      "reference_count": 19,
+      "distinct_indexed_hamiltonian_count": 17,
+      "pearson_r": 0.3581319847588687
+    },
+    {
+      "split": "evaluation",
+      "p": 2,
+      "feature": "penalty_to_business_coefficient_ratio",
+      "outcome": "ground_state_probability",
+      "reference_count": 18,
+      "distinct_indexed_hamiltonian_count": 16,
+      "pearson_r": -0.5145799350997655
+    },
+    {
+      "split": "evaluation",
+      "p": 2,
+      "feature": "penalty_to_business_coefficient_ratio",
+      "outcome": "valid_probability",
+      "reference_count": 18,
+      "distinct_indexed_hamiltonian_count": 16,
+      "pearson_r": -0.42797825235294634
+    },
+    {
+      "split": "evaluation",
+      "p": 2,
+      "feature": "penalty_to_business_coefficient_ratio",
+      "outcome": "normalized_energy_error",
+      "reference_count": 18,
+      "distinct_indexed_hamiltonian_count": 16,
+      "pearson_r": 0.48366343295990294
+    },
+    {
+      "split": "evaluation",
+      "p": 3,
+      "feature": "atomic_encoded_constraint_count",
+      "outcome": "ground_state_probability",
+      "reference_count": 19,
+      "distinct_indexed_hamiltonian_count": 17,
+      "pearson_r": -0.8696807252449459
+    },
+    {
+      "split": "evaluation",
+      "p": 3,
+      "feature": "atomic_encoded_constraint_count",
+      "outcome": "valid_probability",
+      "reference_count": 19,
+      "distinct_indexed_hamiltonian_count": 17,
+      "pearson_r": -0.7596413455413068
+    },
+    {
+      "split": "evaluation",
+      "p": 3,
+      "feature": "atomic_encoded_constraint_count",
+      "outcome": "normalized_energy_error",
+      "reference_count": 19,
+      "distinct_indexed_hamiltonian_count": 17,
+      "pearson_r": 0.762181941017254
+    },
+    {
+      "split": "evaluation",
+      "p": 3,
+      "feature": "active_constraint_component_type_count",
+      "outcome": "ground_state_probability",
+      "reference_count": 19,
+      "distinct_indexed_hamiltonian_count": 17,
+      "pearson_r": -0.7364672528720443
+    },
+    {
+      "split": "evaluation",
+      "p": 3,
+      "feature": "active_constraint_component_type_count",
+      "outcome": "valid_probability",
+      "reference_count": 19,
+      "distinct_indexed_hamiltonian_count": 17,
+      "pearson_r": -0.796105180849051
+    },
+    {
+      "split": "evaluation",
+      "p": 3,
+      "feature": "active_constraint_component_type_count",
+      "outcome": "normalized_energy_error",
+      "reference_count": 19,
+      "distinct_indexed_hamiltonian_count": 17,
+      "pearson_r": 0.6544215365123713
+    },
+    {
+      "split": "evaluation",
+      "p": 3,
+      "feature": "penalty_to_business_coefficient_ratio",
+      "outcome": "ground_state_probability",
+      "reference_count": 18,
+      "distinct_indexed_hamiltonian_count": 16,
+      "pearson_r": -0.5684757464315366
+    },
+    {
+      "split": "evaluation",
+      "p": 3,
+      "feature": "penalty_to_business_coefficient_ratio",
+      "outcome": "valid_probability",
+      "reference_count": 18,
+      "distinct_indexed_hamiltonian_count": 16,
+      "pearson_r": -0.5631085604045207
+    },
+    {
+      "split": "evaluation",
+      "p": 3,
+      "feature": "penalty_to_business_coefficient_ratio",
+      "outcome": "normalized_energy_error",
+      "reference_count": 18,
+      "distinct_indexed_hamiltonian_count": 16,
+      "pearson_r": 0.5414360929612334
+    }
+  ],
+  "limits": "Small, structurally selected, confounded synthetic suite. Duplicate Hamiltonians and repeated depths prevent an independent-sample interpretation. No causal claim, significance test or retrospective hypothesis."
+}
