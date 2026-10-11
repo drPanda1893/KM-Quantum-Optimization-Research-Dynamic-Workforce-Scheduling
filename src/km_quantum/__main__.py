@@ -91,6 +91,9 @@ def _parser() -> argparse.ArgumentParser:
     from km_quantum.qaoa.cli import add_qaoa_parser
 
     add_qaoa_parser(commands)
+    from km_quantum.m4.cli import add_m4_parser
+
+    add_m4_parser(commands)
     return parser
 
 
@@ -122,6 +125,12 @@ def _solver_config(args: argparse.Namespace) -> SolverConfig:
 
 def _execute(args: argparse.Namespace) -> int:
     output: BaseModel | dict[str, Any]
+    if args.command == "m4":
+        from km_quantum.m4.cli import execute_m4
+
+        output, code = execute_m4(args)
+        _emit(output)
+        return code
     if args.command == "qaoa":
         from km_quantum.qaoa.cli import execute_qaoa
 
