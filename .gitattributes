@@ -1,2 +1,7 @@
 # Preserve the exact reconstructed M2 acceptance report used by M3 provenance.
 results/m2-acceptance.json -text
+
+# Keep archived M3 traces and samples byte-identical to their recorded hashes.
+results/m3/runs/*.json -text whitespace=trailing-space,space-before-tab,cr-at-eol
+results/m3/traces/*.jsonl -text whitespace=trailing-space,space-before-tab,cr-at-eol
+results/m3/samples/*.json -text whitespace=trailing-space,space-before-tab,cr-at-eol

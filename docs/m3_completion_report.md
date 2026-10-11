@@ -519,7 +519,7 @@ Main execution wall-clock time is 1395.038 seconds; the sum of core run times is
 
 The execution platform is Windows-11-10.0.26200-SP0. Dependency-lock SHA-256 is 4eb9099637f5467f0a320e624771456675d5324767bb713c2f182a6183e8624d. Every training record has the same clean source commit and pinned environment. Reporting changes regenerate presentation from saved data without numeric retraining.
 
-Compact analysis, structural measurements, restart/exploratory summaries, gates, acceptance, tooling and five figures are versioned. The 660 raw runs/samples/traces remain locally available in documented ignored directories. Machine-readable data supports the figures.
+Compact analysis, structural measurements, restart/exploratory summaries, gates, acceptance, tooling and five figures are versioned. The complete archive also versions all 660 raw run records, 660 sample records and 660 traces, totaling 81,406,353 bytes. Git `-text` attributes preserve their exact bytes and recorded trace/sample hashes across checkouts. Machine-readable data supports the figures.
 
 The deterministic reporting scripts are [m3_report_analysis.py](../scripts/m3_report_analysis.py) and [m3_constraint_analysis.py](../scripts/m3_constraint_analysis.py). `git log --oneline -- docs/m3_completion_report.md` identifies the final report commit.
 
@@ -594,7 +594,8 @@ protocol, documentation, and quantum tests.
 | `.gitattributes`, archived `results/m2-acceptance.json` | Portable protected comparisons and exact acceptance byte preservation |
 | `docs/m3_completion_report.md` | This complete measured report |
 | `scripts/m3_report_analysis.py`, `scripts/m3_constraint_analysis.py` | Deterministic descriptive and constraint reporting |
-| Compact M3 JSON and five PNG files | Portable report/audit evidence; raw trajectories remain ignored |
+| Compact M3 JSON and five PNG files | Portable report/audit evidence |
+| `results/m3/runs`, `results/m3/samples`, `results/m3/traces` | Complete 660-run archive with exact trace/sample byte preservation |
 
 | Commit | Thematic change |
 | --- | --- |

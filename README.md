@@ -160,6 +160,11 @@ Use `--split development` or `--split evaluation` for staged execution and
 `--resume` to retain verified completed runs. Run outputs retain every
 optimizer evaluation, ideal sampling counts and environment identity.
 
+The complete primary study is archived in `results/m3/runs`, `traces` and
+`samples`: 660 records in each directory. Git attributes preserve their exact
+bytes so acceptance can verify the recorded trace and sample hashes after
+checkout. Temporary analysis drafts and caches remain untracked.
+
 Ground probability sums every exact M2 minimum. Decoded M1 feasibility and
 optimality are reported separately from auxiliary-encoding feasibility:
 an optimal business schedule can have incorrect slack bits. Raw decoded
