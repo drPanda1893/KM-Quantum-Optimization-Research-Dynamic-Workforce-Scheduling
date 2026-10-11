@@ -147,8 +147,10 @@ values are observational metadata and are not expected to reproduce bytewise.
 Sampling occurs only after exact statevector optimization. Save all distinct
 measurement counts, modal string/frequency, best sampled energy, all-ground
 counts, valid/invalid counts, best decoded M1 objective and whether any optimum
-was observed. Compare ground and validity frequencies against the exact
-distribution using a stated statistical test, not exact equality. Ground-sample
+was observed. Compare ground frequencies against the exact
+distribution using a stated statistical test, not exact equality. Empirical
+feasibility is reported alongside the exact decoded-valid mass; the formal
+statistical audit tests the ground frequency. Ground-sample
 verification uses the exact two-sided binomial test with the prespecified tail
 threshold `alpha=1e-9`. Across 660 runs the union bound gives a false-rejection
 probability at most `6.6e-7`. Report the p-value, absolute deviation, binomial

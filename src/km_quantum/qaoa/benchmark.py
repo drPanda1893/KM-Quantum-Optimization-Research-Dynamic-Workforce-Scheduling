@@ -413,8 +413,11 @@ def create_plots(
                 alpha=0.15,
                 linewidth=0.7,
             )
-    ax.set(xlabel="Optimizer evaluation", ylabel="Expected energy (M2 units)")
-    ax.set_title("Complete optimizer trajectories (all restarts)")
+    ax.set(
+        xlabel="Expectation evaluation (includes final verification)",
+        ylabel="Expected energy (M2 units)",
+    )
+    ax.set_title("Complete energy traces (all restarts)")
     save(fig, "convergence")
 
     fig, ax = plt.subplots(figsize=(8, 5))
@@ -470,7 +473,7 @@ def create_plots(
     ax.plot([0, 1], [0, 1], "k--", linewidth=1, label="Uniform equality")
     ax.set(xlabel="Uniform P_ground", ylabel="Median QAOA P_ground", xlim=(0, 1), ylim=(0, 1))
     ax.set_title("Probability concentration relative to uniform sampling")
-    ax.legend()
+    ax.legend(loc="lower right")
     save(fig, "qaoa_vs_uniform")
     return paths
 
