@@ -145,7 +145,9 @@ dependencies = [
     { name = "ortools" },
     { name = "pydantic" },
     { name = "qiskit" },
+    { name = "qiskit-aer" },
     { name = "scipy" },
+    { name = "threadpoolctl" },
 ]
 
 [package.dev-dependencies]
@@ -162,7 +164,9 @@ requires-dist = [
     { name = "ortools", specifier = ">=9.14,<10" },
     { name = "pydantic", specifier = ">=2.11,<3" },
     { name = "qiskit", specifier = "==2.5.2" },
+    { name = "qiskit-aer", specifier = "==0.17.2" },
     { name = "scipy", specifier = ">=1.16,<2" },
+    { name = "threadpoolctl", specifier = "==3.7.0" },
 ]
 
 [package.metadata.requires-dev]
@@ -373,6 +377,22 @@ wheels = [
 ]
 
 [[package]]
+name = "psutil"
+version = "7.2.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/aa/c6/d1ddf4abb55e93cebc4f2ed8b5d6dbad109ecb8d63748dd2b20ab5e57ebe/psutil-7.2.2.tar.gz", hash = "sha256:0746f5f8d406af344fd547f1c8daa5f5c33dbc293bb8d6a16d80b4bb88f59372", size = 493740, upload-time = "2026-01-28T18:14:54.428Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e7/36/5ee6e05c9bd427237b11b3937ad82bb8ad2752d72c6969314590dd0c2f6e/psutil-7.2.2-cp36-abi3-macosx_10_9_x86_64.whl", hash = "sha256:ed0cace939114f62738d808fdcecd4c869222507e266e574799e9c0faa17d486", size = 129090, upload-time = "2026-01-28T18:15:22.168Z" },
+    { url = "https://files.pythonhosted.org/packages/80/c4/f5af4c1ca8c1eeb2e92ccca14ce8effdeec651d5ab6053c589b074eda6e1/psutil-7.2.2-cp36-abi3-macosx_11_0_arm64.whl", hash = "sha256:1a7b04c10f32cc88ab39cbf606e117fd74721c831c98a27dc04578deb0c16979", size = 129859, upload-time = "2026-01-28T18:15:23.795Z" },
+    { url = "https://files.pythonhosted.org/packages/b5/70/5d8df3b09e25bce090399cf48e452d25c935ab72dad19406c77f4e828045/psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:076a2d2f923fd4821644f5ba89f059523da90dc9014e85f8e45a5774ca5bc6f9", size = 155560, upload-time = "2026-01-28T18:15:25.976Z" },
+    { url = "https://files.pythonhosted.org/packages/63/65/37648c0c158dc222aba51c089eb3bdfa238e621674dc42d48706e639204f/psutil-7.2.2-cp36-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:b0726cecd84f9474419d67252add4ac0cd9811b04d61123054b9fb6f57df6e9e", size = 156997, upload-time = "2026-01-28T18:15:27.794Z" },
+    { url = "https://files.pythonhosted.org/packages/8e/13/125093eadae863ce03c6ffdbae9929430d116a246ef69866dad94da3bfbc/psutil-7.2.2-cp36-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:fd04ef36b4a6d599bbdb225dd1d3f51e00105f6d48a28f006da7f9822f2606d8", size = 148972, upload-time = "2026-01-28T18:15:29.342Z" },
+    { url = "https://files.pythonhosted.org/packages/04/78/0acd37ca84ce3ddffaa92ef0f571e073faa6d8ff1f0559ab1272188ea2be/psutil-7.2.2-cp36-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:b58fabe35e80b264a4e3bb23e6b96f9e45a3df7fb7eed419ac0e5947c61e47cc", size = 148266, upload-time = "2026-01-28T18:15:31.597Z" },
+    { url = "https://files.pythonhosted.org/packages/b4/90/e2159492b5426be0c1fef7acba807a03511f97c5f86b3caeda6ad92351a7/psutil-7.2.2-cp37-abi3-win_amd64.whl", hash = "sha256:eb7e81434c8d223ec4a219b5fc1c47d0417b12be7ea866e24fb5ad6e84b3d988", size = 137737, upload-time = "2026-01-28T18:15:33.849Z" },
+    { url = "https://files.pythonhosted.org/packages/8c/c7/7bb2e321574b10df20cbde462a94e2b71d05f9bbda251ef27d104668306a/psutil-7.2.2-cp37-abi3-win_arm64.whl", hash = "sha256:8c233660f575a5a89e6d4cb65d9f938126312bca76d8fe087b947b3a1aaac9ee", size = 134617, upload-time = "2026-01-28T18:15:36.514Z" },
+]
+
+[[package]]
 name = "pydantic"
 version = "2.13.5"
 source = { registry = "https://pypi.org/simple" }
@@ -487,6 +507,29 @@ wheels = [
 ]
 
 [[package]]
+name = "qiskit-aer"
+version = "0.17.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy" },
+    { name = "psutil" },
+    { name = "python-dateutil" },
+    { name = "qiskit" },
+    { name = "scipy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/07/6c/6b8b35f67159401580665c59ae64d676bef9e85aac4d2a50831cbe32f652/qiskit_aer-0.17.2.tar.gz", hash = "sha256:134eef8e509311955a15be543d2ba368f988f3583a2bc1f548af3196da820eb4", size = 6551618, upload-time = "2025-09-17T13:55:25.165Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0a/2c/7039b1891377ef081c92af79cee230be0a01e52c21561469f6807f17fe96/qiskit_aer-0.17.2-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:5f03bf3f45f7f6cc6e480df473e4750178cb66ee7fb44d85d98c13901e81c42c", size = 2508338, upload-time = "2025-09-17T13:54:19.202Z" },
+    { url = "https://files.pythonhosted.org/packages/50/02/f1d6906c2cb3ff3ec94f97656abbc56b80b80c4677ff603ee40063cf9c84/qiskit_aer-0.17.2-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:abb03d621cfd30e608ba8ddbb9e673707e6f790a744130d1d6355e3e10554d13", size = 2117032, upload-time = "2025-09-17T13:54:21.009Z" },
+    { url = "https://files.pythonhosted.org/packages/10/b3/86a9687b2123201badcca23c0954fe17e83d648cfb1737558c00783e3ea6/qiskit_aer-0.17.2-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:6e3ee2debad4dd9d1ff021002e82363a83ee22b1440ccbc293a444072c9fd0c1", size = 6454082, upload-time = "2025-09-17T15:22:24.811Z" },
+    { url = "https://files.pythonhosted.org/packages/ca/05/45a3d07b0372317f33ce3abaa438d668b57f3ecdd0c62dcb4c2d43e44d17/qiskit_aer-0.17.2-cp312-cp312-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:782f6ba0bdd08faec19f7bbb65e95fc70b0c2d097b056fc929a95c084b57c203", size = 7974594, upload-time = "2025-09-17T13:54:22.628Z" },
+    { url = "https://files.pythonhosted.org/packages/d1/c3/91ea504db5ba2c43f1fc5918ff60098aa730a5db40830a096855325b2b66/qiskit_aer-0.17.2-cp312-cp312-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:2e91fc4f0a26540ff0e9d0a30b8be3e0f12b4c9c59ec1afffb753944d47e1888", size = 7926812, upload-time = "2025-09-17T14:51:09.356Z" },
+    { url = "https://files.pythonhosted.org/packages/30/cc/c47b356b90dd00b9b19fdcaa8f6776613db0885630f7095f92659f62b5c8/qiskit_aer-0.17.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:7a8857aad723036ff818af14bbd4c3375559741366bffce7b36b4eeb306b88cf", size = 12375640, upload-time = "2025-09-17T13:54:24.582Z" },
+    { url = "https://files.pythonhosted.org/packages/06/eb/8b796a34622392ee1f66b7d03ba31385ef559cd3a145ec6de2556ebb983e/qiskit_aer-0.17.2-cp312-cp312-win32.whl", hash = "sha256:a9abdb24318c417b69867c6d43aed4684b67320b1e7010f4c57c84fdeff89a13", size = 6922323, upload-time = "2025-09-17T13:54:26.703Z" },
+    { url = "https://files.pythonhosted.org/packages/30/f7/5943ba7f6be0a02667593ef5f684359a62d5a46ba9dac9a0367c3ab3d1d8/qiskit_aer-0.17.2-cp312-cp312-win_amd64.whl", hash = "sha256:80c419bb3fb65a5135286ce4e98abd68b9dc836b77affbbc4b06721d53ce1e3c", size = 9563069, upload-time = "2025-09-17T13:54:28.885Z" },
+]
+
+[[package]]
 name = "ruff"
 version = "0.16.10"
 source = { registry = "https://pypi.org/simple" }
@@ -570,6 +613,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/db/a1/3b8ed9c1fc3aa6eebb57732d924ddaa0500ecc3b638d0454816320994383/stevedore-5.9.1.tar.gz", hash = "sha256:e97a2667923efda926e8713fde6a73616df68210a3cbc6f02b48967b676fd8bf", size = 518111, upload-time = "2026-08-20T15:25:14.754Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/c5/97/bba6e7ec2f5498b9dcb7b1b6400086b80ae5a8ebaff4b25e8c8add75f439/stevedore-5.9.1-py3-none-any.whl", hash = "sha256:5c8ff3a9f336cc1a06ac0f597bc79d11a2f950bfd32e290ca56b5a301fafafbf", size = 54931, upload-time = "2026-08-20T15:25:13.602Z" },
+]
+
+[[package]]
+name = "threadpoolctl"
+version = "3.7.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/00/dc/6c58154c1c65f758ea979e7139cb76993a9cfc662d14e9be3c4a667cfb77/threadpoolctl-3.7.0.tar.gz", hash = "sha256:61348cfb77d53b9242e0017029244b559b810c142ced65b4e21eeca1843959a7", size = 31961, upload-time = "2026-09-15T15:46:20.263Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/43/3f/f88a53f60a472b46f4023f56d204dd7de33d34c5d2acbfa0d70a674e639e/threadpoolctl-3.7.0-py3-none-any.whl", hash = "sha256:cd8b60b5641b45c67bbf73c64c843235fc2d8a480c87389f52f5dbee893b86be", size = 26362, upload-time = "2026-09-15T15:46:19.168Z" },
 ]
 
 [[package]]

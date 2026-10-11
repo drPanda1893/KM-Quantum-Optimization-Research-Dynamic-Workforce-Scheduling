@@ -14,7 +14,9 @@ dependencies = [
     "ortools>=9.14,<10",
     "pydantic>=2.11,<3",
     "qiskit==2.5.2",
+    "qiskit-aer==0.17.2",
     "scipy>=1.16,<2",
+    "threadpoolctl==3.7.0",
 ]
 
 [dependency-groups]
@@ -46,5 +48,5 @@ no_implicit_optional = true
 warn_unused_ignores = true
 
 [[tool.mypy.overrides]]
-module = ["ortools.*", "qiskit.*", "scipy.*", "matplotlib.*"]
+module = ["ortools.*", "qiskit.*", "qiskit_aer.*", "scipy.*", "matplotlib.*", "psutil.*", "threadpoolctl.*"]
 ignore_missing_imports = true
