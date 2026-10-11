@@ -88,6 +88,9 @@ def _parser() -> argparse.ArgumentParser:
     from km_quantum.qubo.cli import add_qubo_parser
 
     add_qubo_parser(commands)
+    from km_quantum.qaoa.cli import add_qaoa_parser
+
+    add_qaoa_parser(commands)
     return parser
 
 
@@ -118,6 +121,13 @@ def _solver_config(args: argparse.Namespace) -> SolverConfig:
 
 
 def _execute(args: argparse.Namespace) -> int:
+    output: BaseModel | dict[str, Any]
+    if args.command == "qaoa":
+        from km_quantum.qaoa.cli import execute_qaoa
+
+        output, code = execute_qaoa(args)
+        _emit(output)
+        return code
     if args.command == "qubo":
         from km_quantum.qubo.cli import execute_qubo
 
