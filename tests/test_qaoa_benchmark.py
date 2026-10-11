@@ -4,6 +4,7 @@ import hashlib
 import json
 import shutil
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -106,6 +107,31 @@ def test_manifest_refuses_to_overwrite_changed_prespecification(tmp_path: Path) 
     original["configuration"]["optimizer_config"]["maxiter"] = 1
     path.write_text(json.dumps(original), encoding="utf-8")
     with pytest.raises(ValueError, match="already frozen"):
+        create_manifest(root)
+
+
+def test_lf_checkout_preserves_content_gate_and_frozen_manifest(tmp_path: Path) -> None:
+    root = _study_root(tmp_path)
+    frozen = root / "data/synthetic/m2/frozen_qubos.jsonl"
+    # Simulate the initial Windows snapshot on every test platform.
+    raw = frozen.read_bytes().replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")
+    frozen.write_bytes(raw)
+    original = create_manifest(root)
+    frozen.write_bytes(raw.replace(b"\r\n", b"\n"))
+    verification = verify_provenance(root)
+    assert verification["unchanged"]
+    assert verification["mathematical_unchanged"]
+    assert not verification["protected_bytes_unchanged"]
+    assert len(verification["line_ending_only_changes"]) == 1
+    assert verification["changed"] == []
+    assert create_manifest(root) == original
+    # LF equivalence never permits an actual content change.
+    frozen.write_bytes(frozen.read_bytes().replace(b'"ground_energy":0', b'"ground_energy":1', 1))
+    verification = verify_provenance(root)
+    assert not verification["unchanged"]
+    assert not verification["mathematical_unchanged"]
+    assert len(verification["changed"]) == 1
+    with pytest.raises(ValueError, match="artifacts changed"):
         create_manifest(root)
 
 
@@ -282,3 +308,211 @@ def test_resume_refuses_changed_commit_or_config_before_loading_trace(tmp_path: 
     run["config"]["maxiter"] = 301
     with pytest.raises(ValueError, match="configuration differs"):
         _validate_saved_run(run, reference, manifest, {"git_commit": "old-commit"}, tmp_path)
+
+
+def test_separate_split_execution_preserves_combined_summaries_and_plots(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Stub quantum execution to exercise only persisted split orchestration."""
+    from km_quantum.qaoa import benchmark, sampling, simulation
+
+    entries = [
+        {
+            "reference_id": name,
+            "instance_id": name,
+            "split": split,
+            "qubit_count": 2,
+            "structural_metadata": {},
+        }
+        for name, split in (("dev-fixture", "development"), ("eval-fixture", "evaluation"))
+    ]
+    manifest = {"primary_suite": entries, "manifest_content_sha256": "fixed"}
+    references = {
+        entry["reference_id"]: SimpleNamespace(
+            name=entry["reference_id"],
+            instance=SimpleNamespace(instance_id=entry["instance_id"]),
+        )
+        for entry in entries
+    }
+    environment = {"git_dirty": False, "git_commit": "fixed-code"}
+    monkeypatch.setattr(benchmark, "create_manifest", lambda root: manifest)
+    monkeypatch.setattr(
+        benchmark,
+        "_full_gate",
+        lambda root, output, manifest, progress: (
+            {"environment": environment},
+            references,
+            dict.fromkeys(references),
+        ),
+    )
+    validations = []
+    monkeypatch.setattr(
+        benchmark, "_validate_saved_run", lambda run, *args: validations.append(run["run_id"])
+    )
+    monkeypatch.setattr(benchmark, "build_acceptance", lambda *args: {})
+
+    def fake_run(reference, config, *, trace_path, table):
+        trace_path.parent.mkdir(parents=True, exist_ok=True)
+        trace_path.write_text("{}\n", encoding="utf-8")
+        run = _run(config.initialization_seed, 1.0, 0.8, True)
+        run.update(
+            status="COMPLETE",
+            instance_id=reference.instance.instance_id,
+            p=config.p,
+            run_id=f"{reference.name}-p{config.p}-seed{config.initialization_seed}",
+        )
+        return run, None, None
+
+    monkeypatch.setattr(simulation, "run_qaoa", fake_run)
+    monkeypatch.setattr(sampling, "sample_state", lambda *args, **kwargs: {"fixture": True})
+    plot_inputs = []
+
+    def fake_plots(runs, traces, output):
+        plot_inputs.append((len(runs), len(traces), {run["split"] for run in runs}))
+        return []
+
+    monkeypatch.setattr(benchmark, "create_plots", fake_plots)
+    output = tmp_path / "output"
+    first = run_benchmark(tmp_path, output, split="development")
+    previous_files = {
+        path.name: path.read_bytes() for path in (output / "runs").glob("dev-fixture-*.json")
+    }
+    second = run_benchmark(tmp_path, output, split="evaluation")
+    assert first["completed_runs"] == first["summary_run_count"] == 30
+    assert second["completed_runs"] == 30
+    assert second["summary_run_count"] == 60
+    summaries = json.loads((output / "summaries/restarts.json").read_text())["summaries"]
+    assert len(summaries) == 6
+    assert all(row["number_runs"] == 10 for row in summaries)
+    assert {row["split"] for row in summaries} == {"development", "evaluation"}
+    assert plot_inputs == [
+        (30, 30, {"development"}),
+        (60, 60, {"development", "evaluation"}),
+    ]
+    assert previous_files == {
+        path.name: path.read_bytes() for path in (output / "runs").glob("dev-fixture-*.json")
+    }
+    assert sum(name.startswith("dev-fixture-") for name in validations) == 90
+
+
+@pytest.fixture
+def saved_correctness_run(tmp_path: Path):
+    """Build a tiny persisted correctness fixture without optimizer benchmarking."""
+    import numpy as np
+    from qiskit.quantum_info import Statevector
+
+    from km_quantum.qaoa.analysis import analysis_for_probabilities, build_state_table
+    from km_quantum.qaoa.benchmark import _expected_config
+    from km_quantum.qaoa.references import load_references
+    from km_quantum.qaoa.sampling import analyze_counts
+    from km_quantum.qaoa.simulation import bind_parameters, build_qaoa
+
+    reference = load_references(ROOT)["F_unassigned_override"]
+    prepared = build_qaoa(reference.ising, 1)
+    table = build_state_table(reference)
+    initial = np.random.default_rng(0).uniform(0, np.pi, len(prepared.parameters)).tolist()
+    final = [0.0] * len(prepared.parameters)
+    final_probabilities = Statevector.from_instruction(
+        bind_parameters(prepared, final)
+    ).probabilities()
+    energy = float(np.dot(final_probabilities, table.energies))
+    analysis = analysis_for_probabilities(reference, table, final_probabilities, energy)
+    initial_probabilities = Statevector.from_instruction(
+        bind_parameters(prepared, initial)
+    ).probabilities()
+    initial_energy = float(np.dot(initial_probabilities, table.energies))
+    sample = analyze_counts(
+        reference,
+        table,
+        {"0": 512, "1": 512},
+        shots=1024,
+        seed=10100,
+        exact_ground_probability=analysis["ground_state_probability"],
+    )
+    run_id = f"{reference.name}-p1-seed0"
+    trace = tmp_path / "traces" / f"{run_id}.jsonl"
+    trace.parent.mkdir(parents=True)
+    rows = [
+        {"evaluation": 1, "parameters": initial, "expected_energy": initial_energy},
+        {
+            "evaluation": 2,
+            "parameters": final,
+            "phase": "verification",
+            "expected_energy": energy,
+        },
+    ]
+    trace.write_text("".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8")
+    sample_path = tmp_path / "samples" / f"{run_id}.json"
+    sample_path.parent.mkdir(parents=True)
+    sample_path.write_text(json.dumps(sample), encoding="utf-8")
+    environment = {"git_commit": "correctness-fixture"}
+    manifest = {"manifest_content_sha256": "fixed"}
+    run = {
+        "status": "COMPLETE",
+        "p": 1,
+        "initialization_seed": 0,
+        "instance_id": reference.instance.instance_id,
+        "m2_reference_hash": reference.reference_hash,
+        "qubo_hash": reference.qubo_hash,
+        "ising_hash": reference.ising_hash,
+        "qubit_count": reference.qubo.number_variables,
+        "ground_state_count": len(reference.ground_bits),
+        "config": _expected_config(1, 0),
+        "manifest_content_sha256": "fixed",
+        "environment": environment,
+        "parameter_order": [parameter.name for parameter in prepared.parameters],
+        "parameter_count": len(prepared.parameters),
+        "initial_parameters": initial,
+        "final_parameters": final,
+        "parameter_bindings": [
+            {
+                "position": index,
+                "name": parameter.name,
+                "initial_value": initial[index],
+                "final_value": final[index],
+            }
+            for index, parameter in enumerate(prepared.parameters)
+        ],
+        "initial_expected_energy": initial_energy,
+        "final_expected_energy": energy,
+        "operator_equivalence": True,
+        "nfev": 1,
+        "total_expectation_evaluations": 2,
+        "verification_evaluations": 1,
+        "sampling": sample,
+        "trace_sha256": hashlib.sha256(trace.read_bytes()).hexdigest(),
+        "sample_sha256": hashlib.sha256(sample_path.read_bytes()).hexdigest(),
+        **analysis,
+    }
+    return run, reference, manifest, environment, tmp_path
+
+
+@pytest.mark.parametrize(
+    ("metric", "forged_value"),
+    [("valid_probability", 0.0), ("normalized_energy_error", -100.0), ("ground_state_count", 999)],
+)
+def test_resume_recomputes_scientific_metrics_and_rejects_forgery(
+    saved_correctness_run, metric: str, forged_value: object
+) -> None:
+    from km_quantum.qaoa.benchmark import _validate_saved_run
+
+    run, reference, manifest, environment, output = saved_correctness_run
+    _validate_saved_run(run, reference, manifest, environment, output)
+    run[metric] = forged_value
+    with pytest.raises(ValueError, match="differs"):
+        _validate_saved_run(run, reference, manifest, environment, output)
+
+
+def test_resume_recomputes_sample_counts_instead_of_trusting_embedded_metrics(
+    saved_correctness_run,
+) -> None:
+    from km_quantum.qaoa.benchmark import _validate_saved_run
+
+    run, reference, manifest, environment, output = saved_correctness_run
+    run["sampling"]["empirical_ground_frequency"] = 0.0
+    sample_path = output / "samples" / f"{reference.name}-p1-seed0.json"
+    sample_path.write_text(json.dumps(run["sampling"]), encoding="utf-8")
+    # Updating the hash as well must not make invented scientific metrics valid.
+    run["sample_sha256"] = hashlib.sha256(sample_path.read_bytes()).hexdigest()
+    with pytest.raises(ValueError, match="recomputed sampling.empirical_ground_frequency"):
+        _validate_saved_run(run, reference, manifest, environment, output)

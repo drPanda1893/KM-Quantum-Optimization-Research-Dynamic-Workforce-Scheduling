@@ -50,21 +50,38 @@ def _write_json(path: Path, value: object) -> None:
 
 
 def verify_provenance(root: str | Path) -> dict[str, Any]:
-    """Verify protected M1/M2 bytes against the hashes captured before M3 edits.
+    """Verify M1/M2 content against the hashes captured before M3 edits.
 
     Dependency declarations, README and CLI dispatch have separate baseline hashes
     because M3 intentionally adds dependencies and commands. They do not change
-    the mathematical reference. Missing protected files count as changed.
+    the mathematical reference. Initial byte hashes remain untouched; a derived
+    LF hash permits only CRLF/LF checkout differences. Missing files or any other
+    content changes still fail the gate.
     """
     root = Path(root)
     provenance = json.loads((root / PROVENANCE_PATH).read_text(encoding="utf-8"))
     protected: dict[str, str] = provenance["protected_files_sha256"]
+    canonical_lf: dict[str, str] = provenance.get("protected_files_lf_sha256", {})
     changed = []
+    line_endings = []
     for relative, expected in sorted(protected.items()):
         path = root / relative
         actual = _file_hash(path) if path.is_file() else None
         if actual != expected:
-            changed.append({"path": relative, "expected_sha256": expected, "actual_sha256": actual})
+            normalized = (
+                hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+                if path.is_file()
+                else None
+            )
+            diagnostic = {
+                "path": relative,
+                "expected_sha256": expected,
+                "actual_sha256": actual,
+            }
+            if normalized is not None and normalized == canonical_lf.get(relative):
+                line_endings.append(diagnostic)
+            else:
+                changed.append(diagnostic)
     acceptance = root / "results/m2-acceptance.json"
     expected_acceptance = provenance.get("reconstructed_acceptance_report_sha256")
     acceptance_unchanged = expected_acceptance is None or (
@@ -72,6 +89,9 @@ def verify_provenance(root: str | Path) -> dict[str, Any]:
     )
     return {
         "unchanged": not changed and acceptance_unchanged,
+        "mathematical_unchanged": not changed,
+        "protected_bytes_unchanged": not changed and not line_endings,
+        "line_ending_only_changes": line_endings,
         "count": len(protected),
         "changed": changed,
         "m2_reference_commit": provenance["m2_reference_commit"],
@@ -91,7 +111,10 @@ def create_manifest(root: str | Path) -> dict[str, Any]:
     if not verify_provenance(root)["unchanged"]:
         raise ValueError("protected M1/M2 artifacts changed; refusing to freeze M3 selection")
     source = root / FROZEN_REFERENCES_PATH
-    source_hash = _file_hash(source)
+    # The manifest identifies the original frozen byte snapshot. Its recorded
+    # SHA remains stable when Git checks out equivalent LF text on another host.
+    provenance = json.loads((root / PROVENANCE_PATH).read_text(encoding="utf-8"))
+    source_hash = provenance["protected_files_sha256"][FROZEN_REFERENCES_PATH.as_posix()]
     entries: list[dict[str, Any]] = []
     for line_number, line in enumerate(source.read_text(encoding="utf-8").splitlines(), 1):
         if not line.strip():
@@ -528,6 +551,7 @@ def _full_gate(
         }
         reports.append(record)
         tables[name] = table
+        _VALIDATION_TABLE_CACHE[reference.reference_hash] = table
         if not verification["passed"] or not table.checked_ground_set:
             _write_json(output / "operator_gate.json", {"passed": False, "references": reports})
             raise ValueError(f"complete operator/state-table gate failed for {name}")
@@ -562,6 +586,33 @@ def _expected_config(p: int, seed: int) -> dict[str, Any]:
         sampler_seed=10000 + seed + 100 * p,
         max_qubits=PRIMARY_CONFIG["max_qubits"],
     ).model_dump(mode="json")
+
+
+_VALIDATION_TABLE_CACHE: dict[str, Any] = {}
+
+
+def _assert_record_matches(expected: Any, observed: Any, location: str) -> None:
+    """Compare recomputed scientific metrics, retaining strict discrete identity."""
+    if isinstance(expected, dict):
+        if not isinstance(observed, dict) or set(expected) != set(observed):
+            raise ValueError(f"recomputed {location} fields differ")
+        for key, value in expected.items():
+            _assert_record_matches(value, observed[key], f"{location}.{key}")
+    elif isinstance(expected, list):
+        if not isinstance(observed, list) or len(expected) != len(observed):
+            raise ValueError(f"recomputed {location} sequence differs")
+        for index, value in enumerate(expected):
+            _assert_record_matches(value, observed[index], f"{location}[{index}]")
+    elif isinstance(expected, float):
+        if (
+            not isinstance(observed, (float, int))
+            or isinstance(observed, bool)
+            or not math.isfinite(observed)
+            or not math.isclose(expected, observed, abs_tol=1e-9, rel_tol=1e-12)
+        ):
+            raise ValueError(f"recomputed {location} value differs")
+    elif type(expected) is not type(observed) or expected != observed:
+        raise ValueError(f"recomputed {location} value differs")
 
 
 def _validate_saved_run(
@@ -603,6 +654,54 @@ def _validate_saved_run(
             raise ValueError(f"saved run environment differs: {key}")
     if not run.get("operator_equivalence") or not run.get("expectation_verified"):
         raise ValueError("saved run has no successful operator/expectation verification")
+    if type(run.get("ground_state_count")) is not int or run.get("ground_state_count") != len(
+        reference.ground_bits
+    ):
+        raise ValueError("saved run ground-state count differs from frozen reference")
+    import numpy as np
+    from qiskit.quantum_info import Statevector
+
+    from km_quantum.qaoa.analysis import analysis_for_probabilities, build_state_table
+    from km_quantum.qaoa.sampling import analyze_counts
+    from km_quantum.qaoa.simulation import bind_parameters, build_qaoa
+
+    if reference.reference_hash not in _VALIDATION_TABLE_CACHE:
+        _VALIDATION_TABLE_CACHE[reference.reference_hash] = build_state_table(
+            reference, max_qubits=PRIMARY_CONFIG["max_qubits"]
+        )
+    table = _VALIDATION_TABLE_CACHE[reference.reference_hash]
+    prepared = build_qaoa(reference.ising, p, max_qubits=PRIMARY_CONFIG["max_qubits"])
+    actual_order = [parameter.name for parameter in prepared.parameters]
+    if run.get("parameter_order") != actual_order or run.get("parameter_count") != len(
+        prepared.parameters
+    ):
+        raise ValueError("saved run parameter identities differ from the actual Qiskit circuit")
+    expected_bindings = [
+        {
+            "position": index,
+            "name": name,
+            "initial_value": run["initial_parameters"][index],
+            "final_value": run["final_parameters"][index],
+        }
+        for index, name in enumerate(actual_order)
+    ]
+    _assert_record_matches(expected_bindings, run.get("parameter_bindings"), "parameter bindings")
+    initial = np.random.default_rng(seed).uniform(0.0, np.pi, len(prepared.parameters))
+    if run.get("initial_parameters") != initial.tolist():
+        raise ValueError("saved initial parameters differ from the prespecified seeded values")
+    bound = bind_parameters(prepared, run["final_parameters"])
+    probabilities = np.asarray(Statevector.from_instruction(bound).probabilities(), dtype=float)
+    recomputed = analysis_for_probabilities(
+        reference, table, probabilities, run["final_expected_energy"]
+    )
+    for key, value in recomputed.items():
+        _assert_record_matches(value, run.get(key), f"final analysis.{key}")
+    initial_probabilities = np.asarray(
+        Statevector.from_instruction(bind_parameters(prepared, initial)).probabilities(),
+        dtype=float,
+    )
+    initial_energy = float(np.dot(initial_probabilities, table.energies))
+    _assert_record_matches(initial_energy, run.get("initial_expected_energy"), "initial energy")
     tolerance = PRIMARY_CONFIG["numerical_tolerances"]
     if not math.isclose(
         run["final_expected_energy"],
@@ -681,6 +780,46 @@ def _validate_saved_run(
         or sample.get("exact_ground_probability") != run["ground_state_probability"]
     ):
         raise ValueError("saved seeded sampling evidence is malformed or unverified")
+    recomputed_sample = analyze_counts(
+        reference,
+        table,
+        counts,
+        shots=config["shots"],
+        seed=config["sampler_seed"],
+        exact_ground_probability=recomputed["ground_state_probability"],
+    )
+    _assert_record_matches(recomputed_sample, sample, "sampling")
+
+
+def _load_completed_runs(
+    references: dict[str, Any],
+    manifest: dict[str, Any],
+    environment: dict[str, Any],
+    output: Path,
+) -> list[dict[str, Any]]:
+    """Load validated complete study records across both execution splits.
+
+    ERROR records remain in the output and acceptance audit. A complete record
+    with missing or inconsistent evidence is refused rather than omitted from
+    summaries. The manifest bounds collection, excluding unrelated run files.
+    """
+    runs = []
+    for entry in manifest["primary_suite"]:
+        reference = references[entry["reference_id"]]
+        for p in PRIMARY_CONFIG["p_values"]:
+            for seed in PRIMARY_CONFIG["restart_seeds"]:
+                run_id = f"{reference.name}-p{p}-seed{seed}"
+                path = output / "runs" / f"{run_id}.json"
+                if not path.is_file():
+                    continue
+                run = json.loads(path.read_text(encoding="utf-8"))
+                if run.get("status") != "COMPLETE":
+                    continue
+                if run.get("p") != p or run.get("initialization_seed") != seed:
+                    raise ValueError(f"saved file identity differs from its run: {run_id}")
+                _validate_saved_run(run, reference, manifest, environment, output)
+                runs.append(run)
+    return runs
 
 
 def run_benchmark(
@@ -796,6 +935,9 @@ def run_benchmark(
                     failed.append(failure)
                 if progress is not None:
                     progress(f"M3 {entry['split']}: {completed}/{planned} complete; {run_id}")
+    # A development/evaluation invocation only filters new execution. Shared
+    # summaries and plots always describe all saved completed study records.
+    runs = _load_completed_runs(references, manifest, environment, output)
     summaries = aggregate_runs(runs)
     _write_json(output / "summaries/restarts.json", {"summaries": summaries})
     _write_json(
@@ -817,6 +959,8 @@ def run_benchmark(
         "resumed_runs": resumed,
         "failed_runs": len(failed),
         "failures": failed,
+        "summary_run_count": len(runs),
+        "summary_scope": "all saved validated COMPLETE primary-manifest runs across both splits",
         "plots": plots,
         "manifest_content_sha256": manifest["manifest_content_sha256"],
     }

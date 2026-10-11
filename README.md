@@ -143,9 +143,10 @@ uv run --locked python -m km_quantum qaoa benchmark --output-directory results/m
 uv run --locked python -m km_quantum qaoa acceptance --output-directory results/m3 --tooling results/m3/tooling.json
 ```
 
-The recovered checkout omits ignored M2 runtime results. Reconstruct its
-acceptance report once using the M2 command before creating the M3 manifest;
-provenance records the reconstructed report separately from historical evidence.
+The recovered M2 checkout omitted its ignored acceptance report. M3 reconstructed
+it once using unchanged M2 code and preserves those exact bytes in this branch;
+provenance distinguishes that reconstruction from historical evidence. Keep
+`results/m2-acceptance.json` unchanged; use a separate output for new M2 audits.
 Benchmark execution requires a clean code commit. The immutable manifest fixes
 22 structural references, depths 1/2/3 and ten starts: 660 runs. All 113 models
 within the 14-qubit cap participate in complete basis-state correctness gates.

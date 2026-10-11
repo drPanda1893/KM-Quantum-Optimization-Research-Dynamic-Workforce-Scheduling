@@ -19,6 +19,12 @@ its resulting bytes and PASS outcome are recorded separately in provenance.
 Reconstruction is not presented as the original historical report.
 The reconstructed report is versioned explicitly at `results/m2-acceptance.json`
 so its exact provenance bytes remain available in subsequent checkouts.
+The initial raw file hashes remain unchanged. Additional hashes normalize only
+CRLF to LF, permitting Git line-ending conversions across platforms while
+rejecting every other content change. The provenance result distinguishes
+exact protected bytes from line-ending-only differences. Manifest source hashes
+continue to identify the original raw snapshot. The reconstructed acceptance
+report uses Git's `-text` attribute so its exact report bytes are preserved.
 
 First verify protected hashes and the preserved reconstructed M2 acceptance gate. Next,
 translate the frozen Ising representation and verify all computational-basis
@@ -131,6 +137,13 @@ termination message and runtime. An exhausted evaluation budget remains a
 reported run and contributes to the distributions; convergence is separately
 counted. A technical failure is explicit, not silently replaced by another seed.
 
+Run-level `runtime_ms` measures the core `run_qaoa` call: its reference/gate
+checks when not already cached, circuit construction, exact optimization and
+final state analysis, including writing optimization traces. It excludes the
+separate shot-sampling call, run/sample artifact writing, suite-wide gates and
+plot/summary generation. It is not total benchmark wall time. Time and timestamp
+values are observational metadata and are not expected to reproduce bytewise.
+
 Sampling occurs only after exact statevector optimization. Save all distinct
 measurement counts, modal string/frequency, best sampled energy, all-ground
 counts, valid/invalid counts, best decoded M1 objective and whether any optimum
@@ -155,6 +168,10 @@ error; fraction above the prespecified probability criterion; optimizer
 convergence; evaluations and runtime distributions. Never substitute the best
 restart for the whole distribution. Development and evaluation summaries remain
 identifiable; no after-the-fact sample removal is permitted.
+Executing the development and evaluation splits separately filters only which
+runs are newly executed. Shared summaries, correlations and plots are rebuilt
+from all validated completed manifest runs already saved in the output directory,
+so a later split invocation retains the earlier split's observations.
 
 Create energy-vs-evaluation convergence, P_ground-vs-p, P_ground-vs-qubits,
 P_valid-vs-qubits and QAOA-vs-uniform plots from saved raw data. Label averaging
