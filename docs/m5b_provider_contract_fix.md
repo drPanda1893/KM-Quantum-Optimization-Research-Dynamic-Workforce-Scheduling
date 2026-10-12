@@ -143,3 +143,44 @@ provider and contract suite. Additional regressions cover actual PUB
 broadcasting, native payload size, instruction/execution ceilings, immutable
 plan bindings, pending/unknown/truncated job inventory, typed diagnostics and
 the complete Target-model boundary. All are offline.
+
+## Acceptance diagnostic follow-up
+
+The v1 read-only run produced a structurally bound three-job, 52-PUB draft.
+Its conservative local usage scenario exceeded the unchanged caps. Acceptance
+correctly blocked execution, but incorrectly discarded the draft's planned
+quantities and reported missing owner configuration despite the separately
+authenticated account observation. This was a reporting defect.
+
+The acceptance builder now retains only diagnostic planned quantities from a
+structurally validated, sealed draft bound to the verified circuit inventory.
+The original executable-hardware-plan, ledger, approval and result gates are
+unchanged. A draft never enters those validated execution paths. Failed
+structure or inventory binding still supplies zero trusted planned counts.
+
+Cached preflight facts are allowlisted and reported as historical observations,
+with their original timestamp. `VERIFIED_HISTORICAL` requires matching backend,
+instance pseudonym and exact plan hash. The report explicitly performs no live
+read and claims no fresh submission eligibility. Typed usage, provider-contract,
+local-channel and calibration failures remain visible. Credential-bearing SDK
+free text, headers and service objects are excluded; final output is redacted.
+Neither these facts nor the displayed draft quantities remove `BLOCKED` or
+grant human approval.
+
+The new regression first failed in three typed-diagnostic cases and passed two
+existing safety assertions. The red evidence is retained under
+`results/m5b-fix-20261012-v2/readiness_diagnostics_red.txt`; targeted green and
+tooling evidence use that v2 directory. The follow-up changes source-context
+hashes. Full QA and the authorized read-only CLI are rerun into a fresh v2
+output. The source-bound v1 preparation and provider artifacts remain archived,
+rather than relabeled or refreshed.
+
+The independent v1 artifact review also preserves its initial strict-byte
+comparison false alarm. `independent_review_v2.json` corrects that audit
+interpretation transparently: all 84 stored raw-QPY hashes and the archived
+assessment's own seal match exactly; every regenerated semantic limit field
+matches. Fresh RuntimeEncoder/QPY serialization varies by a few bytes while
+remaining far below the independent client guard. This observation does not
+establish a canonical SDK serialization identity, a universal variability
+bound or an unpublished provider-byte limit. The reviewed v1 hardware draft
+remains blocked and unapproved.

@@ -19,12 +19,21 @@ from km_quantum.m5.approvals import plan_hash, validate_plan
 from km_quantum.m5.io import historical_integrity, raw_hash, read_sealed
 from km_quantum.m5.ledger import JobLedger, validate_counts
 from km_quantum.m5.manifest import source_context
-from km_quantum.m5.provider import parse_time
+from km_quantum.m5.provider import parse_time, redact
 from km_quantum.m5.workflow import verify_plan_inventory_binding
 
 _ID = re.compile(r"^[A-Za-z0-9_.-]+$")
 _SHA = re.compile(r"^[0-9a-f]{64}$")
 _TOOLING = ("pytest", "ruff_check", "ruff_format", "mypy", "build")
+_DIAGNOSTIC_KINDS = {
+    "OWNER_CONFIGURATION_REQUIRED",
+    "PROVIDER_CONTRACT_ERROR",
+    "USAGE_LIMIT_EXCEEDED",
+    "INSUFFICIENT_USAGE_MODEL",
+    "LOCAL_CHANNEL_OR_SIMULATION_ERROR",
+    "MISSING_REAL_CALIBRATION",
+    "LOCAL_IMPLEMENTATION_ERROR",
+}
 
 
 def _require(condition: Any, message: str) -> None:
@@ -239,6 +248,79 @@ def _usage_seconds(record: Mapping[str, Any]) -> float | None:
     return float(value)
 
 
+def _reported_draft(output: Path, prepared: dict[str, Any] | None) -> dict[str, Any] | None:
+    """Diagnostic inventory only; never accepted as an executable hardware plan."""
+    if prepared is None:
+        return None
+    path = output / "execution_plan.json"
+    if not path.exists():
+        path = output / "provider_execution_draft.json"
+    try:
+        candidate = read_json(path)
+        _require(isinstance(candidate, dict), "Invalid diagnostic draft")
+        validate_plan(candidate, require_hardware=False)
+        _require(candidate.get("plan_hash") == plan_hash(candidate), "Draft seal differs")
+        verify_plan_inventory_binding(candidate, prepared)
+    except (ValueError, KeyError, TypeError, OSError, ImportError):
+        return None
+    return candidate
+
+
+def _cached_preflight(output: Path) -> dict[str, Any]:
+    """Allowlisted historical facts; reading them never renews provider evidence."""
+    path = output / "provider_preflight.json"
+    if not path.exists():
+        return {}
+    try:
+        cached = read_json(path)
+        _require(isinstance(cached, dict), "Invalid cached preflight")
+        parse_time(cached.get("obtained_at", ""))
+    except (ValueError, KeyError, TypeError, OSError):
+        return {}
+    observation = {
+        key: cached.get(key)
+        for key in (
+            "status",
+            "source_kind",
+            "provider_verified",
+            "backend",
+            "instance_binding",
+            "plan_hash",
+            "obtained_at",
+            "plan",
+            "pricing_type",
+            "cost_eur",
+            "operational",
+            "simulator",
+            "fake",
+        )
+    }
+    kind = cached.get("diagnostic_kind")
+    observation["diagnostic_kind"] = (
+        kind if isinstance(kind, str) and kind in _DIAGNOSTIC_KINDS else None
+    )
+    # Credential-bearing free text, SDK details, headers and complete service
+    # objects are deliberately absent from this diagnostic observation.
+    for group, keys in (
+        (
+            "usage",
+            ("remaining_seconds", "consumed_seconds", "limit_seconds", "usage_limit_reached"),
+        ),
+        ("pending_jobs", ("complete", "count", "status")),
+    ):
+        value = cached.get(group, {})
+        observation[group] = (
+            {key: value.get(key) for key in keys} if isinstance(value, Mapping) else {}
+        )
+    observation.update(
+        artifact="provider_preflight.json",
+        historical_snapshot=True,
+        live_read_performed=False,
+        fresh_submission_eligibility_claimed=False,
+    )
+    return dict(redact(observation))
+
+
 def build_acceptance(
     root: Path, output: Path, tooling: dict[str, Any] | None = None
 ) -> dict[str, Any]:
@@ -282,8 +364,32 @@ def build_acceptance(
                 analysis = candidate
         except (ValueError, KeyError, TypeError, OSError, ImportError) as error:
             diagnostics.append(f"{stage}: {type(error).__name__}; artifact gate failed")
+    # Preserve structurally bound planned quantities without accepting a
+    # blocked draft into the hardware-plan/ledger/approval validation path.
+    diagnostic_plan = plan if plan is not None else _reported_draft(output, prepared)
+    observation = _cached_preflight(output)
+    diagnostic_kind = observation.get("diagnostic_kind") or (
+        diagnostic_plan.get("diagnostic_kind") if diagnostic_plan else None
+    )
+    if not isinstance(diagnostic_kind, str) or diagnostic_kind not in _DIAGNOSTIC_KINDS:
+        diagnostic_kind = None
+    diagnostic_details = []
+    if observation.get("status") in {"BLOCKED", "OWNER_CONFIGURATION_REQUIRED"}:
+        diagnostics.append(
+            "provider_preflight: "
+            + (diagnostic_kind or "UNKNOWN_DIAGNOSTIC")
+            + "; cached blocked observation"
+        )
+        diagnostic_details.append(
+            {
+                "stage": "provider_preflight",
+                "kind": diagnostic_kind,
+                "evidence_scope": "historical_snapshot",
+                "live_read_performed": False,
+            }
+        )
     jobs = ledger.get("jobs", [])
-    planned_jobs = plan.get("jobs", []) if plan else []
+    planned_jobs = diagnostic_plan.get("jobs", []) if diagnostic_plan else []
     pubs = {pub["pub_id"]: pub for job in planned_jobs for pub in job["pubs"]}
     raw = collected.get("raw_results", []) if collected else []
     real_ids: set[str] = set()
@@ -428,7 +534,38 @@ def build_acceptance(
     else:
         execution = "NOT_STARTED"
     source = prepared.get("source_kind") if prepared else None
-    return {
+    configuration_status = (
+        "PROVIDER_PREFLIGHT_READY"
+        if source == "provider" and plan
+        else "OWNER_CONFIGURATION_REQUIRED"
+    )
+    if observation:
+        binding_matches = (
+            diagnostic_plan is not None
+            and all(
+                observation.get(key) == diagnostic_plan.get(key)
+                for key in ("backend", "instance_binding")
+            )
+            and observation.get("plan_hash") == plan_hash(diagnostic_plan)
+        )
+        authenticated_facts = (
+            observation.get("provider_verified") is True
+            and observation.get("source_kind") == "ibm_hardware"
+            and observation.get("plan") == "open"
+            and observation.get("pricing_type") == "free"
+            and observation.get("cost_eur") == 0
+            and observation.get("operational") is True
+            and observation.get("simulator") is False
+            and observation.get("fake") is False
+        )
+        configuration_status = (
+            "VERIFIED_HISTORICAL"
+            if authenticated_facts and binding_matches
+            else "HISTORICAL_PROVIDER_OBSERVATION_UNBOUND"
+            if authenticated_facts
+            else "OWNER_CONFIGURATION_REQUIRED"
+        )
+    result = {
         "schema_version": 1,
         "artifact_type": "m5_acceptance",
         "status": status,
@@ -450,11 +587,17 @@ def build_acceptance(
             if prepared
             else "BLOCKED"
         ),
-        "provider_configuration_status": (
-            "PROVIDER_PREFLIGHT_READY"
-            if source == "provider" and plan
-            else "OWNER_CONFIGURATION_REQUIRED"
-        ),
+        "provider_configuration_status": configuration_status,
+        "provider_preflight_observation": observation,
+        "diagnostic_kind": diagnostic_kind,
+        "gate_diagnostic_details": diagnostic_details,
+        "plan_diagnostics": {
+            "artifact_type": diagnostic_plan.get("artifact_type") if diagnostic_plan else None,
+            "status": diagnostic_plan.get("status") if diagnostic_plan else None,
+            "plan_hash": plan_hash(diagnostic_plan) if diagnostic_plan else None,
+            "inventory_binding_verified": diagnostic_plan is not None,
+            "hardware_execution_valid": plan is not None,
+        },
         "approval_status": approval_status,
         "planned_provider_jobs": len(planned_jobs),
         "submitted_provider_jobs": sum(
@@ -513,3 +656,4 @@ def build_acceptance(
         "tooling": tooling,
         "read_only": True,
     }
+    return dict(redact(result))
