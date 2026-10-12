@@ -9,10 +9,12 @@ from pathlib import Path
 from typing import Any
 
 from km_quantum.m4.io import canonical_hash, read_json
+from km_quantum.m5.accounting import validate_completed_job_usage
 from km_quantum.m5.analysis import analyze_results
 from km_quantum.m5.approvals import approval_request, plan_hash, validate_approval, validate_plan
 from km_quantum.m5.budget_policy import validate_budget_authorization
-from km_quantum.m5.io import atomic_json, output_directory, read_sealed, sealed_json
+from km_quantum.m5.device_binding import validate_device_binding
+from km_quantum.m5.io import atomic_json, output_directory, read_sealed, sealed_json, utc_now
 from km_quantum.m5.ledger import JobLedger
 from km_quantum.m5.models import M5Config
 from km_quantum.m5.provider import (
@@ -22,7 +24,8 @@ from km_quantum.m5.provider import (
     preflight,
     redact,
 )
-from km_quantum.m5.snapshots import load_qpy, snapshot_backend
+from km_quantum.m5.smoke import analyze_smoke_controls
+from km_quantum.m5.snapshots import load_qpy
 from km_quantum.m5.state import transition
 from km_quantum.m5.workflow import (
     artifact_path,
@@ -275,6 +278,9 @@ def _provider_preflight(args: argparse.Namespace, root: Path, output: Path) -> d
         if study.budget_authorization is not None
         else IBMRuntimeAdapter(config)
     )
+    # Read the current configuration/properties/Target through the SDK cache refresh.
+    # Neither this call nor any command in this preflight submits a job.
+    backend = adapter.refresh_backend_for_snapshot()
     evidence = preflight(config, adapter)
     args._m5_redaction_secrets = adapter._secret_values()
     # The optional old input remains recorded as externally supplied information;
@@ -286,7 +292,6 @@ def _provider_preflight(args: argparse.Namespace, root: Path, output: Path) -> d
     atomic_json(output / "provider_preflight.json", evidence)
     if evidence["status"] != "PROVIDER_PREFLIGHT_READY":
         return evidence
-    backend = adapter.backend_for_snapshot()
     subset = select_physical_subset(backend.target)
     try:
         local_result = prepare(
@@ -317,6 +322,7 @@ def _provider_preflight(args: argparse.Namespace, root: Path, output: Path) -> d
         return evidence
     # Preparation may take longer than the five-minute live-account window.
     # Read again; historical target retrieval/calibration timestamps stay intact.
+    current_snapshot = adapter.fresh_device_snapshot(subset)
     evidence = preflight(config, adapter)
     atomic_json(output / "provider_account_preflight.json", evidence)
     if evidence["status"] != "PROVIDER_PREFLIGHT_READY":
@@ -329,15 +335,25 @@ def _provider_preflight(args: argparse.Namespace, root: Path, output: Path) -> d
 
     prepared = load_prepared(root, output)
     snapshot = read_sealed(output / "target_snapshot.json")
-    current_snapshot = snapshot_backend(backend, subset)
     if any(
         current_snapshot[key] != snapshot[key]
-        for key in ("instructions", "qubits", "physical_subset", "backend_name", "backend_width")
-    ):
-        raise SafetyError(
-            "Actual Target differs from the frozen calibration snapshot; use a new output",
-            diagnostic_kind="MISSING_REAL_CALIBRATION",
+        for key in (
+            "instructions",
+            "qubits",
+            "physical_subset",
+            "backend_name",
+            "backend_width",
+            "operation_names",
+            "target_timing",
+            "readout_matrix_convention",
         )
+    ):
+        changed_target_error = SafetyError(
+            "Actual Target differs from the frozen calibration snapshot; use a new output",
+            diagnostic_kind="LIVE_DEVICE_BINDING_ERROR",
+        )
+        _save_failed_device_check(output, current_snapshot, evidence, changed_target_error)
+        return evidence
     draft = make_plan(prepared, study, provider_evidence=evidence)
     circuits = {
         identity: load_qpy(
@@ -372,8 +388,92 @@ def _provider_preflight(args: argparse.Namespace, root: Path, output: Path) -> d
     evidence["plan_hash"] = plan_hash(plan)
     evidence["usage_model_sha256"] = usage_model["model_sha256"]
     evidence["provider_limit_assessment_sha256"] = assessment["content_sha256"]
+    if evidence["status"] == "PROVIDER_PREFLIGHT_READY":
+        try:
+            binding = validate_device_binding(plan, snapshot, current_snapshot, evidence)
+            _save_live_device_check(output, current_snapshot, evidence, binding)
+            evidence["live_device_binding_sha256"] = binding["content_sha256"]
+        except SafetyError as error:
+            _save_failed_device_check(output, current_snapshot, evidence, error, plan=plan)
     atomic_json(output / "provider_preflight.json", evidence)
     return evidence
+
+
+def _save_live_device_check(
+    output: Path, snapshot: dict[str, Any], evidence: dict[str, Any], binding: dict[str, Any]
+) -> None:
+    """Archive each fresh observation without altering the frozen scientific basis."""
+    directory = output / "preflight/live_device" / binding["content_sha256"]
+    atomic_json(directory / "target_snapshot.json", snapshot, immutable=True)
+    atomic_json(directory / "provider_preflight.json", evidence, immutable=True)
+    atomic_json(directory / "assessment.json", binding, immutable=True)
+
+
+def _save_failed_device_check(
+    output: Path,
+    snapshot: dict[str, Any],
+    evidence: dict[str, Any],
+    error: SafetyError,
+    *,
+    plan: dict[str, Any] | None = None,
+) -> None:
+    """Keep rejected observations and replace an apparent READY with its actual blocker."""
+    payload = {
+        "artifact_type": "m5_live_device_binding_assessment",
+        "schema_version": 1,
+        "status": "BLOCKED",
+        "plan_hash": plan_hash(plan) if plan else None,
+        "frozen_snapshot_sha256": read_sealed(output / "target_snapshot.json")["content_sha256"],
+        "current_snapshot_sha256": snapshot["content_sha256"],
+        "observed_at": snapshot["retrieved_at"],
+        "validated_at": utc_now(),
+        "diagnostic_kind": error.diagnostic_kind,
+        "diagnostic": redact(str(error)),
+        "hardware_used": False,
+        "submission_approved": False,
+        "frozen_scientific_reference_changed": False,
+    }
+    binding = {**payload, "content_sha256": canonical_hash(payload)}
+    evidence.update(
+        status="BLOCKED",
+        diagnostic_kind=error.diagnostic_kind,
+        diagnostic=payload["diagnostic"],
+        live_device_binding=binding,
+    )
+    _save_live_device_check(output, snapshot, evidence, binding)
+    atomic_json(output / "provider_preflight.json", evidence)
+
+
+def _completed_job_checks(
+    root: Path,
+    output: Path,
+    plan: dict[str, Any],
+    prepared: dict[str, Any],
+    jobs: list[dict[str, Any]],
+) -> tuple[dict[str, Any], dict[str, Any] | None]:
+    usage = validate_completed_job_usage(plan, jobs)
+    if not jobs:
+        return usage, None
+    raw = [row for job in jobs for row in job.get("raw_results", [])]
+    expected_ids = {pub["pub_id"] for job in jobs for pub in job["pubs"]}
+    actual_ids = [row.get("pub_id") for row in raw]
+    if len(actual_ids) != len(expected_ids) or set(actual_ids) != expected_ids:
+        raise SafetyError(
+            "Every completed predecessor requires its full persistent PUB data",
+            diagnostic_kind="PRIOR_JOB_DATA_INCOMPLETE",
+        )
+    smoke = analyze_smoke_controls(root, output, plan, prepared, raw)
+    atomic_json(
+        output / "summaries/smoke_controls" / (smoke["content_sha256"] + ".json"),
+        smoke,
+        immutable=True,
+    )
+    if smoke.get("structural_passed") is not True or smoke.get("ready_for_next_job") is not True:
+        raise SafetyError(
+            "All frozen smoke controls must have complete structurally verified data",
+            diagnostic_kind="SMOKE_CONTROL_ERROR",
+        )
+    return usage, smoke
 
 
 def _submit(args: argparse.Namespace, root: Path, output: Path) -> dict[str, Any]:
@@ -390,7 +490,8 @@ def _submit(args: argparse.Namespace, root: Path, output: Path) -> dict[str, Any
         raise SafetyError("Exact plan requires human approval; no provider connection was made")
     validate_human_approval(plan, approval)
     verify_local(root, output)
-    verify_plan_inventory_binding(plan, load_prepared(root, output))
+    prepared = load_prepared(root, output)
+    verify_plan_inventory_binding(plan, prepared)
     state_path = output / "state.json"
     state = read_json(state_path)
     if state.get("state") not in {"READY_FOR_APPROVAL", "APPROVED", "COLLECTED"}:
@@ -403,7 +504,10 @@ def _submit(args: argparse.Namespace, root: Path, output: Path) -> dict[str, Any
     jobs = ledger_data["jobs"]
     if len(jobs) >= 3 or (jobs and jobs[-1]["status"] != "COLLECTED"):
         raise SafetyError("Prior job is unresolved or the complete budget was already reserved")
+    _, smoke = _completed_job_checks(root, output, plan, prepared, jobs)
     config = _config(args)
+    if config.binding != plan["instance_binding"] or config.backend != plan["backend"]:
+        raise SafetyError("Explicit provider configuration differs from the approved plan")
     from km_quantum.m5.provider import plan_budget_policy
 
     adapter = (
@@ -411,11 +515,47 @@ def _submit(args: argparse.Namespace, root: Path, output: Path) -> dict[str, Any
         if plan.get("budget_authorization") is not None
         else IBMRuntimeAdapter(config)
     )
+    if (
+        getattr(adapter, "hardware_used", False)
+        and jobs
+        and (
+            any(
+                job.get("source_kind") != "ibm_hardware"
+                or job.get("hardware_used") is not True
+                or any(
+                    row.get("source") != "hardware" or row.get("hardware_used") is not True
+                    for row in job.get("raw_results", [])
+                )
+                for job in jobs
+            )
+            or smoke is None
+            or smoke.get("hardware_used") is not True
+        )
+    ):
+        raise SafetyError(
+            "Real hardware submission requires actual hardware predecessors and smoke data",
+            diagnostic_kind="HARDWARE_PREDECESSOR_REQUIRED",
+        )
+    current_snapshot = adapter.fresh_device_snapshot(plan["layout"])
     evidence = preflight(config, adapter, plan=plan)
     atomic_json(output / "provider_preflight.json", evidence)
     circuits = {
         key: artifact_path(root, row["path"], output) for key, row in plan["circuits"].items()
     }
+    try:
+        validate_approval(plan, approval, evidence)
+        binding = validate_device_binding(
+            plan,
+            read_sealed(output / "target_snapshot.json"),
+            current_snapshot,
+            evidence,
+        )
+    except SafetyError as error:
+        _save_failed_device_check(output, current_snapshot, evidence, error, plan=plan)
+        raise
+    evidence["live_device_binding"] = binding
+    _save_live_device_check(output, current_snapshot, evidence, binding)
+    atomic_json(output / "provider_preflight.json", evidence)
     validate_approval(plan, approval, evidence)
     current = read_json(state_path)["state"] if state_path.exists() else "DRAFT"
     if current == "READY_FOR_APPROVAL":
@@ -449,8 +589,11 @@ def _submit(args: argparse.Namespace, root: Path, output: Path) -> dict[str, Any
 def _collect(args: argparse.Namespace, root: Path, output: Path) -> dict[str, Any]:
     plan = read_json(output / "execution_plan.json")
     validate_plan(plan, require_hardware=False)
-    verify_plan_inventory_binding(plan, load_prepared(root, output))
+    prepared = load_prepared(root, output)
+    verify_plan_inventory_binding(plan, prepared)
     ledger = JobLedger(output / "jobs/ledger.json")
+    JobLedger._check_binding(ledger.snapshot(), plan)
+    result: dict[str, Any]
     if not ledger.snapshot()["jobs"]:
         result = {
             "status": "NOT_SUBMITTED",
@@ -463,13 +606,40 @@ def _collect(args: argparse.Namespace, root: Path, output: Path) -> dict[str, An
     else:
         validate_plan(plan)
         verify_local(root, output)
-        result = ledger.collect(plan, IBMRuntimeAdapter(_config(args)))
+        config = _config(args)
+        if config.binding != plan["instance_binding"] or config.backend != plan["backend"]:
+            raise SafetyError("Collection configuration differs from the exact plan binding")
+        result = ledger.collect(plan, IBMRuntimeAdapter(config))
     result["plan_hash"] = plan_hash(plan)
+    result["campaign_status"] = result["status"]
+    state_target = result["status"]
+    jobs = result["job_records"]
+    if jobs and all(job["status"] == "COLLECTED" for job in jobs):
+        try:
+            usage, smoke = _completed_job_checks(root, output, plan, prepared, jobs)
+            result.update(
+                last_job_status="COLLECTED",
+                actual_usage_accounting=usage,
+                smoke_controls_sha256=smoke["content_sha256"] if smoke else None,
+                next_submission_status="READY_FOR_NEXT_JOB" if len(jobs) < 3 else "COMPLETE",
+            )
+            # PARTIAL describes the unfinished campaign. The last completed job
+            # may advance the strict sequential state only after its full gates.
+            state_target = "COLLECTED"
+        except SafetyError as error:
+            result.update(
+                next_submission_status="BLOCKED",
+                next_submission_blocker=str(error),
+                next_submission_diagnostic_kind=error.diagnostic_kind,
+            )
+            state_target = "PARTIAL"
+    elif jobs:
+        result["next_submission_status"] = "BLOCKED"
     atomic_json(output / "raw/collected.json", result)
-    if result["status"] in {"COLLECTED", "PARTIAL", "FAILED", "CANCELLED", "SUBMISSION_UNKNOWN"}:
+    if state_target in {"COLLECTED", "PARTIAL", "FAILED", "CANCELLED", "SUBMISSION_UNKNOWN"}:
         transition(
             output / "state.json",
-            result["status"],
+            state_target,
             reason="Read-only bounded collection",
             plan_hash=plan_hash(plan),
         )

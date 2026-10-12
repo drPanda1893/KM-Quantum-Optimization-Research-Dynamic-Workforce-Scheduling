@@ -45,6 +45,9 @@ def test_slow_local_work_refreshes_account_without_retimestamping_calibration(
         "backend_width": 16,
         "calibration_timestamp": timestamp,
         "retrieved_at": "2026-10-12T11:00:00+00:00",
+        "operation_names": ["measure", "reset", "x"],
+        "target_timing": {"dt_seconds": None},
+        "readout_matrix_convention": "rows=true, columns=observed",
     }
 
     class ReadOnlyAdapter:
@@ -71,8 +74,12 @@ def test_slow_local_work_refreshes_account_without_retimestamping_calibration(
                 )
             return evidence
 
-        def backend_for_snapshot(self) -> Any:
+        def refresh_backend_for_snapshot(self) -> Any:
             return backend
+
+        def fresh_device_snapshot(self, subset: Any) -> dict[str, Any]:
+            assert list(subset) == prepared["physical_subset"]
+            return copy.deepcopy(snapshot)
 
         def submit(self, *args: Any) -> None:
             raise AssertionError("No submission is authorized or needed")
@@ -87,7 +94,6 @@ def test_slow_local_work_refreshes_account_without_retimestamping_calibration(
     )
     monkeypatch.setattr(cli, "load_prepared", lambda root, output: copy.deepcopy(prepared))
     monkeypatch.setattr(cli, "read_sealed", lambda path: copy.deepcopy(snapshot))
-    monkeypatch.setattr(cli, "snapshot_backend", lambda device, subset: copy.deepcopy(snapshot))
 
     def slow_prepare(*args: Any, **kwargs: Any) -> dict[str, Any]:
         calls.append("local")

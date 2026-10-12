@@ -798,3 +798,49 @@ class IBMRuntimeAdapter:
     def backend_for_snapshot(self) -> Any:
         """Explicit read-only access for target and calibration snapshot creation."""
         return self.backend()
+
+    def refresh_backend_for_snapshot(self) -> Any:
+        """Explicit read-only refresh; never creates a Runtime job or session."""
+        self._connect()
+        if not callable(getattr(self._backend, "refresh", None)):
+            raise SafetyError(
+                "SDK backend cannot refresh its device facts",
+                diagnostic_kind="LIVE_DEVICE_BINDING_ERROR",
+            )
+        try:
+            with _quiet_sdk():
+                self._backend.refresh()
+            if self._service.active_instance() != self.config.instance:
+                raise SafetyError(
+                    "Provider instance changed during device refresh",
+                    diagnostic_kind="LIVE_DEVICE_BINDING_ERROR",
+                )
+        except Exception as error:
+            raise SafetyError(
+                redact(str(error), secrets=self._secret_values()),
+                diagnostic_kind="LIVE_DEVICE_BINDING_ERROR",
+            ) from None
+        return self._backend
+
+    def fresh_device_snapshot(self, physical_subset: Sequence[int]) -> dict[str, Any]:
+        """Refresh once, then bridge the cached properties calibration timestamp."""
+        from km_quantum.m5.device_binding import snapshot_with_calibration_timestamp
+        from km_quantum.m5.snapshots import snapshot_backend
+
+        backend = self.refresh_backend_for_snapshot()
+        try:
+            with _quiet_sdk():
+                properties = backend.properties()
+                timestamp = getattr(properties, "last_update_date", None)
+                if not isinstance(timestamp, datetime) or timestamp.tzinfo is None:
+                    raise SafetyError(
+                        "Fresh SDK calibration timestamp is missing or timezone-free",
+                        diagnostic_kind="LIVE_DEVICE_BINDING_ERROR",
+                    )
+                snapshot = snapshot_backend(backend, physical_subset, retrieved_at=utc_now())
+        except Exception as error:
+            raise SafetyError(
+                redact(str(error), secrets=self._secret_values()),
+                diagnostic_kind="LIVE_DEVICE_BINDING_ERROR",
+            ) from None
+        return snapshot_with_calibration_timestamp(snapshot, timestamp.isoformat())

@@ -283,8 +283,18 @@ def snapshot_backend(
         calibration = calibration.isoformat()
     if not isinstance(calibration, str):
         calibration = None
+    constraints = target.timing_constraints()
+    target_timing = {
+        "dt_seconds": _finite_float(target.dt),
+        "timing_constraints": {
+            key: value if type(value) is int and value > 0 else None
+            for key in ("granularity", "min_length", "pulse_alignment", "acquire_alignment")
+            for value in (getattr(constraints, key, None),)
+        },
+        "source": "qiskit.transpiler.Target.dt/timing_constraints()",
+    }
     result = {
-        "schema_version": 1,
+        "schema_version": 2,
         "artifact_type": "m5_backend_snapshot",
         "source": declared_source,
         "hardware_used": False,
@@ -293,6 +303,7 @@ def snapshot_backend(
         "backend_width": target.num_qubits,
         "physical_subset": list(selected),
         "operation_names": sorted(target.operation_names),
+        "target_timing": target_timing,
         "instructions": instructions,
         "qubits": qubits,
         "retrieved_at": retrieved_at or datetime.now(UTC).isoformat(),

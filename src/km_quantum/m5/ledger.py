@@ -9,13 +9,15 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import math
 import os
 import tempfile
-from collections.abc import Iterator, Mapping
+from collections.abc import Iterator, Mapping, Sequence
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
+from km_quantum.m5.accounting import usage_metrics_missing, validate_completed_job_usage
 from km_quantum.m5.approvals import plan_hash, validate_approval, validate_plan
 from km_quantum.m5.budget_policy import BUDGET_B_VERSION, BudgetPolicy
 from km_quantum.m5.provider import (
@@ -26,6 +28,18 @@ from km_quantum.m5.provider import (
     runtime_options_for_job,
     utc_now,
 )
+
+
+def _metrics_for_archive(value: Any) -> Any:
+    """Preserve nonfinite values explicitly; never invent a numeric replacement."""
+    if isinstance(value, Mapping):
+        return {key: _metrics_for_archive(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_metrics_for_archive(item) for item in value]
+    if isinstance(value, float) and not math.isfinite(value):
+        text = "nan" if math.isnan(value) else "inf" if value > 0 else "-inf"
+        return {"__m5_nonfinite_float__": text}
+    return value
 
 
 def _atomic_write(path: Path, value: Any) -> None:
@@ -53,9 +67,17 @@ class JobLedger:
 
     def _bind_secrets(self, adapter: ProviderAdapter) -> None:
         config = getattr(adapter, "config", None)
-        self._secrets = (
-            getattr(config, "token", "") or "",
-            getattr(config, "instance", "") or "",
+        known = getattr(adapter, "_secret_values", None)
+        loaded = known() if callable(known) else ()
+        self._secrets = tuple(
+            item
+            for item in (
+                *self._secrets,
+                getattr(config, "token", "") or "",
+                getattr(config, "instance", "") or "",
+                *loaded,
+            )
+            if isinstance(item, str) and item
         )
 
     @contextmanager
@@ -100,7 +122,14 @@ class JobLedger:
         policy = plan_budget_policy(plan)
         if data.get("plan_hash") not in {None, plan_hash(plan)}:
             raise SafetyError("Ledger belongs to a different execution plan")
-        records = data["jobs"]
+        records = data.get("jobs")
+        if not isinstance(records, list) or any(not isinstance(row, Mapping) for row in records):
+            raise SafetyError("Ledger job records are malformed")
+        if any(
+            type(data.get(key)) is not int or data[key] < 0
+            for key in ("reserved_qpu_seconds", "reserved_shots")
+        ):
+            raise SafetyError("Ledger reservation counters must be nonnegative integers")
         job_ids = [record.get("job_id") for record in records]
         if len(set(job_ids)) != len(job_ids):
             raise SafetyError("Ledger contains duplicate job identities")
@@ -207,6 +236,47 @@ class JobLedger:
         self._bind_secrets(adapter)
         validate_approval(plan, approval, evidence, now=now)
         policy = plan_budget_policy(plan)
+        live_binding = evidence.get("live_device_binding")
+        live_binding_hash = None
+        if "live_device_binding" in evidence:
+            if not isinstance(live_binding, Mapping):
+                raise SafetyError(
+                    "Live device binding assessment is malformed",
+                    diagnostic_kind="LIVE_DEVICE_BINDING_ERROR",
+                )
+            live_payload = {
+                key: value for key, value in live_binding.items() if key != "content_sha256"
+            }
+            try:
+                live_digest = hashlib.sha256(
+                    json.dumps(
+                        live_payload,
+                        sort_keys=True,
+                        separators=(",", ":"),
+                        ensure_ascii=False,
+                        allow_nan=False,
+                    ).encode()
+                ).hexdigest()
+            except (TypeError, ValueError):
+                raise SafetyError(
+                    "Live device binding assessment has malformed content",
+                    diagnostic_kind="LIVE_DEVICE_BINDING_ERROR",
+                ) from None
+            if (
+                live_binding.get("content_sha256") != live_digest
+                or live_binding.get("artifact_type") != "m5_live_device_binding_assessment"
+                or live_binding.get("status") != "PASS"
+                or live_binding.get("plan_hash") != plan_hash(plan)
+                or live_binding.get("backend") != plan.get("backend")
+                or live_binding.get("instance_binding") != plan.get("instance_binding")
+                or live_binding.get("frozen_snapshot_sha256") != plan.get("target_snapshot_sha256")
+                or live_binding.get("parameters_unchanged") is not True
+            ):
+                raise SafetyError(
+                    "Live device binding assessment differs from the approved plan",
+                    diagnostic_kind="LIVE_DEVICE_BINDING_ERROR",
+                )
+            live_binding_hash = live_digest
         if adapter.source_kind != "ibm_hardware" or adapter.single_job_contract is not True:
             raise SafetyError("Submission requires the reviewed single-job hardware adapter")
         config = getattr(adapter, "config", None)
@@ -231,6 +301,16 @@ class JobLedger:
                 raise SafetyError("All approved jobs have already been reserved")
             if records and records[0].get("contract_verified") is not True:
                 raise SafetyError("Smoke result contract must be verified before main jobs")
+            if getattr(adapter, "hardware_used", False) is True and any(
+                record.get("source_kind") != "ibm_hardware"
+                or record.get("hardware_used") is not True
+                for record in records
+            ):
+                raise SafetyError(
+                    "Real hardware continuation requires real hardware predecessors",
+                    diagnostic_kind="HARDWARE_PREDECESSOR_REQUIRED",
+                )
+            validate_completed_job_usage(plan, records)
             next_job = plan["jobs"][len(records)]
             job_options = runtime_options_for_job(plan, next_job["id"])
             pubs = self._load_pubs(next_job, plan, circuits)
@@ -286,6 +366,8 @@ class JobLedger:
                     "preflight_sha256": canonical_hash(evidence),
                 },
             }
+            if live_binding_hash is not None:
+                record["approval_evidence"]["live_device_binding_sha256"] = live_binding_hash
             if policy.version == BUDGET_B_VERSION:
                 binding = {
                     "budget_policy_version": policy.version,
@@ -309,6 +391,7 @@ class JobLedger:
                 provider_job = adapter.submit(
                     pubs, job_options, [record["local_job_id"], "m5-plan-" + digest]
                 )
+                self._bind_secrets(adapter)
                 identity = provider_job.job_id()
                 if not isinstance(identity, str) or not identity:
                     raise SafetyError("Provider returned no unambiguous job ID")
@@ -323,6 +406,7 @@ class JobLedger:
                 if hasattr(adapter, "verify_job_binding"):
                     adapter.verify_job_binding(provider_job)
             except BaseException as error:
+                self._bind_secrets(adapter)
                 record.update(
                     status="SUBMISSION_UNKNOWN",
                     diagnostic=redact(str(error), secrets=self._secrets),
@@ -343,10 +427,15 @@ class JobLedger:
             for record in data["jobs"]:
                 if record.get("raw_results"):
                     raw.extend(copy.deepcopy(record["raw_results"]))
-                if record["status"] == "COLLECTED" or not record.get("provider_job_id"):
+                if record["status"] == "COLLECTED":
+                    if self._refresh_missing_metrics(record, adapter):
+                        self._save(data)
+                    continue
+                if not record.get("provider_job_id"):
                     continue
                 try:
                     provider_job = adapter.job(record["provider_job_id"])
+                    self._bind_secrets(adapter)
                     if provider_job.job_id() != record["provider_job_id"]:
                         raise SafetyError("Provider job ID differs from persistent ledger ID")
                     if hasattr(adapter, "verify_job_binding"):
@@ -363,27 +452,32 @@ class JobLedger:
                         )
                         record.update(
                             status="CANCELLED" if status_name == "CANCELLED" else "FAILED",
-                            diagnostic=redact(diagnostic),
+                            diagnostic=redact(diagnostic, secrets=self._secrets),
                         )
                     elif status_name in {"DONE", "COMPLETED"}:
                         result = provider_job.result(timeout=1)
                         actual_source = (
                             "hardware" if getattr(adapter, "hardware_used", False) else "mock"
                         )
-                        parsed, diagnostics = parse_sampler_result(result, record, actual_source)
+                        self._bind_secrets(adapter)
+                        parsed, diagnostics = parse_sampler_result(
+                            result, record, actual_source, secrets=self._secrets
+                        )
                         record["raw_results"] = parsed
                         raw = [item for item in raw if item["job_id"] != record["job_id"]]
                         raw.extend(parsed)
                         record["result_diagnostics"] = diagnostics
-                        record["provider_metadata"] = redact(getattr(result, "metadata", {}))
-                        if hasattr(provider_job, "metrics"):
-                            record["provider_metrics"] = redact(provider_job.metrics())
+                        record["provider_metadata"] = redact(
+                            getattr(result, "metadata", {}), secrets=self._secrets
+                        )
                         record["contract_verified"] = not diagnostics
                         record["status"] = "COLLECTED" if not diagnostics else "PARTIAL"
                         record["hardware_used"] = actual_source == "hardware"
+                        self._read_metrics(record, provider_job)
                     else:
                         record["status"] = "SUBMITTED"
                 except Exception as error:
+                    self._bind_secrets(adapter)
                     record.update(
                         status="PARTIAL", diagnostic=redact(str(error), secrets=self._secrets)
                     )
@@ -400,6 +494,14 @@ class JobLedger:
                 status = "OFFLINE_READY"
             if any(record["status"] == "SUBMISSION_UNKNOWN" for record in data["jobs"]):
                 status = "SUBMISSION_UNKNOWN"
+            accounting: dict[str, Any] | None = None
+            accounting_diagnostic = None
+            accounting_kind = None
+            try:
+                accounting = validate_completed_job_usage(plan, data["jobs"])
+            except SafetyError as error:
+                accounting_diagnostic = redact(str(error), secrets=self._secrets)
+                accounting_kind = error.diagnostic_kind
             return dict(
                 redact(
                     {
@@ -409,14 +511,78 @@ class JobLedger:
                         "missing_pubs": missing,
                         "job_records": copy.deepcopy(data["jobs"]),
                         "reserved_qpu_seconds": data["reserved_qpu_seconds"],
+                        "actual_usage_accounting_status": "PASS"
+                        if accounting is not None
+                        else "BLOCKED",
+                        "actual_usage_accounting": accounting,
+                        "actual_usage_accounting_diagnostic": accounting_diagnostic,
+                        "actual_usage_accounting_diagnostic_kind": accounting_kind,
                     },
                     secrets=self._secrets,
                 )
             )
 
+    def _read_metrics(self, record: dict[str, Any], provider_job: Any) -> None:
+        """Fetch telemetry separately so a metrics failure never discards valid counts."""
+        try:
+            if not callable(getattr(provider_job, "metrics", None)):
+                raise SafetyError("Provider job metrics are not exposed")
+            metrics = provider_job.metrics()
+        except Exception as error:
+            diagnostic = redact(str(error), secrets=self._secrets)
+            record["provider_metrics_diagnostic"] = diagnostic
+            record.setdefault("provider_metrics_observations", []).append(
+                {"observed_at": utc_now(), "diagnostic": diagnostic}
+            )
+            return
+        archived = _metrics_for_archive(redact(metrics, secrets=self._secrets))
+        record["provider_metrics"] = archived
+        record["provider_metrics_encoding"] = "redacted_json_with_tagged_nonfinite_v1"
+        record["provider_metrics_observed_at"] = utc_now()
+        record.setdefault("provider_metrics_observations", []).append(
+            {
+                "observed_at": record["provider_metrics_observed_at"],
+                "payload": copy.deepcopy(archived),
+            }
+        )
+        record.pop("provider_metrics_diagnostic", None)
+
+    def _refresh_missing_metrics(self, record: dict[str, Any], adapter: ProviderAdapter) -> bool:
+        """One bounded metrics-only read for a known already-collected job."""
+        if not usage_metrics_missing(record) or not record.get("provider_job_id"):
+            return False
+        attempts = record.get("metrics_refresh_attempts", 0)
+        if type(attempts) is not int or attempts < 0:
+            record["provider_metrics_diagnostic"] = "Invalid persisted metrics refresh counter"
+            return True
+        record["metrics_refresh_attempts"] = attempts + 1
+        if "provider_metrics" in record:
+            record.setdefault("provider_metrics_history", []).append(
+                copy.deepcopy(record["provider_metrics"])
+            )
+        try:
+            provider_job = adapter.job(record["provider_job_id"])
+            self._bind_secrets(adapter)
+            if provider_job.job_id() != record["provider_job_id"]:
+                raise SafetyError("Metrics refresh returned a different provider job ID")
+            if hasattr(adapter, "verify_job_binding"):
+                adapter.verify_job_binding(provider_job)
+            self._read_metrics(record, provider_job)
+        except Exception as error:
+            self._bind_secrets(adapter)
+            diagnostic = redact(str(error), secrets=self._secrets)
+            record["provider_metrics_diagnostic"] = diagnostic
+            record.setdefault("provider_metrics_observations", []).append(
+                {"observed_at": utc_now(), "diagnostic": diagnostic}
+            )
+        record["metrics_refresh_status"] = (
+            "UNAVAILABLE" if usage_metrics_missing(record) else "OBSERVED"
+        )
+        return True
+
 
 def parse_sampler_result(
-    result: Any, record: Mapping[str, Any], source: str
+    result: Any, record: Mapping[str, Any], source: str, *, secrets: Sequence[str] = ()
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """Sampler V2 classified BitArray for the named, unbroadcast m2 register."""
     from qiskit.primitives.containers import BitArray
@@ -467,15 +633,15 @@ def parse_sampler_result(
                     "source": source,
                     "hardware_used": source == "hardware",
                     "requested_runtime_options": copy.deepcopy(record["requested_runtime_options"]),
-                    "provider_metadata": redact(metadata),
+                    "provider_metadata": redact(metadata, secrets=secrets),
                 }
             )
         except Exception as error:
             diagnostics.append(
                 {
                     "pub_id": pub["pub_id"],
-                    "diagnostic": redact(str(error)),
-                    "observed_counts": observed_counts,
+                    "diagnostic": redact(str(error), secrets=secrets),
+                    "observed_counts": redact(observed_counts, secrets=secrets),
                 }
             )
     return parsed, diagnostics
