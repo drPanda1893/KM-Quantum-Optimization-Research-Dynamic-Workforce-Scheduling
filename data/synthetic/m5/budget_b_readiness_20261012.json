@@ -1,0 +1,180 @@
+{
+  "acceptance_raw_sha256": "4c16ecde5f426ca404a7f4d33d9ba6536dcb7c5f70c3c1305aabe24e1c35eaea",
+  "acceptance_status": "OFFLINE_READY",
+  "active_width_maximum": 7,
+  "artifact_type": "m5_budget_b_readiness_snapshot",
+  "authorization_archive_commit": "8dc75063a66fe51351d399acaee8d78381a01e0d",
+  "backend": "ibm_fez",
+  "budget": {
+    "budget_authorization_sha256": "835fa22228731d13c9f7c54bb26f4d6b972b2bd2d13ab98d0677faa13e3e9ff7",
+    "max_cost_eur": 0.0,
+    "max_provider_jobs": 3,
+    "max_qpu_seconds_per_job": 80,
+    "max_total_qpu_seconds": 180,
+    "max_total_shots": 49664,
+    "per_job_qpu_seconds": {
+      "main-block-1": 80,
+      "main-block-2": 80,
+      "smoke": 20
+    }
+  },
+  "budget_authorization_sha256": "835fa22228731d13c9f7c54bb26f4d6b972b2bd2d13ab98d0677faa13e3e9ff7",
+  "budget_policy_version": "m5-budget-b-v2",
+  "calibration_timestamp": "2026-10-12T18:22:41+02:00",
+  "captured_at": "2026-10-12T17:01:32.570390+00:00",
+  "content_sha256": "b8ca0f59b57565a3c4c95cdc10b26f954d8af18853ea92b83abe1304c3dbf94f",
+  "cost_eur": 0,
+  "execution_plan_path": "results/m5-budget-b-20261012-v2/provider/execution_plan.json",
+  "execution_plan_raw_sha256": "f24e7b51c439e2a4338f68226c93ea2b0cff443a02c212980ef4da4ffc880854",
+  "freshness_definition": "Observed provider evidence; before any later submission repeat the five-minute freshness checks",
+  "hardware_approval": {
+    "approved": false,
+    "budget_record_rejected_as_hardware_approval": true,
+    "request_raw_sha256": "7cb405f311622974b78791f4c8e0f90c0c65ad6b254a98089882ffc4eabb209e",
+    "unsigned_request_rejected_as_hardware_approval": true
+  },
+  "hardware_enabled": false,
+  "hardware_used": false,
+  "implementation_commit": "d6aa135a23f795d32087165f328a277ac1032b29",
+  "instance_binding": "c4a7bb9239a2bd371a037ae1c9291de4aa5ca1932a7b84ad1710aaed3483bbfe",
+  "jobs": [
+    {
+      "headroom_seconds": 9.837848319999999,
+      "id": "smoke",
+      "local_policy_seconds": 10.162151680000001,
+      "max_qpu_seconds": 20,
+      "pubs": 4,
+      "runtime_options": {
+        "dynamical_decoupling": {
+          "enable": false
+        },
+        "execution": {
+          "init_qubits": true,
+          "meas_type": "classified",
+          "rep_delay": 0.00025
+        },
+        "max_execution_time": 20,
+        "twirling": {
+          "enable_gates": false,
+          "enable_measure": false
+        }
+      },
+      "shots": 512,
+      "shots_per_pub": 128
+    },
+    {
+      "headroom_seconds": 12.167403520000008,
+      "id": "main-block-1",
+      "local_policy_seconds": 67.83259647999999,
+      "max_qpu_seconds": 80,
+      "pubs": 24,
+      "runtime_options": {
+        "dynamical_decoupling": {
+          "enable": false
+        },
+        "execution": {
+          "init_qubits": true,
+          "meas_type": "classified",
+          "rep_delay": 0.00025
+        },
+        "max_execution_time": 80,
+        "twirling": {
+          "enable_gates": false,
+          "enable_measure": false
+        }
+      },
+      "shots": 24576,
+      "shots_per_pub": 1024
+    },
+    {
+      "headroom_seconds": 12.167403519999993,
+      "id": "main-block-2",
+      "local_policy_seconds": 67.83259648,
+      "max_qpu_seconds": 80,
+      "pubs": 24,
+      "runtime_options": {
+        "dynamical_decoupling": {
+          "enable": false
+        },
+        "execution": {
+          "init_qubits": true,
+          "meas_type": "classified",
+          "rep_delay": 0.00025
+        },
+        "max_execution_time": 80,
+        "twirling": {
+          "enable_gates": false,
+          "enable_measure": false
+        }
+      },
+      "shots": 24576,
+      "shots_per_pub": 1024
+    }
+  ],
+  "local_policy_total_seconds": 145.82734464,
+  "local_verification_content_sha256": "e44bcca37c730e073d1d7e3cd5086652e6ffe505b57ecf0bdc259e419d9792a9",
+  "maximum_probability_absolute_difference": 2.7755575615628914e-15,
+  "no_push_or_merge": true,
+  "pending_jobs": {
+    "complete": true,
+    "count": 0,
+    "inspected_jobs": 0,
+    "observed_at": "2026-10-12T16:57:53.044845+00:00",
+    "reservation_seconds": 0,
+    "scope": "explicit active instance",
+    "source": "SDK jobs(limit=101,pending=None,instance=explicit); status once",
+    "status": "VERIFIED"
+  },
+  "physical_subset": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    16,
+    5
+  ],
+  "plan": "open",
+  "plan_hash": "e863b07c25dc95dd9b5350624dc000c96a87c23d5902764c2cc08aeca242db38",
+  "pricing_type": "free",
+  "provider_limit_assessment_sha256": "fc8bad0f707a6f9ec67317490b4bd0ad2acafee0b765604d392f9afbd8f8ca96",
+  "provider_obtained_at": "2026-10-12T16:57:53.044845+00:00",
+  "provider_preflight_raw_sha256": "7e25027261b784d82f20484e412b7f9726bcf463bd87ecc31cbccad3eeefe6ea",
+  "quality": {
+    "full_tests_passed": 1607,
+    "targeted_tests_passed": 217,
+    "tooling_raw_sha256": "244391934059ef051eae56db2c6c595fec437d9d1b4f604cdf0049e7675775da",
+    "tooling_statuses": {
+      "build": "PASS",
+      "mypy": "PASS",
+      "pytest": "PASS",
+      "ruff_check": "PASS",
+      "ruff_format": "PASS"
+    }
+  },
+  "reserved_qpu_seconds": 0,
+  "schema_version": 1,
+  "source_branch": "codex/m5-budget-b-implementation",
+  "source_context_sha256": "d9d8582c06faaeeae63582bce4288c87e4d1b3113028296f762e0261b178b5af",
+  "source_request_sha256": "ec9064416da9a62932ff81dd99cb9ff21077179190edb992d63cdcc7104625da",
+  "source_start_head": "5c186536d9b383d66d7a209f2835ccf3748e9b3e",
+  "status": "READY_FOR_APPROVAL",
+  "submission_approved": false,
+  "submitted_qpu_jobs": 0,
+  "target_snapshot_sha256": "e1548ca479ead0e822b3e8cd1224bb544238b51e151832e0dc4dd658a4ba6b3f",
+  "total_headroom_seconds": 34.17265535999999,
+  "usage": {
+    "consumed_seconds": 0,
+    "limit_seconds": 600,
+    "observed_at": "2026-10-12T16:57:53.044845+00:00",
+    "period": {
+      "end_time": "2026-10-12T16:57:52.464Z",
+      "start_time": "2026-09-14T16:57:52.464Z"
+    },
+    "remaining_seconds": 600,
+    "remaining_source": "SDK instance difference; separate admission flag required",
+    "time_available": null,
+    "usage_limit_reached": false
+  },
+  "usage_model_sha256": "30f49e949a20f7ed76be14d248319069aa5188ce8cfe09711a07f44cdbf3aca0"
+}
