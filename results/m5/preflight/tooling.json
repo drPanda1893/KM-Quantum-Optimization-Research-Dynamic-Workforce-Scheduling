@@ -1,0 +1,44 @@
+{
+  "build": {
+    "command": "uv build --offline",
+    "status": "PASS",
+    "wheel_metadata_verified": true
+  },
+  "git": {
+    "branch": "feat/m5-ibm-hardware-validation",
+    "commit": "37f47d8f1c6f349bdedb8707ec7a36ca16a238c8",
+    "dirty": false
+  },
+  "hardware_used": false,
+  "mypy": {
+    "command": ".venv/Scripts/python.exe -m mypy src",
+    "source_files": 70,
+    "status": "PASS"
+  },
+  "pytest": {
+    "command": ".venv/Scripts/python.exe -m pytest -q --junitxml=results/m5/preflight/pytest.xml",
+    "errors": 0,
+    "failures": 0,
+    "historical_tests": 1094,
+    "junit_seconds": 486.119,
+    "junit_sha256": "2f44a8ae4ca8e8274b826b3abd62794d1480a6bea50e8977e35a89f6f4981cd2",
+    "new_m5_tests": 256,
+    "reported_seconds": 488.16,
+    "skipped": 0,
+    "status": "PASS",
+    "tests": 1350,
+    "warnings": 249
+  },
+  "real_provider_jobs_submitted": 0,
+  "recorded_at": "2026-10-12T09:53:55.779590+00:00",
+  "ruff_check": {
+    "command": ".venv/Scripts/python.exe -m ruff check src tests --output-format concise",
+    "status": "PASS"
+  },
+  "ruff_format": {
+    "command": ".venv/Scripts/python.exe -m ruff format --check src tests",
+    "files": 109,
+    "status": "PASS"
+  },
+  "source_context_sha256": "c70fdb459cd531f5454dcd08254cc49e94e8c699472ebcf9e1f5931be279744a"
+}

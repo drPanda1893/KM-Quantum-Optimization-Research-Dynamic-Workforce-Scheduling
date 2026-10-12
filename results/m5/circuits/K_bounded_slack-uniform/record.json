@@ -1,0 +1,568 @@
+{
+  "algorithm": "uniform",
+  "circuit_id": "K_bounded_slack-uniform",
+  "content_sha256": "27b41c8e08f3cd9130d12f850afbd0984dd1218f62966de95660145b8d2b22bb",
+  "device_noise_status": "OFFLINE_READY",
+  "equivalence": {
+    "compiled_ideal_metrics": {
+      "auxiliary_bit_count": 3,
+      "conditional_objective_feasibility_rate": 0.18750000000000025,
+      "conditional_valid_m1_objective": 14.0,
+      "distinct_decoded_plans_with_positive_probability": 16,
+      "energy_residual": 135.50000000000017,
+      "expected_qubo_energy": 142.50000000000017,
+      "ground_auxiliary_degeneracy": [
+        {
+          "ground_encoding_multiplicity": 2,
+          "plan_key": "{\"assignments\":[[\"job-long\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-short\"]}"
+        }
+      ],
+      "ground_decoded_plan_count": 1,
+      "ground_encoding_count": 2,
+      "ground_energy": 7,
+      "maximum_encoding_multiplicity_per_plan": 8,
+      "maximum_qubo_energy": 615,
+      "metric_semantics_verified": true,
+      "normalized_energy_error": 0.22286184210526344,
+      "p_encoding_feasible": 0.039062500000000056,
+      "p_ground_encoding": 0.01562500000000002,
+      "p_schedule_feasible": 0.18750000000000025,
+      "p_schedule_optimal": 0.06250000000000008,
+      "possible_decoded_plan_count": 16
+    },
+    "energy_atol": 1e-08,
+    "expected_qubo_energy_absolute_difference": 1.7053025658242404e-13,
+    "logical_ideal_metrics": {
+      "auxiliary_bit_count": 3,
+      "conditional_objective_feasibility_rate": 0.1875,
+      "conditional_valid_m1_objective": 14.0,
+      "distinct_decoded_plans_with_positive_probability": 16,
+      "energy_residual": 135.5,
+      "expected_qubo_energy": 142.5,
+      "ground_auxiliary_degeneracy": [
+        {
+          "ground_encoding_multiplicity": 2,
+          "plan_key": "{\"assignments\":[[\"job-long\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-short\"]}"
+        }
+      ],
+      "ground_decoded_plan_count": 1,
+      "ground_encoding_count": 2,
+      "ground_energy": 7,
+      "maximum_encoding_multiplicity_per_plan": 8,
+      "maximum_qubo_energy": 615,
+      "metric_semantics_verified": true,
+      "normalized_energy_error": 0.22286184210526316,
+      "p_encoding_feasible": 0.0390625,
+      "p_ground_encoding": 0.015625,
+      "p_schedule_feasible": 0.1875,
+      "p_schedule_optimal": 0.0625,
+      "possible_decoded_plan_count": 16
+    },
+    "maximum_probability_absolute_difference": 1.0408340855860843e-17,
+    "metric_absolute_differences": {
+      "p_encoding_feasible": 5.551115123125783e-17,
+      "p_ground_encoding": 2.0816681711721685e-17,
+      "p_schedule_feasible": 2.498001805406602e-16,
+      "p_schedule_optimal": 8.326672684688674e-17
+    },
+    "passed": true,
+    "probability_atol": 1e-10
+  },
+  "kind": "main",
+  "mapping": {
+    "active_physical_qubits": [
+      1,
+      4,
+      9,
+      13,
+      22,
+      31,
+      42
+    ],
+    "logical_to_initial_physical": [
+      1,
+      4,
+      9,
+      13,
+      22,
+      31,
+      42
+    ],
+    "m2_to_classical": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "m2_to_compact": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "m2_to_final_physical": [
+      1,
+      4,
+      9,
+      13,
+      22,
+      31,
+      42
+    ],
+    "m2_to_logical": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "provider_width": 53,
+    "register_name": "m2"
+  },
+  "num_bits": 7,
+  "p": null,
+  "prediction_sha256": "90c9762d1704467015ce5ced57ca8670c366ed244569fbbd90bfe324e6798b54",
+  "qpy": {
+    "compact": {
+      "byte_count": 1926,
+      "path": "results/m5/circuits/K_bounded_slack-uniform/compact.qpy",
+      "qiskit_version": "2.5.2",
+      "qpy_version": 17,
+      "round_trip_structure_verified": true,
+      "serialization_is_canonical": false,
+      "sha256": "87efcd0d6bbdda379f0a8d2b9bc199d512e9484eb6fadc82d20d122307472c65",
+      "version_independent_format": false
+    },
+    "logical": {
+      "byte_count": 500,
+      "path": "results/m5/circuits/K_bounded_slack-uniform/logical.qpy",
+      "qiskit_version": "2.5.2",
+      "qpy_version": 17,
+      "round_trip_structure_verified": true,
+      "serialization_is_canonical": false,
+      "sha256": "dc974bffc37ff855b582a25bab63b8c22d6f7129a24537c4373234c15e921738",
+      "version_independent_format": false
+    },
+    "provider": {
+      "byte_count": 3561,
+      "path": "results/m5/circuits/K_bounded_slack-uniform/provider.qpy",
+      "qiskit_version": "2.5.2",
+      "qpy_version": 17,
+      "round_trip_structure_verified": true,
+      "serialization_is_canonical": false,
+      "sha256": "84f37b32900bd944f873c23ac397844138137f5aed6d9c4961ffa4494b68d754",
+      "version_independent_format": false
+    }
+  },
+  "reference_name": "K_bounded_slack",
+  "summary": {
+    "active_physical_qubits": [
+      1,
+      4,
+      9,
+      13,
+      22,
+      31,
+      42
+    ],
+    "active_width": 7,
+    "approximation_degree": 1.0,
+    "depth": 4,
+    "gate_histogram": {
+      "measure": 7,
+      "rz": 14,
+      "sx": 7
+    },
+    "global_phase": 5.497787143782141,
+    "initial_layout": [
+      1,
+      4,
+      9,
+      13,
+      22,
+      31,
+      42
+    ],
+    "mapping": {
+      "active_physical_qubits": [
+        1,
+        4,
+        9,
+        13,
+        22,
+        31,
+        42
+      ],
+      "logical_to_initial_physical": [
+        1,
+        4,
+        9,
+        13,
+        22,
+        31,
+        42
+      ],
+      "m2_to_classical": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "m2_to_compact": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "m2_to_final_physical": [
+        1,
+        4,
+        9,
+        13,
+        22,
+        31,
+        42
+      ],
+      "m2_to_logical": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "provider_width": 53,
+      "register_name": "m2"
+    },
+    "measurement_count": 7,
+    "native_instructions": [
+      {
+        "classical_bits": [],
+        "index": 0,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 1,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 2,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 3,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 4,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 5,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 6,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 7,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 8,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 9,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 10,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 11,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 12,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 13,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 14,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 15,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 16,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 17,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 18,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 19,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 20,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [
+          0
+        ],
+        "index": 21,
+        "name": "measure",
+        "parameters": [],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [
+          1
+        ],
+        "index": 22,
+        "name": "measure",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [
+          2
+        ],
+        "index": 23,
+        "name": "measure",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [
+          3
+        ],
+        "index": 24,
+        "name": "measure",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [
+          4
+        ],
+        "index": 25,
+        "name": "measure",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [
+          5
+        ],
+        "index": 26,
+        "name": "measure",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [
+          6
+        ],
+        "index": 27,
+        "name": "measure",
+        "parameters": [],
+        "physical_qubits": [
+          42
+        ]
+      }
+    ],
+    "one_qubit_gate_count": 21,
+    "optimization_level": 1,
+    "physical_subset": [
+      1,
+      4,
+      9,
+      13,
+      22,
+      31,
+      42
+    ],
+    "provider_circuit_modified_for_simulation": false,
+    "provider_width": 53,
+    "qiskit_version": "2.5.2",
+    "routing_confined_to_subset": true,
+    "seed_transpiler": 424242,
+    "target_validation_passed": true,
+    "two_qubit_gate_count": 0
+  }
+}

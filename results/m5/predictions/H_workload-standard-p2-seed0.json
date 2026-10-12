@@ -1,0 +1,4523 @@
+{
+  "artifact_type": "m5_frozen_prediction",
+  "circuit_id": "H_workload-standard-p2-seed0",
+  "compiled_ideal": [
+    0.014036521966472777,
+    0.07454073422134581,
+    0.07454073422134597,
+    0.3263454782796802,
+    0.003525527071672885,
+    0.0030336067253601724,
+    0.06971300590349522,
+    0.007672444266038652,
+    0.003525527071672909,
+    0.06971300590349533,
+    0.0030336067253601533,
+    0.007672444266038673,
+    0.010097258158986754,
+    0.001010509837037257,
+    0.0010105098370372506,
+    0.0009917789481151704,
+    0.06242822255707092,
+    0.0659833195301573,
+    0.06598331953015725,
+    0.07581780155086548,
+    0.012006513215433359,
+    0.0019631574417074945,
+    0.011617141140314948,
+    0.002570007936119982,
+    0.012006513215433381,
+    0.011617141140315035,
+    0.0019631574417074945,
+    0.0025700079361200045,
+    0.0020457660324636993,
+    0.00046154611537628607,
+    0.00046154611537628564,
+    4.21456982392461e-05
+  ],
+  "content_sha256": "d2ec597a3a61426a055a4eb700233a01c8c1c9fa6eeaddf2848d1c6921134760",
+  "device_metrics": {
+    "device_after_readout": {
+      "auxiliary_bit_count": 1,
+      "conditional_objective_feasibility_rate": 0.1584712070070209,
+      "conditional_valid_m1_objective": 7.582438365155528,
+      "distinct_decoded_plans_with_positive_probability": 16,
+      "energy_residual": 18.630487074393294,
+      "expected_qubo_energy": 25.630487074393294,
+      "ground_auxiliary_degeneracy": [
+        {
+          "ground_encoding_multiplicity": 1,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}"
+        },
+        {
+          "ground_encoding_multiplicity": 1,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}"
+        }
+      ],
+      "ground_decoded_plan_count": 2,
+      "ground_encoding_count": 2,
+      "ground_energy": 7,
+      "maximum_encoding_multiplicity_per_plan": 2,
+      "maximum_qubo_energy": 104,
+      "metric_semantics_verified": true,
+      "normalized_energy_error": 0.19206687705560097,
+      "p_encoding_feasible": 0.11545857077371559,
+      "p_ground_encoding": 0.11194550053171394,
+      "p_schedule_feasible": 0.1584712070070209,
+      "p_schedule_optimal": 0.14528553404510772,
+      "possible_decoded_plan_count": 16
+    },
+    "device_before_readout": {
+      "auxiliary_bit_count": 1,
+      "conditional_objective_feasibility_rate": 0.16507658927387212,
+      "conditional_valid_m1_objective": 7.569342114992884,
+      "distinct_decoded_plans_with_positive_probability": 16,
+      "energy_residual": 18.238811433750833,
+      "expected_qubo_energy": 25.238811433750833,
+      "ground_auxiliary_degeneracy": [
+        {
+          "ground_encoding_multiplicity": 1,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}"
+        },
+        {
+          "ground_encoding_multiplicity": 1,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}"
+        }
+      ],
+      "ground_decoded_plan_count": 2,
+      "ground_encoding_count": 2,
+      "ground_energy": 7,
+      "maximum_encoding_multiplicity_per_plan": 2,
+      "maximum_qubo_energy": 104,
+      "metric_semantics_verified": true,
+      "normalized_energy_error": 0.18802898385310138,
+      "p_encoding_feasible": 0.12185319079569087,
+      "p_ground_encoding": 0.11848805448068134,
+      "p_schedule_feasible": 0.16507658927387212,
+      "p_schedule_optimal": 0.15165015292058673,
+      "possible_decoded_plan_count": 16
+    }
+  },
+  "device_noise": {
+    "active_simulated_physical_width": 5,
+    "additional_m4_depolarization": false,
+    "aer_version": "0.17.2",
+    "approximation": "Aer backend-derived gate-error and in-gate T1/T2 channels plus independent readout; no complete idle schedule, crosstalk or drift model. Aer may truncate T2 to 2*T1.",
+    "artifact_type": "m5_device_noise_prediction",
+    "compact_to_physical": [
+      1,
+      4,
+      9,
+      13,
+      22
+    ],
+    "coverage": {
+      "gate_occurrence_count": 254,
+      "gate_occurrences": [
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 0,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 1,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 2,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 3,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 4,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 5,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 6,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            0,
+            1
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 7,
+          "physical_qargs": [
+            1,
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.008
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "x",
+          "occurrence": 8,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0005
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 9,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 10,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 11,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 12,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            0,
+            1
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 13,
+          "physical_qargs": [
+            1,
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.008
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "x",
+          "occurrence": 14,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0005
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 15,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 16,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 17,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 18,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 19,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 20,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 21,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 22,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1,
+            2
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 23,
+          "physical_qargs": [
+            4,
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0082
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 24,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 25,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 26,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 27,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 28,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1,
+            2
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 29,
+          "physical_qargs": [
+            4,
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0082
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 30,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 31,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 32,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 33,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1,
+            2
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 34,
+          "physical_qargs": [
+            4,
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0082
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 35,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 36,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            0,
+            1
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 37,
+          "physical_qargs": [
+            1,
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.008
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "x",
+          "occurrence": 38,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0005
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 39,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 40,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 41,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 42,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            0,
+            1
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 43,
+          "physical_qargs": [
+            1,
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.008
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 44,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 45,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 46,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 47,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 48,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 49,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 50,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 51,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            0,
+            1
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 52,
+          "physical_qargs": [
+            1,
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.008
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 53,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 54,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 55,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 56,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 57,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            0,
+            1
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 58,
+          "physical_qargs": [
+            1,
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.008
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 59,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 60,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 61,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 62,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            0,
+            1
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 63,
+          "physical_qargs": [
+            1,
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.008
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "x",
+          "occurrence": 64,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0005
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 65,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 66,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 67,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 68,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 69,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 70,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 71,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 72,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 73,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2,
+            3
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 74,
+          "physical_qargs": [
+            9,
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0084
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "x",
+          "occurrence": 75,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0005
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 76,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 77,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 78,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 79,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2,
+            3
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 80,
+          "physical_qargs": [
+            9,
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0084
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "x",
+          "occurrence": 81,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0005
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 82,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 83,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 84,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 85,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 86,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 87,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 88,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 89,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 90,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 91,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3,
+            4
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 92,
+          "physical_qargs": [
+            13,
+            22
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0086
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 93,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 94,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 95,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 96,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3,
+            4
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 97,
+          "physical_qargs": [
+            13,
+            22
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0086
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 98,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 99,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 100,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 101,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 102,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3,
+            4
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 103,
+          "physical_qargs": [
+            13,
+            22
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0086
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 104,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2,
+            3
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 105,
+          "physical_qargs": [
+            9,
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0084
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 106,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 107,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 108,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 109,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2,
+            3
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 110,
+          "physical_qargs": [
+            9,
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0084
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 111,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 112,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 113,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 114,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 115,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2,
+            3
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 116,
+          "physical_qargs": [
+            9,
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0084
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 117,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 118,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 119,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1,
+            2
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 120,
+          "physical_qargs": [
+            4,
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0082
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "x",
+          "occurrence": 121,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0005
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 122,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 123,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 124,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 125,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1,
+            2
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 126,
+          "physical_qargs": [
+            4,
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0082
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 127,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 128,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 129,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 130,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 131,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 132,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 133,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 134,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 135,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 136,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2,
+            3
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 137,
+          "physical_qargs": [
+            9,
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0084
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 138,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 139,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 140,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 141,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 142,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2,
+            3
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 143,
+          "physical_qargs": [
+            9,
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0084
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 144,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 145,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 146,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 147,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 148,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 149,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 150,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2,
+            3
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 151,
+          "physical_qargs": [
+            9,
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0084
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 152,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 153,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 154,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 155,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2,
+            3
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 156,
+          "physical_qargs": [
+            9,
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0084
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 157,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 158,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 159,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 160,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 161,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2,
+            3
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 162,
+          "physical_qargs": [
+            9,
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0084
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 163,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 164,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 165,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1,
+            2
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 166,
+          "physical_qargs": [
+            4,
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0082
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "x",
+          "occurrence": 167,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0005
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 168,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 169,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 170,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 171,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1,
+            2
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 172,
+          "physical_qargs": [
+            4,
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0082
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 173,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 174,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 175,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            0,
+            1
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 176,
+          "physical_qargs": [
+            1,
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.008
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 177,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 178,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 179,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 180,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 181,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            0,
+            1
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 182,
+          "physical_qargs": [
+            1,
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.008
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 183,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 184,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 185,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 186,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 187,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 188,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 189,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 190,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 191,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2,
+            3
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 192,
+          "physical_qargs": [
+            9,
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0084
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 193,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 194,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 195,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 196,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 197,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2,
+            3
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 198,
+          "physical_qargs": [
+            9,
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0084
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 199,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 200,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 201,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 202,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2,
+            3
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 203,
+          "physical_qargs": [
+            9,
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0084
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 204,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 205,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1,
+            2
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 206,
+          "physical_qargs": [
+            4,
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0082
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "x",
+          "occurrence": 207,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0005
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 208,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 209,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 210,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 211,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1,
+            2
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 212,
+          "physical_qargs": [
+            4,
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0082
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 213,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 214,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 215,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 216,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 217,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 218,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 219,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 220,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 221,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 222,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 223,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 224,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 225,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3,
+            4
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 226,
+          "physical_qargs": [
+            13,
+            22
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0086
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "x",
+          "occurrence": 227,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0005
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 228,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 229,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 230,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 231,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3,
+            4
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 232,
+          "physical_qargs": [
+            13,
+            22
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0086
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 233,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 234,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 235,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2,
+            3
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 236,
+          "physical_qargs": [
+            9,
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0084
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 237,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 238,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 239,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 240,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 241,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2,
+            3
+          ],
+          "duration_seconds": 2.8e-07,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "ecr",
+          "occurrence": 242,
+          "physical_qargs": [
+            9,
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0084
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 243,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 244,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 245,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 246,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 247,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 248,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 249,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 250,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 251,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 252,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            4
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 253,
+          "physical_qargs": [
+            22
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        }
+      ],
+      "missing_calibration_policy": "BLOCKED; no unlabelled perfect or FakeBackend fallback",
+      "missing_calibrations": [],
+      "physical_to_compact_remapping": [
+        {
+          "channel_max_absolute_conversion_difference": 3.3306690738754696e-16,
+          "compact": [
+            0
+          ],
+          "name": "sx",
+          "physical": [
+            1
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 8.881784197001252e-16,
+          "compact": [
+            1
+          ],
+          "name": "sx",
+          "physical": [
+            4
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 8.881784197001252e-16,
+          "compact": [
+            2
+          ],
+          "name": "sx",
+          "physical": [
+            9
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 7.771561172376096e-16,
+          "compact": [
+            3
+          ],
+          "name": "sx",
+          "physical": [
+            13
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 6.661338147750939e-16,
+          "compact": [
+            4
+          ],
+          "name": "sx",
+          "physical": [
+            22
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 4.440892098500626e-16,
+          "compact": [
+            0
+          ],
+          "name": "x",
+          "physical": [
+            1
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 7.771561172376096e-16,
+          "compact": [
+            1
+          ],
+          "name": "x",
+          "physical": [
+            4
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 3.3306690738754696e-16,
+          "compact": [
+            2
+          ],
+          "name": "x",
+          "physical": [
+            9
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 2.221165868831581e-16,
+          "compact": [
+            3
+          ],
+          "name": "x",
+          "physical": [
+            13
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 9.992007221626409e-16,
+          "compact": [
+            4
+          ],
+          "name": "x",
+          "physical": [
+            22
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 1.6653345369377348e-15,
+          "compact": [
+            0,
+            1
+          ],
+          "name": "ecr",
+          "physical": [
+            1,
+            4
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 1.887379141862766e-15,
+          "compact": [
+            1,
+            2
+          ],
+          "name": "ecr",
+          "physical": [
+            4,
+            9
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 1.5543122344752192e-15,
+          "compact": [
+            2,
+            3
+          ],
+          "name": "ecr",
+          "physical": [
+            9,
+            13
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 1.2212453270876722e-15,
+          "compact": [
+            3,
+            4
+          ],
+          "name": "ecr",
+          "physical": [
+            13,
+            22
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "compact": [
+            0
+          ],
+          "physical": [
+            1
+          ],
+          "type": "readout"
+        },
+        {
+          "compact": [
+            1
+          ],
+          "physical": [
+            4
+          ],
+          "type": "readout"
+        },
+        {
+          "compact": [
+            2
+          ],
+          "physical": [
+            9
+          ],
+          "type": "readout"
+        },
+        {
+          "compact": [
+            3
+          ],
+          "physical": [
+            13
+          ],
+          "type": "readout"
+        },
+        {
+          "compact": [
+            4
+          ],
+          "physical": [
+            22
+          ],
+          "type": "readout"
+        }
+      ],
+      "quantum_channel_applications": 132,
+      "readout": [
+        {
+          "compact": 1,
+          "missing": [],
+          "physical_id": 4
+        },
+        {
+          "compact": 3,
+          "missing": [],
+          "physical_id": 13
+        },
+        {
+          "compact": 0,
+          "missing": [],
+          "physical_id": 1
+        },
+        {
+          "compact": 4,
+          "missing": [],
+          "physical_id": 22
+        },
+        {
+          "compact": 2,
+          "missing": [],
+          "physical_id": 9
+        }
+      ],
+      "readout_in_density_model": false,
+      "verified": true
+    },
+    "density_physicality": {
+      "born_probability_max_roundoff_adjustment": 2.6367796834847468e-15,
+      "dimension": 32,
+      "hermiticity_max_absolute_error": 9.813077866773594e-17,
+      "minimum_eigenvalue": 8.648499449393597e-05,
+      "normalization_atol": 1e-09,
+      "positivity_atol": 1e-09,
+      "readout_applied": false,
+      "trace_absolute_error": 1.0436121241450381e-14,
+      "trace_imaginary": -2.2756079976601328e-17,
+      "trace_real": 0.9999999999999896,
+      "verified": true
+    },
+    "device_calibration_used": false,
+    "hardware_used": false,
+    "idle_delay_effects_modelled": false,
+    "logical_register_width": 5,
+    "measured_compact_by_m2": [
+      1,
+      3,
+      0,
+      4,
+      2
+    ],
+    "measured_physical_by_m2": [
+      4,
+      13,
+      1,
+      22,
+      9
+    ],
+    "measurement_in_density_simulation": false,
+    "missing_snapshot_timestamps": [],
+    "no_density_or_full_device_vector_archived": true,
+    "noise_model_api": "qiskit_aer.noise.NoiseModel.from_backend",
+    "noise_model_options": {
+      "gate_error": true,
+      "readout_error": true,
+      "temperature": 0,
+      "thermal_relaxation": true
+    },
+    "probabilities_after_readout": [
+      0.029407624702161288,
+      0.08598958494344623,
+      0.08163560310053308,
+      0.23066811559446607,
+      0.012196236811065006,
+      0.009981338263724228,
+      0.056620259977799785,
+      0.01841558390611066,
+      0.010970113515190614,
+      0.055325240553914155,
+      0.008062038495682544,
+      0.01916917875462793,
+      0.009672602719911537,
+      0.004214714680225282,
+      0.004171570401728523,
+      0.002429719705328501,
+      0.05502215057914972,
+      0.0665132380550972,
+      0.06178679009616701,
+      0.07637356523736696,
+      0.014526358826015584,
+      0.006925016131588972,
+      0.01655023277484228,
+      0.008585687748940994,
+      0.012953699859805587,
+      0.016789800738551502,
+      0.006724263715931775,
+      0.009649361606494778,
+      0.0035130702420016462,
+      0.0018032962957628637,
+      0.0022637885607627696,
+      0.0010901534056049615
+    ],
+    "probabilities_before_readout": [
+      0.024207051906945665,
+      0.08172510233006833,
+      0.07667700010358908,
+      0.24708235879961338,
+      0.010150737385121072,
+      0.008987087737972679,
+      0.059844904686410655,
+      0.016324213383865614,
+      0.008940868864280454,
+      0.05864314979427069,
+      0.006880436606414225,
+      0.017096116032721473,
+      0.010061300038275859,
+      0.003654995852670778,
+      0.003563795206244126,
+      0.0021666436551808334,
+      0.05471021182192333,
+      0.06844424605574097,
+      0.06291521796307038,
+      0.07956834286050435,
+      0.014429605541423161,
+      0.006308490750710489,
+      0.01640984154349299,
+      0.00817960661860722,
+      0.01271472311353877,
+      0.01675225689641241,
+      0.006097290313674959,
+      0.009363248083011913,
+      0.0033651363150095427,
+      0.0016373440868611593,
+      0.002152468328045267,
+      0.0009462073243282851
+    ],
+    "quantum_channel_conversion_api": "QuantumError(error.to_quantumchannel())",
+    "quantum_channel_cptp_verified": true,
+    "quantum_channel_equivalence_atol": 1e-12,
+    "quantum_channel_max_absolute_conversion_difference": 1.887379141862766e-15,
+    "quantum_channel_representation": "equivalent single Kraus instruction per local error",
+    "readout_applications": 1,
+    "readout_convention": "rows=true; columns=observed; p_observed=R.T@p_true",
+    "readout_matrices_m2_order": [
+      [
+        [
+          0.986,
+          0.014
+        ],
+        [
+          0.029,
+          0.971
+        ]
+      ],
+      [
+        [
+          0.984,
+          0.016
+        ],
+        [
+          0.028,
+          0.972
+        ]
+      ],
+      [
+        [
+          0.989,
+          0.011
+        ],
+        [
+          0.026000000000000002,
+          0.974
+        ]
+      ],
+      [
+        [
+          0.989,
+          0.011
+        ],
+        [
+          0.027000000000000003,
+          0.973
+        ]
+      ],
+      [
+        [
+          0.988,
+          0.012
+        ],
+        [
+          0.029,
+          0.971
+        ]
+      ]
+    ],
+    "readout_matrix_sources_m2_order": [
+      "target_asymmetric_probabilities",
+      "target_asymmetric_probabilities",
+      "target_asymmetric_probabilities",
+      "target_asymmetric_probabilities",
+      "target_asymmetric_probabilities"
+    ],
+    "resources": {
+      "available_ram_bytes": 1802674176,
+      "blas_thread_limit": 2,
+      "density_complex_entries": 1024,
+      "density_runs": 0,
+      "density_state_bytes": 16384,
+      "estimated_workspace_bytes": 131072,
+      "instance_count": 0,
+      "limits": {
+        "max_density_runs": 1200,
+        "max_instances": 12,
+        "max_memory_mb": 512,
+        "max_parallel_threads": 2,
+        "max_qubits": 10,
+        "max_training_runs": 240
+      },
+      "logical_cpu_count": 16,
+      "number_qubits": 5,
+      "parallel_experiments": 1,
+      "parallel_run_workers": 1,
+      "parallel_shots": 1,
+      "passed": true,
+      "physical_ram_bytes": 16854855680,
+      "training_runs": 0,
+      "workspace_matrix_multiplier": 8
+    },
+    "schema_version": 1,
+    "shots_are_not_a_density_estimation_budget": true,
+    "simulation_options": {
+      "device": "CPU",
+      "enable_truncation": false,
+      "fusion_enable": false,
+      "max_memory_mb": 512,
+      "max_parallel_experiments": 1,
+      "max_parallel_shots": 1,
+      "max_parallel_threads": 2,
+      "method": "density_matrix",
+      "precision": "double",
+      "zero_threshold": 1e-14
+    },
+    "simulation_seed": 0,
+    "small_probability_mixture_terms_preserved": true,
+    "snapshot_calibration_timestamp": "2000-01-01T00:00:00+00:00",
+    "snapshot_execution_shots": 1,
+    "snapshot_retrieved_at": "2026-10-12T09:54:01.160678+00:00",
+    "snapshot_sha256": "1b69b06f8434229c9851e49c8d1caff62f8ee547351dcf78d5df031e0d711ee6",
+    "snapshot_source": "offline_synthetic",
+    "status": "OFFLINE_READY",
+    "synthetic_model_is_device_calibration": false
+  },
+  "frozen_before_results": true,
+  "hardware_used": false,
+  "logical_ideal": [
+    0.014036521966472612,
+    0.07454073422134484,
+    0.07454073422134484,
+    0.32634547827967586,
+    0.0035255270716728483,
+    0.003033606725360132,
+    0.0697130059034944,
+    0.007672444266038593,
+    0.003525527071672844,
+    0.0697130059034944,
+    0.003033606725360128,
+    0.007672444266038595,
+    0.010097258158986613,
+    0.0010105098370372277,
+    0.0010105098370372272,
+    0.0009917789481151454,
+    0.06242822255707005,
+    0.06598331953015628,
+    0.06598331953015628,
+    0.07581780155086452,
+    0.012006513215433176,
+    0.0019631574417074828,
+    0.011617141140314799,
+    0.002570007936119926,
+    0.012006513215433183,
+    0.011617141140314795,
+    0.0019631574417074715,
+    0.002570007936119932,
+    0.0020457660324636785,
+    0.00046154611537627696,
+    0.00046154611537627577,
+    4.21456982392465e-05
+  ],
+  "source_kind": "offline_synthetic",
+  "target_snapshot_sha256": "4463a4e4f31ef170b6b52112f10d01171018d5f4299b65a58c95b3d27fd06df5"
+}

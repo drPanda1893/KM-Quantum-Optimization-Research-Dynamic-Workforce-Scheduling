@@ -1,0 +1,7442 @@
+{
+  "algorithm": "standard",
+  "circuit_id": "K_bounded_slack-standard-p2-seed0",
+  "content_sha256": "e8a578dd23194370be6d48283c04631a214fad589ffbbcc4c30c4657ae9532fe",
+  "device_noise_status": "OFFLINE_READY",
+  "equivalence": {
+    "compiled_ideal_metrics": {
+      "auxiliary_bit_count": 3,
+      "conditional_objective_feasibility_rate": 0.12281254419585849,
+      "conditional_valid_m1_objective": 9.861266924763578,
+      "distinct_decoded_plans_with_positive_probability": 16,
+      "energy_residual": 78.23729547215375,
+      "expected_qubo_energy": 85.23729547215375,
+      "ground_auxiliary_degeneracy": [
+        {
+          "ground_encoding_multiplicity": 2,
+          "plan_key": "{\"assignments\":[[\"job-long\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-short\"]}"
+        }
+      ],
+      "ground_decoded_plan_count": 1,
+      "ground_encoding_count": 2,
+      "ground_energy": 7,
+      "maximum_encoding_multiplicity_per_plan": 8,
+      "maximum_qubo_energy": 615,
+      "metric_semantics_verified": true,
+      "normalized_energy_error": 0.12867976228972655,
+      "p_encoding_feasible": 0.029046316323221043,
+      "p_ground_encoding": 0.007346832654614898,
+      "p_schedule_feasible": 0.12281254419585849,
+      "p_schedule_optimal": 0.08107035122709907,
+      "possible_decoded_plan_count": 16
+    },
+    "energy_atol": 1e-08,
+    "expected_qubo_energy_absolute_difference": 3.637978807091713e-12,
+    "logical_ideal_metrics": {
+      "auxiliary_bit_count": 3,
+      "conditional_objective_feasibility_rate": 0.12281254419585366,
+      "conditional_valid_m1_objective": 9.86126692476359,
+      "distinct_decoded_plans_with_positive_probability": 16,
+      "energy_residual": 78.23729547215011,
+      "expected_qubo_energy": 85.23729547215011,
+      "ground_auxiliary_degeneracy": [
+        {
+          "ground_encoding_multiplicity": 2,
+          "plan_key": "{\"assignments\":[[\"job-long\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-short\"]}"
+        }
+      ],
+      "ground_decoded_plan_count": 1,
+      "ground_encoding_count": 2,
+      "ground_energy": 7,
+      "maximum_encoding_multiplicity_per_plan": 8,
+      "maximum_qubo_energy": 615,
+      "metric_semantics_verified": true,
+      "normalized_energy_error": 0.12867976228972058,
+      "p_encoding_feasible": 0.02904631632322,
+      "p_ground_encoding": 0.007346832654614588,
+      "p_schedule_feasible": 0.12281254419585366,
+      "p_schedule_optimal": 0.08107035122709567,
+      "possible_decoded_plan_count": 16
+    },
+    "maximum_probability_absolute_difference": 6.328271240363392e-15,
+    "metric_absolute_differences": {
+      "p_encoding_feasible": 1.0443035325380379e-15,
+      "p_ground_encoding": 3.0964814046186007e-16,
+      "p_schedule_feasible": 4.829470157119431e-15,
+      "p_schedule_optimal": 3.400058012914542e-15
+    },
+    "passed": true,
+    "probability_atol": 1e-10
+  },
+  "kind": "main",
+  "mapping": {
+    "active_physical_qubits": [
+      1,
+      4,
+      9,
+      13,
+      22,
+      31,
+      42
+    ],
+    "logical_to_initial_physical": [
+      1,
+      4,
+      9,
+      13,
+      22,
+      31,
+      42
+    ],
+    "m2_to_classical": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "m2_to_compact": [
+      1,
+      5,
+      0,
+      6,
+      2,
+      4,
+      3
+    ],
+    "m2_to_final_physical": [
+      4,
+      31,
+      1,
+      42,
+      9,
+      22,
+      13
+    ],
+    "m2_to_logical": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "provider_width": 53,
+    "register_name": "m2"
+  },
+  "num_bits": 7,
+  "p": 2,
+  "prediction_sha256": "c4b167d7e8cc2963db5a3197f9061861e4e2192268fef0ff643aa8e287a314bc",
+  "qpy": {
+    "compact": {
+      "byte_count": 37889,
+      "path": "results/m5/circuits/K_bounded_slack-standard-p2-seed0/compact.qpy",
+      "qiskit_version": "2.5.2",
+      "qpy_version": 17,
+      "round_trip_structure_verified": true,
+      "serialization_is_canonical": false,
+      "sha256": "e8150a6da8af252a8d5d609edaa5836f0dd553c18bb8328f3992817c29aadb8c",
+      "version_independent_format": false
+    },
+    "logical": {
+      "byte_count": 3826,
+      "path": "results/m5/circuits/K_bounded_slack-standard-p2-seed0/logical.qpy",
+      "qiskit_version": "2.5.2",
+      "qpy_version": 17,
+      "round_trip_structure_verified": true,
+      "serialization_is_canonical": false,
+      "sha256": "81657f17e9f98272e42cde7c329fd31e2a831755b3145def8f0d4114f2543d87",
+      "version_independent_format": false
+    },
+    "provider": {
+      "byte_count": 39736,
+      "path": "results/m5/circuits/K_bounded_slack-standard-p2-seed0/provider.qpy",
+      "qiskit_version": "2.5.2",
+      "qpy_version": 17,
+      "round_trip_structure_verified": true,
+      "serialization_is_canonical": false,
+      "sha256": "35f575fc527812902a76029aaf66565f1a4d1a06ec158aac35472ad5338c3fbc",
+      "version_independent_format": false
+    }
+  },
+  "reference_name": "K_bounded_slack",
+  "summary": {
+    "active_physical_qubits": [
+      1,
+      4,
+      9,
+      13,
+      22,
+      31,
+      42
+    ],
+    "active_width": 7,
+    "approximation_degree": 1.0,
+    "depth": 297,
+    "gate_histogram": {
+      "ecr": 117,
+      "measure": 7,
+      "rz": 327,
+      "sx": 224,
+      "x": 34
+    },
+    "global_phase": 2.356194490192359,
+    "initial_layout": [
+      1,
+      4,
+      9,
+      13,
+      22,
+      31,
+      42
+    ],
+    "mapping": {
+      "active_physical_qubits": [
+        1,
+        4,
+        9,
+        13,
+        22,
+        31,
+        42
+      ],
+      "logical_to_initial_physical": [
+        1,
+        4,
+        9,
+        13,
+        22,
+        31,
+        42
+      ],
+      "m2_to_classical": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "m2_to_compact": [
+        1,
+        5,
+        0,
+        6,
+        2,
+        4,
+        3
+      ],
+      "m2_to_final_physical": [
+        4,
+        31,
+        1,
+        42,
+        9,
+        22,
+        13
+      ],
+      "m2_to_logical": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "provider_width": 53,
+      "register_name": "m2"
+    },
+    "measurement_count": 7,
+    "native_instructions": [
+      {
+        "classical_bits": [],
+        "index": 0,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 1,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 2,
+        "name": "rz",
+        "parameters": [
+          -2.598729086726264
+        ],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 3,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 4,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 5,
+        "name": "rz",
+        "parameters": [
+          1.2088872822192105
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 6,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 7,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          1,
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 8,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 9,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 10,
+        "name": "rz",
+        "parameters": [
+          2.055865519862734
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 11,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 12,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 13,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          1,
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 14,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 15,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 16,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 17,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 18,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 19,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 20,
+        "name": "rz",
+        "parameters": [
+          -0.3132461203972525
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 21,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 22,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 23,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 24,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 25,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 26,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 27,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 28,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 29,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 30,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 31,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 32,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 33,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 34,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 35,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 36,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 37,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          1,
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 38,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 39,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 40,
+        "name": "rz",
+        "parameters": [
+          -0.18095452228784303
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 41,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 42,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 43,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          1,
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 44,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 45,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 46,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 47,
+        "name": "rz",
+        "parameters": [
+          -0.005712474095709297
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 48,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 49,
+        "name": "rz",
+        "parameters": [
+          -1.5564439578363993
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 50,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 51,
+        "name": "rz",
+        "parameters": [
+          1.191985833150186
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 52,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          1,
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 53,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 54,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 55,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 56,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 57,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 58,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          1,
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 59,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 60,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 61,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 62,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 63,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          1,
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 64,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 65,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 66,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 67,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 68,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 69,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 70,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 71,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 72,
+        "name": "rz",
+        "parameters": [
+          2.512817550390972
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 73,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 74,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 75,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 76,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 77,
+        "name": "rz",
+        "parameters": [
+          -0.18095452228784303
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 78,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 79,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 80,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 81,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 82,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 83,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 84,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 85,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 86,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 87,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 88,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 89,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 90,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 91,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 92,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 93,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 94,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 95,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 96,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 97,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 98,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 99,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 100,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 101,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 102,
+        "name": "rz",
+        "parameters": [
+          -1.9495658258564816
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 103,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 104,
+        "name": "rz",
+        "parameters": [
+          -0.7931218382729099
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 105,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 106,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 107,
+        "name": "rz",
+        "parameters": [
+          -1.3898418045070535
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 108,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 109,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 110,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 111,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 112,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 113,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 114,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 115,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 116,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 117,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 118,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 119,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 120,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 121,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 122,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 123,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 124,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 125,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 126,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 127,
+        "name": "rz",
+        "parameters": [
+          -0.5428635668635291
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 128,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 129,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 130,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 131,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 132,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 133,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 134,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 135,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 136,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 137,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 138,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 139,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 140,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 141,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 142,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 143,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 144,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 145,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 146,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 147,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 148,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 149,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 150,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 151,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 152,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 153,
+        "name": "rz",
+        "parameters": [
+          2.779683609014107
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 154,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 155,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 156,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 157,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 158,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 159,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 160,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 161,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 162,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 163,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 164,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 165,
+        "name": "rz",
+        "parameters": [
+          1.9327053713705826
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 166,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 167,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 168,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 169,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 170,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 171,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 172,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 173,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 174,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 175,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 176,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 177,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 178,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 179,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 180,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 181,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 182,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 183,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 184,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 185,
+        "name": "rz",
+        "parameters": [
+          2.055865519862734
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 186,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 187,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 188,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 189,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 190,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 191,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 192,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 193,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 194,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 195,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 196,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 197,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 198,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 199,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 200,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 201,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 202,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 203,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 204,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 205,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 206,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 207,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 208,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 209,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 210,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 211,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 212,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 213,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 214,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 215,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 216,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 217,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 218,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 219,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 220,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 221,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 222,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 223,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 224,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 225,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 226,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 227,
+        "name": "rz",
+        "parameters": [
+          2.417774564438421
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 228,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 229,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 230,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 231,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 232,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 233,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 234,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 235,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 236,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 237,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 238,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 239,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 240,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 241,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 242,
+        "name": "rz",
+        "parameters": [
+          0.36190904457568607
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 243,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 244,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 245,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 246,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 247,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 248,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 249,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 250,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 251,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 252,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 253,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 254,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 255,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 256,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 257,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 258,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 259,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 260,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 261,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 262,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 263,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 264,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 265,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 266,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 267,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 268,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 269,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 270,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 271,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 272,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 273,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 274,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 275,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 276,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 277,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 278,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 279,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 280,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 281,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 282,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 283,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 284,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 285,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 286,
+        "name": "rz",
+        "parameters": [
+          -1.3898418045070535
+        ],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 287,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 288,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          31,
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 289,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 290,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 291,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 292,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 293,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          31,
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 294,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 295,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 296,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 297,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 298,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 299,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          31,
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 300,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 301,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 302,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 303,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 304,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 305,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 306,
+        "name": "rz",
+        "parameters": [
+          -0.5428635668635291
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 307,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 308,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 309,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 310,
+        "name": "rz",
+        "parameters": [
+          -2.6464072945533204
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 311,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 312,
+        "name": "rz",
+        "parameters": [
+          -0.697205879610399
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 313,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 314,
+        "name": "rz",
+        "parameters": [
+          2.1845098551163336
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 315,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 316,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 317,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 318,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 319,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 320,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 321,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 322,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 323,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 324,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 325,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 326,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 327,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 328,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 329,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 330,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 331,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 332,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 333,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 334,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 335,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 336,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 337,
+        "name": "rz",
+        "parameters": [
+          2.779683609014107
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 338,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 339,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 340,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 341,
+        "name": "rz",
+        "parameters": [
+          0.7182612927367229
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 342,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 343,
+        "name": "rz",
+        "parameters": [
+          -2.597671299963668
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 344,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 345,
+        "name": "rz",
+        "parameters": [
+          2.3456088996124294
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 346,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 347,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 348,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 349,
+        "name": "rz",
+        "parameters": [
+          1.9408422425600023
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 350,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 351,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 352,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 353,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 354,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 355,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 356,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 357,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 358,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 359,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 360,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 361,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 362,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 363,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 364,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 365,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 366,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 367,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 368,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 369,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 370,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 371,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 372,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 373,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 374,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 375,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 376,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 377,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 378,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 379,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 380,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 381,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 382,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 383,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 384,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          1,
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 385,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 386,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 387,
+        "name": "rz",
+        "parameters": [
+          0.2001250685049638
+        ],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 388,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 389,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 390,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          1,
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 391,
+        "name": "rz",
+        "parameters": [
+          -2.0091064763653375
+        ],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 392,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 393,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 394,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 395,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 396,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 397,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 398,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 399,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 400,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 401,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 402,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 403,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 404,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 405,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 406,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 407,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 408,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 409,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 410,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 411,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 412,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 413,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 414,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 415,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 416,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 417,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 418,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 419,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 420,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 421,
+        "name": "rz",
+        "parameters": [
+          -0.18095452228784303
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 422,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 423,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 424,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 425,
+        "name": "rz",
+        "parameters": [
+          -2.0725231541425657
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 426,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 427,
+        "name": "rz",
+        "parameters": [
+          -0.4261191614600328
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 428,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 429,
+        "name": "rz",
+        "parameters": [
+          2.6783499731415077
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 430,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 431,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 432,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 433,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 434,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 435,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 436,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 437,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 438,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 439,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 440,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 441,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 442,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 443,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 444,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 445,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 446,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 447,
+        "name": "rz",
+        "parameters": [
+          2.5412174480748977
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 448,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 449,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 450,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 451,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 452,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 453,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 454,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 455,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 456,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 457,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 458,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 459,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 460,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 461,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 462,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 463,
+        "name": "rz",
+        "parameters": [
+          2.779683609014107
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 464,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 465,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 466,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 467,
+        "name": "rz",
+        "parameters": [
+          -2.42333136085307
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 468,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 469,
+        "name": "rz",
+        "parameters": [
+          -0.5439213536261249
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 470,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 471,
+        "name": "rz",
+        "parameters": [
+          2.3667800807722594
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 472,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 473,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 474,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 475,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 476,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 477,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 478,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 479,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 480,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 481,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 482,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 483,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 484,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 485,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 486,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 487,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 488,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 489,
+        "name": "rz",
+        "parameters": [
+          1.9408422425600023
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 490,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 491,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 492,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 493,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 494,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 495,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 496,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 497,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 498,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 499,
+        "name": "rz",
+        "parameters": [
+          2.0725231541425657
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 500,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 501,
+        "name": "rz",
+        "parameters": [
+          -2.7154734921297603
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 502,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 503,
+        "name": "rz",
+        "parameters": [
+          -0.4632426804482854
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 504,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 505,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 506,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 507,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 508,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 509,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 510,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 511,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 512,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 513,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 514,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 515,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 516,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 517,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 518,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 519,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 520,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 521,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 522,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 523,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 524,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 525,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 526,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 527,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 528,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 529,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 530,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 531,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 532,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 533,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 534,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 535,
+        "name": "rz",
+        "parameters": [
+          2.5412174480748977
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 536,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 537,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 538,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          4,
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 539,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 540,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 541,
+        "name": "rz",
+        "parameters": [
+          -2.703282504019352
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 542,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 543,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 544,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 545,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 546,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 547,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 548,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 549,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 550,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 551,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 552,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 553,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 554,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 555,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          31,
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 556,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 557,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 558,
+        "name": "rz",
+        "parameters": [
+          2.941467585084829
+        ],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 559,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 560,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 561,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          31,
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 562,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 563,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 564,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 565,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 566,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 567,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 568,
+        "name": "rz",
+        "parameters": [
+          0.4002501370099276
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 569,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 570,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 571,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 572,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 573,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 574,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 575,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 576,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 577,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 578,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 579,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 580,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 581,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 582,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 583,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 584,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 585,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 586,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 587,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 588,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 589,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 590,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 591,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 592,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 593,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 594,
+        "name": "rz",
+        "parameters": [
+          0.8005002740198552
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 595,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 596,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 597,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 598,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 599,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 600,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 601,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 602,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 603,
+        "name": "rz",
+        "parameters": [
+          2.7413425165798655
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 604,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 605,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 606,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 607,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 608,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 609,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 610,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 611,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 612,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 613,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 614,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 615,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 616,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 617,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 618,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 619,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 620,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 621,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 622,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 623,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 624,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 625,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 626,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 627,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 628,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 629,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 630,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 631,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 632,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 633,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 634,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 635,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 636,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 637,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 638,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 639,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 640,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 641,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 642,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 643,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 644,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 645,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 646,
+        "name": "rz",
+        "parameters": [
+          0.4002501370099276
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 647,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 648,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 649,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 650,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 651,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 652,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 653,
+        "name": "x",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 654,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 655,
+        "name": "rz",
+        "parameters": [
+          2.941467585084829
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 656,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 657,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 658,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          9,
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 659,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 660,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 661,
+        "name": "rz",
+        "parameters": [
+          -2.703282504019352
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 662,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 663,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 664,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 665,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 666,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 667,
+        "name": "rz",
+        "parameters": [
+          1.1324861772244557
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 668,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 669,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 670,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 671,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 672,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 673,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 674,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 675,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 676,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 677,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 678,
+        "name": "rz",
+        "parameters": [
+          -3.141592653589793
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 679,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 680,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 681,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          22,
+          31
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 682,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 683,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 684,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 685,
+        "name": "rz",
+        "parameters": [
+          -1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 686,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 687,
+        "name": "rz",
+        "parameters": [
+          0.4002501370099276
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 688,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 689,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 690,
+        "name": "ecr",
+        "parameters": [],
+        "physical_qubits": [
+          13,
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 691,
+        "name": "rz",
+        "parameters": [
+          -2.0091064763653375
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 692,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 693,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          13
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 694,
+        "name": "rz",
+        "parameters": [
+          1.1324861772244557
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 695,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 696,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 697,
+        "name": "rz",
+        "parameters": [
+          1.5707963267948966
+        ],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 698,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 699,
+        "name": "rz",
+        "parameters": [
+          5.844875157609145
+        ],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 700,
+        "name": "sx",
+        "parameters": [],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [],
+        "index": 701,
+        "name": "rz",
+        "parameters": [
+          7.853981633974483
+        ],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [
+          0
+        ],
+        "index": 702,
+        "name": "measure",
+        "parameters": [],
+        "physical_qubits": [
+          4
+        ]
+      },
+      {
+        "classical_bits": [
+          1
+        ],
+        "index": 703,
+        "name": "measure",
+        "parameters": [],
+        "physical_qubits": [
+          31
+        ]
+      },
+      {
+        "classical_bits": [
+          2
+        ],
+        "index": 704,
+        "name": "measure",
+        "parameters": [],
+        "physical_qubits": [
+          1
+        ]
+      },
+      {
+        "classical_bits": [
+          3
+        ],
+        "index": 705,
+        "name": "measure",
+        "parameters": [],
+        "physical_qubits": [
+          42
+        ]
+      },
+      {
+        "classical_bits": [
+          4
+        ],
+        "index": 706,
+        "name": "measure",
+        "parameters": [],
+        "physical_qubits": [
+          9
+        ]
+      },
+      {
+        "classical_bits": [
+          5
+        ],
+        "index": 707,
+        "name": "measure",
+        "parameters": [],
+        "physical_qubits": [
+          22
+        ]
+      },
+      {
+        "classical_bits": [
+          6
+        ],
+        "index": 708,
+        "name": "measure",
+        "parameters": [],
+        "physical_qubits": [
+          13
+        ]
+      }
+    ],
+    "one_qubit_gate_count": 585,
+    "optimization_level": 1,
+    "physical_subset": [
+      1,
+      4,
+      9,
+      13,
+      22,
+      31,
+      42
+    ],
+    "provider_circuit_modified_for_simulation": false,
+    "provider_width": 53,
+    "qiskit_version": "2.5.2",
+    "routing_confined_to_subset": true,
+    "seed_transpiler": 424242,
+    "target_validation_passed": true,
+    "two_qubit_gate_count": 117
+  }
+}

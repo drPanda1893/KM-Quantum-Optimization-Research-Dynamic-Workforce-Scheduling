@@ -1,0 +1,193 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "km_quantum",
+    "m5",
+    "acceptance"
+  ],
+  "exit_code": 0,
+  "output": {
+    "analysis_status": "NOT_AVAILABLE",
+    "approval_status": "NOT_APPROVED",
+    "artifact_type": "m5_acceptance",
+    "bit_mapping_verified": true,
+    "budget_evidence": {
+      "actual_provider_metrics_available": false,
+      "actual_qpu_seconds_per_job": [],
+      "actual_total_qpu_seconds": null,
+      "euro_cost_guarantee_claimed": false,
+      "provider_metrics": [],
+      "qpu_time_is_queue_or_wall_time": false,
+      "reserved_qpu_seconds": 0,
+      "reserved_shots": 0
+    },
+    "completed_provider_jobs": 0,
+    "completed_real_pubs": 0,
+    "completed_test_jobs": 0,
+    "device_noise_model_status": "OFFLINE_SYNTHETIC_READY",
+    "gate_diagnostics": [],
+    "good_prediction_agreement_required_for_pass": false,
+    "hardware_execution_status": "NOT_STARTED",
+    "hardware_used": false,
+    "historical_integrity": {
+      "allowed_integration_changes": [
+        {
+          "after_sha256": "1af36c782760d315765563f7663aaf3090afcf97f78b84d33dbd66aee3dc4a50",
+          "before_sha256": "a106e2fbe93f10097833e85292fe7e591bdb950eaa1025787eafc0abe8a85fe6",
+          "path": "README.md"
+        },
+        {
+          "after_sha256": "8c532630de5873e89c7b6947baea81017b3b50277b586f1a52177d9d3955271b",
+          "before_sha256": "aff6d2dd41fcfd96bc3988c932cce86d5c207f09464ea075f5c169b3b9926892",
+          "path": "pyproject.toml"
+        },
+        {
+          "after_sha256": "384b25068e9c8a79056524adebd2f4214570bad7a0d6ef2a0d034af3687684ff",
+          "before_sha256": "f52ac660ffd612450c87a32594ab6f302d636c50c8a0c652004480888785f421",
+          "path": "src/km_quantum/__main__.py"
+        },
+        {
+          "after_sha256": "f8e97d52e5bf98f2be2101729ecf5c0189fac7bc0f9db570a20ca7612686a5fc",
+          "before_sha256": "d1dc60673534ed2a191fc8c6ce221316fc387a9654d490c8340469716be7320f",
+          "path": "uv.lock"
+        }
+      ],
+      "baseline_file_count": 4180,
+      "binary_normalization_permitted": false,
+      "changed": [],
+      "line_ending_only_changes": [],
+      "protected_content_unchanged": true,
+      "protected_file_count": 4176,
+      "protected_raw_bytes_unchanged": true,
+      "published_m4_commit": "4ca11bf8f709aef9f43df4d3f2a0867189b54a7c",
+      "status": "PASS"
+    },
+    "implementation_status": "PASS",
+    "limitations": [
+      "Offline/fake data establish only local readiness, never real hardware completion",
+      "Backend-derived noise is approximate; idle schedules, crosstalk and drift are unmodelled",
+      "Known four-case suite and two repeat blocks do not establish Warm-Start superiority",
+      "Histogram distance is not state fidelity or tomography"
+    ],
+    "local_compilation_equivalence": "PASS",
+    "local_verification_summary": {
+      "active_width_maximum": 7,
+      "checked_main_circuits": 24,
+      "maximum_probability_absolute_difference": 6.328271240363392e-15
+    },
+    "missing_provider_jobs": 3,
+    "missing_pub_ids": [
+      "block-0-smoke-0-0000000",
+      "block-0-smoke-1-1111111",
+      "block-0-smoke-2-1001010",
+      "block-0-smoke-3-0110001",
+      "block-1-A_single_job-standard-p1-seed0",
+      "block-1-A_single_job-standard-p2-seed0",
+      "block-1-A_single_job-uniform",
+      "block-1-A_single_job-warm_product",
+      "block-1-A_single_job-warm_start-p1-seed0",
+      "block-1-A_single_job-warm_start-p2-seed0",
+      "block-1-E_overlap-standard-p1-seed0",
+      "block-1-E_overlap-standard-p2-seed0",
+      "block-1-E_overlap-uniform",
+      "block-1-E_overlap-warm_product",
+      "block-1-E_overlap-warm_start-p1-seed0",
+      "block-1-E_overlap-warm_start-p2-seed0",
+      "block-1-H_workload-standard-p1-seed0",
+      "block-1-H_workload-standard-p2-seed0",
+      "block-1-H_workload-uniform",
+      "block-1-H_workload-warm_product",
+      "block-1-H_workload-warm_start-p1-seed0",
+      "block-1-H_workload-warm_start-p2-seed0",
+      "block-1-K_bounded_slack-standard-p1-seed0",
+      "block-1-K_bounded_slack-standard-p2-seed0",
+      "block-1-K_bounded_slack-uniform",
+      "block-1-K_bounded_slack-warm_product",
+      "block-1-K_bounded_slack-warm_start-p1-seed0",
+      "block-1-K_bounded_slack-warm_start-p2-seed0",
+      "block-2-A_single_job-standard-p1-seed0",
+      "block-2-A_single_job-standard-p2-seed0",
+      "block-2-A_single_job-uniform",
+      "block-2-A_single_job-warm_product",
+      "block-2-A_single_job-warm_start-p1-seed0",
+      "block-2-A_single_job-warm_start-p2-seed0",
+      "block-2-E_overlap-standard-p1-seed0",
+      "block-2-E_overlap-standard-p2-seed0",
+      "block-2-E_overlap-uniform",
+      "block-2-E_overlap-warm_product",
+      "block-2-E_overlap-warm_start-p1-seed0",
+      "block-2-E_overlap-warm_start-p2-seed0",
+      "block-2-H_workload-standard-p1-seed0",
+      "block-2-H_workload-standard-p2-seed0",
+      "block-2-H_workload-uniform",
+      "block-2-H_workload-warm_product",
+      "block-2-H_workload-warm_start-p1-seed0",
+      "block-2-H_workload-warm_start-p2-seed0",
+      "block-2-K_bounded_slack-standard-p1-seed0",
+      "block-2-K_bounded_slack-standard-p2-seed0",
+      "block-2-K_bounded_slack-uniform",
+      "block-2-K_bounded_slack-warm_product",
+      "block-2-K_bounded_slack-warm_start-p1-seed0",
+      "block-2-K_bounded_slack-warm_start-p2-seed0"
+    ],
+    "missing_pubs": 52,
+    "observed_hardware_agreement": "NOT_AVAILABLE",
+    "planned_main_pubs": 48,
+    "planned_provider_jobs": 3,
+    "planned_pubs": 52,
+    "planned_smoke_pubs": 4,
+    "provider_configuration_status": "OWNER_CONFIGURATION_REQUIRED",
+    "raw_results_complete": false,
+    "read_only": true,
+    "schema_version": 1,
+    "status": "OFFLINE_READY",
+    "submitted_provider_jobs": 0,
+    "submitted_pubs": 0,
+    "test_data_pubs": 0,
+    "tooling": {
+      "build": {
+        "command": "uv build --offline",
+        "status": "PASS",
+        "wheel_metadata_verified": true
+      },
+      "git": {
+        "branch": "feat/m5-ibm-hardware-validation",
+        "commit": "37f47d8f1c6f349bdedb8707ec7a36ca16a238c8",
+        "dirty": false
+      },
+      "hardware_used": false,
+      "mypy": {
+        "command": ".venv/Scripts/python.exe -m mypy src",
+        "source_files": 70,
+        "status": "PASS"
+      },
+      "pytest": {
+        "command": ".venv/Scripts/python.exe -m pytest -q --junitxml=results/m5/preflight/pytest.xml",
+        "errors": 0,
+        "failures": 0,
+        "historical_tests": 1094,
+        "junit_seconds": 486.119,
+        "junit_sha256": "2f44a8ae4ca8e8274b826b3abd62794d1480a6bea50e8977e35a89f6f4981cd2",
+        "new_m5_tests": 256,
+        "reported_seconds": 488.16,
+        "skipped": 0,
+        "status": "PASS",
+        "tests": 1350,
+        "warnings": 249
+      },
+      "real_provider_jobs_submitted": 0,
+      "recorded_at": "2026-10-12T09:53:55.779590+00:00",
+      "ruff_check": {
+        "command": ".venv/Scripts/python.exe -m ruff check src tests --output-format concise",
+        "status": "PASS"
+      },
+      "ruff_format": {
+        "command": ".venv/Scripts/python.exe -m ruff format --check src tests",
+        "files": 109,
+        "status": "PASS"
+      },
+      "source_context_sha256": "c70fdb459cd531f5454dcd08254cc49e94e8c699472ebcf9e1f5931be279744a"
+    }
+  }
+}

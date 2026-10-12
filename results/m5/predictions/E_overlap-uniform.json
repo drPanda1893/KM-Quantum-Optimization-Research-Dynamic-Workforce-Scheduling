@@ -1,0 +1,687 @@
+{
+  "artifact_type": "m5_frozen_prediction",
+  "circuit_id": "E_overlap-uniform",
+  "compiled_ideal": [
+    0.06250000000000011,
+    0.06250000000000011,
+    0.06250000000000011,
+    0.06250000000000011,
+    0.06250000000000011,
+    0.06250000000000011,
+    0.06250000000000011,
+    0.06250000000000011,
+    0.06250000000000011,
+    0.06250000000000011,
+    0.06250000000000011,
+    0.06250000000000011,
+    0.06250000000000011,
+    0.06250000000000011,
+    0.06250000000000011,
+    0.06250000000000011
+  ],
+  "content_sha256": "c63e7e74759a48330e9adfc5cc2c702be1f1938dbf9380f58ef6fcf882ae35f9",
+  "device_metrics": {
+    "device_after_readout": {
+      "auxiliary_bit_count": 0,
+      "conditional_objective_feasibility_rate": 0.1874785251058901,
+      "conditional_valid_m1_objective": 9.33487810985838,
+      "distinct_decoded_plans_with_positive_probability": 16,
+      "energy_residual": 18.53622998986212,
+      "expected_qubo_energy": 25.53622998986212,
+      "ground_auxiliary_degeneracy": [
+        {
+          "ground_encoding_multiplicity": 1,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}"
+        },
+        {
+          "ground_encoding_multiplicity": 1,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}"
+        }
+      ],
+      "ground_decoded_plan_count": 2,
+      "ground_encoding_count": 2,
+      "ground_energy": 7,
+      "maximum_encoding_multiplicity_per_plan": 1,
+      "maximum_qubo_energy": 59,
+      "metric_semantics_verified": true,
+      "normalized_energy_error": 0.35646596134350234,
+      "p_encoding_feasible": 0.1874785251058901,
+      "p_ground_encoding": 0.12494431020042188,
+      "p_schedule_feasible": 0.1874785251058901,
+      "p_schedule_optimal": 0.12494431020042188,
+      "possible_decoded_plan_count": 16
+    },
+    "device_before_readout": {
+      "auxiliary_bit_count": 0,
+      "conditional_objective_feasibility_rate": 0.18750022371590347,
+      "conditional_valid_m1_objective": 9.333339686296414,
+      "distinct_decoded_plans_with_positive_probability": 16,
+      "energy_residual": 18.745796106561265,
+      "expected_qubo_energy": 25.745796106561265,
+      "ground_auxiliary_degeneracy": [
+        {
+          "ground_encoding_multiplicity": 1,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}"
+        },
+        {
+          "ground_encoding_multiplicity": 1,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}"
+        }
+      ],
+      "ground_decoded_plan_count": 2,
+      "ground_encoding_count": 2,
+      "ground_energy": 7,
+      "maximum_encoding_multiplicity_per_plan": 1,
+      "maximum_qubo_energy": 59,
+      "metric_semantics_verified": true,
+      "normalized_energy_error": 0.36049607897233205,
+      "p_encoding_feasible": 0.18750022371590347,
+      "p_ground_encoding": 0.1249999789750787,
+      "p_schedule_feasible": 0.18750022371590347,
+      "p_schedule_optimal": 0.1249999789750787,
+      "possible_decoded_plan_count": 16
+    }
+  },
+  "device_noise": {
+    "active_simulated_physical_width": 4,
+    "additional_m4_depolarization": false,
+    "aer_version": "0.17.2",
+    "approximation": "Aer backend-derived gate-error and in-gate T1/T2 channels plus independent readout; no complete idle schedule, crosstalk or drift model. Aer may truncate T2 to 2*T1.",
+    "artifact_type": "m5_device_noise_prediction",
+    "compact_to_physical": [
+      1,
+      4,
+      9,
+      13
+    ],
+    "coverage": {
+      "gate_occurrence_count": 12,
+      "gate_occurrences": [
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 0,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 1,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            0
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 2,
+          "physical_qargs": [
+            1
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 3,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 4,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            1
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 5,
+          "physical_qargs": [
+            4
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 6,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 7,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            2
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 8,
+          "physical_qargs": [
+            9
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 9,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 3.5e-08,
+          "explicitly_ideal_calibration": false,
+          "missing": [],
+          "name": "sx",
+          "occurrence": 10,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": true,
+          "reported_gate_error": 0.0004
+        },
+        {
+          "compact_qargs": [
+            3
+          ],
+          "duration_seconds": 0.0,
+          "explicitly_ideal_calibration": true,
+          "missing": [],
+          "name": "rz",
+          "occurrence": 11,
+          "physical_qargs": [
+            13
+          ],
+          "quantum_channel_attached": false,
+          "reported_gate_error": 0.0
+        }
+      ],
+      "missing_calibration_policy": "BLOCKED; no unlabelled perfect or FakeBackend fallback",
+      "missing_calibrations": [],
+      "physical_to_compact_remapping": [
+        {
+          "channel_max_absolute_conversion_difference": 3.3306690738754696e-16,
+          "compact": [
+            0
+          ],
+          "name": "sx",
+          "physical": [
+            1
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 8.881784197001252e-16,
+          "compact": [
+            1
+          ],
+          "name": "sx",
+          "physical": [
+            4
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 8.881784197001252e-16,
+          "compact": [
+            2
+          ],
+          "name": "sx",
+          "physical": [
+            9
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 7.771561172376096e-16,
+          "compact": [
+            3
+          ],
+          "name": "sx",
+          "physical": [
+            13
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 4.440892098500626e-16,
+          "compact": [
+            0
+          ],
+          "name": "x",
+          "physical": [
+            1
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 7.771561172376096e-16,
+          "compact": [
+            1
+          ],
+          "name": "x",
+          "physical": [
+            4
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 3.3306690738754696e-16,
+          "compact": [
+            2
+          ],
+          "name": "x",
+          "physical": [
+            9
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 2.221165868831581e-16,
+          "compact": [
+            3
+          ],
+          "name": "x",
+          "physical": [
+            13
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 1.6653345369377348e-15,
+          "compact": [
+            0,
+            1
+          ],
+          "name": "ecr",
+          "physical": [
+            1,
+            4
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 1.887379141862766e-15,
+          "compact": [
+            1,
+            2
+          ],
+          "name": "ecr",
+          "physical": [
+            4,
+            9
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "channel_max_absolute_conversion_difference": 1.5543122344752192e-15,
+          "compact": [
+            2,
+            3
+          ],
+          "name": "ecr",
+          "physical": [
+            9,
+            13
+          ],
+          "representation": "single_cptp_kraus_instruction",
+          "type": "quantum"
+        },
+        {
+          "compact": [
+            0
+          ],
+          "physical": [
+            1
+          ],
+          "type": "readout"
+        },
+        {
+          "compact": [
+            1
+          ],
+          "physical": [
+            4
+          ],
+          "type": "readout"
+        },
+        {
+          "compact": [
+            2
+          ],
+          "physical": [
+            9
+          ],
+          "type": "readout"
+        },
+        {
+          "compact": [
+            3
+          ],
+          "physical": [
+            13
+          ],
+          "type": "readout"
+        }
+      ],
+      "quantum_channel_applications": 4,
+      "readout": [
+        {
+          "compact": 0,
+          "missing": [],
+          "physical_id": 1
+        },
+        {
+          "compact": 1,
+          "missing": [],
+          "physical_id": 4
+        },
+        {
+          "compact": 2,
+          "missing": [],
+          "physical_id": 9
+        },
+        {
+          "compact": 3,
+          "missing": [],
+          "physical_id": 13
+        }
+      ],
+      "readout_in_density_model": false,
+      "verified": true
+    },
+    "density_physicality": {
+      "born_probability_max_roundoff_adjustment": 5.551115123125783e-17,
+      "dimension": 16,
+      "hermiticity_max_absolute_error": 5.2258753738353025e-33,
+      "minimum_eigenvalue": 2.9871763249914935e-14,
+      "normalization_atol": 1e-09,
+      "positivity_atol": 1e-09,
+      "readout_applied": false,
+      "trace_absolute_error": 8.881784197001252e-16,
+      "trace_imaginary": -1.5831879664053476e-33,
+      "trace_real": 1.0000000000000009,
+      "verified": true
+    },
+    "device_calibration_used": false,
+    "hardware_used": false,
+    "idle_delay_effects_modelled": false,
+    "logical_register_width": 4,
+    "measured_compact_by_m2": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "measured_physical_by_m2": [
+      1,
+      4,
+      9,
+      13
+    ],
+    "measurement_in_density_simulation": false,
+    "missing_snapshot_timestamps": [],
+    "no_density_or_full_device_vector_archived": true,
+    "noise_model_api": "qiskit_aer.noise.NoiseModel.from_backend",
+    "noise_model_options": {
+      "gate_error": true,
+      "readout_error": true,
+      "temperature": 0,
+      "thermal_relaxation": true
+    },
+    "probabilities_after_readout": [
+      0.06634214060628568,
+      0.06434516020566226,
+      0.06434547467042406,
+      0.06240859638143085,
+      0.06408861206576297,
+      0.062159465658534106,
+      0.062159769441468206,
+      0.060288683580393014,
+      0.06473308664736287,
+      0.06278454075895368,
+      0.06278484759672658,
+      0.060894946110868986,
+      0.06253421490546823,
+      0.060651857773284246,
+      0.06065215418830514,
+      0.05882644940906924
+    ],
+    "probabilities_before_readout": [
+      0.06257253088754192,
+      0.06253607657214154,
+      0.06253616736556193,
+      0.06249973423529311,
+      0.06253631768705778,
+      0.06249988446921271,
+      0.06249997521008734,
+      0.06246356316511319,
+      0.0625364370523778,
+      0.06250000376499135,
+      0.06250009450603917,
+      0.06246368239156403,
+      0.06250024474082479,
+      0.062463832538823906,
+      0.062463923227356305,
+      0.06242753218601314
+    ],
+    "quantum_channel_conversion_api": "QuantumError(error.to_quantumchannel())",
+    "quantum_channel_cptp_verified": true,
+    "quantum_channel_equivalence_atol": 1e-12,
+    "quantum_channel_max_absolute_conversion_difference": 1.887379141862766e-15,
+    "quantum_channel_representation": "equivalent single Kraus instruction per local error",
+    "readout_applications": 1,
+    "readout_convention": "rows=true; columns=observed; p_observed=R.T@p_true",
+    "readout_matrices_m2_order": [
+      [
+        [
+          0.989,
+          0.011
+        ],
+        [
+          0.026000000000000002,
+          0.974
+        ]
+      ],
+      [
+        [
+          0.986,
+          0.014
+        ],
+        [
+          0.029,
+          0.971
+        ]
+      ],
+      [
+        [
+          0.988,
+          0.012
+        ],
+        [
+          0.029,
+          0.971
+        ]
+      ],
+      [
+        [
+          0.984,
+          0.016
+        ],
+        [
+          0.028,
+          0.972
+        ]
+      ]
+    ],
+    "readout_matrix_sources_m2_order": [
+      "target_asymmetric_probabilities",
+      "target_asymmetric_probabilities",
+      "target_asymmetric_probabilities",
+      "target_asymmetric_probabilities"
+    ],
+    "resources": {
+      "available_ram_bytes": 1904152576,
+      "blas_thread_limit": 2,
+      "density_complex_entries": 256,
+      "density_runs": 0,
+      "density_state_bytes": 4096,
+      "estimated_workspace_bytes": 32768,
+      "instance_count": 0,
+      "limits": {
+        "max_density_runs": 1200,
+        "max_instances": 12,
+        "max_memory_mb": 512,
+        "max_parallel_threads": 2,
+        "max_qubits": 10,
+        "max_training_runs": 240
+      },
+      "logical_cpu_count": 16,
+      "number_qubits": 4,
+      "parallel_experiments": 1,
+      "parallel_run_workers": 1,
+      "parallel_shots": 1,
+      "passed": true,
+      "physical_ram_bytes": 16854855680,
+      "training_runs": 0,
+      "workspace_matrix_multiplier": 8
+    },
+    "schema_version": 1,
+    "shots_are_not_a_density_estimation_budget": true,
+    "simulation_options": {
+      "device": "CPU",
+      "enable_truncation": false,
+      "fusion_enable": false,
+      "max_memory_mb": 512,
+      "max_parallel_experiments": 1,
+      "max_parallel_shots": 1,
+      "max_parallel_threads": 2,
+      "method": "density_matrix",
+      "precision": "double",
+      "zero_threshold": 1e-14
+    },
+    "simulation_seed": 0,
+    "small_probability_mixture_terms_preserved": true,
+    "snapshot_calibration_timestamp": "2000-01-01T00:00:00+00:00",
+    "snapshot_execution_shots": 1,
+    "snapshot_retrieved_at": "2026-10-12T09:54:01.160678+00:00",
+    "snapshot_sha256": "1b69b06f8434229c9851e49c8d1caff62f8ee547351dcf78d5df031e0d711ee6",
+    "snapshot_source": "offline_synthetic",
+    "status": "OFFLINE_READY",
+    "synthetic_model_is_device_calibration": false
+  },
+  "frozen_before_results": true,
+  "hardware_used": false,
+  "logical_ideal": [
+    0.06249999999999996,
+    0.06249999999999996,
+    0.06249999999999996,
+    0.06249999999999996,
+    0.06249999999999996,
+    0.06249999999999996,
+    0.06249999999999996,
+    0.06249999999999996,
+    0.06249999999999996,
+    0.06249999999999996,
+    0.06249999999999996,
+    0.06249999999999996,
+    0.06249999999999996,
+    0.06249999999999996,
+    0.06249999999999996,
+    0.06249999999999996
+  ],
+  "source_kind": "offline_synthetic",
+  "target_snapshot_sha256": "4463a4e4f31ef170b6b52112f10d01171018d5f4299b65a58c95b3d27fd06df5"
+}
