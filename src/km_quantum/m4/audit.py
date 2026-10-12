@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import re
+from collections import Counter
 from dataclasses import asdict
 from pathlib import Path
 from time import perf_counter
@@ -364,6 +365,115 @@ def _validate_aggregate_rows(output: Path, filename: str, folder: str) -> None:
         raise ValueError(f"Saved aggregate artifact differs from original records: {filename}")
 
 
+def _audit_execution_ledger(
+    output: Path,
+    plan: dict[str, Any],
+    context: dict[str, Any],
+    manifest: dict[str, Any],
+    records: list[dict[str, Any]],
+    failures: list[dict[str, Any]],
+) -> tuple[dict[str, Any], list[dict[str, Any]], list[str]]:
+    """Require one honest status for every frozen noise execution, including skips."""
+    planned = plan["noise"]
+    expected_ids = [row["run_id"] for row in planned]
+    completed_ids = {row["run_id"] for row in records if row.get("status") == "COMPLETE"}
+    failed_ids = {row["failed_execution_id"] for row in failures}
+    failed_training = {row["training_id"] for row in failures}
+    missing_files = []
+    execution_path = output / "benchmark_execution.json"
+    execution = read_json(execution_path) if execution_path.exists() else None
+    stopped = any(row.get("error_type") == "TimeoutError" for row in failures)
+    if execution is None:
+        missing_files.append("benchmark_execution.json")
+    else:
+        for key, value in (
+            ("scope", plan["scope"]),
+            ("plan_hash", plan["plan_hash"]),
+            ("training", len(plan["training"])),
+            ("density", len(planned)),
+            ("controls", len(plan["controls"])),
+            ("preparations", len(plan["reference_ids"])),
+            ("completed_executions", len(records)),
+            ("failures", failures),
+            ("stopped_at_wall_limit", stopped),
+            ("code_sha", context["environment"]["git_commit"]),
+            ("config_hash", manifest["config_hash"]),
+            ("manifest_content_sha256", manifest["manifest_content_sha256"]),
+            (
+                "status",
+                "COMPLETE" if len(records) == len(planned) and not failures else "INCOMPLETE",
+            ),
+        ):
+            _assert_record_matches(value, execution.get(key), f"benchmark_execution.{key}")
+        if not np.isfinite(execution["duration_seconds"]) or execution["duration_seconds"] < 0:
+            raise ValueError("Saved benchmark execution duration is invalid")
+    if any(identifier is not None and identifier not in expected_ids for identifier in failed_ids):
+        raise ValueError("Failure evidence references an execution outside the frozen ledger")
+    training_ids = {row["training_id"] for row in plan["training"]}
+    if failed_training - training_ids - {"campaign_abort"}:
+        raise ValueError("Failure evidence references training outside the frozen plan")
+    path = output / "execution_ledger.jsonl"
+    if not path.exists():
+        missing_files.append("execution_ledger.jsonl")
+        return (
+            {
+                "status": "INCOMPLETE",
+                "planned": len(planned),
+                "ledger_rows": 0,
+                "counts": None,
+                "missing_files": missing_files,
+            },
+            [],
+            missing_files,
+        )
+    lines = path.read_text(encoding="utf-8").splitlines()
+    if any(not line.strip() for line in lines):
+        raise ValueError("Execution ledger contains an empty record")
+    rows = [json.loads(line) for line in lines]
+    if [row.get("run_id") for row in rows] != expected_ids:
+        raise ValueError("Execution ledger must contain every planned ID once in frozen order")
+    skipped = []
+    for expected, row in zip(planned, rows, strict=True):
+        identifier = expected["run_id"]
+        status = (
+            "COMPLETE"
+            if identifier in completed_ids
+            else "FAILED"
+            if identifier in failed_ids
+            else "SKIPPED_WALL_LIMIT"
+            if stopped
+            else "SKIPPED_DEPENDENCY_FAILURE"
+            if expected["training_id"] in failed_training
+            else "MISSING"
+        )
+        if canonical_hash({**expected, "status": status}) != canonical_hash(row):
+            raise ValueError(f"Execution ledger identity/status differs: {identifier}")
+        if status.startswith("SKIPPED_"):
+            skipped.append(row)
+    statuses = Counter(row["status"] for row in rows)
+    counts = {
+        "planned": len(planned),
+        "completed": statuses["COMPLETE"],
+        "failed": statuses["FAILED"],
+        "skipped": len(skipped),
+        "missing": statuses["MISSING"],
+        "attempted_or_completed": statuses["COMPLETE"] + statuses["FAILED"],
+        "statuses": dict(sorted(statuses.items())),
+    }
+    return (
+        {
+            "status": "INCOMPLETE" if missing_files else "PASS",
+            "planned": len(planned),
+            "ledger_rows": len(rows),
+            "counts": counts,
+            "missing_files": missing_files,
+            "all_planned_statuses_visible": True,
+        },
+        skipped,
+        missing_files,
+    )
+
+
 def audit_experiment(
     root: Path, output: Path, manifest: dict[str, Any], config: M4Config
 ) -> dict[str, Any]:
@@ -382,6 +492,8 @@ def audit_experiment(
         "errors": [],
         "missing": [],
         "failed": [],
+        "skipped": [],
+        "execution_ledger": {"status": "NOT_CHECKED"},
         "unexpected": [],
         "checked": {"preparations": 0, "controls": 0, "training": 0, "compiled": 0, "density": 0},
         "config_hash": manifest["config_hash"],
@@ -446,6 +558,13 @@ def audit_experiment(
                 raise ValueError(f"Saved artifact execution seal mismatch: {relative}")
         if set(seals) != actual_paths:
             raise ValueError("Artifact index paths differ from the present execution artifacts")
+        records = [read_json(path) for path in sorted((output / "records").glob("*.json"))]
+        ledger, skipped, missing_ledger_files = _audit_execution_ledger(
+            output, plan, context, manifest, records, report["failed"]
+        )
+        report["execution_ledger"] = ledger
+        report["skipped"] = skipped
+        report["missing"] += missing_ledger_files
         tables = {
             name: build_plan_table(references[name], config.max_qubits)
             for name in plan["reference_ids"]

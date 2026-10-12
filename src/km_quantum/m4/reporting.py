@@ -512,7 +512,12 @@ def summarize_records(
         ),
         **{
             name: sum(float(row.get("timings", {}).get(name, 0)) for row in good)
-            for name in ("density_runtime_ms", "readout_runtime_ms", "sampling_analysis_runtime_ms")
+            for name in (
+                "density_runtime_ms",
+                "readout_runtime_ms",
+                "sampling_analysis_runtime_ms",
+                "distribution_analysis_runtime_ms",
+            )
         },
     }
     cp_sat = []

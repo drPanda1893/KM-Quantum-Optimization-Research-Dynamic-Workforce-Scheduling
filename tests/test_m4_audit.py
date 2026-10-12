@@ -8,8 +8,14 @@ from typing import Any
 
 import pytest
 
-from km_quantum.m4 import audit, benchmark, verification
-from km_quantum.m4.audit import append_seal, audit_experiment, read_seals, verify_seal
+from km_quantum.m4 import acceptance, audit, benchmark, verification
+from km_quantum.m4.audit import (
+    _audit_execution_ledger,
+    append_seal,
+    audit_experiment,
+    read_seals,
+    verify_seal,
+)
 from km_quantum.m4.io import canonical_hash, read_json, write_json
 from km_quantum.m4.models import M4Config
 from km_quantum.m4.noise import DEFAULT_NOISE_PROFILES
@@ -79,6 +85,15 @@ def campaign(
         "planned_noise_runs": noise,
         "planned_control_runs": controls,
         "initial_resource_preflight": {"passed": True},
+        "counts": {
+            "instances": 1,
+            "training": 2,
+            "density": 10,
+            "controls": 3,
+            "preparations": 1,
+            "cp_sat_references": 1,
+        },
+        "m3_reference_commit": "b" * 40,
     }
     manifest["manifest_content_sha256"] = canonical_hash(manifest)
     monkeypatch.setattr(benchmark, "load_config", lambda root: config)
@@ -138,6 +153,16 @@ def test_real_tiny_campaign_audits_all_layers_without_retraining_or_noisy_resimu
         "density": 10,
     }
     assert result["missing"] == result["failed"] == result["errors"] == []
+    assert result["execution_ledger"]["counts"] == {
+        "planned": 10,
+        "completed": 10,
+        "failed": 0,
+        "skipped": 0,
+        "missing": 0,
+        "attempted_or_completed": 10,
+        "statuses": {"COMPLETE": 10},
+    }
+    assert result["skipped"] == []
     assert result["optimization_performed"] is False
     assert result["primary_density_resimulation_performed"] is False
     assert read_json(output / "audit.json") == result
@@ -252,10 +277,211 @@ def test_unexecuted_planned_records_remain_incomplete(
         output / "runs.jsonl",
         [read_json(item) for item in sorted((output / "records").glob("*.json"))],
     )
+    ledger_path = output / "execution_ledger.jsonl"
+    ledger = [json.loads(line) for line in ledger_path.read_text(encoding="utf-8").splitlines()]
+    ledger[-1]["status"] = "MISSING"
+    benchmark._record_jsonl(ledger_path, ledger)
+    execution_path = output / "benchmark_execution.json"
+    execution = read_json(execution_path)
+    execution.update(status="INCOMPLETE", completed_executions=9)
+    write_json(execution_path, execution)
     result = audit_experiment(tmp_path, output, manifest, config)
     assert result["status"] == "INCOMPLETE", result
     assert result["missing"] == [path.relative_to(output).as_posix()]
     assert result["checked"]["density"] == 9
+    assert result["execution_ledger"]["counts"]["missing"] == 1
+
+
+def test_missing_ledger_cannot_pass_even_with_all_physics_records_complete(
+    campaign: tuple[Path, dict[str, Any], M4Config],
+    tmp_path: Path,
+) -> None:
+    output, manifest, config = campaign
+    (output / "execution_ledger.jsonl").unlink()
+    result = audit_experiment(tmp_path, output, manifest, config)
+    assert result["status"] == "INCOMPLETE", result
+    assert "execution_ledger.jsonl" in result["missing"]
+    assert result["checked"]["density"] == 10
+    assert result["execution_ledger"]["counts"] is None
+
+
+@pytest.mark.parametrize(
+    "tamper", ["missing_row", "duplicate", "identity", "status", "strength", "execution_count"]
+)
+def test_ledger_corruption_cannot_pass_acceptance_audit(
+    campaign: tuple[Path, dict[str, Any], M4Config],
+    tmp_path: Path,
+    tamper: str,
+) -> None:
+    output, manifest, config = campaign
+    path = output / "execution_ledger.jsonl"
+    ledger = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+    if tamper == "missing_row":
+        ledger.pop()
+    elif tamper == "duplicate":
+        ledger[-1] = ledger[0]
+    elif tamper == "identity":
+        ledger[0]["initialization_seed"] += 1
+    elif tamper == "status":
+        ledger[0]["status"] = "SKIPPED_WALL_LIMIT"
+    elif tamper == "strength":
+        ledger[0]["noise_profile"]["lambda_1q"] += 1e-12
+    else:
+        execution_path = output / "benchmark_execution.json"
+        execution = read_json(execution_path)
+        execution["completed_executions"] -= 1
+        write_json(execution_path, execution)
+    benchmark._record_jsonl(path, ledger)
+    result = audit_experiment(tmp_path, output, manifest, config)
+    assert result["status"] == "INVALID", result
+    assert result["errors"]
+
+
+def _ledger_fixture(
+    output: Path, *, full: bool
+) -> tuple[
+    dict[str, Any], dict[str, Any], dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]
+]:
+    count = 1200 if full else 10
+    training = [{"training_id": f"training-{i}"} for i in range(count // 5)]
+    rows = [
+        {
+            "run_id": f"run-{i}",
+            "training_id": f"training-{i // 5}",
+            "reference_id": f"reference-{i // 100}",
+            "initialization_seed": i % 5,
+        }
+        for i in range(count)
+    ]
+    plan = {
+        "scope": "primary",
+        "plan_hash": "plan",
+        "noise": rows,
+        "training": training,
+        "controls": [],
+        "reference_ids": ["reference-0"],
+    }
+    context = {"environment": {"git_commit": "a" * 40}}
+    manifest = {"config_hash": "config", "manifest_content_sha256": "manifest"}
+    records = [
+        {"run_id": row["run_id"], "status": "COMPLETE"} for row in rows[: count if full else 4]
+    ]
+    failures = (
+        []
+        if full
+        else [
+            {
+                "failed_execution_id": rows[4]["run_id"],
+                "training_id": rows[4]["training_id"],
+                "error_type": "TimeoutError",
+            }
+        ]
+    )
+    execution = {
+        "scope": "primary",
+        "plan_hash": "plan",
+        "training": len(training),
+        "density": count,
+        "controls": 0,
+        "preparations": 1,
+        "completed_executions": len(records),
+        "failures": failures,
+        "stopped_at_wall_limit": not full,
+        "code_sha": "a" * 40,
+        "config_hash": "config",
+        "manifest_content_sha256": "manifest",
+        "status": "COMPLETE" if full else "INCOMPLETE",
+        "duration_seconds": 1.0,
+    }
+    write_json(output / "benchmark_execution.json", execution)
+    ledger = [
+        {
+            **row,
+            "status": "COMPLETE" if full or i < 4 else "FAILED" if i == 4 else "SKIPPED_WALL_LIMIT",
+        }
+        for i, row in enumerate(rows)
+    ]
+    benchmark._record_jsonl(output / "execution_ledger.jsonl", ledger)
+    return plan, context, manifest, records, failures
+
+
+def test_full_1200_ledger_has_exact_frozen_identity_and_counts(tmp_path: Path) -> None:
+    plan, context, manifest, records, failures = _ledger_fixture(tmp_path, full=True)
+    ledger, skipped, missing = _audit_execution_ledger(
+        tmp_path, plan, context, manifest, records, failures
+    )
+    assert ledger["status"] == "PASS"
+    assert (
+        ledger["ledger_rows"]
+        == ledger["counts"]["completed"]
+        == ledger["counts"]["planned"]
+        == 1200
+    )
+    assert (
+        ledger["counts"]["failed"]
+        == ledger["counts"]["skipped"]
+        == ledger["counts"]["missing"]
+        == 0
+    )
+    assert skipped == missing == []
+
+
+def test_failed_and_skipped_ledger_entries_remain_distinct(tmp_path: Path) -> None:
+    plan, context, manifest, records, failures = _ledger_fixture(tmp_path, full=False)
+    ledger, skipped, missing = _audit_execution_ledger(
+        tmp_path, plan, context, manifest, records, failures
+    )
+    assert ledger["status"] == "PASS"  # Honest accounting does not make the experiment complete.
+    assert ledger["counts"]["completed"] == 4
+    assert ledger["counts"]["failed"] == 1
+    assert ledger["counts"]["skipped"] == len(skipped) == 5
+    assert all(row["status"] == "SKIPPED_WALL_LIMIT" for row in skipped)
+    assert missing == []
+
+
+def test_acceptance_cannot_pass_without_required_ledger_and_exposes_explicit_counts(
+    campaign: tuple[Path, dict[str, Any], M4Config],
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    output, manifest, config = campaign
+    monkeypatch.setattr(acceptance, "validate_manifest", lambda root, cfg: manifest)
+    monkeypatch.setattr(acceptance, "verify_reference_integrity", lambda root: {"unchanged": True})
+    write_json(
+        output / "verification.json",
+        {
+            "status": "PASS",
+            "config_hash": manifest["config_hash"],
+            "manifest_content_sha256": manifest["manifest_content_sha256"],
+            **{
+                key: True
+                for key in (
+                    "metric_semantics_verified",
+                    "warm_start_mixer_verified",
+                    "zero_noise_equivalence_verified",
+                    "readout_model_verified",
+                    "operator_equivalence",
+                )
+            },
+        },
+    )
+    report_path = tmp_path / "docs/m4_completion_report.md"
+    report_path.parent.mkdir(parents=True)
+    report_path.write_text("Fixture report for acceptance guard test\n", encoding="utf-8")
+    for name in acceptance.PLOT_NAMES:
+        path = output / "plots" / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(b"test figure presence")
+    tooling = {key: {"status": "PASS"} for key in ("pytest", "ruff", "format", "mypy", "build")}
+    initial = acceptance.build_acceptance(tmp_path, output, manifest, config, tooling)
+    assert initial["status"] == "PASS", initial
+    assert initial["experiment_status"]["execution_ledger"]["counts"]["completed"] == 10
+    assert initial["experiment_status"]["skipped"] == []
+    (output / "execution_ledger.jsonl").unlink()
+    missing = acceptance.build_acceptance(tmp_path, output, manifest, config, tooling)
+    assert missing["status"] == missing["experiment_status"]["status"] == "INCOMPLETE"
+    assert missing["implementation_status"] == "PASS"
+    assert "execution_ledger.jsonl" in missing["experiment_status"]["missing"]
 
 
 def test_duplicate_artifact_index_entry_is_invalid(

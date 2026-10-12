@@ -91,6 +91,8 @@ def build_acceptance(
             "planned": manifest["counts"],
             "verified_executed": audit["checked"],
             "failed": audit["failed"],
+            "skipped": audit["skipped"],
+            "execution_ledger": audit["execution_ledger"],
             "missing": audit["missing"],
             "unexpected": audit["unexpected"],
             "summary_counts": summary["experiment_counts"],

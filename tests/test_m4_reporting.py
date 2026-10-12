@@ -102,6 +102,7 @@ def fixture() -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any
                                 "density_runtime_ms": 6.0,
                                 "readout_runtime_ms": 0.1,
                                 "sampling_analysis_runtime_ms": 0.2,
+                                "distribution_analysis_runtime_ms": 0.3,
                                 "standalone_end_to_end_ms": 21.3,
                                 "amortized_end_to_end_ms": 20.3,
                             },
@@ -260,6 +261,7 @@ def test_preparation_cost_is_deduplicated_and_stationarity_flags_honest(
     assert costs["unique_training_runtime_ms"] == 180
     assert costs["unique_compile_runtime_ms"] == 54
     assert costs["density_runtime_ms"] == 216
+    assert costs["distribution_analysis_runtime_ms"] == pytest.approx(10.8)
     assert not summary["cp_sat_missing_reference_ids"]
     assert summary["optimizer_status_counts_unique_training"] == {
         "converged": 6,
