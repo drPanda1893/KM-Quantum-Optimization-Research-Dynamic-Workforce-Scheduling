@@ -29,6 +29,12 @@ MAX_PREFLIGHT_AGE_SECONDS = 300
 class SafetyError(ValueError):
     """A required safety or artifact contract is not satisfied."""
 
+    def __init__(
+        self, message: str, *, diagnostic_kind: str = "OWNER_CONFIGURATION_REQUIRED"
+    ) -> None:
+        super().__init__(message)
+        self.diagnostic_kind = diagnostic_kind
+
 
 def utc_now() -> str:
     return datetime.now(UTC).isoformat()
@@ -211,7 +217,12 @@ def _known_nonnegative(value: Any) -> bool:
 def validate_preflight(
     evidence: Mapping[str, Any], plan: Mapping[str, Any] | None = None, *, now: str | None = None
 ) -> None:
-    """A fresh verified free instance, real operational QPU, and complete limits."""
+    """Verify live account facts and the exact documentary/local job contracts.
+
+    BackendConfiguration's old max_shots/max_experiments/max_jobs fields are
+    observations only. They cannot substitute for modern expanded-execution,
+    control-memory, native-circuit and concrete payload assessments.
+    """
     if (
         evidence.get("provider_verified") is not True
         or evidence.get("source_kind") != "ibm_hardware"
@@ -230,16 +241,44 @@ def validate_preflight(
     if age < 0 or age > MAX_PREFLIGHT_AGE_SECONDS:
         raise SafetyError("Provider preflight is stale or future dated")
     usage = evidence.get("usage", {})
-    limits = evidence.get("limits", {})
+    if not evidence.get("region") or str(evidence.get("status_message", "")).lower() != "active":
+        raise SafetyError("Explicit instance region and active accepting backend are required")
     for key in ("remaining_seconds", "consumed_seconds", "limit_seconds"):
         if not _known_nonnegative(usage.get(key)):
             raise SafetyError("Current usage and quota must be known")
     usage_age = (current - parse_time(usage.get("observed_at", ""))).total_seconds()
     if usage_age < 0 or usage_age > MAX_PREFLIGHT_AGE_SECONDS:
         raise SafetyError("Usage observation is stale or future dated")
-    for key in ("max_shots", "max_jobs", "max_pubs"):
-        if type(limits.get(key)) is not int or limits[key] < 1:
-            raise SafetyError("Provider shot, job and PUB limits must be known")
+    if usage.get("usage_limit_reached") is not False:
+        raise SafetyError("Current account usage_limit_reached must be explicitly false")
+    if (
+        usage["limit_seconds"] <= 0
+        or usage["remaining_seconds"] > usage["limit_seconds"]
+        or usage["consumed_seconds"] + usage["remaining_seconds"] > usage["limit_seconds"] + 1e-6
+    ):
+        raise SafetyError("Provider usage and remaining allocation are inconsistent")
+    pending = evidence.get("pending_jobs", {})
+    if (
+        pending.get("complete") is not True
+        or pending.get("status") != "VERIFIED"
+        or type(pending.get("count")) is not int
+        or pending["count"] != 0
+    ):
+        raise SafetyError("Non-final or unknown provider job reservations must be resolved")
+    pending_age = (current - parse_time(pending.get("observed_at", ""))).total_seconds()
+    if pending_age < 0 or pending_age > MAX_PREFLIGHT_AGE_SECONDS:
+        raise SafetyError("Provider job reservation observation is stale or future dated")
+    from km_quantum.m5.provider_limits import (
+        LimitContractError,
+        validate_limit_assessment,
+        validate_service_limit_policy,
+    )
+
+    policy = evidence.get("service_limits", {})
+    try:
+        validate_service_limit_policy(policy)
+    except (LimitContractError, TypeError) as error:
+        raise SafetyError(str(error), diagnostic_kind="PROVIDER_CONTRACT_ERROR") from None
     if not evidence.get("backend") or not evidence.get("instance_binding"):
         raise SafetyError("Explicit provider binding is missing")
     if plan is None:
@@ -248,20 +287,78 @@ def validate_preflight(
         raise SafetyError("Provider instance or backend differs from the execution plan")
     jobs = plan["jobs"]
     reserved = sum(job["max_execution_time"] for job in jobs)
-    if reserved > usage["remaining_seconds"] or len(jobs) > limits["max_jobs"]:
+    fixed_budget = {
+        "max_provider_jobs": 3,
+        "max_total_shots": 49664,
+        "max_qpu_seconds_per_job": 40,
+        "max_total_qpu_seconds": 120,
+        "max_cost_eur": 0.0,
+    }
+    if (
+        plan.get("budget") != fixed_budget
+        or len(jobs) > 3
+        or reserved > 120
+        or any(
+            type(job["max_execution_time"]) is not int or not 1 <= job["max_execution_time"] <= 40
+            for job in jobs
+        )
+        or sum(pub["shots"] for job in jobs for pub in job["pubs"]) > 49664
+    ):
+        raise SafetyError(
+            "Fixed local job/shot/QPU/cost budget changed",
+            diagnostic_kind="PROVIDER_CONTRACT_ERROR",
+        )
+    if reserved > usage["remaining_seconds"]:
         raise SafetyError("Remaining provider quota does not cover the full approved reservation")
-    estimates = evidence.get("execution_estimates", {})
+    try:
+        validate_limit_assessment(plan, policy)
+    except (LimitContractError, KeyError, TypeError, ValueError) as error:
+        raise SafetyError(str(error), diagnostic_kind="PROVIDER_CONTRACT_ERROR") from None
+    model = plan.get("local_usage_model")
+    if not isinstance(model, Mapping):
+        raise SafetyError(
+            "Concrete local target usage model is required",
+            diagnostic_kind="INSUFFICIENT_USAGE_MODEL",
+        )
+    from km_quantum.m5.usage import validate_usage_model
+
+    try:
+        validate_usage_model(model, plan, require_ready=False)
+    except (ValueError, KeyError, TypeError) as error:
+        raise SafetyError(str(error), diagnostic_kind="INSUFFICIENT_USAGE_MODEL") from None
+    over_cap = any(
+        _known_nonnegative(row.get("local_policy_seconds")) and row["local_policy_seconds"] > 40
+        for row in model.get("jobs", [])
+    ) or (
+        _known_nonnegative(model.get("local_policy_total_seconds"))
+        and model["local_policy_total_seconds"] > 120
+    )
+    if over_cap:
+        raise SafetyError(
+            "Local target usage scenario exceeds the unchanged 40/120-second caps",
+            diagnostic_kind="USAGE_LIMIT_EXCEEDED",
+        )
+    try:
+        validate_usage_model(model, plan)
+    except (ValueError, KeyError, TypeError) as error:
+        raise SafetyError(str(error), diagnostic_kind="INSUFFICIENT_USAGE_MODEL") from None
+    if evidence.get("local_usage_model") != model or evidence.get(
+        "execution_estimates"
+    ) != model.get("execution_estimates"):
+        raise SafetyError(
+            "Fresh preflight must retain the full plan-bound local usage model",
+            diagnostic_kind="INSUFFICIENT_USAGE_MODEL",
+        )
     for job in jobs:
-        estimate = estimates.get(job["id"], {})
-        seconds = estimate.get("seconds")
-        if not _known_nonnegative(seconds) or not estimate.get("source"):
-            raise SafetyError("Every job requires a documented QPU usage estimate")
-        if seconds > job["max_execution_time"]:
-            raise SafetyError("QPU usage estimate exceeds the approved per-job cap")
-        if len(job["pubs"]) > limits["max_pubs"]:
-            raise SafetyError("PUB count exceeds the verified provider limit")
-        if any(pub["shots"] > limits["max_shots"] for pub in job["pubs"]):
-            raise SafetyError("Shots exceed the verified provider limit")
+        estimate = model["execution_estimates"][job["id"]]
+        if (
+            job.get("estimated_qpu_seconds") != estimate["seconds"]
+            or job.get("estimate_source") != estimate["source"]
+        ):
+            raise SafetyError(
+                "Plan job estimate mirror differs from its complete local usage model",
+                diagnostic_kind="INSUFFICIENT_USAGE_MODEL",
+            )
 
 
 def preflight(
@@ -270,28 +367,49 @@ def preflight(
     plan: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Explicit read boundary; no dry-run job, polling or submission."""
+    evidence: dict[str, Any] = {}
     try:
         evidence = adapter.metadata(config, plan)
         evidence["instance_binding"] = config.binding
         evidence["backend"] = config.backend
         evidence["source_kind"] = adapter.source_kind
         evidence["single_job_contract"] = adapter.single_job_contract
+        secret_values = (config.token or "", config.instance, config.account_name or "")
+        private_secrets = getattr(adapter, "_secret_values", None)
+        if callable(private_secrets):
+            secret_values += tuple(private_secrets())
         if adapter.source_kind != "ibm_hardware":
             evidence.update(status="OFFLINE_READY", provider_verified=False, hardware_used=False)
-            return dict(redact(evidence, secrets=(config.token or "", config.instance)))
+            return dict(redact(evidence, secrets=secret_values))
         validate_preflight(evidence, plan)
         evidence["status"] = "PROVIDER_PREFLIGHT_READY"
         evidence["hardware_used"] = False
-        return dict(redact(evidence, secrets=(config.token or "", config.instance)))
+        return dict(redact(evidence, secrets=secret_values))
     except Exception as error:
-        return {
-            "status": "OWNER_CONFIGURATION_REQUIRED",
-            "provider_verified": False,
-            "hardware_used": False,
-            "backend": config.backend,
-            "instance_binding": config.binding,
-            "diagnostic": redact(str(error), secrets=(config.token or "", config.instance)),
-        }
+        kind = getattr(error, "diagnostic_kind", "OWNER_CONFIGURATION_REQUIRED")
+        secret_values = (config.token or "", config.instance, config.account_name or "")
+        private_secrets = getattr(adapter, "_secret_values", None)
+        if callable(private_secrets):
+            secret_values += tuple(private_secrets())
+        # Retain the successful live reads: a local contract/model bug is not
+        # evidence that the owner should re-enter valid credentials.
+        evidence.update(
+            {
+                "status": "OWNER_CONFIGURATION_REQUIRED"
+                if kind == "OWNER_CONFIGURATION_REQUIRED"
+                else "BLOCKED",
+                "provider_verified": evidence.get("provider_verified", False),
+                "hardware_used": False,
+                "backend": config.backend,
+                "instance_binding": config.binding,
+                "diagnostic_kind": kind,
+                "diagnostic": str(error),
+                "diagnostics": [
+                    {"kind": kind, "exception_type": type(error).__name__, "message": str(error)}
+                ],
+            }
+        )
+        return dict(redact(evidence, secrets=secret_values))
 
 
 @contextmanager
@@ -318,6 +436,18 @@ class IBMRuntimeAdapter:
         self.config = config
         self._service: Any = None
         self._backend: Any = None
+        self._known_secrets: tuple[str, ...] = ()
+
+    def _secret_values(self) -> tuple[str, ...]:
+        """Private already-loaded named credential; never read account files."""
+        token = getattr(getattr(self._service, "_account", None), "token", None)
+        return (
+            *self._known_secrets,
+            token if isinstance(token, str) else "",
+            self.config.token or "",
+            self.config.instance,
+            self.config.account_name or "",
+        )
 
     def _connect(self) -> None:
         if self._service is not None:
@@ -333,6 +463,8 @@ class IBMRuntimeAdapter:
                 kwargs.update(channel="ibm_quantum_platform", token=self.config.token)
             with _quiet_sdk():
                 service = sdk.QiskitRuntimeService(**kwargs)
+                token = getattr(getattr(service, "_account", None), "token", None)
+                self._known_secrets = (token,) if isinstance(token, str) else ()
                 backend = service.backend(self.config.backend, instance=self.config.instance)
             if service.channel not in {"ibm_quantum_platform", "ibm_cloud"}:
                 raise SafetyError("Local Runtime channel is not hardware")
@@ -343,8 +475,19 @@ class IBMRuntimeAdapter:
                 raise SafetyError("Active provider instance differs from explicit binding")
             self._service, self._backend = service, backend
         except Exception as error:
+            if (
+                self.config.account_name
+                and not self._known_secrets
+                and not isinstance(error, SafetyError)
+            ):
+                # Constructor failure can precede any readable SDK account.
+                # An opaque stored API key cannot be safely identified there.
+                raise SafetyError(
+                    "Named account connection failed; private SDK detail suppressed"
+                ) from None
             raise SafetyError(
-                redact(str(error), secrets=(self.config.token or "", self.config.instance))
+                redact(str(error), secrets=self._secret_values()),
+                diagnostic_kind=getattr(error, "diagnostic_kind", "OWNER_CONFIGURATION_REQUIRED"),
             ) from None
 
     def _disable_runtime_retries(self) -> None:
@@ -402,6 +545,36 @@ class IBMRuntimeAdapter:
         if len(selected) != 1 or self._service.active_instance() != config.instance:
             raise SafetyError("The explicit account instance cannot be verified")
         now = utc_now()
+        # pending=True in SDK 0.47 includes QUEUED/RUNNING only and could miss
+        # INITIALIZING. Fetch a bounded unfiltered inventory instead, then read
+        # each status once. A truncated inventory is honestly incomplete.
+        pending: dict[str, Any] = {
+            "status": "UNKNOWN",
+            "complete": False,
+            "count": None,
+            "observed_at": now,
+            "scope": "explicit active instance",
+            "source": "SDK jobs(limit=101,pending=None,instance=explicit); status once",
+            "reservation_seconds": None,
+        }
+        if callable(getattr(self._service, "jobs", None)):
+            try:
+                with _quiet_sdk():
+                    jobs = self._service.jobs(limit=101, pending=None, instance=config.instance)
+                    states = [str(job.status()).upper() for job in jobs]
+                final = {"DONE", "CANCELLED", "ERROR"}
+                known = final | {"INITIALIZING", "QUEUED", "RUNNING"}
+                complete = len(jobs) < 101 and all(state in known for state in states)
+                nonfinal = sum(state not in final for state in states)
+                pending.update(
+                    status="VERIFIED" if complete else "UNKNOWN",
+                    complete=complete,
+                    count=nonfinal if complete else None,
+                    inspected_jobs=len(jobs),
+                    reservation_seconds=0 if complete and nonfinal == 0 else None,
+                )
+            except Exception as error:
+                pending["diagnostic"] = redact(str(error), secrets=self._secret_values())
         limit = usage.get("usage_limit_seconds", usage.get("usage_allocation_seconds"))
         consumed = usage.get("usage_consumed_seconds")
         remaining = usage.get("usage_remaining_seconds")
@@ -415,6 +588,11 @@ class IBMRuntimeAdapter:
             "pricing_type": pricing,
             "cost_eur": 0 if pricing == "free" else None,
             "operational": status.operational,
+            "status_message": getattr(status, "status_msg", None),
+            "region": config.instance.split(":")[5]
+            if len(config.instance.split(":")) > 5
+            else None,
+            "region_source": "Provider-returned selected instance CRN location",
             "simulator": configuration.simulator,
             "fake": False,
             "runtime_version": RUNTIME_VERSION,
@@ -430,6 +608,10 @@ class IBMRuntimeAdapter:
                 "consumed_seconds": consumed,
                 "limit_seconds": limit,
                 "observed_at": now,
+                "usage_limit_reached": usage.get("usage_limit_reached"),
+                "period": usage.get("usage_period"),
+                "time_available": usage.get("usage_time_available"),
+                "remaining_source": "SDK instance difference; separate admission flag required",
             },
             "limits": {
                 "max_shots": getattr(configuration, "max_shots", None),
@@ -443,15 +625,18 @@ class IBMRuntimeAdapter:
                 "source": "backend.configuration.default_rep_delay",
             },
             "execution_estimates": {},
+            "pending_jobs": pending,
         }
+        from km_quantum.m5.provider_limits import service_limit_policy
+
+        result["service_limits"] = service_limit_policy()
         if plan is not None:
-            result["execution_estimates"] = {
-                job["id"]: {
-                    "seconds": job.get("estimated_qpu_seconds"),
-                    "source": job.get("estimate_source"),
-                }
-                for job in plan["jobs"]
-            }
+            import copy
+
+            model = plan.get("local_usage_model")
+            if isinstance(model, Mapping):
+                result["local_usage_model"] = copy.deepcopy(dict(model))
+                result["execution_estimates"] = copy.deepcopy(model.get("execution_estimates", {}))
         # Missing service facts are kept unknown. No inferred paid fallback or
         # fabricated job capacity converts this into READY_FOR_APPROVAL.
         return result

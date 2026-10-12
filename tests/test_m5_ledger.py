@@ -105,7 +105,7 @@ def experiment(
 def _submit(experiment: Any) -> dict[str, Any]:
     plan, paths, ledger, adapter = experiment
     return ledger.submit_next(
-        plan, synthetic_approval(plan), synthetic_preflight(), adapter, paths, now=NOW
+        plan, synthetic_approval(plan), synthetic_preflight(plan), adapter, paths, now=NOW
     )
 
 
@@ -145,7 +145,7 @@ def test_accepted_then_timeout_remains_reserved_and_resume_never_resubmits(exper
     assert resumed.collect(plan, adapter)["status"] == "SUBMISSION_UNKNOWN"
     with pytest.raises(SafetyError, match="Prior job"):
         resumed.submit_next(
-            plan, synthetic_approval(plan), synthetic_preflight(), adapter, paths, now=NOW
+            plan, synthetic_approval(plan), synthetic_preflight(plan), adapter, paths, now=NOW
         )
     assert len(adapter.calls) == 1
     assert resumed.snapshot()["reserved_qpu_seconds"] == 40
@@ -217,7 +217,7 @@ def test_unapproved_plan_stops_before_loading_credentials_or_reserving(experimen
     request = synthetic_approval(plan)
     request["approved"] = False
     with pytest.raises(SafetyError, match="explicit approval"):
-        ledger.submit_next(plan, request, synthetic_preflight(), adapter, paths, now=NOW)
+        ledger.submit_next(plan, request, synthetic_preflight(plan), adapter, paths, now=NOW)
     assert ledger.snapshot()["reserved_qpu_seconds"] == 0
     assert not adapter.calls
 

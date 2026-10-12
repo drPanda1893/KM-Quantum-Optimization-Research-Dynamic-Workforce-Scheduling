@@ -93,7 +93,12 @@ def _runtime_settings(evidence: dict[str, Any] | None) -> tuple[dict[str, Any], 
 
 
 def make_plan(
-    prepared: dict[str, Any], config: M5Config, provider_evidence: dict[str, Any] | None = None
+    prepared: dict[str, Any],
+    config: M5Config,
+    provider_evidence: dict[str, Any] | None = None,
+    *,
+    usage_model: dict[str, Any] | None = None,
+    provider_limit_assessment: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build a deterministic unapproved plan without accessing any provider.
 
@@ -238,7 +243,12 @@ def make_plan(
     if real:
         assert provider_evidence is not None
         for job in jobs:
-            estimate = provider_evidence.get("execution_estimates", {}).get(job["id"], {})
+            estimates = (
+                usage_model.get("execution_estimates", {})
+                if usage_model is not None
+                else provider_evidence.get("execution_estimates", {})
+            )
+            estimate = estimates.get(job["id"], {})
             job.update(
                 estimated_qpu_seconds=estimate.get("seconds"),
                 estimate_source=estimate.get("source"),
@@ -282,20 +292,45 @@ def make_plan(
         "submission_approved": False,
         "hardware_used": False,
     }
-    validate_plan(result, require_hardware=real)
+    if real:
+        # Numerical models and concrete QPY service-limit assessments are part
+        # of the unsigned plan hash. They cannot be replaced by legacy limits
+        # or an unbound manual seconds value.
+        if usage_model is not None:
+            result["local_usage_model"] = copy.deepcopy(usage_model)
+            result["usage_model_sha256"] = usage_model.get("model_sha256")
+        if provider_limit_assessment is not None:
+            result["provider_limit_assessment"] = copy.deepcopy(provider_limit_assessment)
+            result["provider_limit_assessment_sha256"] = provider_limit_assessment.get(
+                "content_sha256"
+            )
+    # Validate study structure before potentially missing concrete contracts
+    # are converted into an explicitly unapprovable diagnostic draft.
+    validate_plan(result, require_hardware=False)
     if real:
         assert provider_evidence is not None
+        contract_evidence = copy.deepcopy(provider_evidence)
+        if usage_model is not None:
+            # These are explicitly local calculations, not new provider facts.
+            # Live binding/usage timestamps and service observations stay intact.
+            contract_evidence["local_usage_model"] = copy.deepcopy(usage_model)
+            contract_evidence["execution_estimates"] = copy.deepcopy(
+                usage_model.get("execution_estimates", {})
+            )
         try:
-            validate_preflight(provider_evidence, result)
+            validate_preflight(contract_evidence, result)
         except SafetyError as error:
             # Preflight must first learn the concrete PUB order before external
             # usage estimates can be bound. This draft is explicitly unapprovable.
             result.update(
                 artifact_type="m5_hardware_execution_draft",
-                status="OWNER_CONFIGURATION_REQUIRED",
+                status="BLOCKED",
                 provider_verified=False,
                 readiness_diagnostic=str(error),
+                diagnostic_kind=getattr(error, "diagnostic_kind", "PROVIDER_CONTRACT_ERROR"),
             )
             validate_plan(result, require_hardware=False)
+        else:
+            validate_plan(result)
     result["plan_hash"] = plan_hash(result)
     return result

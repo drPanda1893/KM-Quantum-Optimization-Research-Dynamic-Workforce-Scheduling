@@ -95,6 +95,22 @@ def validate_plan(plan: Mapping[str, Any], *, require_hardware: bool = True) -> 
             shot_sum += shots
     if len(set(pub_ids)) != 52 or shot_sum != 49664:
         raise SafetyError("Total PUB IDs or shots differ from the frozen study")
+    if require_hardware:
+        from km_quantum.m5.provider_limits import (
+            LimitContractError,
+            service_limit_policy,
+            validate_limit_assessment,
+        )
+        from km_quantum.m5.usage import validate_usage_model
+
+        try:
+            validate_limit_assessment(plan, service_limit_policy())
+            validate_usage_model(plan.get("local_usage_model", {}), plan)
+        except (LimitContractError, KeyError, TypeError, ValueError) as error:
+            raise SafetyError(
+                f"Concrete execution contracts are invalid: {error}",
+                diagnostic_kind="PROVIDER_CONTRACT_ERROR",
+            ) from None
 
 
 def approval_request(plan: Mapping[str, Any], expires_at: str) -> dict[str, Any]:

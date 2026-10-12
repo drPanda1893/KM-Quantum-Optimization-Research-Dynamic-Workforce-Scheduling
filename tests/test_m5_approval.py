@@ -4,6 +4,7 @@ import copy
 from typing import Any
 
 import pytest
+from m5_contract_helpers import attach_execution_contracts, modern_evidence
 
 from km_quantum.m5.approvals import (
     approval_request,
@@ -39,57 +40,62 @@ def synthetic_plan(circuit_hash: str = "a" * 64) -> dict[str, Any]:
                 ],
             }
         )
-    return {
-        "schema_version": 1,
-        "artifact_type": "m5_hardware_execution_plan",
-        "provider_verified": True,
-        "source_kind": "ibm_hardware",
-        "hardware_enabled": False,
-        "submission_approved": False,
-        "backend": "synthetic-contract-only",
-        "instance_binding": "b" * 64,
-        "layout": [9, 3, 6],
-        "circuits": circuits,
-        "jobs": jobs,
-        "budget": {
-            "max_provider_jobs": 3,
-            "max_total_shots": 49664,
-            "max_qpu_seconds_per_job": 40,
-            "max_total_qpu_seconds": 120,
-            "max_cost_eur": 0,
-        },
-        "runtime_options": safe_runtime_options(),
-    }
+    return attach_execution_contracts(
+        {
+            "schema_version": 1,
+            "artifact_type": "m5_hardware_execution_plan",
+            "provider_verified": True,
+            "source_kind": "ibm_hardware",
+            "hardware_enabled": False,
+            "submission_approved": False,
+            "backend": "synthetic-contract-only",
+            "instance_binding": "b" * 64,
+            "layout": [9, 3, 6],
+            "circuits": circuits,
+            "jobs": jobs,
+            "budget": {
+                "max_provider_jobs": 3,
+                "max_total_shots": 49664,
+                "max_qpu_seconds_per_job": 40,
+                "max_total_qpu_seconds": 120,
+                "max_cost_eur": 0,
+            },
+            "runtime_options": safe_runtime_options(),
+        }
+    )
 
 
-def synthetic_preflight() -> dict[str, Any]:
-    return {
-        "status": "PROVIDER_PREFLIGHT_READY",
-        "provider_verified": True,
-        "source_kind": "ibm_hardware",
-        "backend": "synthetic-contract-only",
-        "instance_binding": "b" * 64,
-        "plan": "open",
-        "pricing_type": "free",
-        "cost_eur": 0,
-        "operational": True,
-        "simulator": False,
-        "fake": False,
-        "runtime_version": "0.47.0",
-        "single_job_contract": True,
-        "obtained_at": NOW,
-        "usage": {
-            "remaining_seconds": 120,
-            "consumed_seconds": 0,
-            "limit_seconds": 120,
-            "observed_at": NOW,
+def synthetic_preflight(plan: dict[str, Any] | None = None) -> dict[str, Any]:
+    return modern_evidence(
+        {
+            "status": "PROVIDER_PREFLIGHT_READY",
+            "provider_verified": True,
+            "source_kind": "ibm_hardware",
+            "backend": "synthetic-contract-only",
+            "instance_binding": "b" * 64,
+            "plan": "open",
+            "pricing_type": "free",
+            "cost_eur": 0,
+            "operational": True,
+            "simulator": False,
+            "fake": False,
+            "runtime_version": "0.47.0",
+            "single_job_contract": True,
+            "obtained_at": NOW,
+            "usage": {
+                "remaining_seconds": 120,
+                "consumed_seconds": 0,
+                "limit_seconds": 120,
+                "observed_at": NOW,
+            },
+            "limits": {"max_shots": 1024, "max_jobs": 3, "max_pubs": 24},
+            "execution_estimates": {
+                f"job-{index}": {"seconds": 20.0, "source": "synthetic test estimate"}
+                for index in range(3)
+            },
         },
-        "limits": {"max_shots": 1024, "max_jobs": 3, "max_pubs": 24},
-        "execution_estimates": {
-            f"job-{index}": {"seconds": 20.0, "source": "synthetic test estimate"}
-            for index in range(3)
-        },
-    }
+        plan if plan is not None else synthetic_plan(),
+    )
 
 
 def synthetic_approval(plan: dict[str, Any]) -> dict[str, Any]:
@@ -187,7 +193,7 @@ def test_unknown_quota_limits_estimates_and_stale_facts_block(missing: str) -> N
     elif missing == "usage":
         evidence["usage"]["consumed_seconds"] = None
     elif missing == "jobs":
-        evidence["limits"]["max_jobs"] = None
+        evidence["pending_jobs"]["complete"] = False
     elif missing == "estimate":
         evidence["execution_estimates"].pop("job-1")
     elif missing == "estimate_cap":

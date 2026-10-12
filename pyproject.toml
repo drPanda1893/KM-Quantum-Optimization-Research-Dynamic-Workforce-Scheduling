@@ -29,6 +29,9 @@ km-quantum = "km_quantum.__main__:main"
 [tool.hatch.build.targets.wheel]
 packages = ["src/km_quantum"]
 
+[tool.hatch.build.targets.sdist]
+exclude = ["/.m5-local", "/results"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"

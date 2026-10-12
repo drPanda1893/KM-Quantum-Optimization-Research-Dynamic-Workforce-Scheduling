@@ -11,7 +11,7 @@ from typing import Any
 
 import pytest
 from test_m5_approval import synthetic_approval, synthetic_plan
-from test_m5_planning import prepared_fixture, provider_fixture
+from test_m5_planning import concrete_test_plan, prepared_fixture, provider_fixture
 
 from km_quantum.m5 import cli
 from km_quantum.m5.approvals import approval_request
@@ -102,7 +102,9 @@ def test_same_verified_hardware_plan_command_resumes_without_state_rewind(
     for record in prepared["records"]:
         record["device_noise_status"] = "READY"
     evidence = provider_fixture()
+    concrete = concrete_test_plan(prepared, evidence)
     atomic_json(output / "provider_preflight.json", evidence)
+    atomic_json(output / "provider_execution_draft.json", concrete)
     monkeypatch.setattr(cli, "load_prepared", lambda root, output: copy.deepcopy(prepared))
     monkeypatch.setattr(cli, "verify_local", lambda root, output: {"status": "PASS"})
     monkeypatch.setattr(cli, "read_sealed", lambda path: {"calibration_timestamp": utc_now()})
@@ -132,7 +134,7 @@ def test_valid_human_contract_with_invalid_execution_state_refuses_before_provid
     output = tmp_path / "results/m5-integration"
     prepared = prepared_fixture()
     prepared["source_kind"] = "provider"
-    plan = make_plan(prepared, M5Config(), provider_fixture())
+    plan = concrete_test_plan(prepared, provider_fixture())
     now = datetime.now(UTC)
     approval = approval_request(plan, (now + timedelta(hours=1)).isoformat())
     approval.update(approved=True, signed_by="Florian", signed_at=now.isoformat())
@@ -151,7 +153,7 @@ def test_valid_human_contract_with_invalid_execution_state_refuses_before_provid
     assert not (output / "jobs/ledger.json").exists()
 
 
-def test_real_missing_estimates_are_owner_required_in_public_plan_output(
+def test_real_missing_contracts_are_implementation_blocker_in_public_plan_output(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     output = tmp_path / "results/m5-integration"
@@ -167,8 +169,33 @@ def test_real_missing_estimates_are_owner_required_in_public_plan_output(
     monkeypatch.setattr(cli, "read_sealed", lambda path: {"calibration_timestamp": utc_now()})
     calls = _deny_provider(monkeypatch)
     result, code = cli.execute_m5(_arguments(tmp_path, "plan"))
-    assert code == 1 and result["status"] == "OWNER_CONFIGURATION_REQUIRED"
+    assert code == 1 and result["status"] == "BLOCKED"
+    assert result["diagnostic_kind"] == "PROVIDER_CONTRACT_ERROR"
     plan = json.loads((output / "execution_plan.json").read_text(encoding="utf-8"))
     assert plan["provider_verified"] is False
     assert plan["hardware_enabled"] is False and plan["submission_approved"] is False
+    assert not calls
+
+
+def test_cached_ready_plan_cannot_hide_a_new_blocked_preflight(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    output = tmp_path / "results/m5-integration"
+    prepared = prepared_fixture()
+    prepared["source_kind"] = "provider"
+    for record in prepared["records"]:
+        record["device_noise_status"] = "READY"
+    evidence = provider_fixture()
+    plan = concrete_test_plan(prepared, evidence)
+    atomic_json(output / "provider_execution_draft.json", plan)
+    evidence.update(status="BLOCKED", diagnostic_kind="USAGE_LIMIT_EXCEEDED")
+    atomic_json(output / "provider_preflight.json", evidence)
+    monkeypatch.setattr(cli, "load_prepared", lambda root, output: copy.deepcopy(prepared))
+    monkeypatch.setattr(cli, "verify_local", lambda root, output: {"status": "PASS"})
+    monkeypatch.setattr(cli, "read_sealed", lambda path: {"calibration_timestamp": utc_now()})
+    calls = _deny_provider(monkeypatch)
+    result, code = cli.execute_m5(_arguments(tmp_path, "plan"))
+    assert code == 1 and result["status"] == "BLOCKED"
+    assert result["diagnostic_kind"] == "USAGE_LIMIT_EXCEEDED"
+    assert not (output / "approval_request.json").exists()
     assert not calls

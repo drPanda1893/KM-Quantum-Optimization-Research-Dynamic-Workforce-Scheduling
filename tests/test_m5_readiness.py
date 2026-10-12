@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from m5_contract_helpers import attach_execution_contracts
 
 from km_quantum.m4.io import canonical_hash, lf_file_hash, read_json
 from km_quantum.m5 import readiness
@@ -178,6 +179,8 @@ def _fixture(
             for record in records
         },
     }
+    if provider:
+        attach_execution_contracts(plan)
     plan["plan_hash"] = plan_hash(plan)
     atomic_json(output / "execution_plan.json", plan)
     return output, plan

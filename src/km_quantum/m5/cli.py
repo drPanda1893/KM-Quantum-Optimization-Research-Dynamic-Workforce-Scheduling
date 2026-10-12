@@ -21,6 +21,7 @@ from km_quantum.m5.provider import (
     preflight,
     redact,
 )
+from km_quantum.m5.snapshots import load_qpy, snapshot_backend
 from km_quantum.m5.state import transition
 from km_quantum.m5.workflow import (
     artifact_path,
@@ -59,7 +60,10 @@ def add_m5_parser(commands: Any) -> None:
         if name == "provider-preflight":
             command.add_argument(
                 "--usage-estimates",
-                help="Reviewed provider QPU estimates for the three fixed job IDs",
+                help=(
+                    "Optional external estimates for audit; "
+                    "the bound local model controls readiness"
+                ),
             )
         if name == "submit-next":
             command.add_argument("--approval", required=True)
@@ -129,9 +133,46 @@ def _make_plan(root: Path, output: Path) -> dict[str, Any]:
         snapshot = read_sealed(output / "target_snapshot.json")
         if not snapshot.get("calibration_timestamp"):
             raise SafetyError("Concrete calibration timestamp is required for a hardware plan")
-    evidence_path = output / "provider_preflight.json"
+    evidence_path = output / (
+        "provider_account_preflight.json"
+        if prepared["source_kind"] == "provider"
+        and (output / "provider_account_preflight.json").exists()
+        else "provider_preflight.json"
+    )
     evidence = read_json(evidence_path) if evidence_path.exists() else None
-    plan = make_plan(prepared, M5Config(), provider_evidence=evidence)
+    usage_path = output / "local_usage_model.json"
+    assessment_path = output / "provider_limit_assessment.json"
+    if (
+        prepared["source_kind"] == "provider"
+        and (output / "provider_execution_draft.json").exists()
+    ):
+        plan = read_json(output / "provider_execution_draft.json")
+        # This freezes the exact already assessed artifact. Provider freshness
+        # is checked during preflight; opening a blocked draft cannot approve it.
+        validate_plan(plan, require_hardware=plan.get("provider_verified") is True)
+        verify_plan_inventory_binding(plan, prepared)
+        if plan.get("provider_verified") is True:
+            final_evidence = read_json(output / "provider_preflight.json")
+            if final_evidence.get("status") != "PROVIDER_PREFLIGHT_READY":
+                raise SafetyError(
+                    "Latest hardware preflight is blocked; the cached draft cannot report READY",
+                    diagnostic_kind=final_evidence.get(
+                        "diagnostic_kind", "PROVIDER_CONTRACT_ERROR"
+                    ),
+                )
+            from km_quantum.m5.provider import validate_preflight
+
+            validate_preflight(final_evidence, plan)
+    else:
+        plan = make_plan(
+            prepared,
+            M5Config(),
+            provider_evidence=evidence,
+            usage_model=read_json(usage_path) if usage_path.exists() else None,
+            provider_limit_assessment=read_json(assessment_path)
+            if assessment_path.exists()
+            else None,
+        )
     atomic_json(output / "execution_plan.json", plan, immutable=True)
     request_path = output / "approval_request.json"
     if request_path.exists():
@@ -186,9 +227,9 @@ def _make_plan(root: Path, output: Path) -> dict[str, Any]:
         "status": status,
         "plan_hash": plan_hash(plan),
         "hardware_used": False,
-        "provider_configuration_status": "VERIFIED"
-        if plan["provider_verified"]
-        else "OWNER_CONFIGURATION_REQUIRED",
+        "provider_configuration_status": "VERIFIED" if plan["provider_verified"] else "BLOCKED",
+        "diagnostic_kind": plan.get("diagnostic_kind"),
+        "readiness_diagnostic": plan.get("readiness_diagnostic"),
         "planned_jobs": 3,
         "planned_pubs": 52,
         "planned_shots": 49664,
@@ -204,37 +245,100 @@ def _provider_preflight(args: argparse.Namespace, root: Path, output: Path) -> d
     config = _config(args)
     adapter = IBMRuntimeAdapter(config)
     evidence = preflight(config, adapter)
+    args._m5_redaction_secrets = adapter._secret_values()
+    # The optional old input remains recorded as externally supplied information;
+    # bare seconds cannot override the automatically bound numerical model.
     if args.usage_estimates:
-        estimates = read_json(args.usage_estimates)
-        if set(estimates) != {"smoke", "main-block-1", "main-block-2"}:
-            raise SafetyError("QPU estimates must cover exactly the three frozen job IDs")
-        evidence["execution_estimates"] = estimates
+        evidence["external_estimates_not_used_for_approval"] = redact(
+            read_json(args.usage_estimates), secrets=args._m5_redaction_secrets
+        )
     atomic_json(output / "provider_preflight.json", evidence)
     if evidence["status"] != "PROVIDER_PREFLIGHT_READY":
         return evidence
     backend = adapter.backend_for_snapshot()
     subset = select_physical_subset(backend.target)
-    local_result = prepare(
-        root,
-        output,
-        backend=backend,
-        physical_subset=subset,
-        calibration_timestamp=evidence.get("calibration_timestamp"),
-    )
+    try:
+        local_result = prepare(
+            root,
+            output,
+            backend=backend,
+            physical_subset=subset,
+            calibration_timestamp=evidence.get("calibration_timestamp"),
+        )
+    except Exception as error:
+        evidence.update(
+            status="BLOCKED",
+            diagnostic_kind="LOCAL_CHANNEL_OR_SIMULATION_ERROR",
+            local_preparation_status="BLOCKED",
+            diagnostic=redact(str(error), secrets=adapter._secret_values()),
+        )
+        atomic_json(output / "provider_preflight.json", evidence)
+        return evidence
     if local_result["status"] == "BLOCKED" or not evidence.get("calibration_timestamp"):
         evidence.update(
             status="BLOCKED",
             local_preparation_status=local_result["status"],
             readiness_diagnostic="Required device calibration or timestamp is missing",
+            diagnostic_kind="MISSING_REAL_CALIBRATION",
         )
         atomic_json(output / "provider_preflight.json", evidence)
         return evidence
-    # Build a draft to estimate bounded gate/measurement execution + rep delay.
-    # Unknown server overhead/job capacity remains a blocking provider fact.
+    # Preparation may take longer than the five-minute live-account window.
+    # Read again; historical target retrieval/calibration timestamps stay intact.
+    evidence = preflight(config, adapter)
+    atomic_json(output / "provider_account_preflight.json", evidence)
+    if evidence["status"] != "PROVIDER_PREFLIGHT_READY":
+        evidence["local_preparation_status"] = local_result["status"]
+        atomic_json(output / "provider_preflight.json", evidence)
+        return evidence
     from km_quantum.m5.planning import make_plan
+    from km_quantum.m5.provider_limits import assess_plan_limits
+    from km_quantum.m5.usage import estimate_plan_usage
 
-    plan = make_plan(load_prepared(root, output), M5Config(), provider_evidence=evidence)
+    prepared = load_prepared(root, output)
+    snapshot = read_sealed(output / "target_snapshot.json")
+    current_snapshot = snapshot_backend(backend, subset)
+    if any(
+        current_snapshot[key] != snapshot[key]
+        for key in ("instructions", "qubits", "physical_subset", "backend_name", "backend_width")
+    ):
+        raise SafetyError(
+            "Actual Target differs from the frozen calibration snapshot; use a new output",
+            diagnostic_kind="MISSING_REAL_CALIBRATION",
+        )
+    draft = make_plan(prepared, M5Config(), provider_evidence=evidence)
+    circuits = {
+        identity: load_qpy(
+            artifact_path(root, record["path"], output),
+            expected_sha256=record["qpy_sha256"],
+        )
+        for identity, record in draft["circuits"].items()
+    }
+    hashes = {identity: record["qpy_sha256"] for identity, record in draft["circuits"].items()}
+    assessment = assess_plan_limits(draft, circuits, qpy_hashes=hashes)
+    usage_model = estimate_plan_usage(
+        draft,
+        circuits,
+        backend.target,
+        rep_delay=evidence.get("rep_delay"),
+        target_snapshot_sha256=prepared["target_snapshot_sha256"],
+        qpy_hashes=hashes,
+    )
+    atomic_json(output / "provider_limit_assessment.json", assessment, immutable=True)
+    atomic_json(output / "local_usage_model.json", usage_model, immutable=True)
+    plan = make_plan(
+        prepared,
+        M5Config(),
+        provider_evidence=evidence,
+        usage_model=usage_model,
+        provider_limit_assessment=assessment,
+    )
+    atomic_json(output / "provider_execution_draft.json", plan, immutable=True)
     evidence = preflight(config, adapter, plan=plan)
+    evidence["local_preparation_status"] = local_result["status"]
+    evidence["plan_hash"] = plan_hash(plan)
+    evidence["usage_model_sha256"] = usage_model["model_sha256"]
+    evidence["provider_limit_assessment_sha256"] = assessment["content_sha256"]
     atomic_json(output / "provider_preflight.json", evidence)
     return evidence
 
@@ -442,7 +546,9 @@ def execute_m5(args: argparse.Namespace) -> tuple[dict[str, Any], int]:
         result = {
             "status": "OWNER_CONFIGURATION_REQUIRED"
             if args.m5_command == "provider-preflight"
+            and getattr(exc, "diagnostic_kind", "") == "OWNER_CONFIGURATION_REQUIRED"
             else "BLOCKED",
+            "diagnostic_kind": getattr(exc, "diagnostic_kind", "LOCAL_IMPLEMENTATION_ERROR"),
             "hardware_used": False,
             "error": redact(str(exc), secrets=secrets),
         }

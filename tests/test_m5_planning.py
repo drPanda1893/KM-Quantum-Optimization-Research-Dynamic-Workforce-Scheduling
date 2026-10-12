@@ -4,6 +4,7 @@ import copy
 from typing import Any
 
 import pytest
+from m5_contract_helpers import attach_execution_contracts, modern_evidence
 
 from km_quantum.m5.approvals import approval_request, plan_hash, validate_approval
 from km_quantum.m5.models import M5Config
@@ -81,38 +82,53 @@ def prepared_fixture() -> dict[str, Any]:
 
 def provider_fixture() -> dict[str, Any]:
     now = utc_now()
-    return {
-        "provider_verified": True,
-        "source_kind": "ibm_hardware",
-        "backend": "offline-synthetic-target",
-        "instance_binding": "b" * 64,
-        "plan": "open",
-        "pricing_type": "free",
-        "cost_eur": 0,
-        "operational": True,
-        "simulator": False,
-        "fake": False,
-        "runtime_version": "0.47.0",
-        "single_job_contract": True,
-        "obtained_at": now,
-        "usage": {
-            "remaining_seconds": 120,
-            "consumed_seconds": 0,
-            "limit_seconds": 120,
-            "observed_at": now,
-        },
-        "limits": {"max_shots": 1024, "max_jobs": 3, "max_pubs": 24},
-        "execution_estimates": {
-            identity: {"seconds": 20, "source": "documented synthetic unit-test estimate"}
-            for identity in ("smoke", "main-block-1", "main-block-2")
-        },
-        "rep_delay": {
-            "supported": True,
-            "value": 0.00025,
-            "range": [0, 0.001],
-            "source": "Synthetic explicit backend default",
-        },
-    }
+    return modern_evidence(
+        {
+            "provider_verified": True,
+            "source_kind": "ibm_hardware",
+            "backend": "offline-synthetic-target",
+            "instance_binding": "b" * 64,
+            "plan": "open",
+            "pricing_type": "free",
+            "cost_eur": 0,
+            "operational": True,
+            "simulator": False,
+            "fake": False,
+            "runtime_version": "0.47.0",
+            "single_job_contract": True,
+            "obtained_at": now,
+            "usage": {
+                "remaining_seconds": 120,
+                "consumed_seconds": 0,
+                "limit_seconds": 120,
+                "observed_at": now,
+            },
+            "limits": {"max_shots": 1024, "max_jobs": 3, "max_pubs": 24},
+            "execution_estimates": {
+                identity: {"seconds": 20, "source": "documented synthetic unit-test estimate"}
+                for identity in ("smoke", "main-block-1", "main-block-2")
+            },
+            "rep_delay": {
+                "supported": True,
+                "value": 0.00025,
+                "range": [0, 0.001],
+                "source": "Synthetic explicit backend default",
+            },
+        }
+    )
+
+
+def concrete_test_plan(prepared: dict[str, Any], evidence: dict[str, Any]) -> dict[str, Any]:
+    draft = make_plan(prepared, M5Config(), evidence)
+    attach_execution_contracts(draft)
+    modern_evidence(evidence, draft)
+    return make_plan(
+        prepared,
+        M5Config(),
+        evidence,
+        usage_model=draft["local_usage_model"],
+        provider_limit_assessment=draft["provider_limit_assessment"],
+    )
 
 
 def test_offline_plan_exact_budget_false_flags_and_immutable_sources() -> None:
@@ -169,7 +185,7 @@ def test_real_plan_requires_fresh_complete_verified_evidence_and_remains_unsigne
     prepared = prepared_fixture()
     prepared["source_kind"] = "provider"
     evidence = provider_fixture()
-    plan = make_plan(prepared, M5Config(), evidence)
+    plan = concrete_test_plan(prepared, evidence)
     assert plan["artifact_type"] == "m5_hardware_execution_plan"
     assert plan["status"] == "READY_FOR_APPROVAL"
     assert plan["provider_verified"] is True
@@ -177,7 +193,11 @@ def test_real_plan_requires_fresh_complete_verified_evidence_and_remains_unsigne
     assert plan["hardware_enabled"] is False and plan["submission_approved"] is False
     assert plan["instance_binding"] == evidence["instance_binding"]
     assert plan["runtime_options"]["execution"]["rep_delay"] == 0.00025
-    assert all(job["estimated_qpu_seconds"] == 20 for job in plan["jobs"])
+    assert all(
+        job["estimated_qpu_seconds"]
+        == plan["local_usage_model"]["execution_estimates"][job["id"]]["seconds"]
+        for job in plan["jobs"]
+    )
     assert "expires_at" not in plan
 
 
@@ -200,7 +220,7 @@ def test_real_plan_unknown_or_changed_provider_facts_block(change: str) -> None:
         evidence["backend"] = "another-backend"
     if change in {"estimate", "quota"}:
         plan = make_plan(prepared, M5Config(), evidence)
-        assert plan["status"] == "OWNER_CONFIGURATION_REQUIRED"
+        assert plan["status"] == "BLOCKED"
         assert plan["provider_verified"] is False
         request = approval_request(plan, "2099-01-01T00:00:00+00:00")
         request.update(approved=True, signed_by="Florian", signed_at=utc_now())
@@ -273,3 +293,23 @@ def test_changed_bound_source_or_qpy_hash_changes_plan_hash() -> None:
     assert original["plan_hash"] != changed["plan_hash"]
     prepared["source_context_sha256"] = "d" * 64
     assert make_plan(prepared, M5Config())["plan_hash"] != changed["plan_hash"]
+
+
+def test_local_model_is_bound_without_relabeling_it_as_a_provider_quote() -> None:
+    prepared = prepared_fixture()
+    prepared["source_kind"] = "provider"
+    evidence = provider_fixture()
+    before = copy.deepcopy(evidence)
+    draft = make_plan(prepared, M5Config(), evidence)
+    attach_execution_contracts(draft)
+    plan = make_plan(
+        prepared,
+        M5Config(),
+        evidence,
+        usage_model=draft["local_usage_model"],
+        provider_limit_assessment=draft["provider_limit_assessment"],
+    )
+    assert evidence == before
+    assert plan["status"] == "READY_FOR_APPROVAL"
+    assert plan["local_usage_model"]["is_provider_quote"] is False
+    assert "local_usage_model" not in evidence
