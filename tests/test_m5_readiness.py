@@ -319,6 +319,8 @@ def test_complete_mock_data_never_pass_hardware(
     assert result["status"] == "OFFLINE_READY"
     assert result["hardware_execution_status"] == "TEST_DATA_ONLY"
     assert result["test_data_pubs"] == 52 and result["completed_real_pubs"] == 0
+    assert result["completed_provider_jobs"] == result["submitted_provider_jobs"] == 0
+    assert result["submitted_pubs"] == 0 and result["completed_test_jobs"] == 3
     assert not result["raw_results_complete"] and not result["hardware_used"]
     assert result["analysis_status"] == "TEST_DATA_ONLY"
 

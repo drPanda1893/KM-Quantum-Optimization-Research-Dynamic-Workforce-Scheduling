@@ -143,8 +143,14 @@ def prepare(
     config = config or M5Config()
     if (destination / "prepared_manifest.json").exists():
         checked = verify_local(root, destination)
+        inventory = load_prepared(root, destination)
+        blocked = any(row["device_noise_status"] == "BLOCKED" for row in inventory["records"])
         return {
-            "status": "OFFLINE_READY" if checked["source_kind"] != "provider" else "LOCAL_READY",
+            "status": "BLOCKED"
+            if blocked
+            else "OFFLINE_READY"
+            if checked["source_kind"] != "provider"
+            else "LOCAL_READY",
             "resumed": True,
             "hardware_used": False,
             "prepared_manifest_sha256": load_prepared(root, destination)["content_sha256"],
@@ -309,7 +315,11 @@ def prepare(
         (destination / name).mkdir(exist_ok=True)
     checked = verify_local(root, destination)
     return {
-        "status": "OFFLINE_READY" if snapshot["source"] != "provider" else "LOCAL_READY",
+        "status": "BLOCKED"
+        if any(row["device_noise_status"] == "BLOCKED" for row in records)
+        else "OFFLINE_READY"
+        if snapshot["source"] != "provider"
+        else "LOCAL_READY",
         "resumed": False,
         "hardware_used": False,
         "circuit_count": len(records),

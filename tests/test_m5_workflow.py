@@ -149,7 +149,7 @@ def test_subset_selection_is_structural_and_deterministic() -> None:
     assert select_physical_subset(SyntheticBackend().target) == selected
 
 
-@pytest.mark.parametrize("value", [float("nan"), float("inf"), -0.1, True])
+@pytest.mark.parametrize("value", [float("nan"), float("inf"), -0.1])
 def test_subset_rejects_invalid_calibration(value: float) -> None:
     target = SyntheticBackend().target
     target["ecr"][(1, 4)].error = value

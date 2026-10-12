@@ -331,7 +331,11 @@ def build_acceptance(
     if jobs and not approved:
         approval_status = "INVALID_OR_MISSING_EVIDENCE"
     complete_jobs = sum(
-        job.get("status") == "COLLECTED" and job.get("contract_verified") is True for job in jobs
+        job.get("status") == "COLLECTED"
+        and job.get("contract_verified") is True
+        and job.get("source_kind") == "ibm_hardware"
+        and job.get("hardware_used") is True
+        for job in jobs
     )
     complete_real = len(pubs) == len(real_ids) == 52 and complete_jobs == 3
     hardware_used = bool(real_ids)
@@ -453,15 +457,25 @@ def build_acceptance(
         ),
         "approval_status": approval_status,
         "planned_provider_jobs": len(planned_jobs),
-        "submitted_provider_jobs": sum(bool(job.get("provider_job_id")) for job in jobs),
+        "submitted_provider_jobs": sum(
+            bool(job.get("provider_job_id")) and job.get("source_kind") == "ibm_hardware"
+            for job in jobs
+        ),
         "completed_provider_jobs": complete_jobs,
+        "completed_test_jobs": sum(
+            job.get("status") == "COLLECTED" and job.get("source_kind") == "mock" for job in jobs
+        ),
         "missing_provider_jobs": len(planned_jobs) - complete_jobs,
         "planned_pubs": len(pubs),
         "planned_main_pubs": sum(len(job["pubs"]) for job in planned_jobs if job["kind"] == "main"),
         "planned_smoke_pubs": sum(
             len(job["pubs"]) for job in planned_jobs if job["kind"] == "smoke"
         ),
-        "submitted_pubs": sum(len(job["pubs"]) for job in jobs if job.get("provider_job_id")),
+        "submitted_pubs": sum(
+            len(job["pubs"])
+            for job in jobs
+            if job.get("provider_job_id") and job.get("source_kind") == "ibm_hardware"
+        ),
         "completed_real_pubs": len(real_ids),
         "test_data_pubs": len(all_ids - real_ids),
         "missing_pubs": len(pubs) - len(real_ids),

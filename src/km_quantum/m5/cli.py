@@ -214,13 +214,21 @@ def _provider_preflight(args: argparse.Namespace, root: Path, output: Path) -> d
         return evidence
     backend = adapter.backend_for_snapshot()
     subset = select_physical_subset(backend.target)
-    prepare(
+    local_result = prepare(
         root,
         output,
         backend=backend,
         physical_subset=subset,
         calibration_timestamp=evidence.get("calibration_timestamp"),
     )
+    if local_result["status"] == "BLOCKED" or not evidence.get("calibration_timestamp"):
+        evidence.update(
+            status="BLOCKED",
+            local_preparation_status=local_result["status"],
+            readiness_diagnostic="Required device calibration or timestamp is missing",
+        )
+        atomic_json(output / "provider_preflight.json", evidence)
+        return evidence
     # Build a draft to estimate bounded gate/measurement execution + rep delay.
     # Unknown server overhead/job capacity remains a blocking provider fact.
     from km_quantum.m5.planning import make_plan
@@ -400,7 +408,7 @@ def execute_m5(args: argparse.Namespace) -> tuple[dict[str, Any], int]:
             result = prepare(root, output, config)
             transition(
                 output / "state.json",
-                "OFFLINE_READY",
+                "BLOCKED" if result["status"] == "BLOCKED" else "OFFLINE_READY",
                 reason="Offline preparation and equivalence passed",
             )
         elif args.m5_command == "verify-local":
