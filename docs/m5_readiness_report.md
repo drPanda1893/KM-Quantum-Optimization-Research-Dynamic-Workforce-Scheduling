@@ -18,8 +18,9 @@ keine QPU-Einreichung, keine kostenpflichtige Instanz, kein Upgrade und keine me
   Nur README, pyproject, uv.lock und CLI-Einstieg wurden zur Integration geändert.
   Es gibt keine CRLF/LF-Ausnahmen im finalen Integritätsbefund; Binärdateien werden nicht normalisiert.
 - Die 40 ursprünglichen Paketversionen sind unverändert; 22 Pakete wurden mit Runtime `0.47.0` ergänzt.
-- Code, Artefakte und Bericht werden lokal in thematischen Commits archiviert. **Kein M5-Push oder Merge.**
-  Der Archiv-Commit liegt nach dem oben genannten Quellstand; `git log` und der Abschluss nennen ihn.
+- Code, Artefakte und Bericht sind in thematischen Commits archiviert. Der M5-Branch wurde am
+  12. Oktober 2026 zu `origin` gepusht; der veröffentlichte Artefaktstand ist
+  `605585be9012a511e3bff2ff1c5dc3c27f0ab3a2`. Es wurde kein Merge und kein QPU-Job ausgeführt.
 
 Die vier bekannten Fälle A/E/H/K bilden eine Diagnosesuite. K bleibt trotz seiner bekannten Schwäche
 enthalten. Die 16 QAOA-Schaltungen verwenden ausschließlich gespeicherte M4-Winkel für Standard/Warm
