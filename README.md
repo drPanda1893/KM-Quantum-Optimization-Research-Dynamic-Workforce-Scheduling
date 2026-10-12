@@ -30,7 +30,7 @@ A negative result is a valid research result. A useful KM³ optimization product
 
 ## Status
 
-**M3 — Ideal QAOA**
+**M4 — Controlled Noise + Warm-Start QAOA**
 
 Implemented: validated fixed-slot scheduling models, deterministic synthetic
 instances, independent feasibility validator and objective evaluator, OR-Tools
@@ -52,6 +52,16 @@ ground probability above uniform in 577 runs; 83 remain below it. The bounded
 slack case stays below uniform at every tested depth. See the
 [M3 completion report](docs/m3_completion_report.md) for complete restart,
 sampling, depth and structural results.
+M4 completes a prespecified local study on six known diagnostics and six new
+small evaluations: 240 ideal trainings and 1,200 frozen-parameter noise
+evaluations, with 1,094 passing tests. Its four separate probabilities distinguish
+QUBO ground states, encoding feasibility, decoded scheduling feasibility and
+decoded optimal schedules. The historical 2,107 protected files remain byte
+identical. The positive new-instance warm-minus-standard means are concentrated
+in a simple case; the median instance differences are +0.15 percentage points
+at p=1 and -0.38 at p=2. This is descriptive evidence, with no broad warm-start
+or quantum-advantage claim. See the [M4 completion report](docs/m4_completion_report.md)
+and [machine-readable acceptance](results/m4/m4-acceptance.json).
 The research roadmap remains in [RESEARCH_PLAN.md](RESEARCH_PLAN.md).
 
 ## Run locally
@@ -65,8 +75,8 @@ uv run --locked ruff check .
 uv run --locked mypy
 ```
 
-Runtime dependencies include OR-Tools, Pydantic, Qiskit SDK 2.5.2, SciPy,
-NumPy and Matplotlib; pytest, Ruff and mypy are development tools. Exact
+Runtime dependencies include OR-Tools, Pydantic, Qiskit SDK 2.5.2, Qiskit Aer
+0.17.2, SciPy, NumPy, Matplotlib and threadpoolctl; pytest, Ruff and mypy are development tools. Exact
 resolved versions are committed in `uv.lock`. No IBM Runtime package or
 credentials are needed.
 
@@ -107,6 +117,7 @@ src/km_quantum/
   experiments/          JSON helpers and benchmark records
   qubo/                 Exact encoding/decoding, Ising, enumeration and verification
   qaoa/                 Verified SDK adapter, ideal training, sampling and M3 study
+  m4/                   Convex warm preparation, matched mixer, frozen noise transfer and audits
 tests/                  Mathematical, solver, reproducibility and workflow tests
 configs/                Baseline and easy/tight generator configurations
 data/synthetic/         Synthetic families and ten hand-verifiable fixtures
@@ -173,9 +184,57 @@ All energies restore the frozen Ising offset. Results include full restart
 distributions and reproducible plots, without selecting favorable seeds.
 
 See [the ideal experiment protocol](docs/m3_experiment_protocol.md) and
-[the M3 completion report](docs/m3_completion_report.md). The next milestone
-is **M4 — Noise + Warm-Start QAOA**, described only. M3 uses no hardware,
+[the M3 completion report](docs/m3_completion_report.md). M3 uses no hardware,
 noise models, warm starts or quantum-advantage claims.
+
+## M4 controlled-noise and warm-start workflow
+
+The immutable [M4 protocol](docs/m4_experiment_protocol.md) fixes twelve
+instances, at most ten qubits, depths 1/2, five paired starts and five synthetic
+noise profiles. Both variants train only ideal exact expectations with the same
+COBYLA budget. The [convex box relaxation and matched mixer](docs/m4_warm_start_formulation.md)
+use coefficients alone; CP-SAT and exhaustive optima enter independent evaluation
+only. Uniform, rounded relaxation and classical clipped-product controls remain
+visible. Gate noise, readout and 1,024-shot sampling are stored as separate layers.
+
+```sh
+uv run --locked python -m km_quantum m4 manifest
+uv run --locked python -m km_quantum m4 benchmark --dry-run
+uv run --locked python -m km_quantum m4 verify --output-directory results/m4-recheck
+uv run --locked python -m km_quantum m4 benchmark --smoke --output-directory results/m4-smoke-repeat
+uv run --locked python -m km_quantum m4 benchmark --output-directory results/m4-repeat
+uv run --locked python -m km_quantum m4 summarize --output-directory results/m4-repeat
+```
+
+Use `--resume` on the same output directory after an interruption. It refuses
+changed experiment sources, dependency versions, input hashes or configuration;
+reporting commits with identical experiment sources retain the original run SHA.
+Completed primary data are archived under `results/m4`; use a new output directory
+for a repeat. The 1,200-row execution ledger preserves every planned status, and
+artifact seals bind all 1,728 preparation/control/training/compiler/noise records
+plus hashes of the 240 optimizer traces. The final smoke and its byte-preserving
+resume are archived separately under `results/m4-smoke-final`.
+
+The summarize command writes five PNGs beside `summary.json`. For the acceptance
+plot catalog, copy those same files to the output's `plots` directory; the archived
+copies are byte identical and recorded in `results/m4/plot_qa.json`. For a repeat:
+
+```sh
+uv run --locked python -c "from pathlib import Path; import shutil; o=Path('results/m4-repeat'); (o/'plots').mkdir(exist_ok=True); [shutil.copyfile(p,o/'plots'/p.name) for p in o.glob('*.png')]"
+```
+
+Audit the committed complete study, including actual tooling evidence, with:
+
+```sh
+uv run --locked python -m km_quantum m4 acceptance --output-directory results/m4 --tooling results/m4/tooling.json
+```
+
+M4 uses CPU simulation and synthetic assumptions, with at most two threads,
+one experiment at a time and a 512 MiB Aer limit. There is no noisy or shot-based
+training, hardware account, QPU execution or M5 implementation. QAOA optimizer
+budget terminations are retained as outcomes; completeness and correctness are
+separate from performance. M4 work is locally committed on
+`feat/m4-noise-warm-start`; it has not been pushed and has no pull request.
 
 ## Intended outputs
 

@@ -1,0 +1,63 @@
+{
+  "build": {
+    "artifacts": [
+      "dist/km_quantum-0.1.0.tar.gz",
+      "dist/km_quantum-0.1.0-py3-none-any.whl"
+    ],
+    "command": "uv build",
+    "post_archive_build": {
+      "archive_commit": "4ee735d73fd369d2fcc65ad7b5a3e9de48c9b0ae",
+      "command": "uv build",
+      "sdist_bytes": 604522,
+      "status": "PASS",
+      "wheel_bytes": 154107
+    },
+    "status": "PASS"
+  },
+  "environment": {
+    "dependencies": {
+      "matplotlib": "3.11.2",
+      "numpy": "2.5.3",
+      "ortools": "9.15.6755",
+      "psutil": "7.2.2",
+      "pydantic": "2.13.5",
+      "qiskit": "2.5.2",
+      "qiskit-aer": "0.17.2",
+      "scipy": "1.18.1",
+      "threadpoolctl": "3.7.0"
+    },
+    "dependency_lock_lf_sha256": "d1dc60673534ed2a191fc8c6ce221316fc387a9654d490c8340469716be7320f",
+    "dependency_lock_sha256": "d1dc60673534ed2a191fc8c6ce221316fc387a9654d490c8340469716be7320f",
+    "git_commit": "27f2b9e82fd76394f9860f455953eacc66b3cc42",
+    "git_dirty": false,
+    "numpy": "2.5.3",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.15",
+    "qiskit": "2.5.2",
+    "scipy": "1.18.1"
+  },
+  "format": {
+    "already_formatted_files": 97,
+    "command": ".venv/Scripts/ruff.exe format --check .",
+    "status": "PASS"
+  },
+  "mypy": {
+    "command": ".venv/Scripts/mypy.exe src",
+    "source_files": 53,
+    "status": "PASS"
+  },
+  "pytest": {
+    "command": ".venv/Scripts/python.exe -m pytest -q",
+    "duration_seconds": 235.59,
+    "failed": 0,
+    "passed": 1094,
+    "status": "PASS"
+  },
+  "recorded_at_utc": "2026-10-12T07:01:08.794142+00:00",
+  "ruff": {
+    "command": ".venv/Scripts/ruff.exe check .",
+    "status": "PASS"
+  },
+  "tested_source_commit": "27f2b9e82fd76394f9860f455953eacc66b3cc42",
+  "tested_source_content_hash": "066ee057437dce5db4b04e6f61496827e7ca57a92f621d121285e260eb23c750"
+}
