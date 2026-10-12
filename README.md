@@ -234,7 +234,8 @@ one experiment at a time and a 512 MiB Aer limit. There is no noisy or shot-base
 training, hardware account, QPU execution or M5 implementation. QAOA optimizer
 budget terminations are retained as outcomes; completeness and correctness are
 separate from performance. M4 work is locally committed on
-`feat/m4-noise-warm-start`; it has not been pushed and has no pull request.
+`feat/m4-noise-warm-start` and has been pushed to `origin`. No pull request was
+created as part of this work.
 
 ## Intended outputs
 

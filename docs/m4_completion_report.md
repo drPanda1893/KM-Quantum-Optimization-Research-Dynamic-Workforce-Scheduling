@@ -318,8 +318,9 @@ Alle 240 Trainings-/1.200 Noise-Records stammen von `27f2b9e82fd76394f9860f45595
 | `27f2b9e82fd76394f9860f455953eacc66b3cc42` | vollständiger Ledger und Phasenkosten; tatsächlicher Hauptlauf |
 | `4ee735d73fd369d2fcc65ad7b5a3e9de48c9b0ae` | vollständiges Roharchiv und finaler Resume-Smoke |
 
-Dokumentations-/Abnahmecommit ist anschließend über `git log -- docs/m4_completion_report.md` nachvollziehbar. M4 liegt lokal auf `feat/m4-noise-warm-start`; **nicht gepusht, kein M4-PR,
-kein Merge oder Force-Push**. Der vorhandene Remote-M3-Stand ist keine M4-Veröffentlichung.
+Dokumentations-/Abnahmecommits sind über `git log -- docs/m4_completion_report.md` nachvollziehbar. M4 wurde auf Nutzerauftrag vollständig nach
+`origin/feat/m4-noise-warm-start` gepusht. **In dieser Arbeit wurde kein M4-PR erstellt, kein Merge und kein Force-Push durchgeführt.**
+Die vor dem Hauptlauf gespeicherte Statusprüfung dokumentiert den damaligen lokalen Stand; Forschungsdaten und Abnahme bleiben unverändert.
 
 | Hashdefinition / Artefakt | SHA-256 |
 | --- | --- |
