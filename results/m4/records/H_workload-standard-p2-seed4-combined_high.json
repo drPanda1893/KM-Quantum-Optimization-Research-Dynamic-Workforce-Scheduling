@@ -1,0 +1,2547 @@
+{
+  "algorithm": "standard",
+  "code_sha": "27f2b9e82fd76394f9860f455953eacc66b3cc42",
+  "compiled_artifact": "compiled/H_workload-standard-p2-seed4.json",
+  "compiler": {
+    "active_qubit_count": 5,
+    "active_qubits": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "compile_runtime_ms": 10.634600010234863,
+    "compiler": {
+      "basis_gates": [
+        "rz",
+        "sx",
+        "x",
+        "cx"
+      ],
+      "optimization_level": 0,
+      "seed": 424242
+    },
+    "coupling_map": null,
+    "depth": 39,
+    "equivalence_atol": 1e-09,
+    "equivalence_rtol": 1e-12,
+    "gate_count": 105,
+    "gate_histogram": {
+      "cx": 20,
+      "rz": 60,
+      "sx": 25
+    },
+    "hardware_target": false,
+    "ideal_equivalence_verified": true,
+    "includes_state_preparation_and_mixer": true,
+    "layout": null,
+    "max_amplitude_difference_up_to_global_phase": 1.0623534945633305e-15,
+    "number_qubits": 5,
+    "one_qubit_gate_count": 85,
+    "routing": false,
+    "sequence_sha256": "b80fd6067bdb95aad43b5b67c6ab86fcc22949e571d8313a30cf54fd2e3568d8",
+    "two_qubit_gate_count": 20
+  },
+  "config_hash": "74380406a5a1b53e4ddafd9a982833e56b93a05821ccd6bc2803539147165dc4",
+  "environment": {
+    "dependencies": {
+      "matplotlib": "3.11.2",
+      "numpy": "2.5.3",
+      "ortools": "9.15.6755",
+      "psutil": "7.2.2",
+      "pydantic": "2.13.5",
+      "qiskit": "2.5.2",
+      "qiskit-aer": "0.17.2",
+      "scipy": "1.18.1",
+      "threadpoolctl": "3.7.0"
+    },
+    "dependency_lock_lf_sha256": "d1dc60673534ed2a191fc8c6ce221316fc387a9654d490c8340469716be7320f",
+    "dependency_lock_sha256": "d1dc60673534ed2a191fc8c6ce221316fc387a9654d490c8340469716be7320f",
+    "git_commit": "27f2b9e82fd76394f9860f455953eacc66b3cc42",
+    "git_dirty": false,
+    "numpy": "2.5.3",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.15",
+    "qiskit": "2.5.2",
+    "scipy": "1.18.1"
+  },
+  "final_parameters": [
+    3.56516833174452,
+    1.2456576157409376,
+    3.0943254748457276,
+    0.2888657485415998
+  ],
+  "group": "known_diagnostic",
+  "hardware_used": false,
+  "initialization_seed": 4,
+  "ising_hash": "d25069e6fd86e67edecf4e50812996040aa87f83e984d2605f9bc5ea105e6c5a",
+  "manifest_content_sha256": "9ac70aa0ffd8c8ed145b034edc5ab2a014e841504ffc843bd56e546f012b45f0",
+  "metrics": {
+    "after_readout": {
+      "auxiliary_bit_count": 1,
+      "conditional_objective_feasibility_rate": 0.36923373821685185,
+      "conditional_valid_m1_objective": 8.037831755479013,
+      "decoded_plans": [
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+          "probability": 0.018119288897753362,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              },
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a",
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}",
+          "probability": 0.03819702387526529,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              },
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}",
+          "probability": 0.039134617131459666,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              },
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[]}",
+          "probability": 0.1468811139245499,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              },
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": []
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+          "probability": 0.056917838878014146,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a",
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}",
+          "probability": 0.032311369673343436,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 1,
+          "ground_encoding_multiplicity": 1,
+          "m1_objective": 7,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}",
+          "probability": 0.15715570421811403,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-b"
+            ]
+          },
+          "schedule_feasible": true,
+          "schedule_optimal": true
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[]}",
+          "probability": 0.06602273969361616,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": []
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+          "probability": 0.057210850943611384,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a",
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 1,
+          "ground_encoding_multiplicity": 1,
+          "m1_objective": 7,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}",
+          "probability": 0.1573348198964988,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a"
+            ]
+          },
+          "schedule_feasible": true,
+          "schedule_optimal": true
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}",
+          "probability": 0.03210827390599622,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[]}",
+          "probability": 0.06544530754981173,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": []
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 1,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": 14,
+          "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+          "probability": 0.05474321410223905,
+          "schedule": {
+            "assignments": [],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a",
+              "job-b"
+            ]
+          },
+          "schedule_feasible": true,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[\"job-a\"]}",
+          "probability": 0.0294254567790121,
+          "schedule": {
+            "assignments": [],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[\"job-b\"]}",
+          "probability": 0.028870074968549576,
+          "schedule": {
+            "assignments": [],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[]}",
+          "probability": 0.020122305562165106,
+          "schedule": {
+            "assignments": [],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": []
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        }
+      ],
+      "distinct_decoded_plans_with_positive_probability": 16,
+      "energy_residual": 20.010578710700372,
+      "expected_qubo_energy": 27.010578710700372,
+      "ground_auxiliary_degeneracy": [
+        {
+          "ground_encoding_multiplicity": 1,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}"
+        },
+        {
+          "ground_encoding_multiplicity": 1,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}"
+        }
+      ],
+      "ground_decoded_plan_count": 2,
+      "ground_encoding_count": 2,
+      "ground_energy": 7,
+      "maximum_encoding_multiplicity_per_plan": 2,
+      "maximum_qubo_energy": 104,
+      "metric_semantics_verified": true,
+      "normalized_energy_error": 0.206294625883509,
+      "p_encoding_feasible": 0.20176762507282808,
+      "p_ground_encoding": 0.16645644019504302,
+      "p_schedule_feasible": 0.36923373821685185,
+      "p_schedule_optimal": 0.3144905241146128,
+      "possible_decoded_plan_count": 16
+    },
+    "before_readout": {
+      "auxiliary_bit_count": 1,
+      "conditional_objective_feasibility_rate": 0.40035211320594266,
+      "conditional_valid_m1_objective": 7.98739550648685,
+      "decoded_plans": [
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+          "probability": 0.014454460182957901,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              },
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a",
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}",
+          "probability": 0.03120644115867542,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              },
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}",
+          "probability": 0.0322813523105814,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              },
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[]}",
+          "probability": 0.15967308593189158,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              },
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": []
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+          "probability": 0.055608455016194346,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a",
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}",
+          "probability": 0.030549944846609438,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 1,
+          "ground_encoding_multiplicity": 1,
+          "m1_objective": 7,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}",
+          "probability": 0.17182669485469096,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-b"
+            ]
+          },
+          "schedule_feasible": true,
+          "schedule_optimal": true
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[]}",
+          "probability": 0.06263328515809677,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": []
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+          "probability": 0.05594059864547185,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a",
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 1,
+          "ground_encoding_multiplicity": 1,
+          "m1_objective": 7,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}",
+          "probability": 0.17205315012381414,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a"
+            ]
+          },
+          "schedule_feasible": true,
+          "schedule_optimal": true
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}",
+          "probability": 0.030316228181609173,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[]}",
+          "probability": 0.06198031764047335,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": []
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 1,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": 14,
+          "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+          "probability": 0.056472268227437554,
+          "schedule": {
+            "assignments": [],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a",
+              "job-b"
+            ]
+          },
+          "schedule_feasible": true,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[\"job-a\"]}",
+          "probability": 0.024416663762389938,
+          "schedule": {
+            "assignments": [],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[\"job-b\"]}",
+          "probability": 0.02380192454460725,
+          "schedule": {
+            "assignments": [],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[]}",
+          "probability": 0.016785129414498827,
+          "schedule": {
+            "assignments": [],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": []
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        }
+      ],
+      "distinct_decoded_plans_with_positive_probability": 16,
+      "energy_residual": 18.72697468526688,
+      "expected_qubo_energy": 25.72697468526688,
+      "ground_auxiliary_degeneracy": [
+        {
+          "ground_encoding_multiplicity": 1,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}"
+        },
+        {
+          "ground_encoding_multiplicity": 1,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}"
+        }
+      ],
+      "ground_decoded_plan_count": 2,
+      "ground_encoding_count": 2,
+      "ground_energy": 7,
+      "maximum_encoding_multiplicity_per_plan": 2,
+      "maximum_qubo_energy": 104,
+      "metric_semantics_verified": true,
+      "normalized_energy_error": 0.193061594693473,
+      "p_encoding_feasible": 0.2198355697992186,
+      "p_ground_encoding": 0.18144013161032913,
+      "p_schedule_feasible": 0.40035211320594266,
+      "p_schedule_optimal": 0.3438798449785051,
+      "possible_decoded_plan_count": 16
+    },
+    "ideal": {
+      "auxiliary_bit_count": 1,
+      "conditional_objective_feasibility_rate": 0.47828797493542746,
+      "conditional_valid_m1_objective": 7.778407206947052,
+      "decoded_plans": [
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+          "probability": 0.004620790721276096,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              },
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a",
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}",
+          "probability": 0.014978133726772758,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              },
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}",
+          "probability": 0.014978133726772733,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              },
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[]}",
+          "probability": 0.18741191405311178,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              },
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": []
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+          "probability": 0.055849088069388444,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a",
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}",
+          "probability": 0.026074345361844387,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 1,
+          "ground_encoding_multiplicity": 1,
+          "m1_objective": 7,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}",
+          "probability": 0.212550929847296,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-b"
+            ]
+          },
+          "schedule_feasible": true,
+          "schedule_optimal": true
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[]}",
+          "probability": 0.0572141277598219,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": []
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+          "probability": 0.055849088069388486,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a",
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 1,
+          "ground_encoding_multiplicity": 1,
+          "m1_objective": 7,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}",
+          "probability": 0.21255092984729607,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a"
+            ]
+          },
+          "schedule_feasible": true,
+          "schedule_optimal": true
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}",
+          "probability": 0.026074345361844373,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[]}",
+          "probability": 0.05721412775982197,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": []
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 1,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": 14,
+          "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+          "probability": 0.053186115240835385,
+          "schedule": {
+            "assignments": [],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a",
+              "job-b"
+            ]
+          },
+          "schedule_feasible": true,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[\"job-a\"]}",
+          "probability": 0.007699700642433136,
+          "schedule": {
+            "assignments": [],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[\"job-b\"]}",
+          "probability": 0.007699700642433136,
+          "schedule": {
+            "assignments": [],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[]}",
+          "probability": 0.006048529169662281,
+          "schedule": {
+            "assignments": [],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": []
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        }
+      ],
+      "distinct_decoded_plans_with_positive_probability": 16,
+      "energy_residual": 15.330074361140792,
+      "expected_qubo_energy": 22.33007436114079,
+      "ground_auxiliary_degeneracy": [
+        {
+          "ground_encoding_multiplicity": 1,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}"
+        },
+        {
+          "ground_encoding_multiplicity": 1,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}"
+        }
+      ],
+      "ground_decoded_plan_count": 2,
+      "ground_encoding_count": 2,
+      "ground_energy": 7,
+      "maximum_encoding_multiplicity_per_plan": 2,
+      "maximum_qubo_energy": 104,
+      "metric_semantics_verified": true,
+      "normalized_energy_error": 0.15804200372310095,
+      "p_encoding_feasible": 0.2651758085559241,
+      "p_ground_encoding": 0.22389608036574649,
+      "p_schedule_feasible": 0.47828797493542746,
+      "p_schedule_optimal": 0.42510185969459213,
+      "possible_decoded_plan_count": 16
+    }
+  },
+  "noise_metadata": {
+    "density_backend": {
+      "aer": {
+        "active_input_qubits": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "batched_shots_optimization": false,
+        "device": "CPU",
+        "fusion": {
+          "enabled": false
+        },
+        "input_qubit_map": [],
+        "max_memory_mb": 512,
+        "measure_sampling": true,
+        "method": "density_matrix",
+        "noise": "superop",
+        "num_bind_params": 1,
+        "num_clbits": 0,
+        "num_qubits": 5,
+        "parallel_shots": 1,
+        "parallel_state_update": 2,
+        "remapped_qubits": false,
+        "required_memory_mb": 1,
+        "result_subtypes": {
+          "rho": "average"
+        },
+        "result_types": {
+          "rho": "save_density_matrix"
+        },
+        "runtime_parameter_bind": false,
+        "time_taken": 0.0019265
+      },
+      "measurement_present": false,
+      "options": {
+        "device": "CPU",
+        "enable_truncation": false,
+        "fusion_enable": false,
+        "max_memory_mb": 512,
+        "max_parallel_experiments": 1,
+        "max_parallel_shots": 1,
+        "max_parallel_threads": 2,
+        "method": "density_matrix",
+        "precision": "double",
+        "zero_threshold": 1e-14
+      },
+      "readout_present": false,
+      "seed_simulator": 0,
+      "sequence_sha256": "b80fd6067bdb95aad43b5b67c6ab86fcc22949e571d8313a30cf54fd2e3568d8",
+      "shots_are_not_a_density_estimation_budget": true,
+      "snapshot_execution_shots": 1
+    },
+    "density_physicality": {
+      "born_probability_max_roundoff_adjustment": 1.942890293094024e-16,
+      "dimension": 32,
+      "hermiticity_max_absolute_error": 4.1714599331759725e-17,
+      "minimum_eigenvalue": 0.0005945153158228,
+      "normalization_atol": 1e-09,
+      "positivity_atol": 1e-09,
+      "readout_applied": false,
+      "trace_absolute_error": 1.776377734111948e-15,
+      "trace_imaginary": 8.61587863491858e-18,
+      "trace_real": 0.9999999999999982,
+      "verified": true,
+      "zero_noise_statevector_equivalence_verified": null
+    },
+    "density_runtime_ms": 18.304099998204038,
+    "hardware_used": false,
+    "noise_gate_coverage": {
+      "active_noisy_instruction_names": [
+        "cx",
+        "sx"
+      ],
+      "eligible_one_qubit_gate_count": 25,
+      "eligible_two_qubit_gate_count": 20,
+      "missing_two_qubit_exposure_is_legitimate": false,
+      "model_noise_instructions": [
+        "cx",
+        "sx",
+        "x"
+      ],
+      "one_qubit_channel_applications": 25,
+      "readout_in_density_model": false,
+      "rz_is_ideal": true,
+      "state_preparation_included": true,
+      "total_channel_applications": 45,
+      "two_qubit_channel_applications": 20,
+      "verified": true
+    },
+    "noise_profile": {
+      "lambda_1q": 0.002,
+      "lambda_2q": 0.02,
+      "name": "combined_high",
+      "readout_flip": 0.03
+    },
+    "readout_applications": 1,
+    "readout_matrices_qubit_order": [
+      [
+        [
+          0.97,
+          0.03
+        ],
+        [
+          0.03,
+          0.97
+        ]
+      ],
+      [
+        [
+          0.97,
+          0.03
+        ],
+        [
+          0.03,
+          0.97
+        ]
+      ],
+      [
+        [
+          0.97,
+          0.03
+        ],
+        [
+          0.03,
+          0.97
+        ]
+      ],
+      [
+        [
+          0.97,
+          0.03
+        ],
+        [
+          0.03,
+          0.97
+        ]
+      ],
+      [
+        [
+          0.97,
+          0.03
+        ],
+        [
+          0.03,
+          0.97
+        ]
+      ]
+    ],
+    "readout_matrix_convention": "rows=true, columns=observed; p_observed=R.T@p_true",
+    "readout_runtime_ms": 0.31870001112110913,
+    "synthetic_model_is_device_calibration": false,
+    "total_variation_distance_ideal_to_before_readout": 0.11842478403810125,
+    "total_variation_distance_ideal_to_observed": 0.1627486485285847
+  },
+  "noise_profile": {
+    "lambda_1q": 0.002,
+    "lambda_2q": 0.02,
+    "name": "combined_high",
+    "readout_flip": 0.03
+  },
+  "p": 2,
+  "probabilities": {
+    "after_readout": [
+      0.008603447947508783,
+      0.040906891060729846,
+      0.04112754404555034,
+      0.09981938628223877,
+      0.015673034403326448,
+      0.024118622660258285,
+      0.08333697390468577,
+      0.02546709122186403,
+      0.015315080465730832,
+      0.08311946629035724,
+      0.02395593002922578,
+      0.025815693329092566,
+      0.01943202922445398,
+      0.035678170002094244,
+      0.0358970047659484,
+      0.010631744739407603,
+      0.011518857614656323,
+      0.025115848632886316,
+      0.024317763504261396,
+      0.047061727642311126,
+      0.013752422375685655,
+      0.008192747013085153,
+      0.07399784599181304,
+      0.01272993265340126,
+      0.013554994502818746,
+      0.07403623792775678,
+      0.008152343876770442,
+      0.013318923802367101,
+      0.03531118487778507,
+      0.0212396688759199,
+      0.021313846177662986,
+      0.007487544158345757
+    ],
+    "before_readout": [
+      0.006006621649390938,
+      0.039479076014990504,
+      0.03976403900728306,
+      0.11060639943338742,
+      0.013288510865991587,
+      0.02407440662383438,
+      0.09083927488853434,
+      0.021815193592595226,
+      0.01289132363939148,
+      0.0906008567217948,
+      0.02386958120151849,
+      0.02221475515097586,
+      0.018076830038548083,
+      0.03631657275641795,
+      0.03656790694385946,
+      0.008161109314542683,
+      0.01077850776510789,
+      0.023154209143106265,
+      0.022216278633190294,
+      0.04906668649850417,
+      0.01112815289639835,
+      0.006475538222775057,
+      0.0812138752352798,
+      0.009391247566080193,
+      0.01091060090521577,
+      0.08122583813289616,
+      0.0064466469800906825,
+      0.01006659715960554,
+      0.03839543818888947,
+      0.019291882259776398,
+      0.019372691701612394,
+      0.006293350868415219
+    ],
+    "ideal": [
+      8.331197866499185e-05,
+      0.040703876409327974,
+      0.040703876409328,
+      0.13682755550710676,
+      0.006445243703256388,
+      0.024032100683238494,
+      0.11194804018287326,
+      0.0134284525758972,
+      0.006445243703256388,
+      0.11194804018287323,
+      0.02403210068323847,
+      0.013428452575897178,
+      0.011906387050657786,
+      0.03856848681084021,
+      0.03856848681084026,
+      0.001729603464109084,
+      0.005965217190997289,
+      0.016510251350493933,
+      0.01651025135049397,
+      0.050584358546005015,
+      0.001254456939176748,
+      0.002042244678605894,
+      0.10060288966442282,
+      0.001549681150875558,
+      0.001254456939176748,
+      0.1006028896644228,
+      0.0020422446786059023,
+      0.0015496811508755551,
+      0.0412797281901776,
+      0.01728060125854823,
+      0.017280601258548224,
+      0.002891187257167012
+    ]
+  },
+  "qubit_count": 5,
+  "qubo_hash": "a6fd6b70b53f9472014f9b6c8a62b11754ecbf1edfc60fe918753aaf548756d5",
+  "reference_hash": "09d129e0e6414ef2293dcbdbc07129e22f69b170df5ace6a49dd2f596d6f7f21",
+  "reference_id": "H_workload",
+  "relaxation": {
+    "config": {
+      "ftol": 1e-12,
+      "gtol": 1e-08,
+      "max_function_evaluations": 300,
+      "max_iterations": 300,
+      "max_variables": 10
+    },
+    "convex_tangent_gap": 4.245732495290577e-08,
+    "convex_tangent_lower_bound": -21.69753090665486,
+    "diagnostic_certificate": "floating-point convex tangent bound; not a symbolic certificate",
+    "exact_row_bound": "45",
+    "function_evaluations": 9,
+    "gradient_evaluations": 9,
+    "initial_y": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "iterations": 8,
+    "lambda": 45.00000000000001,
+    "lambda_safety": "nextafter(exact_row_bound,+inf), or zero for zero row bound",
+    "library_success": true,
+    "method": "convex_diagonal_box_L-BFGS-B",
+    "minimum_eigenvalue": 20.729490168751592,
+    "numerical_scale": 180.0,
+    "numerically_stationary": true,
+    "objective_value": -21.69753086419753,
+    "projected_gradient_inf": 2.4244172891485505e-08,
+    "runtime_ms": 2.055099990684539,
+    "scaled_convex_tangent_gap": 2.358740275161432e-10,
+    "scaled_objective_value": -0.12054183813443073,
+    "scaled_projected_gradient_inf": 1.3468987036802105e-10,
+    "schema_version": 1,
+    "status": "CONVERGED",
+    "termination_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+    "trace": [
+      {
+        "evaluation": 1,
+        "scaled_value": -0.10694444444444444,
+        "y": [
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "evaluation": 2,
+        "scaled_value": -0.12028549382716049,
+        "y": [
+          0.4166666666666667,
+          0.4166666666666667,
+          0.46111111111111114,
+          0.46111111111111114,
+          0.41666666666666674
+        ]
+      },
+      {
+        "evaluation": 3,
+        "scaled_value": -0.12051159881258755,
+        "y": [
+          0.40848064897141756,
+          0.40848064897141756,
+          0.4545951724073965,
+          0.4545951724073965,
+          0.40015539318251075
+        ]
+      },
+      {
+        "evaluation": 4,
+        "scaled_value": -0.12052981711993051,
+        "y": [
+          0.41034891576731225,
+          0.41034891576731225,
+          0.45306410664581975,
+          0.45306410664581975,
+          0.39562248698064156
+        ]
+      },
+      {
+        "evaluation": 5,
+        "scaled_value": -0.12054181715831247,
+        "y": [
+          0.41476329976260323,
+          0.41476329976260323,
+          0.45043930489045614,
+          0.45043930489045614,
+          0.3902070875378719
+        ]
+      },
+      {
+        "evaluation": 6,
+        "scaled_value": -0.12054183151014636,
+        "y": [
+          0.4148205744148502,
+          0.4148205744148502,
+          0.45071747105648535,
+          0.45071747105648535,
+          0.39004492352392645
+        ]
+      },
+      {
+        "evaluation": 7,
+        "scaled_value": -0.12054183813137745,
+        "y": [
+          0.41481379403177393,
+          0.41481379403177393,
+          0.45061717079618585,
+          0.45061717079618585,
+          0.3901210199575546
+        ]
+      },
+      {
+        "evaluation": 8,
+        "scaled_value": -0.12054183813441194,
+        "y": [
+          0.41481473155529147,
+          0.41481473155529147,
+          0.4506172384791464,
+          0.4506172384791464,
+          0.39012328667728746
+        ]
+      },
+      {
+        "evaluation": 9,
+        "scaled_value": -0.12054183813443073,
+        "y": [
+          0.41481481475443066,
+          0.41481481475443066,
+          0.45061728370136567,
+          0.45061728370136567,
+          0.390123456940367
+        ]
+      }
+    ],
+    "y": [
+      0.41481481475443066,
+      0.41481481475443066,
+      0.45061728370136567,
+      0.45061728370136567,
+      0.390123456940367
+    ]
+  },
+  "run_id": "H_workload-standard-p2-seed4-combined_high",
+  "sampling": {
+    "best_valid_sample_objective": 7,
+    "best_valid_sample_objective_gap": 0,
+    "best_valid_sample_plan": {
+      "assignments": [
+        {
+          "job_id": "job-a",
+          "worker_id": "worker-a"
+        }
+      ],
+      "instance_id": "m2-H_workload",
+      "objective_value": null,
+      "solver_metadata": {
+        "repair_applied": false,
+        "source": "qubo_decoder"
+      },
+      "unassigned_job_ids": [
+        "job-b"
+      ]
+    },
+    "counts": {
+      "00000": 15,
+      "00001": 35,
+      "00010": 49,
+      "00011": 105,
+      "00100": 8,
+      "00101": 23,
+      "00110": 73,
+      "00111": 23,
+      "01000": 14,
+      "01001": 78,
+      "01010": 14,
+      "01011": 30,
+      "01100": 20,
+      "01101": 45,
+      "01110": 43,
+      "01111": 19,
+      "10000": 17,
+      "10001": 29,
+      "10010": 19,
+      "10011": 46,
+      "10100": 12,
+      "10101": 14,
+      "10110": 71,
+      "10111": 17,
+      "11000": 13,
+      "11001": 70,
+      "11010": 10,
+      "11011": 12,
+      "11100": 35,
+      "11101": 20,
+      "11110": 34,
+      "11111": 11
+    },
+    "distinct_sampled_bitstrings": 32,
+    "distinct_sampled_decoded_plans": 16,
+    "empirical": {
+      "auxiliary_bit_count": 1,
+      "conditional_objective_feasibility_rate": 0.3388671875,
+      "conditional_valid_m1_objective": 8.109510086455332,
+      "decoded_plans": [
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+          "probability": 0.029296875,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              },
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a",
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}",
+          "probability": 0.0390625,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              },
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}",
+          "probability": 0.041015625,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              },
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[]}",
+          "probability": 0.1474609375,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              },
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": []
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+          "probability": 0.0634765625,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a",
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}",
+          "probability": 0.0361328125,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 1,
+          "ground_encoding_multiplicity": 1,
+          "m1_objective": 7,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}",
+          "probability": 0.14453125,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-b"
+            ]
+          },
+          "schedule_feasible": true,
+          "schedule_optimal": true
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[]}",
+          "probability": 0.0625,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-a",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": []
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+          "probability": 0.0751953125,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a",
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 1,
+          "ground_encoding_multiplicity": 1,
+          "m1_objective": 7,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}",
+          "probability": 0.140625,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a"
+            ]
+          },
+          "schedule_feasible": true,
+          "schedule_optimal": true
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}",
+          "probability": 0.0234375,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[]}",
+          "probability": 0.06640625,
+          "schedule": {
+            "assignments": [
+              {
+                "job_id": "job-b",
+                "worker_id": "worker-a"
+              }
+            ],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": []
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 1,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": 14,
+          "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+          "probability": 0.0537109375,
+          "schedule": {
+            "assignments": [],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a",
+              "job-b"
+            ]
+          },
+          "schedule_feasible": true,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[\"job-a\"]}",
+          "probability": 0.01953125,
+          "schedule": {
+            "assignments": [],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-a"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[\"job-b\"]}",
+          "probability": 0.0263671875,
+          "schedule": {
+            "assignments": [],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": [
+              "job-b"
+            ]
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        },
+        {
+          "encoding_multiplicity": 2,
+          "feasible_encoding_multiplicity": 0,
+          "ground_encoding_multiplicity": 0,
+          "m1_objective": null,
+          "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[]}",
+          "probability": 0.03125,
+          "schedule": {
+            "assignments": [],
+            "instance_id": "m2-H_workload",
+            "objective_value": null,
+            "solver_metadata": {
+              "repair_applied": false,
+              "source": "qubo_decoder"
+            },
+            "unassigned_job_ids": []
+          },
+          "schedule_feasible": false,
+          "schedule_optimal": false
+        }
+      ],
+      "distinct_decoded_plans_with_positive_probability": 16,
+      "energy_residual": 21.283203125,
+      "expected_qubo_energy": 28.283203125,
+      "ground_auxiliary_degeneracy": [
+        {
+          "ground_encoding_multiplicity": 1,
+          "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}"
+        },
+        {
+          "ground_encoding_multiplicity": 1,
+          "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}"
+        }
+      ],
+      "ground_decoded_plan_count": 2,
+      "ground_encoding_count": 2,
+      "ground_energy": 7,
+      "maximum_encoding_multiplicity_per_plan": 2,
+      "maximum_qubo_energy": 104,
+      "metric_semantics_verified": true,
+      "normalized_energy_error": 0.21941446520618557,
+      "p_encoding_feasible": 0.181640625,
+      "p_ground_encoding": 0.1474609375,
+      "p_schedule_feasible": 0.3388671875,
+      "p_schedule_optimal": 0.28515625,
+      "possible_decoded_plan_count": 16
+    },
+    "sampling_intervals": {
+      "p_encoding_feasible": {
+        "absolute_sampling_deviation": 0.020127000072828083,
+        "binomial_two_sided_pvalue": 0.11049097026878801,
+        "confidence_interval_95": [
+          0.15847997630531147,
+          0.20664712563979248
+        ],
+        "count": 186,
+        "exact_probability": 0.20176762507282808,
+        "frequency": 0.181640625,
+        "sampling_verified": true,
+        "standard_error": 0.012541238636918736
+      },
+      "p_ground_encoding": {
+        "absolute_sampling_deviation": 0.01899550269504302,
+        "binomial_two_sided_pvalue": 0.1107700756259005,
+        "confidence_interval_95": [
+          0.12629375325675524,
+          0.17067678980426418
+        ],
+        "count": 151,
+        "exact_probability": 0.16645644019504302,
+        "frequency": 0.1474609375,
+        "sampling_verified": true,
+        "standard_error": 0.011640308037322172
+      },
+      "p_schedule_feasible": {
+        "absolute_sampling_deviation": 0.030366550716851848,
+        "binomial_two_sided_pvalue": 0.04470734569223079,
+        "confidence_interval_95": [
+          0.30988666392748465,
+          0.36877744071460783
+        ],
+        "count": 347,
+        "exact_probability": 0.36923373821685185,
+        "frequency": 0.3388671875,
+        "sampling_verified": true,
+        "standard_error": 0.01508116662259579
+      },
+      "p_schedule_optimal": {
+        "absolute_sampling_deviation": 0.029334274114612813,
+        "binomial_two_sided_pvalue": 0.04347872614414436,
+        "confidence_interval_95": [
+          0.25766532760033095,
+          0.3138880950434967
+        ],
+        "count": 292,
+        "exact_probability": 0.3144905241146128,
+        "frequency": 0.28515625,
+        "sampling_verified": true,
+        "standard_error": 0.014509770225230761
+      }
+    },
+    "sampling_seed": 4020244,
+    "sampling_tail_alpha": 1e-09,
+    "sampling_verified": true,
+    "shots": 1024,
+    "valid_sample_frequency": 0.3388671875
+  },
+  "sampling_seed": 4020244,
+  "schema_version": 4,
+  "scope": "primary",
+  "source_content_hash": "066ee057437dce5db4b04e6f61496827e7ca57a92f621d121285e260eb23c750",
+  "split": "development",
+  "status": "COMPLETE",
+  "timings": {
+    "amortized_end_to_end_ms": 1538.4405000368133,
+    "compile_runtime_ms": 10.634600010234863,
+    "density_runtime_ms": 18.304099998204038,
+    "distribution_analysis_runtime_ms": 0.375300005543977,
+    "ideal_training_runtime_ms": 1484.1527999960817,
+    "readout_runtime_ms": 0.31870001112110913,
+    "relaxation_runtime_ms": 0.0,
+    "sampling_analysis_runtime_ms": 24.655000015627593,
+    "scope": "Standalone pipeline counts preparation and ideal training fully; transferred-profile reuse and campaign actual wall time reported separately.",
+    "standalone_end_to_end_ms": 1538.4405000368133
+  },
+  "training": {
+    "circuit": {
+      "gate_count": 55,
+      "gate_histogram": {
+        "cx": 20,
+        "u": 35
+      },
+      "hardware_transpilation": false,
+      "logical_decomposition_repetitions": 3,
+      "logical_depth": 29,
+      "number_qubits": 5,
+      "one_qubit_gate_count": 35,
+      "other_gate_count": 0,
+      "parameter_count": 4,
+      "parameter_order": [
+        "β[0]",
+        "β[1]",
+        "γ[0]",
+        "γ[1]"
+      ],
+      "two_qubit_gate_count": 20
+    },
+    "energy_offset": 37.0,
+    "final_expected_energy": 22.33007436114083,
+    "final_parameters": [
+      3.56516833174452,
+      1.2456576157409376,
+      3.0943254748457276,
+      0.2888657485415998
+    ],
+    "initial_expected_energy": 40.260522228843,
+    "initial_parameters": [
+      2.9626981331891504,
+      1.6063828834996454,
+      3.0669600539645994,
+      0.25395385881583277
+    ],
+    "nfev": 300,
+    "parameter_bindings": [
+      {
+        "final_value": 3.56516833174452,
+        "initial_value": 2.9626981331891504,
+        "name": "β[0]",
+        "position": 0
+      },
+      {
+        "final_value": 1.2456576157409376,
+        "initial_value": 1.6063828834996454,
+        "name": "β[1]",
+        "position": 1
+      },
+      {
+        "final_value": 3.0943254748457276,
+        "initial_value": 3.0669600539645994,
+        "name": "γ[0]",
+        "position": 2
+      },
+      {
+        "final_value": 0.2888657485415998,
+        "initial_value": 0.25395385881583277,
+        "name": "γ[1]",
+        "position": 3
+      }
+    ],
+    "parameter_order": [
+      "β[0]",
+      "β[1]",
+      "γ[0]",
+      "γ[1]"
+    ],
+    "preparation_quality_gate": null,
+    "runtime_ms": 1484.1527999960817,
+    "success": false,
+    "termination_message": "Return from COBYLA because the objective function has been evaluated MAXFUN times.",
+    "timings": {
+      "final_analysis_runtime_ms": 0.23200002033263445,
+      "final_verification_runtime_ms": 2.84470000769943,
+      "legacy_core_runtime_ms": 1473.9423999853898,
+      "legacy_internal_setup_and_analysis_runtime_ms": 131.82270000106655,
+      "optimization_runtime_ms": 1339.0247999923304,
+      "preparation_runtime_ms": 0.7047000108286738,
+      "scope": "External M4 preparation and second distribution gate measured directly; optimizer phase derived from M3 evaluator timestamps. Legacy core includes its own setup, training, verification and first final state analysis; its setup and first analysis remain combined. Fields are not additive."
+    }
+  },
+  "training_id": "H_workload-standard-p2-seed4",
+  "training_noise_used": false,
+  "training_path": "training/H_workload-standard-p2-seed4.json"
+}

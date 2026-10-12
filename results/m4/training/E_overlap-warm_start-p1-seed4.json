@@ -1,0 +1,795 @@
+{
+  "algorithm": "warm_start",
+  "artifact_type": "m4_ideal_training",
+  "best_valid_objective": 7,
+  "checked_ground_set": true,
+  "circuit": {
+    "gate_count": 29,
+    "gate_histogram": {
+      "cx": 6,
+      "u": 23
+    },
+    "hardware_transpilation": false,
+    "logical_decomposition_repetitions": 3,
+    "logical_depth": 11,
+    "number_qubits": 4,
+    "one_qubit_gate_count": 23,
+    "other_gate_count": 0,
+    "parameter_count": 2,
+    "parameter_order": [
+      "β[0]",
+      "γ[0]"
+    ],
+    "two_qubit_gate_count": 6
+  },
+  "code_sha": "27f2b9e82fd76394f9860f455953eacc66b3cc42",
+  "config": {
+    "initialization": "uniform[0,pi]",
+    "initialization_seed": 4,
+    "max_qubits": 10,
+    "maxiter": 300,
+    "optimizer": "COBYLA",
+    "p": 1,
+    "rhobeg": 0.5,
+    "sampler_seed": 4000104,
+    "shots": 1024,
+    "tolerance": 1e-06
+  },
+  "config_hash": "74380406a5a1b53e4ddafd9a982833e56b93a05821ccd6bc2803539147165dc4",
+  "constraint_energy_margin": 8,
+  "cost_evolution": "exp(-i*gamma*H_cost)",
+  "decoded_optimal_schedule_probability": 0.16128308396919006,
+  "encoded_valid_probability": 0.19767791604515664,
+  "encoding_invalid_probability": 0.8023220839548424,
+  "energy_offset": 25.75,
+  "energy_residual": 9.916376177181231,
+  "environment": {
+    "dependencies": {
+      "matplotlib": "3.11.2",
+      "numpy": "2.5.3",
+      "ortools": "9.15.6755",
+      "psutil": "7.2.2",
+      "pydantic": "2.13.5",
+      "qiskit": "2.5.2",
+      "qiskit-aer": "0.17.2",
+      "scipy": "1.18.1",
+      "threadpoolctl": "3.7.0"
+    },
+    "dependency_lock_lf_sha256": "d1dc60673534ed2a191fc8c6ce221316fc387a9654d490c8340469716be7320f",
+    "dependency_lock_sha256": "d1dc60673534ed2a191fc8c6ce221316fc387a9654d490c8340469716be7320f",
+    "git_commit": "27f2b9e82fd76394f9860f455953eacc66b3cc42",
+    "git_dirty": false,
+    "numpy": "2.5.3",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.15",
+    "qiskit": "2.5.2",
+    "scipy": "1.18.1"
+  },
+  "epsilon": 0.25,
+  "expectation_verified": true,
+  "expected_energy": 16.91637617718123,
+  "expected_valid_objective": 8.288782427641381,
+  "final_expected_energy": 16.916376177181252,
+  "final_parameters": [
+    3.494128843181359,
+    1.6294371264933547
+  ],
+  "ground_energy": 7,
+  "ground_probability_lift": 1.2902646717535204,
+  "ground_state_count": 2,
+  "ground_state_probability": 0.16128308396919006,
+  "group": "known_diagnostic",
+  "hamiltonian_scale": "unchanged frozen M2 coefficients",
+  "ideal_metrics": {
+    "auxiliary_bit_count": 0,
+    "conditional_objective_feasibility_rate": 0.19767791604515664,
+    "conditional_valid_m1_objective": 8.288782427641381,
+    "decoded_plans": [
+      {
+        "encoding_multiplicity": 1,
+        "feasible_encoding_multiplicity": 0,
+        "ground_encoding_multiplicity": 0,
+        "m1_objective": null,
+        "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+        "probability": 0.000801876205993453,
+        "schedule": {
+          "assignments": [
+            {
+              "job_id": "job-a",
+              "worker_id": "worker-a"
+            },
+            {
+              "job_id": "job-b",
+              "worker_id": "worker-a"
+            }
+          ],
+          "instance_id": "m2-E_overlap",
+          "objective_value": null,
+          "solver_metadata": {
+            "repair_applied": false,
+            "source": "qubo_decoder"
+          },
+          "unassigned_job_ids": [
+            "job-a",
+            "job-b"
+          ]
+        },
+        "schedule_feasible": false,
+        "schedule_optimal": false
+      },
+      {
+        "encoding_multiplicity": 1,
+        "feasible_encoding_multiplicity": 0,
+        "ground_encoding_multiplicity": 0,
+        "m1_objective": null,
+        "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}",
+        "probability": 0.003490579420403249,
+        "schedule": {
+          "assignments": [
+            {
+              "job_id": "job-a",
+              "worker_id": "worker-a"
+            },
+            {
+              "job_id": "job-b",
+              "worker_id": "worker-a"
+            }
+          ],
+          "instance_id": "m2-E_overlap",
+          "objective_value": null,
+          "solver_metadata": {
+            "repair_applied": false,
+            "source": "qubo_decoder"
+          },
+          "unassigned_job_ids": [
+            "job-a"
+          ]
+        },
+        "schedule_feasible": false,
+        "schedule_optimal": false
+      },
+      {
+        "encoding_multiplicity": 1,
+        "feasible_encoding_multiplicity": 0,
+        "ground_encoding_multiplicity": 0,
+        "m1_objective": null,
+        "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}",
+        "probability": 0.003490579420403251,
+        "schedule": {
+          "assignments": [
+            {
+              "job_id": "job-a",
+              "worker_id": "worker-a"
+            },
+            {
+              "job_id": "job-b",
+              "worker_id": "worker-a"
+            }
+          ],
+          "instance_id": "m2-E_overlap",
+          "objective_value": null,
+          "solver_metadata": {
+            "repair_applied": false,
+            "source": "qubo_decoder"
+          },
+          "unassigned_job_ids": [
+            "job-b"
+          ]
+        },
+        "schedule_feasible": false,
+        "schedule_optimal": false
+      },
+      {
+        "encoding_multiplicity": 1,
+        "feasible_encoding_multiplicity": 0,
+        "ground_encoding_multiplicity": 0,
+        "m1_objective": null,
+        "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"],[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[]}",
+        "probability": 0.0968235128888281,
+        "schedule": {
+          "assignments": [
+            {
+              "job_id": "job-a",
+              "worker_id": "worker-a"
+            },
+            {
+              "job_id": "job-b",
+              "worker_id": "worker-a"
+            }
+          ],
+          "instance_id": "m2-E_overlap",
+          "objective_value": null,
+          "solver_metadata": {
+            "repair_applied": false,
+            "source": "qubo_decoder"
+          },
+          "unassigned_job_ids": []
+        },
+        "schedule_feasible": false,
+        "schedule_optimal": false
+      },
+      {
+        "encoding_multiplicity": 1,
+        "feasible_encoding_multiplicity": 0,
+        "ground_encoding_multiplicity": 0,
+        "m1_objective": null,
+        "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+        "probability": 0.0013258934192244417,
+        "schedule": {
+          "assignments": [
+            {
+              "job_id": "job-a",
+              "worker_id": "worker-a"
+            }
+          ],
+          "instance_id": "m2-E_overlap",
+          "objective_value": null,
+          "solver_metadata": {
+            "repair_applied": false,
+            "source": "qubo_decoder"
+          },
+          "unassigned_job_ids": [
+            "job-a",
+            "job-b"
+          ]
+        },
+        "schedule_feasible": false,
+        "schedule_optimal": false
+      },
+      {
+        "encoding_multiplicity": 1,
+        "feasible_encoding_multiplicity": 0,
+        "ground_encoding_multiplicity": 0,
+        "m1_objective": null,
+        "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}",
+        "probability": 0.006501821600786538,
+        "schedule": {
+          "assignments": [
+            {
+              "job_id": "job-a",
+              "worker_id": "worker-a"
+            }
+          ],
+          "instance_id": "m2-E_overlap",
+          "objective_value": null,
+          "solver_metadata": {
+            "repair_applied": false,
+            "source": "qubo_decoder"
+          },
+          "unassigned_job_ids": [
+            "job-a"
+          ]
+        },
+        "schedule_feasible": false,
+        "schedule_optimal": false
+      },
+      {
+        "encoding_multiplicity": 1,
+        "feasible_encoding_multiplicity": 1,
+        "ground_encoding_multiplicity": 1,
+        "m1_objective": 7,
+        "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}",
+        "probability": 0.08064154198459506,
+        "schedule": {
+          "assignments": [
+            {
+              "job_id": "job-a",
+              "worker_id": "worker-a"
+            }
+          ],
+          "instance_id": "m2-E_overlap",
+          "objective_value": null,
+          "solver_metadata": {
+            "repair_applied": false,
+            "source": "qubo_decoder"
+          },
+          "unassigned_job_ids": [
+            "job-b"
+          ]
+        },
+        "schedule_feasible": true,
+        "schedule_optimal": true
+      },
+      {
+        "encoding_multiplicity": 1,
+        "feasible_encoding_multiplicity": 0,
+        "ground_encoding_multiplicity": 0,
+        "m1_objective": null,
+        "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[]}",
+        "probability": 0.21312413589798954,
+        "schedule": {
+          "assignments": [
+            {
+              "job_id": "job-a",
+              "worker_id": "worker-a"
+            }
+          ],
+          "instance_id": "m2-E_overlap",
+          "objective_value": null,
+          "solver_metadata": {
+            "repair_applied": false,
+            "source": "qubo_decoder"
+          },
+          "unassigned_job_ids": []
+        },
+        "schedule_feasible": false,
+        "schedule_optimal": false
+      },
+      {
+        "encoding_multiplicity": 1,
+        "feasible_encoding_multiplicity": 0,
+        "ground_encoding_multiplicity": 0,
+        "m1_objective": null,
+        "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+        "probability": 0.0013258934192244406,
+        "schedule": {
+          "assignments": [
+            {
+              "job_id": "job-b",
+              "worker_id": "worker-a"
+            }
+          ],
+          "instance_id": "m2-E_overlap",
+          "objective_value": null,
+          "solver_metadata": {
+            "repair_applied": false,
+            "source": "qubo_decoder"
+          },
+          "unassigned_job_ids": [
+            "job-a",
+            "job-b"
+          ]
+        },
+        "schedule_feasible": false,
+        "schedule_optimal": false
+      },
+      {
+        "encoding_multiplicity": 1,
+        "feasible_encoding_multiplicity": 1,
+        "ground_encoding_multiplicity": 1,
+        "m1_objective": 7,
+        "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}",
+        "probability": 0.08064154198459501,
+        "schedule": {
+          "assignments": [
+            {
+              "job_id": "job-b",
+              "worker_id": "worker-a"
+            }
+          ],
+          "instance_id": "m2-E_overlap",
+          "objective_value": null,
+          "solver_metadata": {
+            "repair_applied": false,
+            "source": "qubo_decoder"
+          },
+          "unassigned_job_ids": [
+            "job-a"
+          ]
+        },
+        "schedule_feasible": true,
+        "schedule_optimal": true
+      },
+      {
+        "encoding_multiplicity": 1,
+        "feasible_encoding_multiplicity": 0,
+        "ground_encoding_multiplicity": 0,
+        "m1_objective": null,
+        "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}",
+        "probability": 0.006501821600786541,
+        "schedule": {
+          "assignments": [
+            {
+              "job_id": "job-b",
+              "worker_id": "worker-a"
+            }
+          ],
+          "instance_id": "m2-E_overlap",
+          "objective_value": null,
+          "solver_metadata": {
+            "repair_applied": false,
+            "source": "qubo_decoder"
+          },
+          "unassigned_job_ids": [
+            "job-b"
+          ]
+        },
+        "schedule_feasible": false,
+        "schedule_optimal": false
+      },
+      {
+        "encoding_multiplicity": 1,
+        "feasible_encoding_multiplicity": 0,
+        "ground_encoding_multiplicity": 0,
+        "m1_objective": null,
+        "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[]}",
+        "probability": 0.21312413589798945,
+        "schedule": {
+          "assignments": [
+            {
+              "job_id": "job-b",
+              "worker_id": "worker-a"
+            }
+          ],
+          "instance_id": "m2-E_overlap",
+          "objective_value": null,
+          "solver_metadata": {
+            "repair_applied": false,
+            "source": "qubo_decoder"
+          },
+          "unassigned_job_ids": []
+        },
+        "schedule_feasible": false,
+        "schedule_optimal": false
+      },
+      {
+        "encoding_multiplicity": 1,
+        "feasible_encoding_multiplicity": 1,
+        "ground_encoding_multiplicity": 0,
+        "m1_objective": 14,
+        "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[\"job-a\",\"job-b\"]}",
+        "probability": 0.036394832075966575,
+        "schedule": {
+          "assignments": [],
+          "instance_id": "m2-E_overlap",
+          "objective_value": null,
+          "solver_metadata": {
+            "repair_applied": false,
+            "source": "qubo_decoder"
+          },
+          "unassigned_job_ids": [
+            "job-a",
+            "job-b"
+          ]
+        },
+        "schedule_feasible": true,
+        "schedule_optimal": false
+      },
+      {
+        "encoding_multiplicity": 1,
+        "feasible_encoding_multiplicity": 0,
+        "ground_encoding_multiplicity": 0,
+        "m1_objective": null,
+        "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[\"job-a\"]}",
+        "probability": 0.06913844034198871,
+        "schedule": {
+          "assignments": [],
+          "instance_id": "m2-E_overlap",
+          "objective_value": null,
+          "solver_metadata": {
+            "repair_applied": false,
+            "source": "qubo_decoder"
+          },
+          "unassigned_job_ids": [
+            "job-a"
+          ]
+        },
+        "schedule_feasible": false,
+        "schedule_optimal": false
+      },
+      {
+        "encoding_multiplicity": 1,
+        "feasible_encoding_multiplicity": 0,
+        "ground_encoding_multiplicity": 0,
+        "m1_objective": null,
+        "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[\"job-b\"]}",
+        "probability": 0.06913844034198868,
+        "schedule": {
+          "assignments": [],
+          "instance_id": "m2-E_overlap",
+          "objective_value": null,
+          "solver_metadata": {
+            "repair_applied": false,
+            "source": "qubo_decoder"
+          },
+          "unassigned_job_ids": [
+            "job-b"
+          ]
+        },
+        "schedule_feasible": false,
+        "schedule_optimal": false
+      },
+      {
+        "encoding_multiplicity": 1,
+        "feasible_encoding_multiplicity": 0,
+        "ground_encoding_multiplicity": 0,
+        "m1_objective": null,
+        "plan_key": "{\"assignments\":[],\"unassigned_job_ids\":[]}",
+        "probability": 0.1175349534992361,
+        "schedule": {
+          "assignments": [],
+          "instance_id": "m2-E_overlap",
+          "objective_value": null,
+          "solver_metadata": {
+            "repair_applied": false,
+            "source": "qubo_decoder"
+          },
+          "unassigned_job_ids": []
+        },
+        "schedule_feasible": false,
+        "schedule_optimal": false
+      }
+    ],
+    "distinct_decoded_plans_with_positive_probability": 16,
+    "energy_residual": 9.916376177181231,
+    "expected_qubo_energy": 16.91637617718123,
+    "ground_auxiliary_degeneracy": [
+      {
+        "ground_encoding_multiplicity": 1,
+        "plan_key": "{\"assignments\":[[\"job-a\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-b\"]}"
+      },
+      {
+        "ground_encoding_multiplicity": 1,
+        "plan_key": "{\"assignments\":[[\"job-b\",\"worker-a\"]],\"unassigned_job_ids\":[\"job-a\"]}"
+      }
+    ],
+    "ground_decoded_plan_count": 2,
+    "ground_encoding_count": 2,
+    "ground_energy": 7,
+    "maximum_encoding_multiplicity_per_plan": 1,
+    "maximum_qubo_energy": 59,
+    "metric_semantics_verified": true,
+    "normalized_energy_error": 0.19069954186886984,
+    "p_encoding_feasible": 0.19767791604515664,
+    "p_ground_encoding": 0.16128308396919006,
+    "p_schedule_feasible": 0.19767791604515664,
+    "p_schedule_optimal": 0.16128308396919006,
+    "possible_decoded_plan_count": 16
+  },
+  "ideal_probabilities": [
+    0.1175349534992361,
+    0.21312413589798954,
+    0.21312413589798945,
+    0.0968235128888281,
+    0.06913844034198871,
+    0.006501821600786538,
+    0.08064154198459501,
+    0.003490579420403249,
+    0.06913844034198868,
+    0.08064154198459506,
+    0.006501821600786541,
+    0.003490579420403251,
+    0.036394832075966575,
+    0.0013258934192244417,
+    0.0013258934192244406,
+    0.000801876205993453
+  ],
+  "initial_expected_energy": 30.096193302562178,
+  "initial_parameters": [
+    2.9626981331891504,
+    1.6063828834996454
+  ],
+  "initialization_seed": 4,
+  "instance_id": "m2-E_overlap",
+  "invalid_probability": 0.8023220839548424,
+  "ising_hash": "71d1ca48f238c82e230ac6a06e6dc2d74b656a7e98dd24990c7affb8acd194c1",
+  "m2_reference_hash": "8a4b58e043f3108abf3748f15e9b6bcceda89d117d160fbcb495cb1c1eb1a5ba",
+  "manifest_content_sha256": "9ac70aa0ffd8c8ed145b034edc5ab2a014e841504ffc843bd56e546f012b45f0",
+  "max_energy": 59,
+  "mixer_evolution": "exp(-i*beta*H_mixer)",
+  "mixer_sign": 1,
+  "nfev": 207,
+  "normalized_energy_error": 0.19069954186886984,
+  "normalized_quality": 0.8093004581311302,
+  "operator_equivalence": true,
+  "optimal_valid_probability": 0.16128308396919006,
+  "optimizer": "COBYLA",
+  "optimizer_config": {
+    "maxiter": 300,
+    "rhobeg": 0.5,
+    "tolerance": 1e-06
+  },
+  "p": 1,
+  "parameter_bindings": [
+    {
+      "final_value": 3.494128843181359,
+      "initial_value": 2.9626981331891504,
+      "name": "β[0]",
+      "position": 0
+    },
+    {
+      "final_value": 1.6294371264933547,
+      "initial_value": 1.6063828834996454,
+      "name": "γ[0]",
+      "position": 1
+    }
+  ],
+  "parameter_count": 2,
+  "parameter_order": [
+    "β[0]",
+    "γ[0]"
+  ],
+  "preparation_quality_gate": {
+    "certificate": "numerical quality gate; not a rigorous symbolic certificate",
+    "criterion": "library convergence plus both scaled residual and tangent gap <= threshold",
+    "numerically_stationary_at_solver_gtol": true,
+    "passed": true,
+    "scaled_convex_tangent_gap": 3.318554282949374e-10,
+    "scaled_projected_gradient_inf": 2.7017577064469833e-10,
+    "threshold": 1e-06
+  },
+  "qubit_count": 4,
+  "qubo_hash": "636930045ef47a6c473c47fcb3abf9b968509a41a3840c513b0d6594af02c315",
+  "reference_hash": "8a4b58e043f3108abf3748f15e9b6bcceda89d117d160fbcb495cb1c1eb1a5ba",
+  "reference_id": "E_overlap",
+  "reference_name": "E_overlap",
+  "relaxation": {
+    "config": {
+      "ftol": 1e-12,
+      "gtol": 1e-08,
+      "max_function_evaluations": 300,
+      "max_iterations": 300,
+      "max_variables": 10
+    },
+    "convex_tangent_gap": 2.9866988546544365e-08,
+    "convex_tangent_lower_bound": 1.9604166367996823,
+    "diagnostic_certificate": "floating-point convex tangent bound; not a symbolic certificate",
+    "exact_row_bound": "45/2",
+    "function_evaluations": 9,
+    "gradient_evaluations": 9,
+    "initial_y": [
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "iterations": 8,
+    "lambda": 22.500000000000004,
+    "lambda_safety": "nextafter(exact_row_bound,+inf), or zero for zero row bound",
+    "library_success": true,
+    "method": "convex_diagonal_box_L-BFGS-B",
+    "minimum_eigenvalue": 3.288353903933774,
+    "numerical_scale": 90.0,
+    "numerically_stationary": true,
+    "objective_value": 1.9604166666666707,
+    "projected_gradient_inf": 2.4315816915532196e-08,
+    "runtime_ms": 3.703700000187382,
+    "scaled_convex_tangent_gap": 3.318554282949374e-10,
+    "scaled_objective_value": 0.02178240740740745,
+    "scaled_projected_gradient_inf": 2.7017577064469833e-10,
+    "schema_version": 1,
+    "status": "CONVERGED",
+    "termination_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+    "trace": [
+      {
+        "evaluation": 1,
+        "scaled_value": 0.03611111111111111,
+        "y": [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "evaluation": 2,
+        "scaled_value": 0.022098765432098787,
+        "y": [
+          0.4166666666666667,
+          0.4166666666666667,
+          0.4222222222222223,
+          0.4222222222222223
+        ]
+      },
+      {
+        "evaluation": 3,
+        "scaled_value": 0.0219080316773184,
+        "y": [
+          0.4146820029941138,
+          0.4146820029941138,
+          0.40937014448867565,
+          0.40937014448867565
+        ]
+      },
+      {
+        "evaluation": 4,
+        "scaled_value": 0.021819683250077028,
+        "y": [
+          0.42008733524935477,
+          0.42008733524935477,
+          0.3988495049245962,
+          0.3988495049245962
+        ]
+      },
+      {
+        "evaluation": 5,
+        "scaled_value": 0.021782654029752595,
+        "y": [
+          0.4285669424877732,
+          0.4285669424877732,
+          0.39164990286325385,
+          0.39164990286325385
+        ]
+      },
+      {
+        "evaluation": 6,
+        "scaled_value": 0.02178240802037404,
+        "y": [
+          0.42915961338672937,
+          0.42915961338672937,
+          0.3916369928148322,
+          0.3916369928148322
+        ]
+      },
+      {
+        "evaluation": 7,
+        "scaled_value": 0.021782407409508448,
+        "y": [
+          0.4291678941932879,
+          0.4291678941932879,
+          0.39166415632904583,
+          0.39166415632904583
+        ]
+      },
+      {
+        "evaluation": 8,
+        "scaled_value": 0.0217824074074099,
+        "y": [
+          0.4291667390909039,
+          0.4291667390909039,
+          0.3916666020733087,
+          0.3916666020733087
+        ]
+      },
+      {
+        "evaluation": 9,
+        "scaled_value": 0.02178240740740745,
+        "y": [
+          0.42916666708315976,
+          0.42916666708315976,
+          0.39166666664420774,
+          0.39166666664420774
+        ]
+      }
+    ],
+    "y": [
+      0.42916666708315976,
+      0.42916666708315976,
+      0.39166666664420774,
+      0.39166666664420774
+    ]
+  },
+  "run_id": "E_overlap-warm_start-p1-seed4",
+  "runtime_ms": 942.7173000003677,
+  "schema_version": 4,
+  "scope": "primary",
+  "source_content_hash": "066ee057437dce5db4b04e6f61496827e7ca57a92f621d121285e260eb23c750",
+  "split": "development",
+  "statevector_expectation_absolute_difference": 2.1316282072803006e-14,
+  "status": "COMPLETE",
+  "structural_metadata": {
+    "assignment_variable_count": 2,
+    "auxiliary_variable_count": 0,
+    "coefficient_dynamic_range": "15/4",
+    "linear_term_count": 4,
+    "max_coefficient": 30,
+    "min_nonzero_coefficient": 8,
+    "number_possible_assignments_before": 2,
+    "number_variables_after_preprocessing": 2,
+    "original_worker_job_combinations": 2,
+    "preprocessing_reduction": 0,
+    "quadratic_term_count": 3,
+    "qubo_density": 0.5,
+    "qubo_variable_count": 4,
+    "reduction_ratio": 0.0,
+    "slack_variable_count": 0,
+    "unassigned_variable_count": 2
+  },
+  "success": true,
+  "termination_message": "Return from COBYLA because the trust region radius reaches its lower bound.",
+  "timings": {
+    "final_analysis_runtime_ms": 0.9562000050209463,
+    "final_verification_runtime_ms": 2.3549999750684947,
+    "optimization_runtime_ms": 808.3473000151571,
+    "preparation_runtime_ms": 2.3108999885153025,
+    "scope": "Warm circuit preparation/operator gate, ideal optimization, final energy verification and final statevector analysis measured separately. Classical relaxation time is separately reported, not included here."
+  },
+  "total_expectation_evaluations": 208,
+  "trace_lf_sha256": "e420586a26a4b4c7496ff58362dd4fde3c6020721b05a5832169eeca3e736694",
+  "trace_path": "C:\\Users\\flori\\Documents\\Quantum\\results\\m4\\traces\\E_overlap-warm_start-p1-seed4.jsonl",
+  "training_cost": "ideal exact StatevectorEstimator; no shots or channel noise",
+  "training_id": "E_overlap-warm_start-p1-seed4",
+  "uniform_ground_probability": 0.125,
+  "valid_probability": 0.19767791604515664,
+  "verification_evaluations": 1
+}
