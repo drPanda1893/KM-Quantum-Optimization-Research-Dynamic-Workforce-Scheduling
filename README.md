@@ -231,11 +231,40 @@ uv run --locked python -m km_quantum m4 acceptance --output-directory results/m4
 
 M4 uses CPU simulation and synthetic assumptions, with at most two threads,
 one experiment at a time and a 512 MiB Aer limit. There is no noisy or shot-based
-training, hardware account, QPU execution or M5 implementation. QAOA optimizer
+training, hardware account or QPU execution in the published M4 experiment. QAOA optimizer
 budget terminations are retained as outcomes; completeness and correctness are
 separate from performance. M4 work is locally committed on
 `feat/m4-noise-warm-start` and has been pushed to `origin`. No pull request was
 created as part of this work.
+
+## M5: frozen circuit hardware validation
+
+M5 transfers the published M4 seed-0 parameters for four known diagnostic cases,
+with 24 main circuits and four basis smoke controls. The implementation and its
+synthetic Target checks run locally. Hardware execution requires an explicit
+verified IBM Open instance, a concrete backend plan and Florian's approval.
+The current status is `OFFLINE_READY`; no IBM job has been submitted.
+
+```sh
+uv run --locked python -m km_quantum m5 prepare --config configs/m5_baseline.json
+uv run --locked python -m km_quantum m5 verify-local
+uv run --locked python -m km_quantum m5 plan
+uv run --locked python -m km_quantum m5 collect
+uv run --locked python -m km_quantum m5 analyze
+uv run --locked python -m km_quantum m5 acceptance
+```
+
+These commands use `results/m5`. Repeating prepare verifies existing QPY bytes,
+source and prediction hashes without training or replacing artifacts. Changed
+inputs require a new `results/m5...` output. Empty analysis is `NOT_AVAILABLE`.
+The unsigned offline draft reserves at most three jobs, 52 PUBs, 49,664 shots and
+40 QPU seconds per job (120 total); it cannot authorize submission.
+
+The separately invoked provider commands and human approval steps are documented
+in [IBM setup](docs/m5_ibm_setup.md). Read the
+[precommitted protocol](docs/m5_experiment_protocol.md) and
+[local readiness report](docs/m5_readiness_report.md) before executing them.
+No hardware outcome, advantage or successful M5 hardware experiment is claimed.
 
 ## Intended outputs
 
