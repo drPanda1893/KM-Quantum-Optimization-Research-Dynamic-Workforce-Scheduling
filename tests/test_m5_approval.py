@@ -5,7 +5,13 @@ from typing import Any
 
 import pytest
 
-from km_quantum.m5.approvals import approval_request, plan_hash, validate_approval, validate_plan
+from km_quantum.m5.approvals import (
+    approval_request,
+    plan_hash,
+    validate_approval,
+    validate_human_approval,
+    validate_plan,
+)
 from km_quantum.m5.provider import SafetyError, safe_runtime_options
 
 NOW = "2026-10-12T12:00:00+00:00"
@@ -228,3 +234,45 @@ def test_consistent_hash_is_checked_if_stored_in_execution_plan() -> None:
     plan["layout"] = [3, 6, 9]
     with pytest.raises(SafetyError, match="hash"):
         validate_plan(plan)
+
+
+@pytest.mark.parametrize(
+    "mutation", ["expiry", "mirror", "unsigned", "ttl", "malformed", "timezone", "schema"]
+)
+def test_all_human_contract_errors_are_rejected_without_provider_validation(
+    monkeypatch: pytest.MonkeyPatch, mutation: str
+) -> None:
+    import km_quantum.m5.approvals as approvals
+
+    plan = synthetic_plan()
+    approval = synthetic_approval(plan)
+    if mutation == "expiry":
+        approval["expires_at"] = NOW
+    elif mutation == "mirror":
+        approval["runtime_options"]["execution"]["init_qubits"] = False
+    elif mutation == "unsigned":
+        approval["signed_by"] = None
+    elif mutation == "ttl":
+        approval["expires_at"] = "2026-10-13T12:00:01+00:00"
+    elif mutation == "malformed":
+        approval["expires_at"] = "invalid date"
+    elif mutation == "timezone":
+        approval["signed_at"] = "2026-10-12T12:00:00"
+    else:
+        approval["schema_version"] = 99
+
+    def never_provider(*args: Any, **kwargs: Any) -> None:
+        raise AssertionError(
+            "An invalid human contract must be rejected before provider validation"
+        )
+
+    monkeypatch.setattr(approvals, "validate_preflight", never_provider)
+    with pytest.raises(SafetyError):
+        validate_approval(plan, approval, synthetic_preflight(), now=NOW)
+
+
+def test_offline_human_validation_allows_exact_24_hour_limit() -> None:
+    plan = synthetic_plan()
+    approval = synthetic_approval(plan)
+    approval["expires_at"] = "2026-10-13T12:00:00+00:00"
+    validate_human_approval(plan, approval, now=NOW)

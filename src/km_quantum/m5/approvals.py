@@ -7,6 +7,7 @@ import hashlib
 import json
 import re
 from collections.abc import Mapping
+from datetime import timedelta
 from typing import Any
 
 from km_quantum.m5.provider import (
@@ -120,17 +121,17 @@ def approval_request(plan: Mapping[str, Any], expires_at: str) -> dict[str, Any]
     }
 
 
-def validate_approval(
+def validate_human_approval(
     plan: Mapping[str, Any],
     approval: Mapping[str, Any],
-    evidence: Mapping[str, Any],
     *,
     now: str | None = None,
 ) -> None:
+    """Validate every human binding locally before credential or provider access."""
     validate_plan(plan)
-    validate_preflight(evidence, plan, now=now)
     if (
         approval.get("artifact_type") != "m5_human_approval"
+        or approval.get("schema_version") != 1
         or approval.get("approved") is not True
         or approval.get("signed_by") != "Florian"
         or approval.get("plan_hash") != plan_hash(plan)
@@ -141,6 +142,8 @@ def validate_approval(
     expiry = parse_time(approval.get("expires_at", ""))
     if signed > current or expiry <= current or signed >= expiry:
         raise SafetyError("Human approval is expired or has invalid dates")
+    if expiry - signed > timedelta(hours=24):
+        raise SafetyError("Human approval validity may not exceed 24 hours")
     for key in (
         "backend",
         "instance_binding",
@@ -152,3 +155,14 @@ def validate_approval(
     ):
         if approval.get(key) != plan.get(key):
             raise SafetyError("Human approval differs from the frozen execution plan")
+
+
+def validate_approval(
+    plan: Mapping[str, Any],
+    approval: Mapping[str, Any],
+    evidence: Mapping[str, Any],
+    *,
+    now: str | None = None,
+) -> None:
+    validate_human_approval(plan, approval, now=now)
+    validate_preflight(evidence, plan, now=now)

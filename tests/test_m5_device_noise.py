@@ -8,7 +8,7 @@ from qiskit import QuantumCircuit
 from qiskit.quantum_info import Statevector
 from qiskit_aer import AerSimulator
 from qiskit_aer.library import SaveDensityMatrix
-from qiskit_aer.noise import NoiseModel, ReadoutError, depolarizing_error, pauli_error
+from qiskit_aer.noise import NoiseModel, QuantumError, ReadoutError, depolarizing_error, pauli_error
 
 from km_quantum.m5.device_noise import build_device_noise_prediction, remap_backend_noise
 from km_quantum.m5.snapshots import SyntheticBackend, snapshot_backend
@@ -76,6 +76,40 @@ def test_directed_native_ecr_error_preserves_qarg_order_and_local_channel_coordi
         Statevector.from_instruction(reverse).probabilities(),
     )
     assert "cx" not in compact.quantum_model.noise_instructions
+
+
+def test_backend_mixture_terms_below_cpp_cutoff_are_preserved_without_relaxing_trace() -> None:
+    backend = SyntheticBackend()
+    full = NoiseModel.from_backend(backend)
+    serialized = next(
+        error
+        for error in full.to_dict(serializable=True)["errors"]
+        if error["type"] == "qerror"
+        and error["operations"] == ["ecr"]
+        and error["gate_qubits"] == [[1, 4]]
+    )
+    assert len(serialized["probabilities"]) == 144
+    discarded_mass = sum(value for value in serialized["probabilities"] if value <= 1e-10)
+    assert discarded_mass > 5e-10
+    raw_model = NoiseModel()
+    raw_model.add_quantum_error(QuantumError.from_dict(serialized), "ecr", [0, 1])
+    circuit = QuantumCircuit(2)
+    circuit.ecr(0, 1)
+    circuit.ecr(0, 1)
+    raw_probabilities = _probabilities(circuit, raw_model)
+    assert abs(raw_probabilities.sum() - 1) > 1e-9
+    compact = remap_backend_noise(full, (1, 4))
+    preserved = _probabilities(circuit, compact.quantum_model)
+    assert abs(preserved.sum() - 1) < 1e-12
+    ecr = next(
+        error
+        for error in compact.quantum_model.to_dict(serializable=True)["errors"]
+        if error["operations"] == ["ecr"]
+    )
+    assert ecr["probabilities"] == [1]
+    record = next(row for row in compact.remapping if row.get("name") == "ecr")
+    assert record["representation"] == "single_cptp_kraus_instruction"
+    assert record["channel_max_absolute_conversion_difference"] < 1e-12
 
 
 def test_measured_subset_mapping_readout_once_and_wide_backend_stays_compact() -> None:

@@ -18,6 +18,7 @@ import qiskit_aer
 from numpy.typing import NDArray
 from qiskit import QuantumCircuit
 from qiskit.providers import BackendV2
+from qiskit.quantum_info import SuperOp
 from qiskit_aer import AerSimulator
 from qiskit_aer.library import SaveDensityMatrix
 from qiskit_aer.noise import NoiseModel, QuantumError
@@ -97,15 +98,37 @@ def remap_backend_noise(
             compact = tuple(physical_to_compact[qubit] for qubit in physical)
             if serialized["type"] == "qerror":
                 error = QuantumError.from_dict(serialized)
+                # Aer 0.17.2's C++ mixture loader drops terms p<=1e-10 without
+                # preserving trace. Backend two-qubit errors can contain such
+                # terms (depolarization composed with both thermal channels).
+                # A single Kraus instruction represents the same complete
+                # channel with probability one, using only public APIs.
+                original_channel = error.to_quantumchannel()
+                equivalent = QuantumError(original_channel)
+                equivalent_channel = SuperOp(equivalent)
+                channel_delta = float(
+                    np.max(np.abs(equivalent_channel.data - original_channel.data))
+                )
+                if channel_delta > 1e-12 or not equivalent_channel.is_cptp(atol=1e-12):
+                    raise ValueError(
+                        "Kraus representation changed the backend-derived CPTP channel"
+                    )
                 for name in serialized["operations"]:
                     if name == "measure":
                         raise ValueError(
                             "Measurement quantum errors cannot enter density prediction"
                         )
-                    model.add_quantum_error(error, name, compact)
+                    model.add_quantum_error(equivalent, name, compact)
                     attachments.add((name, compact))
                     records.append(
-                        {"type": "quantum", "name": name, "physical": physical, "compact": compact}
+                        {
+                            "type": "quantum",
+                            "name": name,
+                            "physical": physical,
+                            "compact": compact,
+                            "representation": "single_cptp_kraus_instruction",
+                            "channel_max_absolute_conversion_difference": channel_delta,
+                        }
                     )
             elif serialized["type"] == "roerror":
                 if len(physical) != 1:
@@ -303,6 +326,11 @@ def build_device_noise_prediction(
             "temperature": 0,
         },
         "additional_m4_depolarization": False,
+        "quantum_channel_representation": "equivalent single Kraus instruction per local error",
+        "quantum_channel_conversion_api": "QuantumError(error.to_quantumchannel())",
+        "quantum_channel_equivalence_atol": 1e-12,
+        "quantum_channel_cptp_verified": False,
+        "small_probability_mixture_terms_preserved": True,
         "readout_applications": 0,
         "idle_delay_effects_modelled": False,
         "approximation": (
@@ -316,6 +344,15 @@ def build_device_noise_prediction(
         return metadata
     full_model = NoiseModel.from_backend(backend, **metadata["noise_model_options"])
     compact_noise = remap_backend_noise(full_model, physical)
+    metadata["quantum_channel_cptp_verified"] = True
+    metadata["quantum_channel_max_absolute_conversion_difference"] = max(
+        (
+            record["channel_max_absolute_conversion_difference"]
+            for record in compact_noise.remapping
+            if record["type"] == "quantum"
+        ),
+        default=0.0,
+    )
     qubit_rows = {row["physical_id"]: row for row in snapshot["qubits"]}
     readout_matrices = []
     for compact in measured:
