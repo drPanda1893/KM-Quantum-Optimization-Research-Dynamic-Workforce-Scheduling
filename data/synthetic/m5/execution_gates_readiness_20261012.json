@@ -1,0 +1,193 @@
+{
+  "active_qubits_maximum": 7,
+  "approval_request_approved": false,
+  "artifact_type": "m5_execution_gates_fix_readiness",
+  "backend": "ibm_fez",
+  "backend_width": 156,
+  "branch": "codex/m5-execution-gates-fix",
+  "budget_authorization_sha256": "835fa22228731d13c9f7c54bb26f4d6b972b2bd2d13ab98d0677faa13e3e9ff7",
+  "budget_policy_version": "m5-budget-b-v2",
+  "calibration_timestamp": "2026-10-12T20:53:19+02:00",
+  "central_total_seconds": 18.661875712,
+  "content_sha256": "77f424732ad70815cabaa532f23153980cf45fdcaea9162a6b75d150472dbfe2",
+  "cost_eur": 0,
+  "final_confirmation_sha256": "c865288b5ad703da2e5dd272e6e3de0cdf06bd054746783de982820fad301e95",
+  "frozen_circuits": 28,
+  "frozen_qpy_files": 84,
+  "full_tests_passed": 1741,
+  "hardware_acceptance_status": "NOT_STARTED",
+  "hardware_enabled": false,
+  "historical_approval_transferred": false,
+  "jobs": [
+    {
+      "central_seconds": 2.129721344,
+      "id": "smoke",
+      "local_partition_count": 4,
+      "local_policy_seconds": 10.162151680000001,
+      "local_safety_factor": 1.25,
+      "max_qpu_seconds": 20,
+      "pubs": 4,
+      "shot_time_seconds": 0.12972134400000002,
+      "shots": 512
+    },
+    {
+      "central_seconds": 8.266077184,
+      "id": "main-block-1",
+      "local_partition_count": 24,
+      "local_policy_seconds": 67.83259647999999,
+      "local_safety_factor": 1.25,
+      "max_qpu_seconds": 80,
+      "pubs": 24,
+      "shot_time_seconds": 6.266077183999999,
+      "shots": 24576
+    },
+    {
+      "central_seconds": 8.266077184,
+      "id": "main-block-2",
+      "local_partition_count": 24,
+      "local_policy_seconds": 67.83259648,
+      "local_safety_factor": 1.25,
+      "max_qpu_seconds": 80,
+      "pubs": 24,
+      "shot_time_seconds": 6.266077184000001,
+      "shots": 24576
+    }
+  ],
+  "local_maximum_probability_difference": 2.7755575615628914e-15,
+  "local_policy_total_seconds": 145.82734464,
+  "local_verification_sha256": "5d3296c53c824516255dda0cd51aebbb0070cb2f39b2a6964cff8af31a431e49",
+  "max_campaign_qpu_seconds": 180,
+  "maximum_energy_difference": 1.1795009413617663e-12,
+  "maximum_metric_difference": 2.7755575615628914e-15,
+  "merged": false,
+  "new_job_ledger_exists": false,
+  "noise_predictions_ready": 28,
+  "original_checkout_head": "bad2b09714209df3ccccbbab6d7fd408becc2e36",
+  "original_checkout_modified": false,
+  "overall_m5_pass": false,
+  "pending_job_count": 0,
+  "pending_listing_complete": true,
+  "physical_subset": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    16,
+    5
+  ],
+  "plan_hash": "2eb423c2403cd73aa4104c83eb5fce0d29c950fdb0377501dcca1a9df4c4e6a5",
+  "protected_raw_bytes_unchanged": true,
+  "protected_raw_files": 4176,
+  "provider_observed_at": "2026-10-12T19:49:08.680448+00:00",
+  "pushed": false,
+  "qpu_jobs_submitted": 0,
+  "quality": {
+    "build": {
+      "command": [
+        "C:/Users/flori/.cache/km-quantum-tools/bin/uv.exe",
+        "build",
+        "--offline",
+        "--python",
+        "C:\\Users\\flori\\Documents\\Quantum\\.venv\\Scripts\\python.exe",
+        "--out-dir",
+        "C:\\Users\\flori\\.codex\\worktrees\\m5-execution-gates-fix\\Quantum\\results\\m5-execution-gates-fix-20261012-v2\\dist"
+      ],
+      "log_sha256": "df8f1d24053d34b627d004d3c8a28a45dcac8959f6cac081cfb8aa47f4f6142e",
+      "status": "PASS"
+    },
+    "mypy": {
+      "command": [
+        "C:\\Users\\flori\\Documents\\Quantum\\.venv\\Scripts\\mypy.exe",
+        "src/km_quantum",
+        "C:\\Users\\flori\\.codex\\worktrees\\m5-execution-gates-fix\\Quantum\\scripts\\compare_m5b_budgets.py"
+      ],
+      "log_sha256": "1ce3b96a532000894c99f32b6780158c3ea67c152e54bc6f01b06e1005774249",
+      "status": "PASS"
+    },
+    "pytest": {
+      "command": [
+        "C:\\Users\\flori\\Documents\\Quantum\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests",
+        "-q",
+        "--tb=short",
+        "--junitxml=C:\\Users\\flori\\.codex\\worktrees\\m5-execution-gates-fix\\Quantum\\results\\m5-execution-gates-fix-20261012-v2\\pytest-after-reference-restore-junit.xml"
+      ],
+      "log_sha256": "c677488e259ac6f5352acad2b5349474eb0a8ae7e9d823fe0524a9ed6c365c0b",
+      "status": "PASS"
+    },
+    "ruff_check": {
+      "command": [
+        "C:\\Users\\flori\\Documents\\Quantum\\.venv\\Scripts\\ruff.exe",
+        "check",
+        "src",
+        "tests",
+        "C:\\Users\\flori\\.codex\\worktrees\\m5-execution-gates-fix\\Quantum\\scripts\\compare_m5b_budgets.py"
+      ],
+      "log_sha256": "98733c3446b52dc3e6b6943142b19a142025d9727521f6abc3783a20e4b6d3c6",
+      "status": "PASS"
+    },
+    "ruff_format": {
+      "command": [
+        "C:\\Users\\flori\\Documents\\Quantum\\.venv\\Scripts\\ruff.exe",
+        "format",
+        "--check",
+        "src",
+        "tests",
+        "C:\\Users\\flori\\.codex\\worktrees\\m5-execution-gates-fix\\Quantum\\scripts\\compare_m5b_budgets.py"
+      ],
+      "log_sha256": "12c44a07a61516f03dae74e23de137c20c46510f33c6aa19fdc634ed45518fad",
+      "status": "PASS"
+    },
+    "targeted": {
+      "command": [
+        "C:\\Users\\flori\\Documents\\Quantum\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_m5_cli_execution_gates.py",
+        "tests/test_m5_execution_accounting.py",
+        "tests/test_m5_live_device_binding.py",
+        "tests/test_m5_smoke_controls.py",
+        "tests/test_m5_preflight_refresh.py",
+        "tests/test_m5_integration_safety.py",
+        "tests/test_m5_budget_b_provider.py",
+        "tests/test_m5_ledger.py",
+        "-q",
+        "--tb=short",
+        "--junitxml=C:\\Users\\flori\\.codex\\worktrees\\m5-execution-gates-fix\\Quantum\\results\\m5-execution-gates-fix-20261012-v2\\targeted-junit.xml"
+      ],
+      "log_sha256": "55d89791bfab8c0a17bb1fc80cce6bf13f3496f2236eb8c79cfc43dea9e5fc2a",
+      "status": "PASS"
+    }
+  },
+  "schema_version": 1,
+  "snapshot_schema_version": 2,
+  "source_commit": "880705ce98358787e5f1a7892ab81464873879d6",
+  "source_context_sha256": "16016c77ecbceea2f9230432acd20ca12dfae77a43779df8ceb549b2f3f8ef38",
+  "status": "READY_FOR_APPROVAL",
+  "submission_approved": false,
+  "submission_run_attempts": 0,
+  "target_snapshot_sha256": "8fe0e2bc64339858a9e52dc6f8881d50db91a1c9bdb9cc8c6b26c7bab9adcac7",
+  "targeted_tests_passed": 197,
+  "total_jobs": 3,
+  "total_pubs": 52,
+  "total_shots": 49664,
+  "usage": {
+    "consumed_seconds": 0,
+    "limit_seconds": 600,
+    "observed_at": "2026-10-12T19:49:08.680448+00:00",
+    "period": {
+      "end_time": "2026-10-12T19:49:08.726Z",
+      "start_time": "2026-09-14T19:49:08.726Z"
+    },
+    "remaining_seconds": 600,
+    "remaining_source": "SDK instance difference; separate admission flag required",
+    "time_available": null,
+    "usage_limit_reached": false
+  },
+  "usage_method_changed": false,
+  "verified_plan": "open",
+  "verified_pricing_type": "free"
+}
