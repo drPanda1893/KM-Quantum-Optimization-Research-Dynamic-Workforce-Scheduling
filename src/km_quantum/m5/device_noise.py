@@ -18,7 +18,7 @@ import qiskit_aer
 from numpy.typing import NDArray
 from qiskit import QuantumCircuit
 from qiskit.providers import BackendV2
-from qiskit.quantum_info import SuperOp
+from qiskit.quantum_info import Kraus, Operator, SuperOp
 from qiskit_aer import AerSimulator
 from qiskit_aer.library import SaveDensityMatrix
 from qiskit_aer.noise import NoiseModel, QuantumError
@@ -72,6 +72,31 @@ def _readout_matrix(values: Any) -> FloatArray:
     return matrix
 
 
+def _weighted_kraus_error(error: QuantumError) -> QuantumError:
+    """Represent the full original mixture as one exact numerical Kraus instruction.
+
+    Aer drops probabilities <=1e-10 while loading mixtures. Converting the
+    complete SuperOp back to canonical Kraus also drops small Choi eigenvalues
+    in the pinned stack. Composing each original operation's numerical Kraus
+    matrices and retaining sqrt(p)*K avoids both losses. No state or matrix is
+    normalized, reshaped, made real, or pruned here.
+    """
+    dimension = 2**error.num_qubits
+    identity = np.eye(dimension, dtype=complex)
+    matrices: list[NDArray[np.complex128]] = []
+    for probability, circuit in zip(error.probabilities, error.circuits, strict=True):
+        composed = [identity]
+        for item in circuit.data:
+            qargs = [circuit.find_bit(qubit).index for qubit in item.qubits]
+            embedded = [
+                np.asarray(Operator(identity).compose(Operator(matrix), qargs=qargs).data)
+                for matrix in Kraus(item.operation).data
+            ]
+            composed = [after @ before for before in composed for after in embedded]
+        matrices.extend(np.sqrt(probability) * matrix for matrix in composed)
+    return QuantumError(Kraus(matrices))
+
+
 def remap_backend_noise(
     full_model: NoiseModel, compact_to_physical: Sequence[int]
 ) -> CompactDeviceNoise:
@@ -88,7 +113,11 @@ def remap_backend_noise(
     attachments: set[tuple[str, tuple[int, ...]]] = set()
     readout: dict[int, FloatArray] = {}
     records: list[dict[str, Any]] = []
-    for serialized in full_model.to_dict(serializable=True).get("errors", []):
+    # QuantumError.from_dict expects numerical complex matrix parameters.
+    # Aer's serializable=True JSON encoding instead adds a real/imag axis, which
+    # that pinned reconstruction API does not decode. This dictionary remains
+    # ephemeral; archived predictions still contain only JSON-safe small vectors.
+    for serialized in full_model.to_dict(serializable=False).get("errors", []):
         if not serialized.get("gate_qubits"):
             raise ValueError("Device noise requires local physical gate_qubits attachments")
         for qargs in serialized["gate_qubits"]:
@@ -104,7 +133,7 @@ def remap_backend_noise(
                 # A single Kraus instruction represents the same complete
                 # channel with probability one, using only public APIs.
                 original_channel = error.to_quantumchannel()
-                equivalent = QuantumError(original_channel)
+                equivalent = _weighted_kraus_error(error)
                 equivalent_channel = SuperOp(equivalent)
                 channel_delta = float(
                     np.max(np.abs(equivalent_channel.data - original_channel.data))
@@ -327,7 +356,11 @@ def build_device_noise_prediction(
         },
         "additional_m4_depolarization": False,
         "quantum_channel_representation": "equivalent single Kraus instruction per local error",
-        "quantum_channel_conversion_api": "QuantumError(error.to_quantumchannel())",
+        "quantum_channel_conversion_api": (
+            "Kraus(operation); Operator.compose(qargs); QuantumError(Kraus(weighted_matrices))"
+        ),
+        "quantum_channel_reconstruction_dictionary": "NoiseModel.to_dict(serializable=False)",
+        "quantum_channel_mixture_weights_retained": True,
         "quantum_channel_equivalence_atol": 1e-12,
         "quantum_channel_cptp_verified": False,
         "small_probability_mixture_terms_preserved": True,
