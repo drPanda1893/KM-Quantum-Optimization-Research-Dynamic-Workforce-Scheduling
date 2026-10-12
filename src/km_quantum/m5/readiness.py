@@ -20,7 +20,7 @@ from km_quantum.m5.io import historical_integrity, raw_hash, read_sealed
 from km_quantum.m5.ledger import JobLedger, validate_counts
 from km_quantum.m5.manifest import source_context
 from km_quantum.m5.provider import parse_time, redact
-from km_quantum.m5.workflow import verify_plan_inventory_binding
+from km_quantum.m5.workflow import read_prepared_selection, verify_plan_inventory_binding
 
 _ID = re.compile(r"^[A-Za-z0-9_.-]+$")
 _SHA = re.compile(r"^[0-9a-f]{64}$")
@@ -57,7 +57,7 @@ def _verify_inventory(root: Path, output: Path) -> tuple[dict[str, Any], dict[st
         prepared.get("source_context_sha256") == source_context(root)["content_sha256"],
         "Implementation changed after preparation",
     )
-    selection = read_sealed(root / "data/synthetic/m5/selection_manifest.json")
+    selection = read_prepared_selection(root, output, prepared)
     _require(
         selection["content_sha256"] == prepared.get("selection_manifest_sha256"),
         "Selection manifest changed",
@@ -176,6 +176,8 @@ def _verify_plan(plan: dict[str, Any], prepared: dict[str, Any]) -> None:
 
 
 def _verify_ledger(ledger: dict[str, Any], plan: dict[str, Any]) -> None:
+    if plan.get("budget_authorization") is not None:
+        JobLedger._check_binding(ledger, plan)
     jobs = ledger.get("jobs", [])
     _require(ledger.get("plan_hash") in {None, plan_hash(plan)}, "Ledger plan differs")
     _require(len(jobs) <= 3, "Too many ledger reservations")
@@ -193,8 +195,15 @@ def _verify_ledger(ledger: dict[str, Any], plan: dict[str, Any]) -> None:
         )
         _require(record.get("plan_hash") == plan_hash(plan), "Job plan differs")
         _require(record.get("pubs") == job["pubs"], "Job PUB identities differ")
-        _require(record.get("reserved_qpu_seconds") == 40, "Job reservation differs")
-    _require(ledger.get("reserved_qpu_seconds") == 40 * len(jobs), "Reservation total differs")
+        _require(
+            record.get("reserved_qpu_seconds") == job["max_execution_time"],
+            "Job reservation differs",
+        )
+    _require(
+        ledger.get("reserved_qpu_seconds")
+        == sum(job["max_execution_time"] for job in plan["jobs"][: len(jobs)]),
+        "Reservation total differs",
+    )
     _require(
         ledger.get("reserved_shots")
         == sum(pub["shots"] for record in jobs for pub in record["pubs"]),
@@ -246,6 +255,28 @@ def _usage_seconds(record: Mapping[str, Any]) -> float | None:
     ):
         return None
     return float(value)
+
+
+def _usage_budget_diagnostics(
+    jobs: list[dict[str, Any]],
+    usage_seconds: list[float | None],
+    plan: dict[str, Any] | None,
+) -> list[str]:
+    """Charge measured quantum usage against each reviewed cap and the campaign."""
+    diagnostics = []
+    caps = {job["id"]: job["max_execution_time"] for job in plan["jobs"]} if plan else {}
+    if any(
+        value is not None and value > caps.get(job.get("job_id"), 0)
+        for job, value in zip(jobs, usage_seconds, strict=True)
+    ):
+        diagnostics.append("provider_usage: actual QPU usage exceeds the reviewed per-job cap")
+    if (
+        plan is not None
+        and sum(value for value in usage_seconds if value is not None)
+        > plan["budget"]["max_total_qpu_seconds"]
+    ):
+        diagnostics.append("provider_usage: actual QPU usage exceeds the reviewed campaign cap")
+    return diagnostics
 
 
 def _reported_draft(output: Path, prepared: dict[str, Any] | None) -> dict[str, Any] | None:
@@ -498,8 +529,7 @@ def build_acceptance(
             analysis_status = "INVALID"
     usage_seconds = [_usage_seconds(job) for job in jobs]
     usage_complete = bool(jobs) and all(value is not None for value in usage_seconds)
-    if any(value is not None and value > 40 for value in usage_seconds):
-        diagnostics.append("provider_usage: actual QPU usage exceeds the reviewed per-job cap")
+    diagnostics.extend(_usage_budget_diagnostics(jobs, usage_seconds, diagnostic_plan))
     local_ready = prepared is not None and local is not None and integrity.get("status") == "PASS"
     if diagnostics or not local_ready or implementation != "PASS":
         status = "BLOCKED"

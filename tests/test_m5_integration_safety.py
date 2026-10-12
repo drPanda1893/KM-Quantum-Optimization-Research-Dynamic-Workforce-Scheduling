@@ -106,6 +106,7 @@ def test_same_verified_hardware_plan_command_resumes_without_state_rewind(
     atomic_json(output / "provider_preflight.json", evidence)
     atomic_json(output / "provider_execution_draft.json", concrete)
     monkeypatch.setattr(cli, "load_prepared", lambda root, output: copy.deepcopy(prepared))
+    monkeypatch.setattr(cli, "load_prepared_config", lambda root, output: M5Config())
     monkeypatch.setattr(cli, "verify_local", lambda root, output: {"status": "PASS"})
     monkeypatch.setattr(cli, "read_sealed", lambda path: {"calibration_timestamp": utc_now()})
     calls = _deny_provider(monkeypatch)
@@ -165,6 +166,7 @@ def test_real_missing_contracts_are_implementation_blocker_in_public_plan_output
     evidence["execution_estimates"] = {}
     atomic_json(output / "provider_preflight.json", evidence)
     monkeypatch.setattr(cli, "load_prepared", lambda root, output: copy.deepcopy(prepared))
+    monkeypatch.setattr(cli, "load_prepared_config", lambda root, output: M5Config())
     monkeypatch.setattr(cli, "verify_local", lambda root, output: {"status": "PASS"})
     monkeypatch.setattr(cli, "read_sealed", lambda path: {"calibration_timestamp": utc_now()})
     calls = _deny_provider(monkeypatch)
@@ -191,6 +193,7 @@ def test_cached_ready_plan_cannot_hide_a_new_blocked_preflight(
     evidence.update(status="BLOCKED", diagnostic_kind="USAGE_LIMIT_EXCEEDED")
     atomic_json(output / "provider_preflight.json", evidence)
     monkeypatch.setattr(cli, "load_prepared", lambda root, output: copy.deepcopy(prepared))
+    monkeypatch.setattr(cli, "load_prepared_config", lambda root, output: M5Config())
     monkeypatch.setattr(cli, "verify_local", lambda root, output: {"status": "PASS"})
     monkeypatch.setattr(cli, "read_sealed", lambda path: {"calibration_timestamp": utc_now()})
     calls = _deny_provider(monkeypatch)

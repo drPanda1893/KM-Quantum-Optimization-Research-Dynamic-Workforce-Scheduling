@@ -10,12 +10,14 @@ from collections.abc import Mapping
 from datetime import timedelta
 from typing import Any
 
+from km_quantum.m5.budget_policy import BUDGET_B_VERSION, JOB_IDS
 from km_quantum.m5.provider import (
     SafetyError,
     parse_time,
+    plan_budget_policy,
+    runtime_options_for_job,
     utc_now,
     validate_preflight,
-    validate_runtime_options,
 )
 
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
@@ -45,32 +47,25 @@ def validate_plan(plan: Mapping[str, Any], *, require_hardware: bool = True) -> 
         raise SafetyError("Execution plan hash is inconsistent")
     if "plan_sha256" in plan and plan["plan_sha256"] != plan_hash(plan):
         raise SafetyError("Execution plan hash is inconsistent")
-    budget = plan.get("budget", {})
-    expected = {
-        "max_provider_jobs": 3,
-        "max_total_shots": 49664,
-        "max_qpu_seconds_per_job": 40,
-        "max_total_qpu_seconds": 120,
-        "max_cost_eur": 0,
-    }
-    if budget != expected:
-        raise SafetyError("This implementation requires the fixed reviewed M5 budget")
-    validate_runtime_options(plan.get("runtime_options", {}))
-    if plan["runtime_options"]["max_execution_time"] != 40:
-        raise SafetyError("Every job must reserve the full 40-second cap")
+    policy = plan_budget_policy(plan)
     jobs = plan.get("jobs", [])
     if len(jobs) != 3 or [job.get("kind") for job in jobs] != ["smoke", "main", "main"]:
         raise SafetyError("Exactly smoke then two main jobs are required")
     if len({job.get("id") for job in jobs}) != 3 or any(not job.get("id") for job in jobs):
         raise SafetyError("Persistent unique job IDs are required")
+    if policy.version == BUDGET_B_VERSION and [job["id"] for job in jobs] != list(JOB_IDS):
+        raise SafetyError("Budget B requires its exact smoke/main job identities and order")
     circuits = plan.get("circuits", {})
     if not isinstance(circuits, dict) or not circuits or not plan.get("layout"):
         raise SafetyError("Frozen QPY hashes and layout are required")
     pub_ids: list[str] = []
     shot_sum = 0
     for job in jobs:
-        if job.get("max_execution_time") != 40:
+        if type(job.get("max_execution_time")) is not int or job[
+            "max_execution_time"
+        ] != policy.cap_for_job(job["id"]):
             raise SafetyError("Each job requires its approved QPU cap")
+        runtime_options_for_job(plan, job["id"])
         shots = 128 if job["kind"] == "smoke" else 1024
         expected_pubs = 4 if job["kind"] == "smoke" else 24
         if len(job.get("pubs", [])) != expected_pubs:
@@ -116,7 +111,7 @@ def validate_plan(plan: Mapping[str, Any], *, require_hardware: bool = True) -> 
 def approval_request(plan: Mapping[str, Any], expires_at: str) -> dict[str, Any]:
     """Generate an unsigned proposal; this function can never approve it."""
     parse_time(expires_at)
-    return {
+    result = {
         "artifact_type": "m5_human_approval",
         "schema_version": 1,
         "plan_hash": plan_hash(plan),
@@ -135,6 +130,10 @@ def approval_request(plan: Mapping[str, Any], expires_at: str) -> dict[str, Any]
         "submission_approved": False,
         "approval_method": "Florian manually reviews and edits this local file",
     }
+    if plan.get("budget_policy_version") == BUDGET_B_VERSION:
+        for key in ("budget_policy_version", "budget_authorization", "job_runtime_options"):
+            result[key] = copy.deepcopy(plan.get(key))
+    return result
 
 
 def validate_human_approval(
@@ -171,6 +170,10 @@ def validate_human_approval(
     ):
         if approval.get(key) != plan.get(key):
             raise SafetyError("Human approval differs from the frozen execution plan")
+    if plan.get("budget_policy_version") == BUDGET_B_VERSION:
+        for key in ("budget_policy_version", "budget_authorization", "job_runtime_options"):
+            if approval.get(key) != plan.get(key):
+                raise SafetyError("Hardware approval differs from the bound budget-only proof")
 
 
 def validate_approval(

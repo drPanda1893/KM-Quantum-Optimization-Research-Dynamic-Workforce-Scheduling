@@ -19,6 +19,7 @@ from qiskit import QuantumCircuit
 from qiskit.primitives.containers.sampler_pub import SamplerPub
 from qiskit.transpiler import Target
 
+from km_quantum.m5.budget_policy import BUDGET_B_VERSION, BUDGET_V1_VERSION, resolve_budget_policy
 from km_quantum.m5.io import canonical_hash
 from km_quantum.m5.models import M5Config
 
@@ -73,13 +74,38 @@ def _number(value: Any) -> TypeGuard[int | float]:
     )
 
 
-def _hard_limits(config: M5Config) -> dict[str, int]:
-    return {
+def _hard_limits(config: M5Config) -> dict[str, Any]:
+    policy = config.resolved_budget_policy()
+    limits: dict[str, Any] = {
         "max_qpu_seconds_per_job": config.max_qpu_seconds_per_job,
         "max_total_qpu_seconds": config.max_total_qpu_seconds,
         "max_campaign_submissions": config.max_provider_jobs,
         "max_total_shots": config.max_total_shots,
     }
+    if policy.version == BUDGET_B_VERSION:
+        limits.update(
+            budget_policy_version=policy.version,
+            per_job_qpu_seconds=policy.per_job_qpu_seconds,
+            budget_authorization_sha256=policy.budget_authorization_sha256,
+        )
+    return limits
+
+
+def _job_cap(job: Mapping[str, Any], config: M5Config) -> int | None:
+    try:
+        return config.execution_time_cap(str(job.get("id", "")))
+    except ValueError:
+        return None
+
+
+def _matching_plan_budget(plan: Mapping[str, Any], config: M5Config) -> bool:
+    try:
+        actual = resolve_budget_policy(
+            plan.get("budget_policy_version", BUDGET_V1_VERSION), plan.get("budget_authorization")
+        )
+    except (TypeError, ValueError):
+        return False
+    return actual.as_dict() == config.resolved_budget_policy().as_dict()
 
 
 def _job_spec(job: Mapping[str, Any], config: M5Config) -> dict[str, Any]:
@@ -87,7 +113,7 @@ def _job_spec(job: Mapping[str, Any], config: M5Config) -> dict[str, Any]:
     return {
         "id": job.get("id"),
         "kind": job.get("kind"),
-        "max_execution_time": job.get("max_execution_time", config.max_qpu_seconds_per_job),
+        "max_execution_time": job.get("max_execution_time", _job_cap(job, config)),
         "pubs": copy.deepcopy(job.get("pubs", [])),
     }
 
@@ -249,8 +275,9 @@ def estimate_job_usage(
     repetition = _rep_delay(rep_delay, missing)
     if not _SHA256.fullmatch(target_snapshot_sha256):
         missing.append("target_snapshot_sha256 binding")
-    if job.get("max_execution_time", config.max_qpu_seconds_per_job) != 40:
-        missing.append("max_execution_time must retain the fixed 40-second guard")
+    cap = _job_cap(job, config)
+    if cap is None or job.get("max_execution_time", cap) != cap:
+        missing.append("max_execution_time must retain the authorized job-specific guard")
     if policy.subjob_policy == "unknown":
         missing.append("subjob_partition_policy")
     pubs = job.get("pubs")
@@ -332,7 +359,7 @@ def estimate_job_usage(
         if central is not None and local_subjobs is not None
         else None
     )
-    over_limit = local is not None and local > config.max_qpu_seconds_per_job
+    over_limit = local is not None and cap is not None and local > cap
     status = "BLOCKED" if missing or over_limit else "READY"
     target_entries = {canonical_hash(item): item for item in target_durations}
     payload: dict[str, Any] = {
@@ -462,6 +489,8 @@ def estimate_plan_usage(
         for job in plan.get("jobs", [])
     ]
     missing: list[str] = []
+    if not _matching_plan_budget(plan, config):
+        missing.append("Plan budget version or authorization differs from the model configuration")
     if not jobs or len(jobs) > config.max_provider_jobs:
         missing.append("Campaign must contain one to three fixed submissions")
     if plan.get("runtime_options", {}).get("execution", {}).get("init_qubits") is not True:
@@ -479,7 +508,10 @@ def estimate_plan_usage(
         else None
     )
     if local is not None and local > config.max_total_qpu_seconds:
-        missing.append("Local policy campaign estimate exceeds unchanged 120-second cap")
+        missing.append(
+            "Local policy campaign estimate exceeds authorized "
+            f"{config.max_total_qpu_seconds}-second cap"
+        )
     estimates = {
         job["job_id"]: {
             "seconds": job["local_policy_seconds"],
@@ -555,6 +587,8 @@ def validate_usage_model(
         ):
             raise ValueError("Local job usage model seal mismatch")
         study = M5Config.model_validate(measured.get("study"))
+        if not _matching_plan_budget(plan, study):
+            raise ValueError("Local usage budget version or authorization differs from the plan")
         checked_policy = UsagePolicy(
             **{key: measured["local_policy"][key] for key in asdict(UsagePolicy())}
         )
@@ -645,9 +679,12 @@ def validate_usage_model(
             or not _number(central)
             or not _number(local)
             or local < central
-            or local > study.max_qpu_seconds_per_job
+            or local > study.execution_time_cap(expected["id"])
         ):
-            raise ValueError("Local usage job model is not ready within the fixed 40-second cap")
+            raise ValueError(
+                "Local usage job model is not ready within the authorized "
+                f"{study.execution_time_cap(expected['id'])}-second cap"
+            )
         if central is not None:
             local_policy = measured["local_policy"]
             policy_subjobs = (
@@ -696,10 +733,13 @@ def validate_usage_model(
         model.get("status") != "READY"
         or model.get("missing")
         or not _number(model.get("local_policy_total_seconds"))
-        or model["local_policy_total_seconds"] > 120
+        or model["local_policy_total_seconds"] > study.max_total_qpu_seconds
         or model["local_policy_total_seconds"]
         != sum(job["local_policy_seconds"] for job in model_jobs)
-        or len(model_jobs) > 3
-        or sum(job["total_executions"] for job in model_jobs) > 49664
+        or len(model_jobs) > study.max_provider_jobs
+        or sum(job["total_executions"] for job in model_jobs) > study.max_total_shots
     ):
-        raise ValueError("Local usage campaign model is not ready within the fixed 120-second cap")
+        raise ValueError(
+            "Local usage campaign model is not ready within the authorized "
+            f"{study.max_total_qpu_seconds}-second cap"
+        )

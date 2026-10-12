@@ -11,6 +11,7 @@ from typing import Any
 from km_quantum.m4.io import canonical_hash, read_json
 from km_quantum.m5.analysis import analyze_results
 from km_quantum.m5.approvals import approval_request, plan_hash, validate_approval, validate_plan
+from km_quantum.m5.budget_policy import validate_budget_authorization
 from km_quantum.m5.io import atomic_json, output_directory, read_sealed, sealed_json
 from km_quantum.m5.ledger import JobLedger
 from km_quantum.m5.models import M5Config
@@ -26,6 +27,7 @@ from km_quantum.m5.state import transition
 from km_quantum.m5.workflow import (
     artifact_path,
     load_prepared,
+    load_prepared_config,
     prepare,
     verify_local,
     verify_plan_inventory_binding,
@@ -53,6 +55,10 @@ def add_m5_parser(commands: Any) -> None:
         command = sub.add_parser(name)
         command.add_argument("--root", default=".")
         command.add_argument("--output", default="results/m5")
+        command.add_argument(
+            "--budget-approval",
+            help="Separate versioned budget authorization; never hardware approval",
+        )
         if name == "prepare":
             command.add_argument("--config", default="configs/m5_baseline.json")
         if name in {"provider-preflight", "submit-next", "collect"}:
@@ -79,6 +85,21 @@ def _config(args: argparse.Namespace) -> LocalProviderConfig:
     )
     args._m5_redaction_secrets = (config.instance, config.token or "")
     return config
+
+
+def _study_config(args: argparse.Namespace, root: Path) -> M5Config:
+    """Only the explicit sealed owner budget record may activate version B."""
+    approval = getattr(args, "budget_approval", None)
+    if approval is None:
+        return M5Config()
+    path = Path(approval)
+    path = path if path.is_absolute() else root / path
+    return M5Config(
+        budget_policy_version="m5-budget-b-v2",
+        budget_authorization=validate_budget_authorization(read_sealed(path)),
+        max_qpu_seconds_per_job=80,
+        max_total_qpu_seconds=180,
+    )
 
 
 def select_physical_subset(target: Any) -> tuple[int, ...]:
@@ -122,10 +143,13 @@ def select_physical_subset(target: Any) -> tuple[int, ...]:
     raise SafetyError("No calibrated connected seven-qubit subset is available")
 
 
-def _make_plan(root: Path, output: Path) -> dict[str, Any]:
+def _make_plan(root: Path, output: Path, config: M5Config | None = None) -> dict[str, Any]:
     from km_quantum.m5.planning import make_plan
 
     prepared = load_prepared(root, output)
+    prepared_config = load_prepared_config(root, output)
+    if config is not None and config != prepared_config:
+        raise SafetyError("Requested budget differs from the frozen preparation")
     verify_local(root, output)
     if any(row["device_noise_status"] == "BLOCKED" for row in prepared["records"]):
         raise SafetyError("Missing device calibration blocks the hardware comparison plan")
@@ -166,7 +190,7 @@ def _make_plan(root: Path, output: Path) -> dict[str, Any]:
     else:
         plan = make_plan(
             prepared,
-            M5Config(),
+            prepared_config,
             provider_evidence=evidence,
             usage_model=read_json(usage_path) if usage_path.exists() else None,
             provider_limit_assessment=read_json(assessment_path)
@@ -238,12 +262,19 @@ def _make_plan(root: Path, output: Path) -> dict[str, Any]:
 
 
 def _provider_preflight(args: argparse.Namespace, root: Path, output: Path) -> dict[str, Any]:
+    study = _study_config(args, root)
     if (output / "prepared_manifest.json").exists() and load_prepared(root, output)[
         "source_kind"
     ] != "provider":
         raise SafetyError("Use a new results/m5-provider output for actual provider compilation")
+    if (output / "prepared_manifest.json").exists() and load_prepared_config(root, output) != study:
+        raise SafetyError("Provider output has a different budget; use a new output directory")
     config = _config(args)
-    adapter = IBMRuntimeAdapter(config)
+    adapter = (
+        IBMRuntimeAdapter(config, budget_policy=study.resolved_budget_policy())
+        if study.budget_authorization is not None
+        else IBMRuntimeAdapter(config)
+    )
     evidence = preflight(config, adapter)
     args._m5_redaction_secrets = adapter._secret_values()
     # The optional old input remains recorded as externally supplied information;
@@ -261,6 +292,7 @@ def _provider_preflight(args: argparse.Namespace, root: Path, output: Path) -> d
         local_result = prepare(
             root,
             output,
+            config=study,
             backend=backend,
             physical_subset=subset,
             calibration_timestamp=evidence.get("calibration_timestamp"),
@@ -306,7 +338,7 @@ def _provider_preflight(args: argparse.Namespace, root: Path, output: Path) -> d
             "Actual Target differs from the frozen calibration snapshot; use a new output",
             diagnostic_kind="MISSING_REAL_CALIBRATION",
         )
-    draft = make_plan(prepared, M5Config(), provider_evidence=evidence)
+    draft = make_plan(prepared, study, provider_evidence=evidence)
     circuits = {
         identity: load_qpy(
             artifact_path(root, record["path"], output),
@@ -323,12 +355,13 @@ def _provider_preflight(args: argparse.Namespace, root: Path, output: Path) -> d
         rep_delay=evidence.get("rep_delay"),
         target_snapshot_sha256=prepared["target_snapshot_sha256"],
         qpy_hashes=hashes,
+        config=study,
     )
     atomic_json(output / "provider_limit_assessment.json", assessment, immutable=True)
     atomic_json(output / "local_usage_model.json", usage_model, immutable=True)
     plan = make_plan(
         prepared,
-        M5Config(),
+        study,
         provider_evidence=evidence,
         usage_model=usage_model,
         provider_limit_assessment=assessment,
@@ -371,7 +404,13 @@ def _submit(args: argparse.Namespace, root: Path, output: Path) -> dict[str, Any
     if len(jobs) >= 3 or (jobs and jobs[-1]["status"] != "COLLECTED"):
         raise SafetyError("Prior job is unresolved or the complete budget was already reserved")
     config = _config(args)
-    adapter = IBMRuntimeAdapter(config)
+    from km_quantum.m5.provider import plan_budget_policy
+
+    adapter = (
+        IBMRuntimeAdapter(config, budget_policy=plan_budget_policy(plan))
+        if plan.get("budget_authorization") is not None
+        else IBMRuntimeAdapter(config)
+    )
     evidence = preflight(config, adapter, plan=plan)
     atomic_json(output / "provider_preflight.json", evidence)
     circuits = {
@@ -509,6 +548,11 @@ def execute_m5(args: argparse.Namespace) -> tuple[dict[str, Any], int]:
         if args.m5_command == "prepare":
             path = Path(args.config)
             config = M5Config.model_validate(read_json(path if path.is_absolute() else root / path))
+            if getattr(args, "budget_approval", None) is not None:
+                requested = _study_config(args, root)
+                if args.config != "configs/m5_baseline.json" and config != requested:
+                    raise SafetyError("Explicit study config differs from the budget authorization")
+                config = requested
             result = prepare(root, output, config)
             transition(
                 output / "state.json",
@@ -520,7 +564,12 @@ def execute_m5(args: argparse.Namespace) -> tuple[dict[str, Any], int]:
         elif args.m5_command == "provider-preflight":
             result = _provider_preflight(args, root, output)
         elif args.m5_command == "plan":
-            result = _make_plan(root, output)
+            plan_config = (
+                _study_config(args, root)
+                if getattr(args, "budget_approval", None) is not None
+                else None
+            )
+            result = _make_plan(root, output, plan_config)
         elif args.m5_command == "submit-next":
             result = _submit(args, root, output)
         elif args.m5_command == "collect":

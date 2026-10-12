@@ -17,7 +17,15 @@ from pathlib import Path
 from typing import Any
 
 from km_quantum.m5.approvals import plan_hash, validate_approval, validate_plan
-from km_quantum.m5.provider import ProviderAdapter, SafetyError, redact, utc_now
+from km_quantum.m5.budget_policy import BUDGET_B_VERSION, BudgetPolicy
+from km_quantum.m5.provider import (
+    ProviderAdapter,
+    SafetyError,
+    plan_budget_policy,
+    redact,
+    runtime_options_for_job,
+    utc_now,
+)
 
 
 def _atomic_write(path: Path, value: Any) -> None:
@@ -89,6 +97,7 @@ class JobLedger:
 
     @staticmethod
     def _check_binding(data: Mapping[str, Any], plan: Mapping[str, Any]) -> None:
+        policy = plan_budget_policy(plan)
         if data.get("plan_hash") not in {None, plan_hash(plan)}:
             raise SafetyError("Ledger belongs to a different execution plan")
         records = data["jobs"]
@@ -107,15 +116,39 @@ class JobLedger:
         if (
             data["reserved_qpu_seconds"] != reserved_seconds
             or data["reserved_shots"] != reserved_shots
+            or reserved_seconds > policy.max_total_qpu_seconds
+            or reserved_shots > policy.max_total_shots
+            or len(records) > policy.max_provider_jobs
         ):
             raise SafetyError("Ledger reservations are inconsistent")
+        if (
+            records
+            and policy.version == BUDGET_B_VERSION
+            and (
+                data.get("budget_policy_version") != policy.version
+                or data.get("budget_authorization_sha256") != policy.budget_authorization_sha256
+                or data.get("budget_authorization") != plan["budget_authorization"]
+            )
+        ):
+            raise SafetyError("Ledger budget authorization differs from the execution plan")
         for record, job in zip(records, plan["jobs"], strict=False):
             if (
                 record.get("pubs") != job["pubs"]
                 or record.get("plan_hash") != plan_hash(plan)
                 or record.get("reserved_qpu_seconds") != job["max_execution_time"]
+                or record.get("requested_runtime_options")
+                != runtime_options_for_job(plan, job["id"])
             ):
                 raise SafetyError("Persistent PUB identities or reservations changed")
+            if policy.version == BUDGET_B_VERSION and (
+                record.get("budget_policy_version") != policy.version
+                or record.get("budget_authorization_sha256") != policy.budget_authorization_sha256
+                or not isinstance(record.get("approval_evidence"), Mapping)
+                or record["approval_evidence"].get("budget_policy_version") != policy.version
+                or record["approval_evidence"].get("budget_authorization_sha256")
+                != policy.budget_authorization_sha256
+            ):
+                raise SafetyError("Ledger job budget authorization differs from its plan")
 
     @staticmethod
     def _load_pubs(
@@ -173,6 +206,7 @@ class JobLedger:
     ) -> dict[str, Any]:
         self._bind_secrets(adapter)
         validate_approval(plan, approval, evidence, now=now)
+        policy = plan_budget_policy(plan)
         if adapter.source_kind != "ibm_hardware" or adapter.single_job_contract is not True:
             raise SafetyError("Submission requires the reviewed single-job hardware adapter")
         config = getattr(adapter, "config", None)
@@ -180,6 +214,13 @@ class JobLedger:
             config.binding != plan["instance_binding"] or config.backend != plan["backend"]
         ):
             raise SafetyError("Submission adapter binding differs from the approved plan")
+        if policy.version == BUDGET_B_VERSION and getattr(adapter, "hardware_used", False):
+            adapter_policy = getattr(adapter, "budget_policy", None)
+            if (
+                not isinstance(adapter_policy, BudgetPolicy)
+                or adapter_policy.as_dict() != policy.as_dict()
+            ):
+                raise SafetyError("Hardware adapter lacks the exact approved budget policy")
         with self._lock():
             data = self.snapshot()
             self._check_binding(data, plan)
@@ -191,6 +232,7 @@ class JobLedger:
             if records and records[0].get("contract_verified") is not True:
                 raise SafetyError("Smoke result contract must be verified before main jobs")
             next_job = plan["jobs"][len(records)]
+            job_options = runtime_options_for_job(plan, next_job["id"])
             pubs = self._load_pubs(next_job, plan, circuits)
             requested_shots = sum(pub["shots"] for pub in next_job["pubs"])
             cap = next_job["max_execution_time"]
@@ -224,7 +266,7 @@ class JobLedger:
                 # an accepted request into a resumable empty reservation.
                 "status": "SUBMISSION_UNKNOWN",
                 "reserved_qpu_seconds": cap,
-                "requested_runtime_options": copy.deepcopy(plan["runtime_options"]),
+                "requested_runtime_options": copy.deepcopy(job_options),
                 "pubs": copy.deepcopy(next_job["pubs"]),
                 "created_at": utc_now(),
                 "contract_verified": False,
@@ -244,6 +286,16 @@ class JobLedger:
                     "preflight_sha256": canonical_hash(evidence),
                 },
             }
+            if policy.version == BUDGET_B_VERSION:
+                binding = {
+                    "budget_policy_version": policy.version,
+                    "budget_authorization_sha256": policy.budget_authorization_sha256,
+                }
+                record.update(binding)
+                record["approval_evidence"].update(binding)
+                data.update(
+                    binding, budget_authorization=copy.deepcopy(plan["budget_authorization"])
+                )
             records.append(record)
             data.update(
                 plan_hash=digest,
@@ -255,7 +307,7 @@ class JobLedger:
             self._save(data)
             try:
                 provider_job = adapter.submit(
-                    pubs, plan["runtime_options"], [record["local_job_id"], "m5-plan-" + digest]
+                    pubs, job_options, [record["local_job_id"], "m5-plan-" + digest]
                 )
                 identity = provider_job.job_id()
                 if not isinstance(identity, str) or not identity:

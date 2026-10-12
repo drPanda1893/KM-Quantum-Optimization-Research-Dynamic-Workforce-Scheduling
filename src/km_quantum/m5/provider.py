@@ -22,6 +22,15 @@ from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 from typing import Any, Protocol
 
+from km_quantum.m5.budget_policy import (
+    BUDGET_B_VERSION,
+    BUDGET_V1_VERSION,
+    JOB_IDS,
+    BudgetPolicy,
+    resolve_budget_policy,
+    validate_budget_authorization,
+)
+
 RUNTIME_VERSION = "0.47.0"
 MAX_PREFLIGHT_AGE_SECONDS = 300
 
@@ -70,12 +79,27 @@ _ASSIGNMENT = re.compile(
 def redact(value: Any, *, secrets: Sequence[str] = ()) -> Any:
     """Recursively redact structured secrets and common text/header forms."""
     if isinstance(value, Mapping):
-        return {
-            str(key): "[REDACTED]"
-            if _SECRET_KEY.search(str(key))
-            else redact(item, secrets=secrets)
-            for key, item in value.items()
-        }
+        result: dict[str, Any] = {}
+        for key, item in value.items():
+            name = str(key)
+            if name == "budget_authorization":
+                try:
+                    public = validate_budget_authorization(item).model_dump(mode="json")
+                except (ValueError, TypeError):
+                    result[name] = "[REDACTED]"
+                else:
+                    result[name] = redact(public, secrets=secrets)
+            elif (
+                name == "budget_authorization_sha256"
+                and isinstance(item, str)
+                and re.fullmatch(r"[0-9a-f]{64}", item)
+            ):
+                result[name] = item
+            else:
+                result[name] = (
+                    "[REDACTED]" if _SECRET_KEY.search(name) else redact(item, secrets=secrets)
+                )
+        return result
     if isinstance(value, (tuple, list)):
         return [redact(item, secrets=secrets) for item in value]
     if isinstance(value, str):
@@ -90,7 +114,10 @@ def redact(value: Any, *, secrets: Sequence[str] = ()) -> Any:
 
 
 def safe_runtime_options(
-    max_execution_time: int = 40, *, rep_delay: float | None = None
+    max_execution_time: int = 40,
+    *,
+    rep_delay: float | None = None,
+    budget_policy: BudgetPolicy | None = None,
 ) -> dict[str, Any]:
     """Only supported Sampler options; no Estimator resilience or sampler seed.
 
@@ -98,8 +125,33 @@ def safe_runtime_options(
     Normal per-shot initialization remains enabled. An omitted repetition delay
     uses the documented backend default and must be described in the preflight.
     """
-    if type(max_execution_time) is not int or not 1 <= max_execution_time <= 40:
-        raise SafetyError("QPU execution cap must be between 1 and 40 seconds")
+    policy = budget_policy or resolve_budget_policy()
+    maximum = 80 if policy.version == BUDGET_B_VERSION else 40
+    expected_caps = (
+        {"smoke": 20, "main-block-1": 80, "main-block-2": 80}
+        if policy.version == BUDGET_B_VERSION
+        else {identity: 40 for identity in JOB_IDS}
+    )
+    if (
+        policy.version not in {BUDGET_V1_VERSION, BUDGET_B_VERSION}
+        or policy.per_job_qpu_seconds != expected_caps
+        or policy.max_total_qpu_seconds != (180 if policy.version == BUDGET_B_VERSION else 120)
+        or policy.max_qpu_seconds_per_job != maximum
+        or policy.max_provider_jobs != 3
+        or policy.max_pubs != 52
+        or policy.max_total_shots != 49664
+        or policy.max_concurrent_unresolved_own_jobs != 1
+        or policy.max_cost_eur != 0
+        or policy.required_plan != "open"
+        or policy.required_pricing_type != "free"
+        or (
+            policy.version == BUDGET_B_VERSION
+            and not re.fullmatch(r"[0-9a-f]{64}", policy.budget_authorization_sha256 or "")
+        )
+    ):
+        raise SafetyError("Runtime options require the exact resolved budget policy")
+    if type(max_execution_time) is not int or not 1 <= max_execution_time <= maximum:
+        raise SafetyError(f"QPU execution cap must be between 1 and {maximum} seconds")
     execution: dict[str, Any] = {"init_qubits": True, "meas_type": "classified"}
     if rep_delay is not None:
         if isinstance(rep_delay, bool) or not math.isfinite(rep_delay) or rep_delay < 0:
@@ -113,21 +165,27 @@ def safe_runtime_options(
     }
 
 
-def validate_runtime_options(options: Mapping[str, Any]) -> None:
+def validate_runtime_options(
+    options: Mapping[str, Any], *, budget_policy: BudgetPolicy | None = None
+) -> None:
     """Reject unknown keys and implicit optional processing."""
     execution = options.get("execution")
     if not isinstance(execution, dict):
         raise SafetyError("Explicit Sampler execution options are required")
     expected = safe_runtime_options(
-        options.get("max_execution_time", 0), rep_delay=execution.get("rep_delay")
+        options.get("max_execution_time", 0),
+        rep_delay=execution.get("rep_delay"),
+        budget_policy=budget_policy,
     )
     if dict(options) != expected:
         raise SafetyError("Unknown or non-approved Sampler options")
 
 
-def sdk_option_contract(options: Mapping[str, Any]) -> dict[str, Any]:
+def sdk_option_contract(
+    options: Mapping[str, Any], *, budget_policy: BudgetPolicy | None = None
+) -> dict[str, Any]:
     """Validate real pinned SDK option construction entirely offline."""
-    validate_runtime_options(options)
+    validate_runtime_options(options, budget_policy=budget_policy)
     try:
         installed = version("qiskit-ibm-runtime")
     except PackageNotFoundError:
@@ -144,6 +202,58 @@ def sdk_option_contract(options: Mapping[str, Any]) -> dict[str, Any]:
             if getattr(getattr(result, group), key) != value:
                 raise SafetyError("Runtime SDK changed a requested option")
     return {"status": "PASS", "runtime_version": installed, "hardware_used": False}
+
+
+def plan_budget_policy(plan: Mapping[str, Any]) -> BudgetPolicy:
+    """Resolve the full public budget proof without granting hardware approval."""
+    try:
+        policy = resolve_budget_policy(
+            plan.get("budget_policy_version", BUDGET_V1_VERSION), plan.get("budget_authorization")
+        )
+    except (ValueError, TypeError) as error:
+        raise SafetyError(str(error), diagnostic_kind="PROVIDER_CONTRACT_ERROR") from None
+    expected: dict[str, Any] = {
+        "max_provider_jobs": policy.max_provider_jobs,
+        "max_total_shots": policy.max_total_shots,
+        "max_qpu_seconds_per_job": policy.max_qpu_seconds_per_job,
+        "max_total_qpu_seconds": policy.max_total_qpu_seconds,
+        "max_cost_eur": policy.max_cost_eur,
+    }
+    if policy.version == BUDGET_B_VERSION:
+        expected.update(
+            per_job_qpu_seconds=policy.per_job_qpu_seconds,
+            budget_authorization_sha256=policy.budget_authorization_sha256,
+        )
+    elif "job_runtime_options" in plan or "budget_authorization" in plan:
+        raise SafetyError("Historical V1 cannot carry Budget B execution fields")
+    if plan.get("budget") != expected:
+        raise SafetyError("Plan budget differs from its exact authorized policy")
+    return policy
+
+
+def runtime_options_for_job(plan: Mapping[str, Any], job_id: str) -> dict[str, Any]:
+    """Bind actual per-job Sampler options; only execution time varies in B."""
+    import copy
+
+    policy = plan_budget_policy(plan)
+    global_options = plan.get("runtime_options", {})
+    validate_runtime_options(global_options, budget_policy=policy)
+    if global_options["max_execution_time"] != policy.max_qpu_seconds_per_job:
+        raise SafetyError("Global runtime options differ from the authorized scalar guard")
+    if policy.version == BUDGET_V1_VERSION:
+        return copy.deepcopy(dict(global_options))
+    rows = plan.get("job_runtime_options")
+    if not isinstance(rows, Mapping) or set(rows) != set(JOB_IDS):
+        raise SafetyError("Budget B requires all three exact per-job runtime options")
+    for identity in JOB_IDS:
+        expected = {**global_options, "max_execution_time": policy.cap_for_job(identity)}
+        if rows[identity] != expected:
+            raise SafetyError("Per-job runtime options differ from the authorized budget")
+        validate_runtime_options(rows[identity], budget_policy=policy)
+    try:
+        return copy.deepcopy(dict(rows[job_id]))
+    except KeyError:
+        raise SafetyError("Budget B does not authorize this job identity") from None
 
 
 @dataclass(frozen=True)
@@ -285,29 +395,25 @@ def validate_preflight(
         return
     if any(evidence.get(key) != plan.get(key) for key in ("backend", "instance_binding")):
         raise SafetyError("Provider instance or backend differs from the execution plan")
+    budget_policy = plan_budget_policy(plan)
     jobs = plan["jobs"]
     reserved = sum(job["max_execution_time"] for job in jobs)
-    fixed_budget = {
-        "max_provider_jobs": 3,
-        "max_total_shots": 49664,
-        "max_qpu_seconds_per_job": 40,
-        "max_total_qpu_seconds": 120,
-        "max_cost_eur": 0.0,
-    }
     if (
-        plan.get("budget") != fixed_budget
-        or len(jobs) > 3
-        or reserved > 120
+        len(jobs) > budget_policy.max_provider_jobs
+        or reserved > budget_policy.max_total_qpu_seconds
         or any(
-            type(job["max_execution_time"]) is not int or not 1 <= job["max_execution_time"] <= 40
+            type(job["max_execution_time"]) is not int
+            or job["max_execution_time"] != budget_policy.cap_for_job(job["id"])
             for job in jobs
         )
-        or sum(pub["shots"] for job in jobs for pub in job["pubs"]) > 49664
+        or sum(pub["shots"] for job in jobs for pub in job["pubs"]) > budget_policy.max_total_shots
     ):
         raise SafetyError(
-            "Fixed local job/shot/QPU/cost budget changed",
+            "Authorized local job/shot/QPU/cost budget changed",
             diagnostic_kind="PROVIDER_CONTRACT_ERROR",
         )
+    for job in jobs:
+        runtime_options_for_job(plan, job["id"])
     if reserved > usage["remaining_seconds"]:
         raise SafetyError("Remaining provider quota does not cover the full approved reservation")
     try:
@@ -327,15 +433,16 @@ def validate_preflight(
     except (ValueError, KeyError, TypeError) as error:
         raise SafetyError(str(error), diagnostic_kind="INSUFFICIENT_USAGE_MODEL") from None
     over_cap = any(
-        _known_nonnegative(row.get("local_policy_seconds")) and row["local_policy_seconds"] > 40
+        _known_nonnegative(row.get("local_policy_seconds"))
+        and row["local_policy_seconds"] > budget_policy.cap_for_job(row["job_id"])
         for row in model.get("jobs", [])
     ) or (
         _known_nonnegative(model.get("local_policy_total_seconds"))
-        and model["local_policy_total_seconds"] > 120
+        and model["local_policy_total_seconds"] > budget_policy.max_total_qpu_seconds
     )
     if over_cap:
         raise SafetyError(
-            "Local target usage scenario exceeds the unchanged 40/120-second caps",
+            "Local target usage scenario exceeds the authorized job/total caps",
             diagnostic_kind="USAGE_LIMIT_EXCEEDED",
         )
     try:
@@ -432,8 +539,11 @@ class IBMRuntimeAdapter:
     single_job_contract = True
     hardware_used = True
 
-    def __init__(self, config: LocalProviderConfig) -> None:
+    def __init__(
+        self, config: LocalProviderConfig, *, budget_policy: BudgetPolicy | None = None
+    ) -> None:
         self.config = config
+        self.budget_policy = budget_policy or resolve_budget_policy()
         self._service: Any = None
         self._backend: Any = None
         self._known_secrets: tuple[str, ...] = ()
@@ -642,7 +752,7 @@ class IBMRuntimeAdapter:
         return result
 
     def submit(self, pubs: Sequence[Any], options: Mapping[str, Any], tags: Sequence[str]) -> Any:
-        sdk_option_contract(options)
+        sdk_option_contract(options, budget_policy=self.budget_policy)
         self._connect()
         sdk = importlib.import_module("qiskit_ibm_runtime")
         contexts = importlib.import_module("qiskit_ibm_runtime.utils.default_session")

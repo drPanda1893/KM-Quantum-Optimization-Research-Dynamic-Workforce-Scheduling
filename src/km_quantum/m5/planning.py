@@ -48,7 +48,9 @@ def _mapping(record: dict[str, Any], config: M5Config) -> tuple[int, dict[str, A
     return n, copy.deepcopy(value)
 
 
-def _runtime_settings(evidence: dict[str, Any] | None) -> tuple[dict[str, Any], dict[str, Any]]:
+def _runtime_settings(
+    evidence: dict[str, Any] | None, config: M5Config
+) -> tuple[dict[str, Any], dict[str, Any]]:
     description: dict[str, Any] = {
         "init_qubits": True,
         "initialization_definition": "Normal provider reset before each shot remains enabled",
@@ -89,7 +91,11 @@ def _runtime_settings(evidence: dict[str, Any] | None) -> tuple[dict[str, Any], 
         else:
             description["rep_delay"] = value
             description["rep_delay_requested"] = False
-    return safe_runtime_options(rep_delay=delay), description
+    return safe_runtime_options(
+        config.max_qpu_seconds_per_job,
+        rep_delay=delay,
+        budget_policy=config.resolved_budget_policy(),
+    ), description
 
 
 def make_plan(
@@ -206,7 +212,7 @@ def make_plan(
             raise SafetyError("Standard/Warm pair must use the same frozen initial layout")
     random.Random(config.pub_order_seed).shuffle(groups)
     first_block = [record for group in groups for record in group]
-    runtime, settings = _runtime_settings(provider_evidence)
+    runtime, settings = _runtime_settings(provider_evidence, config)
 
     def pub(record: dict[str, Any], block: int) -> dict[str, Any]:
         identity = record["circuit_id"]
@@ -224,19 +230,19 @@ def make_plan(
         {
             "id": "smoke",
             "kind": "smoke",
-            "max_execution_time": 40,
+            "max_execution_time": config.execution_time_cap("smoke"),
             "pubs": [pub(record, 0) for record in smoke],
         },
         {
             "id": "main-block-1",
             "kind": "main",
-            "max_execution_time": 40,
+            "max_execution_time": config.execution_time_cap("main-block-1"),
             "pubs": [pub(record, 1) for record in first_block],
         },
         {
             "id": "main-block-2",
             "kind": "main",
-            "max_execution_time": 40,
+            "max_execution_time": config.execution_time_cap("main-block-2"),
             "pubs": [pub(record, 2) for record in reversed(first_block)],
         },
     ]
@@ -292,6 +298,18 @@ def make_plan(
         "submission_approved": False,
         "hardware_used": False,
     }
+    if config.budget_authorization is not None:
+        policy = config.resolved_budget_policy()
+        result["budget_policy_version"] = policy.version
+        result["budget_authorization"] = config.budget_authorization.model_dump(mode="json")
+        result["budget"].update(
+            per_job_qpu_seconds=dict(policy.per_job_qpu_seconds),
+            budget_authorization_sha256=policy.budget_authorization_sha256,
+        )
+        result["job_runtime_options"] = {
+            job["id"]: {**copy.deepcopy(runtime), "max_execution_time": job["max_execution_time"]}
+            for job in jobs
+        }
     if real:
         # Numerical models and concrete QPY service-limit assessments are part
         # of the unsigned plan hash. They cannot be replaced by legacy limits

@@ -98,6 +98,11 @@ def plan_payload_hash(plan: Mapping[str, Any]) -> str:
     for job in value["jobs"] or []:
         for key in ("estimated_qpu_seconds", "estimate_source", "usage_model_sha256"):
             job.pop(key, None)
+    # Historical V1 payload seals stay byte/schema compatible. B explicitly
+    # binds its authorization record and the exact options used by each job.
+    if plan.get("budget_policy_version") == "m5-budget-b-v2":
+        for key in ("budget_policy_version", "budget_authorization", "job_runtime_options"):
+            value[key] = copy.deepcopy(plan.get(key))
     value["circuits"] = {
         key: {
             "qpy_sha256": row["qpy_sha256"],
@@ -110,10 +115,12 @@ def plan_payload_hash(plan: Mapping[str, Any]) -> str:
 
 
 def _runtime_payload_bytes(plan: Mapping[str, Any], job: Mapping[str, Any], pubs: list[Any]) -> int:
+    from km_quantum.m5.provider import runtime_options_for_job
+
     SamplerOptions = importlib.import_module("qiskit_ibm_runtime.options").SamplerOptions
     RuntimeEncoder = importlib.import_module("qiskit_ibm_runtime.utils.json").RuntimeEncoder
 
-    options = SamplerOptions(**dict(plan["runtime_options"]))
+    options = SamplerOptions(**runtime_options_for_job(plan, job["id"]))
     inputs = {"pubs": pubs, **SamplerOptions._get_program_inputs(asdict(options))}
     # Deterministic tags have fixed-size hash portions. Placeholder hash lengths
     # match ledger tags; their content cannot affect uncompressed JSON length.
@@ -162,12 +169,15 @@ def assess_plan_limits(
     """
     from qiskit.primitives.containers import SamplerPub
 
+    from km_quantum.m5.provider import runtime_options_for_job
+
     selected = service_limit_policy() if policy is None else dict(policy)
     validate_service_limit_policy(selected)
     if not plan.get("jobs") or len({job["id"] for job in plan["jobs"]}) != len(plan["jobs"]):
         raise LimitContractError("Distinct persistent job identities are required")
     rows: dict[str, Any] = {}
     for job in plan["jobs"]:
+        job_options = runtime_options_for_job(plan, job["id"])
         missing: list[str] = []
         pub_rows = []
         all_pubs: list[Any] = []
@@ -214,7 +224,7 @@ def assess_plan_limits(
                 two_qubit += instruction.operation.num_qubits == 2
                 for qubit in instruction.qubits:
                     low_level[circuit.find_bit(qubit).index] += _WEIGHTS[name] * pub["shots"]
-            if plan["runtime_options"]["execution"]["init_qubits"]:
+            if job_options["execution"]["init_qubits"]:
                 for qubit in range(circuit.num_qubits):
                     low_level[qubit] += _WEIGHTS["init"] * pub["shots"]
             if counts["rz"] > selected["max_rz_per_circuit"]:

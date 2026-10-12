@@ -77,7 +77,7 @@ def load_prepared(root: Path, output: Path) -> dict[str, Any]:
     prepared = read_sealed(output / "prepared_manifest.json")
     if prepared["source_context_sha256"] != source_context(root)["content_sha256"]:
         raise ValueError("M5 implementation changed after preparation; use a new output directory")
-    selection = read_sealed(root / "data/synthetic/m5/selection_manifest.json")
+    selection = read_prepared_selection(root, output, prepared)
     if prepared["selection_manifest_sha256"] != selection["content_sha256"]:
         raise ValueError("Frozen selection manifest changed")
     if selection["protocol_lf_sha256"] != lf_file_hash(root / "docs/m5_experiment_protocol.md"):
@@ -94,6 +94,34 @@ def load_prepared(root: Path, output: Path) -> dict[str, Any]:
     return prepared
 
 
+def read_prepared_selection(root: Path, output: Path, prepared: dict[str, Any]) -> dict[str, Any]:
+    """Version B has an output-local selection; historical V1 keeps its original file."""
+    relative = prepared.get("selection_manifest_path")
+    path = (
+        artifact_path(root, relative, output)
+        if relative is not None
+        else root / "data/synthetic/m5/selection_manifest.json"
+    )
+    selection = read_sealed(path)
+    config = M5Config.model_validate(
+        selection["config"] if relative is not None else selection.get("config", {})
+    )
+    if (relative is not None) != (config.budget_authorization is not None):
+        raise ValueError("Selection path differs from the versioned budget policy")
+    if config.budget_authorization is not None and (
+        prepared.get("budget_policy_version") != config.budget_policy_version
+        or prepared.get("budget_authorization_sha256")
+        != config.resolved_budget_policy().budget_authorization_sha256
+    ):
+        raise ValueError("Prepared inventory differs from its budget authorization")
+    return selection
+
+
+def load_prepared_config(root: Path, output: Path) -> M5Config:
+    prepared = load_prepared(root, output)
+    return M5Config.model_validate(read_prepared_selection(root, output, prepared)["config"])
+
+
 def verify_plan_inventory_binding(plan: dict[str, Any], prepared: dict[str, Any]) -> None:
     """Bind every execution artifact to the verified inventory, even during collection."""
     validate_plan(plan, require_hardware=plan.get("provider_verified") is True)
@@ -107,6 +135,15 @@ def verify_plan_inventory_binding(plan: dict[str, Any], prepared: dict[str, Any]
             raise ValueError("Execution plan differs from the frozen inventory: " + field)
     if plan["layout"] != prepared["physical_subset"]:
         raise ValueError("Execution plan physical layout changed")
+    for field in ("budget_policy_version", "budget_authorization_sha256"):
+        value = prepared.get(field)
+        plan_value = (
+            plan.get("budget", {}).get(field)
+            if field == "budget_authorization_sha256"
+            else plan.get(field)
+        )
+        if value != plan_value:
+            raise ValueError("Execution plan budget differs from the frozen inventory: " + field)
     records = {row["circuit_id"]: row for row in prepared["records"]}
     if set(plan["circuits"]) != set(records):
         raise ValueError("Execution circuit inventory changed")
@@ -142,6 +179,8 @@ def prepare(
     destination = output_directory(root, output)
     config = config or M5Config()
     if (destination / "prepared_manifest.json").exists():
+        if load_prepared_config(root, destination) != config:
+            raise ValueError("Prepared budget differs; use a new output directory")
         checked = verify_local(root, destination)
         inventory = load_prepared(root, destination)
         blocked = any(row["device_noise_status"] == "BLOCKED" for row in inventory["records"])
@@ -161,9 +200,12 @@ def prepare(
     device = backend if backend is not None else SyntheticBackend()
     subset = physical_subset if physical_subset is not None else SYNTHETIC_SUBSET
     suite = reconstruct_suite(root)
-    selection = sealed_json(
-        root / "data/synthetic/m5/selection_manifest.json", selection_manifest(root, suite, config)
+    selection_path = (
+        destination / "selection_manifest.json"
+        if config.budget_authorization is not None
+        else root / "data/synthetic/m5/selection_manifest.json"
     )
+    selection = sealed_json(selection_path, selection_manifest(root, suite, config))
     context = source_context(root)
     draft_path = destination / "preparation_context.json"
     if draft_path.exists():
@@ -309,6 +351,17 @@ def prepare(
             "hardware_enabled": False,
             "submission_approved": False,
             "hardware_used": False,
+            **(
+                {
+                    "selection_manifest_path": selection_path.relative_to(root).as_posix(),
+                    "budget_policy_version": config.budget_policy_version,
+                    "budget_authorization_sha256": (
+                        config.resolved_budget_policy().budget_authorization_sha256
+                    ),
+                }
+                if config.budget_authorization is not None
+                else {}
+            ),
         },
     )
     for name in ("jobs", "raw", "summaries"):
